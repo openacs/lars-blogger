@@ -11,9 +11,9 @@
     <p><b>@blog.title@</b></p>
   </if>
 </else>
-<p>
+
 @blog.content@
-</p>
+
   <br />
   <table cellpadding="0" cellspacing="0" border="0" width="100%">
     <if @show_poster_p@ true>
