@@ -26,6 +26,8 @@ if {[ad_form_new_p -key entry_id]} {
     set page_title "Edit Blog Entry"
 }
 
+set valid_url_example "http://www.example.com/foo"
+
 # If we're in DisplayUserP mode, the user must have a screen name setup
 if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
     acs_user::get -user_id [ad_conn user_id] -array user_info
@@ -53,7 +55,10 @@ ad_form -name entry \
             {html {size 50}}}
         {title_url:text,optional
             {label "Title URL"}
-            {html {size 50}}}
+            {help_text "If this entry is a rant on a web page you can \
+                put the full URL here, e.g. $valid_url_example"}
+            {html {size 50}}
+        }
     } \
     -export {return_url}
 
@@ -153,6 +158,16 @@ ad_form -extend -name entry -form {
     -after_submit {
         ad_returnredirect $return_url
         ad_script_abort
-    }
+    } \
+    -validate {{
+        title_url
+        {[
+            expr {[empty_string_p $title_url] || \
+                [util_url_valid_p $title_url]
+            }
+        ]}
+        "Your input \"$title_url\" doesn't look like a valid URL. \
+            Example of a valid URL: $valid_url_example"
+    }}
 
 set context [list $page_title]
