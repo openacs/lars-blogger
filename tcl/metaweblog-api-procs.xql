@@ -9,4 +9,13 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="metaWeblog.getCategories.select_categories">
+        <querytext>
+            select name, short_name
+            from   pinds_blog_categories
+	    where  package_id = :package_id
+	    order  by lower(name)
+        </querytext>
+    </fullquery>
+
 </queryset>

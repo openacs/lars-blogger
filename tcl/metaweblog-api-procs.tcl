@@ -79,16 +79,31 @@ ad_proc -public metaWeblog.newPost {
         set pubDate [clock format [clock seconds] -format $fmt]
     }
     
-    # ignore 'category', 'enclosure' for now
+    # ignore 'enclosure' for now
+
+    if { [exists_and_not_null content(categories)] } {
+	# Only looking at the first category
+	set category_name [lindex $content(categories) 0]
+	set category_id [db_string select_category_id { 
+	    select category_id
+	    from   pinds_blog_categories 
+	    where  package_id = :package_id 
+	    and    name = :category_name 
+	}]
+    } else {
+	set category_id {}
+    }
+	
     
     return [list -string [lars_blog_entry_add -entry_id $entry_id \
-                           -package_id $package_id \
-                           -title $content(title) \
-                           -content $content(description) \
-                           -content_format "text/html" \
-                           -entry_date $pubDate \
-                           -draft_p [ad_decode $publish_p 1 f t]
-                      ]]
+			      -package_id $package_id \
+			      -title $content(title) \
+			      -content $content(description) \
+			      -content_format "text/html" \
+			      -entry_date $pubDate \
+			      -category_id $category_id \
+			      -draft_p [ad_decode $publish_p 1 f t]
+			 ]]
 }
 
 ad_proc -public metaWeblog.editPost {
@@ -255,4 +270,45 @@ ad_proc -public metaWeblog.getRecentPosts {
 
 # unimplemented so far
 # metaWeblog.newMediaObject 
-# metaWeblog.getCategories
+
+
+ad_proc -public metaWeblog.getCategories {
+    package_id
+    username
+    password
+} {
+    Get categories.
+    
+    @param package_id 
+    @param username We'll determine if this is a username or an email
+    @param password
+
+    @return array of structs
+    @author Lars Pind (lars@collaboraid.biz)
+} {
+    set user_id [lars_blog_auth_for_xmlrpc \
+                     -username $username \
+                     -password $password]
+
+    permission::require_permission -party_id $user_id \
+        -object_id $package_id \
+        -privilege read
+
+    set blog_url "[ad_url][lars_blog_public_package_url -package_id $package_id]"
+    set result ""
+
+    db_foreach select_categories {} {
+        set html_url "${blog_url}cat/$short_name/"
+        
+        set struct [list -struct \
+                        [list \
+                             description [list -string $name] \
+                             htmlUrl [list -string $html_url] \
+                             rssUrl [list -string {}] \
+			    ]]
+        
+        lappend result $struct
+    }
+
+    return [list -array $result]
+}

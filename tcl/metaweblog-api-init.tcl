@@ -11,3 +11,4 @@ xmlrpc::register_proc metaWeblog.newPost
 xmlrpc::register_proc metaWeblog.editPost
 xmlrpc::register_proc metaWeblog.getPost
 xmlrpc::register_proc metaWeblog.getRecentPosts
+xmlrpc::register_proc metaWeblog.getCategories
