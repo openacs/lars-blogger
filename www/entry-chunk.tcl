@@ -21,6 +21,8 @@ if { ![exists_and_not_null return_url] } {
 
 set package_url [lars_blog_public_package_url -package_id $package_id]
 
+set general_comments_package_url [general_comments_package_url]
+
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
 set blog(title) [ad_quotehtml $blog(title)]
@@ -36,7 +38,11 @@ set blog(revoke_url) "${package_url}admin/entry-revoke?[export_vars { entry_id r
 
 set blog(entry_archive_url) "${package_url}one-entry?[export_vars { entry_id }]"
 set blog(google_url) "http://www.google.com/search?[export_vars { {q $blog(title) } }]"
-set blog(comment_add_url) "[general_comments_package_url]comment-add?[export_vars { { object_id $entry_id } { object_name $blog(title) } { return_url "${package_url}flush-cache?[export_vars { return_url }]"} }]"
+
+if { ![empty_string_p $general_comments_package_url] } {
+    set blog(comment_add_url) "${general_comments_package_url}comment-add?[export_vars { { object_id $entry_id } { object_name $blog(title) } { return_url "${package_url}flush-cache?[export_vars { return_url }]"} }]"
+}
+
 set blog(comments_view_url) "${package_url}one-entry?[export_vars { entry_id }]"
 
 if { [string equal $show_comments_p "t"] } {
