@@ -24,22 +24,13 @@
 		           title,
 		           content,
 		           draft_p,
-		           'f' as new_date_p,
 		           p.first_names as poster_first_names,
 		           p.last_name as poster_last_name,
 		           to_char(posted_date , 'HH24:MI') as posted_time_pretty,
 		           (select count(gc.comment_id) 
 		            from general_comments gc, cr_revisions cr 
 		            where gc.object_id = entry_id
-		            and   content_item__get_live_revision(gc.comment_id) = cr.revision_id) as num_comments,
-		           0 as row_number,
-		           '' as edit_url,
-    		       '' as delete_url,
-    		       '' as publish_url,
-    		       '' as revoke_url,
-		           '' as comments_view_url,
-		           '' as comment_add_url,
-		           '' as google_url
+		            and   content_item__get_live_revision(gc.comment_id) = cr.revision_id) as num_comments
 		    from   pinds_blog_entries e join 
 		           acs_objects o on (o.object_id = e.entry_id) join 
 		           persons p on (p.person_id = o.creation_user)

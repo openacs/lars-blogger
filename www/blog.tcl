@@ -35,15 +35,12 @@ set package_url [lars_blog_public_package_url]
 
 set admin_p [ad_permission_p $package_id admin]
 
-set old_date ""
-
 set count 0
 
-db_multirow blog blog { *SQL* } {
-    if { ![string equal $old_date $entry_date_pretty] } {
-        set new_date_p "t"
-        set old_date $entry_date_pretty
-    }
+db_multirow -extend { 
+    row_number edit_url delete_url publish_url
+    revoke_url comments_view_url comment_add_url google_url 
+} blog blog { *SQL* } {
     set row_number [incr count]
 
     set return_url "${package_url}one-entry?[export_vars { entry_id }]"

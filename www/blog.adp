@@ -1,19 +1,16 @@
 <multiple name="blog">
-  <if @blog.new_date_p@ eq "t">
-    <table cellspacing="0" cellpadding="2" border="0" width="100%">
-      <tr>
-        <th bgcolor="#e0d0b0" align=left>
-          <b><a name="blog-date-@blog.entry_date@">@blog.entry_date_pretty@</a></b>
-        </th>
-      </tr>
-    </table>
-  <div style="padding-bottom:14px;">
-  </if>
-  <else>
-    <div style="border-top:1px dashed #3366cc;padding-bottom:14px;">
-  </else>
-  <include src="entry-chunk" &="blog">
-  </div>
+  <table cellspacing="0" cellpadding="2" border="0" width="100%">
+    <tr>
+      <th bgcolor="#e0d0b0" align=left>
+        <b><a name="blog-date-@blog.entry_date@">@blog.entry_date_pretty@</a></b>
+      </th>
+    </tr>
+  </table>
+  <group column="entry_date">
+    <div style="border-bottom:1px dashed #3366cc; padding-bottom:14px;">
+      <include src="entry-chunk" &="blog">
+    </div>
+  </group>
 </multiple>
 
 <a href="@archive_url@"><img src="@arrow_url@" width="11" height="11" border="0" alt="Archive"></a>

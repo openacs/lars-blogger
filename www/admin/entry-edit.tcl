@@ -50,7 +50,7 @@ if { [form is_request entry] } {
     }
 
     element set_properties entry entry_id -value $entry_id
-    template::element set_properties entry insert_or_update -value $insert_or_update
+    element set_properties entry insert_or_update -value $insert_or_update
 }
 
 
@@ -94,7 +94,11 @@ if { [form is_valid entry] } {
 
     ad_returnredirect $return_url
     ad_script_abort
-}    
+} 
+
+if { ![form is_request entry] && ![form is_valid entry] } {
+    set insert_or_update [element get_value entry insert_or_update]
+}
 
 switch -- $insert_or_update {
     insert {

@@ -28,4 +28,6 @@ if { [empty_string_p $day] } {
 
 }
 
+set date "$year-$month-[ad_decode $day "" "01" $day]"
+
 ad_return_template

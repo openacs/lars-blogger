@@ -17,6 +17,21 @@
       <table width="100%" cellspacing="0" cellpadding="2">
         <tr>
           <th bgcolor="#e0d0b0">
+            Calendar
+          </th>
+        </tr>
+        <tr>
+          <td nowrap align="center">
+            <include src="calendar">
+          </td>
+        </tr>
+        <tr>
+          <td height="16">
+            <table><tr><td></td></tr></table>
+          </td>
+        </tr>
+        <tr>
+          <th bgcolor="#e0d0b0">
             Archive
           </th>
         </tr>
