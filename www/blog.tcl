@@ -43,13 +43,15 @@ if { [ad_conn isconnected] && ![string equal $package_url [string range [ad_conn
 
 set admin_p [ad_permission_p $package_id admin]
 
-set num_entries [db_string num_entries {}]
+set limit_clause {}
 
-if { $num_entries < 3 } {
-    set date_clause {1=1}
-    set limit_clause [db_map limit_clause]
-} else {
-    set limit_clause {}
+if { ![string equal $type "archive"] } {
+   set num_entries [db_string num_entries {}]
+
+   if { $num_entries < 3 } {
+       set date_clause {1=1}
+       set limit_clause [db_map limit_clause]
+   }  
 }
 
 db_multirow blog blog {} 
