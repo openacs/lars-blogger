@@ -49,6 +49,10 @@ set num_days [parameter::get \
         
         
 
+if { ![info exists type] } {
+    set type "current"
+}
+
 switch -exact $type {
     archive {
         set date_clause "[db_map date_clause_archive]"
