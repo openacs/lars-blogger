@@ -32,18 +32,17 @@ ad_proc lars_blog_setup_feed {
         }
         
         # check whether there's been a feed setup for this instance
-        set exists_instance_feed_p [db_string exists_instance_feed_p {}]
+        set subscr_id [db_string instance_feed_subscr_id {} -default {}]
         
-        if { [string equal $exists_instance_feed_p "0"] } {
+        if { [empty_string_p $subscr_id] } {
             # Setup an RSS feed for this instance
             set channel_link [lars_blog_public_package_url]
             
             set subscr_id [db_exec_plsql create_subscr {}]
             db_dml update_subscr {}
-            
-            # Run it now
-            rss_gen_report $subscr_id
-	}
+        }
+        # Run it now
+        rss_gen_report $subscr_id
     }
 
     if { [parameter::get -parameter "user_rss_feed_p" -package_id $package_id -default 0] } {
@@ -53,13 +52,13 @@ ad_proc lars_blog_setup_feed {
 
         if { [empty_string_p $summary_context_id] } {
             # Setup a channel for this instance
-    	set summary_context_id [db_exec_plsql create_user_channel {}]
+            set summary_context_id [db_exec_plsql create_user_channel {}]
         }
 
         # check whether there's been a feed setup for this user
-        set exists_user_feed_p [db_string exists_user_feed_p {}]
+        set subscr_id [db_string user_feed_subscr_id {} -default {}]
 
-        if { !$exists_user_feed_p } {
+        if { [empty_string_p $subscr_id] } {
             set screen_name [acs_user::get_element -user_id $creation_user -element screen_name]
             
             if { ![empty_string_p $screen_name] } {
@@ -68,12 +67,13 @@ ad_proc lars_blog_setup_feed {
                 
                 set subscr_id [db_exec_plsql create_subscr {}]
                 db_dml update_subscr {}
-                
-                # Run it now
-                rss_gen_report $subscr_id
             } else {
                 ns_log Warning "lars-blogger: User $creation_user has no screen_name, cannot setup an RSS feed for user"
             }
+        }
+        if { ![empty_string_p $subscr_id] } {
+            # Run it now
+            rss_gen_report $subscr_id
         }
     }
 }
