@@ -1,7 +1,9 @@
 <if @blog.title_url@ not nil>
   <div>
     <a href="@blog.title_url@" style="font-weight: bold;"><if @blog.title@ not nil>@blog.title@</if><else>@blog.title_url@</else></a>
-    &nbsp;&nbsp;<span style="font-size: 80%; font-style: italic;">[@blog.title_url_base@]</span>
+    <if @blog.title_url_base@ not nil>
+      &nbsp;&nbsp;<span style="font-size: 80%; font-style: italic;">[@blog.title_url_base@]</span>
+    </if>
   </div>
 </if>
 <else>
