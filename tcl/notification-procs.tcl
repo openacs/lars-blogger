@@ -13,11 +13,13 @@ ad_proc -public lars_blogger::notification::get_url {
     object_id
 } {
     Get the URL of a blogger entry.
+
+    @author Stan Kaufman (skaufman@epimetrics.com)
+    @creation-date 2005-03-01
+    @param object_id
 } {
-    # LARS:
-    # Not implemented. Sorry.
-    # At least this is better than a hard error.
-    return {}
+    set entry_id $object_id
+    return "[ad_url][db_string select_weblog_package_url {}]"
 }
 
 ad_proc -public lars_blogger::notification::process_reply {
