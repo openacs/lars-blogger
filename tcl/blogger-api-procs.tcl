@@ -17,7 +17,7 @@ ad_proc lars_blog_auth_for_xmlrpc {
     Authenticate a user based on info from XML-RPC client. Not sure if we're
     getting email or username, so test for @ and decide.
 
-    @returns user_id if successful authentication. errors if unsuccesful.
+    @return user_id if successful authentication. errors if unsuccesful.
     @author Vinod Kurup
 } {
     if { [string first "@" $username] != -1 } {
