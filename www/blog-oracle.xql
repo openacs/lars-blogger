@@ -23,6 +23,7 @@
 		           to_char(entry_date, 'YYYY-MM-DD') as entry_date,
 		           title,
                            title_url,
+			   category_id,
 		           content,
                            content_format,
 		           draft_p,

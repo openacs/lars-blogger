@@ -32,7 +32,9 @@ create table pinds_blog_entries (
                         references apm_packages(package_id),
   title                 varchar(500),
   title_url             varchar(500),
-  category_id           integer not null default 0,
+  category_id           integer
+                        constraint pinds_blog_entry_category_fk 
+                        references pinds_blog_categories(category_id),
   content               varchar(32000),
   content_format        varchar(50) 
                         default 'text/html'

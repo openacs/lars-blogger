@@ -48,23 +48,11 @@
         </querytext>
     </fullquery>
 
-    <fullquery name="insert_category">
-        <querytext>
-	        select pinds_blog_category__new (
-            		:category_id,
-  	          	:package_id,
-        	    	:name,
-                	:short_name,
-        	    	:creation_user,
-            		:creation_ip
-        	)
-        </querytext>
-    </fullquery>
-
     <fullquery name="update_category">
         <querytext>
             update pinds_blog_categories
-            set    name=:name, short_name=:short_name
+            set    name = :name, 
+                   short_name = :short_name
             where  category_id = :category_id
         </querytext>
     </fullquery>

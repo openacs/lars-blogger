@@ -25,9 +25,9 @@ set page_title $blog(title)
 
 if {![exists_and_not_null screen_name]} {
     set screen_name ""
-    set context_bar [ad_context_bar $page_title]
+    set context [list $page_title]
 } else {
-    set context_bar [ad_context_bar $screen_name]
+    set context [list $screen_name]
 }
 
 set header_background_color [lars_blog_header_background_color]

@@ -113,8 +113,8 @@ if { ![string equal $type "archive"] && \
    }  
 }
 
-set arr_category_name(0) None
-set arr_category_short_name(0) none
+set arr_category_name() None
+set arr_category_short_name() none
 db_foreach categories {} {
     set arr_category_name($category_id) $name
     set arr_category_short_name($category_id) $short_name

@@ -33,16 +33,14 @@ set today [clock format [clock seconds] -format "%Y-%m-%d"]
 form create entry -cancel_url [ad_decode $return_url "" "." $return_url]
 
 element create entry title -label "Title" -datatype text -html { size 50 }
-element create entry title_url -label "Title URL (optional)" -datatype text -html { size 50 } -optional
+element create entry title_url -label "Title URL" -datatype text -html { size 50 } -optional
 
 # If categories are enabled, set up a select-box with option. 
-# Otherwise just set the category_id to 0 to support category support in the future.
+# Otherwise just set the category_id to null to support category support in the future.
 if { [string equal [lars_blog_categories_p] "1"] } {
     # It's probably possible to set up the widget directly from the datasource -- I just don't know how :-(
     set option_list [concat [list [list None 0]] [db_list_of_lists categories {}]]
     element create entry category_id -label "Category" -datatype integer -widget select -options $option_list
-} else {
-    element create entry category_id -widget hidden -datatype text -value 0
 }
 
 element create entry content -label "Content" -datatype richtext -widget richtext -html { cols 80 rows 20 }

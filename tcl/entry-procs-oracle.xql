@@ -8,6 +8,7 @@
 		    select b.entry_id,  
                            b.title, 
                            b.title_url, 
+                           b.category_id, 
                            b.content, 
                            b.content_format, 
                            b.draft_p, 
@@ -50,18 +51,20 @@
                     o.creation_user,
                     acs_object.name(o.creation_user) as author,
                     to_char(o.creation_date, 'MM-DD-YYYY') as pretty_date,
-                    to_char(o.creation_date, 'Month DD, YYYY HH12:MI PM') as pretty_date2
-		    case when tb.comment_id not null 't' else 'f' end as trackback_p,
+                    to_char(o.creation_date, 'Month DD, YYYY HH12:MI PM') as pretty_date2,
+		    case when tb.comment_id is not null then 't' else 'f' end as trackback_p,
 		    tb.tb_url as trackback_url,
-		    nvl(tb.name,tb.tb_url) as trackback_name
-               from general_comments g left join trackback_pings tb on gc.comment_id=tb.comment_id,
+		    nvl(tb.name, tb.tb_url) as trackback_name
+               from general_comments g, 
+                    trackback_pings tb,
                     cr_revisions r,
 	            cr_items ci,
                     acs_objects o
-              where g.object_id = :object_id 
-		and r.revision_id = i.live_revision
-	        and i.item_id=g.comment_id 
+              where g.object_id = :entry_id 
+		and r.revision_id = ci.live_revision
+	        and ci.item_id = g.comment_id
                 and o.object_id = g.comment_id
+                and tb.comment_id (+) = g.comment_id
               order by o.creation_date
 		
 	</querytext>

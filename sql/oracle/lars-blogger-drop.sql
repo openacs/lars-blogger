@@ -41,3 +41,5 @@ show errors
 @@ lars-blogger-package-drop
 
 drop table pinds_blog_entries;
+
+@@ lars-blogger-categories-drop.sql

@@ -14,7 +14,7 @@ select acs_object_type__create_type (
     'acs_object',                   -- supertype
     'pinds_blog_categories',        -- table_name
     'category_id',                  -- id_column
-    null,                           -- package_name
+    'pinds_blog_category',          -- package_name
     'f',                            -- abstract_p
     null,                           -- type_extension_table
     'pinds_blog_category__name'     -- name_method
@@ -29,8 +29,8 @@ create table pinds_blog_categories (
   package_id            integer
                         constraint pinds_blog_entry_package_id_kf
                         references apm_packages(package_id),
-  name                  varchar(500) not null,
-  short_name            varchar(50) not null
+  name                  varchar(4000) not null,
+  short_name            varchar(4000) not null
 );
 
 create or replace function pinds_blog_category__name (integer)
@@ -94,7 +94,7 @@ declare
     p_category_id alias for $1;
 begin
     update pinds_blog_entries
-        set category_id = 0
+        set category_id = null
         where category_id = p_category_id;
 
     delete from pinds_blog_categories
