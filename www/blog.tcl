@@ -1,7 +1,8 @@
 # Expects:
 #  package_id:optional
 #  url:optional
-#  type:optional (current, archive)
+#  type:optional (current, archive, all)
+#  sw_category_id:optional
 #  archive_interval:optional
 #  archive_date:optional
 #  screen_name:optional
@@ -96,8 +97,12 @@ switch -exact $type {
             set date_clause [db_map date_clause_default]
         }
     }
+    all {
+        set date_clause {}
+        set limit {}
+    }
     default {
-        error "Only knows of type 'archive' or 'current'"
+        error "Only knows of type 'archive', 'current', and 'all'."
     }
 }
 
@@ -114,9 +119,9 @@ if { [ad_conn isconnected] && ![string equal $package_url [string range [ad_conn
 }
 
 # Check that the date limit is not limiting us to show less than min_num_entries entries
-if { ![string equal $type "archive"] && \
-         ![empty_string_p $min_num_entries] && $min_num_entries != 0 && \
-         ![empty_string_p $num_days] && $num_days != 0 
+if { ![string equal $type "archive"] && 
+     ![empty_string_p $min_num_entries] && $min_num_entries != 0 && 
+     ![empty_string_p $num_days] && $num_days != 0 
  } {
     if { [empty_string_p $blog_user_id] } {
         set num_entries [db_string num_entries_by_date_all {}]
@@ -153,17 +158,14 @@ if { [empty_string_p $blog_user_id] } {
 # category and second time to get other categories this item is in.
 
 if { [string length $blog_sw_category_id] } {
-  set sw_category_filter_where_clause \
-    [db_map sw_category_filter_where_clause]
-  set sw_category_filter_join_clause \
-    [db_map sw_category_filter_join_clause]
-  # This is the thing that doesn't exist in PostgreSQL:
-  set sw_category_filter_join_where_clause \
-    [db_map sw_category_filter_join_where_clause]
+    set sw_category_filter_where_clause [db_map sw_category_filter_where_clause]
+    set sw_category_filter_join_clause [db_map sw_category_filter_join_clause]
+    # This is the thing that doesn't exist in PostgreSQL:
+    set sw_category_filter_join_where_clause [db_map sw_category_filter_join_where_clause]
 } else {
-  set sw_category_filter_where_clause ""
-  set sw_category_filter_join_clause ""
-  set sw_category_filter_join_where_clause ""
+    set sw_category_filter_where_clause ""
+    set sw_category_filter_join_clause ""
+    set sw_category_filter_join_where_clause ""
 }
 
 # Our query will have more than one row per item_id.  This variable
@@ -171,8 +173,9 @@ if { [string length $blog_sw_category_id] } {
 
 set output_rows_count 0
 
-db_multirow -extend {category_name category_short_name
-  sw_category_multirow} blog blog {} {
+db_multirow -extend { 
+    category_name category_short_name sw_category_multirow 
+} blog blog {} {
 
     # Putting the limit in the query won't give correct results.  We
     # need to do it here:

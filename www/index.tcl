@@ -46,20 +46,6 @@ if { ![empty_string_p $category_short_name] } {
     set category_id ""
 }
 
-# SWC
-
-if { ![empty_string_p $sw_category_id] } {
-    set sw_category_name [category::get_name $sw_category_id]
-    if { [empty_string_p $sw_category_name] } {
-        ad_return_exception_page 404 "No such category" "Site-wide \
-          Category with ID $sw_category_id doesn't exist"
-	    return
-    }
-    # Show Category in context bar
-    append context_base_url /swcat/$sw_category_id
-    lappend context [list $context_base_url $sw_category_name]
-}
-
 # Set up the <link> elements for the HTML <head>
 # 3 items - RSS, RSD and stylesheet.
 set rss_file_url ""
@@ -178,16 +164,29 @@ if { [exists_and_not_null year] } {
 
 db_multirow categories categories {}
 
-# SWC
+# Site-Wide Categories
 
-db_multirow -unclobber -extend {sw_category_name tree_name} \
-  sw_categories sw_categories {
-  select c.category_id as sw_category_id, c.tree_id
-    from categories c, category_tree_map ctm
-   where ctm.tree_id = c.tree_id
-     and ctm.object_id = :package_id} {
-  set sw_category_name [category::get_name $sw_category_id]
-  set tree_name [category_tree::get_name $tree_id]
+if { ![empty_string_p $sw_category_id] } {
+    set sw_category_name [category::get_name $sw_category_id]
+    if { [empty_string_p $sw_category_name] } {
+        ad_return_exception_page 404 "No such category" "Site-wide \
+          Category with ID $sw_category_id doesn't exist"
+	    return
+    }
+    # Show Category in context bar
+    append context_base_url /swcat/$sw_category_id
+    lappend context [list $context_base_url $sw_category_name]
+    set type "all"
+}
+
+db_multirow -unclobber -extend { sw_category_name tree_name } sw_categories sw_categories {
+    select c.category_id as sw_category_id, c.tree_id
+    from   categories c, category_tree_map ctm
+    where  ctm.tree_id = c.tree_id
+    and    ctm.object_id = :package_id
+} {
+    set sw_category_name [category::get_name $sw_category_id]
+    set tree_name [category_tree::get_name $tree_id]
 }
 
 # Cut the URL off the last item in the context bar
