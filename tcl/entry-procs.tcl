@@ -225,6 +225,9 @@ ad_proc -public lars_blogger::entry::do_notifications {
     append new_content "Permalink: $entry_url\n\n"
     append new_content "$blog_name: $blog_url\n"
 
+    append new_content "This entry: " $entry_url \n\n
+    append new_content "$blog_name: " $blog_url \n
+    
     # Do the notification for the forum
     notification::new \
         -type_id [notification::type::get_type_id \
