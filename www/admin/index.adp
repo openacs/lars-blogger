@@ -8,6 +8,7 @@
   <if @categories@ eq 1>
     <li><a href="../category-edit" title="Categories" class="action_link">Categories</a></li>
   </if>
+  <li><a href="@category_map_url@" class="action_link">Site-Wide Categories</a>
   <li><a href="blogroll" title="View blogroll" class="action_link">Blogroll</a></li>
   <li><a href="../drafts" title="View draft entries" class="action_link">View draft entries</a></li>
   <li><a href="subscribers" title="Show E-Mail subscribers" class="action_link">Show E-Mail subscribers</a></li>
