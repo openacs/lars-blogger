@@ -22,12 +22,15 @@ if { ![empty_string_p [ad_parameter "rss_file_url"]] } {
 
 set admin_p [ad_permission_p [ad_conn package_id] admin]
 
-set notification_chunk [notification::display::request_widget \
-    -type lars_blogger_notif \
-    -object_id [ad_conn package_id] \
-    -pretty_name [lars_blog_name] \
-    -url [lars_blog_public_package_url] \
-]
+if { [catch {
+    set notification_chunk [notification::display::request_widget \
+                                -type lars_blogger_notif \
+                                -object_id [ad_conn package_id] \
+                                -pretty_name [lars_blog_name] \
+                                -url [lars_blog_public_package_url]]
+}] } {
+    set notification_chunk {}
+}
 
 set header_background_color [lars_blog_header_background_color]
 
