@@ -13,7 +13,7 @@
                            u.last_name
 		    from   pinds_blog_entries e,
                            acs_objects o,
-                           all_users u
+                           acs_users_all u
 		    where  e.package_id = :package_id
 		    and    e.draft_p = 't'
 		    and    e.deleted_p = 'f'
@@ -35,7 +35,7 @@
                            u.last_name
 		    from   pinds_blog_entries e,
                            acs_objects o,
-                           all_users u
+                           acs_users_all u
 		    where  e.package_id = :package_id
 		    and    e.draft_p = 't'
 		    and    e.deleted_p = 'f'

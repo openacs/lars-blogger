@@ -5,6 +5,35 @@ ad_library {
      @cvs-id $Id$
 }
 
+namespace eval lars_blogger {}
+namespace eval lars_blogger::rss {}
+
+
+ad_proc -public lars_blogger::rss::get_subscr_id_list {
+    {-package_id ""}
+} {
+    if { [empty_string_p $package_id] } {
+        set package_id [ad_conn package_id]
+    }
+
+    return [db_list select_subscr {
+        select s.subscr_id
+        from   rss_gen_subscrs s
+        where  s.summary_context_id = :package_id 
+        or     s.summary_context_id in (select c.channel_id
+                                        from   weblogger_channels c
+                                        where  c.package_id = :package_id)
+    }]
+}
+
+ad_proc -public lars_blogger::rss::generate {
+    {-package_id ""}
+} {
+    foreach subscr_id [lars_blogger::rss::get_subscr_id_list -package_id $package_id] {
+        rss_gen_report $subscr_id
+    }
+}
+
 ad_proc -private lars_blog__rss_datasource {
     summary_context_id
 } {
@@ -13,7 +42,6 @@ ad_proc -private lars_blog__rss_datasource {
 
     @author Lars Pind (lars@pinds.com)
 } {
-
     db_transaction {
         
         db_1row select_package_id_user_id {}
@@ -25,7 +53,7 @@ ad_proc -private lars_blog__rss_datasource {
         set blog_url "[ad_url]$package_url"
         
     }
-
+    
     set column_array(channel_title) $blog_title
     set column_array(channel_description) $blog_title
 

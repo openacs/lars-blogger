@@ -13,22 +13,17 @@
         <querytext>
             select *
             from (select entry_id,
-                         title, 
-                         content,
-                         entry_date,
-                         posted_date,
-                         to_char(posted_date, 'YYYY-MM-DD') as posted_date_string,
-                         to_char(posted_date, 'HH:MI') as posted_time_string,
-                         to_char(posted_date, 'YYYY-MM-DD HH24:MI:SS') as posted_time_ansi,
-                         -6 as tzoffset_hour,
-                         0 as tzoffset_minute,
-                         to_char(entry_date, 'DD Mon YYYY hh12:MI am') as entry_date_pretty,
-                         to_char(entry_date, 'YYYY/MM/') as entry_archive_url
-                  from pinds_blog_entries 
-                  where package_id = :package_id
-                  and draft_p = 'f'
-                  and deleted_p = 'f'
-                  order by entry_date desc, posted_date desc)
+                         e.title, 
+                         e.content,
+                         to_char(e.posted_date, 'YYYY-MM-DD HH24:MI:SS') as posted_time_ansi,
+                         c.name as category
+                  from   pinds_blog_entries e,
+                         pinds_blog_categories c
+                  where  e.package_id = :package_id
+                  and    e.draft_p = 'f'
+                  and    e.deleted_p = 'f'
+                  and    c.category_id = e.category_id (+)
+                  order  by e.entry_date desc, e.posted_date desc)
             where rownum < 11
         </querytext>
     </fullquery>
@@ -36,28 +31,23 @@
     <fullquery name="lars_blog__rss_datasource.user_blog_rss_items">
         <querytext>
             select *
-            from (select entry_id,
-                         title, 
-                         content,
-                         entry_date,
-                         posted_date,
-                         to_char(posted_date, 'YYYY-MM-DD') as posted_date_string,
-                         to_char(posted_date, 'HH:MI') as posted_time_string,
-                         to_char(posted_date, 'YYYY-MM-DD HH24:MI:SS') as posted_time_ansi,
-                         -6 as tzoffset_hour,
-                         0 as tzoffset_minute,
-                         to_char(entry_date, 'DD Mon YYYY hh12:MI am') as entry_date_pretty,
-                         to_char(entry_date, 'YYYY/MM/') as entry_archive_url
+            from (select e.entry_id,
+                         e.title, 
+                         e.content,
+                         to_char(e.posted_date, 'YYYY-MM-DD HH24:MI:SS') as posted_time_ansi,
+                         c.name as category
                   from   pinds_blog_entries e,
 		         acs_objects o, 
-                         users u
-                  where e.package_id = :package_id
-                  and   o.object_id = e.entry_id
-                  and   o.creation_user = :user_id
-                  and   u.user_id = o.creation_user
-                  and   e.draft_p = 'f'
-                  and   e.deleted_p = 'f'
-                  order by e.entry_date desc, e.posted_date desc)
+                         users u,
+                         pinds_blog_categories c
+                  where  e.package_id = :package_id
+                  and    o.object_id = e.entry_id
+                  and    o.creation_user = :user_id
+                  and    u.user_id = o.creation_user
+                  and    e.draft_p = 'f'
+                  and    e.deleted_p = 'f'
+                  and    c.category_id = e.category_id (+)
+                  order  by e.entry_date desc, e.posted_date desc)
             where rownum < 11
         </querytext>
     </fullquery>

@@ -2,7 +2,45 @@ ad_library {
     Entry procs for blogger.
 }
 
+namespace eval lars_blogger {}
 namespace eval lars_blogger::entry {}
+
+ad_proc -public lars_blogger::entry::new {
+    {-entry_id ""}
+    {-package_id ""}
+    {-title:required}
+    {-title_url ""}
+    {-category_id ""}
+    {-content ""}
+    {-content_format "text/plain"}
+    {-entry_date ""}
+    {-draft_p "t"}
+} {
+	Add the blog entry and then flush the cache so that the new entry shows up.
+} {
+    set creation_user [ad_conn user_id]
+    set creation_ip [ns_conn peeraddr]
+
+    if { [empty_string_p $package_id] } {
+        set package_id [ad_conn package_id]
+    }
+
+    db_transaction {
+        # Create the entry
+        set entry_id [db_exec_plsql entry_add {}]
+        lars_blog_flush_cache $package_id
+    }
+
+    # If publish directly, fire off notifications and ping weblogs.com
+    if { [string equal $draft_p "f"] } {
+        lars_blogger::entry::publish \
+            -entry_id $entry_id \
+            -package_id $package_id \
+            -no_update
+    }
+
+    return $entry_id
+}
 
 ad_proc -public lars_blogger::entry::get { 
     -entry_id:required
@@ -30,7 +68,7 @@ ad_proc -public lars_blogger::entry::publish {
 } {
     if { !$no_update_p } {
         # Set draft_p = 'f'
-        db_dml update_entry { *SQL* }
+        db_dml update_entry {}
         # Flush cache
         lars_blog_flush_cache
     }
@@ -40,11 +78,8 @@ ad_proc -public lars_blogger::entry::publish {
         ns_conn close
     }
     
-    # Setup instance feed if needed
+    # Setup instance/user feeds if needed
     lars_blog_setup_feed -package_id $package_id
-    
-    # Setup user feed if needed
-    lars_blog_setup_feed -user -package_id $package_id
     
     # Notifications
     lars_blogger::entry::do_notifications -entry_id $entry_id

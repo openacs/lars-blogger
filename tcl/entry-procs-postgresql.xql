@@ -3,6 +3,24 @@
 <queryset>
     <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
+    <fullquery name="lars_blogger::entry::new.entry_add">
+        <querytext>
+	        select pinds_blog_entry__new (
+            		:entry_id,
+  	          	:package_id,
+        	    	:title,
+                	:title_url,
+                        :category_id,
+	            	:content,
+        	    	:content_format,
+            		coalesce(to_date(:entry_date, 'YYYY-MM-DD'), current_timestamp),
+	            	:draft_p,
+        	    	:creation_user,
+            		:creation_ip
+        	)
+        </querytext>
+    </fullquery>
+
     <fullquery name="lars_blogger::entry::get.select_entry">
         <querytext>
             select b.entry_id,  

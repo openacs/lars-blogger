@@ -12,7 +12,7 @@ declare
     p_category_id     alias for $1;
     v_name            varchar;
 begin
-    select title into v_name
+    select name into v_name
         from pinds_blog_categories
         where category_id = p_category_id;
     return v_name;

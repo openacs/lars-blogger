@@ -34,11 +34,7 @@ ad_proc pinds_blog_entry__url {
     @creation-date 2002-11-18
 } {
 
-    db_1row get_url_stub "
-        select site_node__url(node_id) as url_stub
-        from site_nodes s, pinds_blog_entries e
-        where e.entry_id = :object_id
-		and s.object_id = e.package_id"
+    db_1row get_url_stub {}
 
     set url "${url_stub}one-entry?entry_id=$object_id"
 

@@ -20,6 +20,11 @@ lappend elements edit {
     link_url_eval {[export_vars -base entry-edit { entry_id { return_url [ad_return_url] } }]}
     link_html { title "Edit entry" }
 }
+lappend elements title {
+    label "Title"
+    link_url_eval {[export_vars -base one-entry { entry_id }]}
+    link_html { title "Preview entry" }
+}
 lappend elements entry_date {
     label "Date"
     display_col entry_date_pretty
@@ -37,9 +42,7 @@ if { [permission::permission_p -object_id $package_id -privilege write] } {
 }
 
 lappend elements content {
-    label "Entry"
-    link_url_eval {[export_vars -base one-entry { entry_id { return_url [ad_return_url] } }]}
-    link_html { title "Preview entry" }
+    label "Content"
 }
 lappend elements publish {
     label {Publish}

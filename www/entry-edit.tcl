@@ -106,7 +106,7 @@ if { [form is_valid entry] } {
     set insert_or_update [element get_value entry insert_or_update]
 
     if { [string equal $insert_or_update "insert"] } {
-        lars_blog_entry_add \
+        lars_blogger::entry::new \
                 -entry_id $entry_id \
                 -package_id $package_id \
                 -title $title \
@@ -119,15 +119,35 @@ if { [form is_valid entry] } {
     } else {
         permission::require_write_permission -object_id $entry_id
 
-        lars_blog_entry_edit \
-            -entry_id $entry_id \
-            -title $title \
-            -title_url $title_url \
-            -category_id $category_id \
-            -content $content \
-            -content_format $content_format \
-            -entry_date $entry_date \
-            -draft_p $draft_p
+        set set_clauses { 
+            "title = :title" 
+            "title_url = :title_url"
+            "category_id = :category_id"
+            "content = :content"
+            "content_format = :content_format"
+            "entry_date = to_date(:entry_date, 'YYYY-MM-DD')" 
+            "draft_p = :draft_p" 
+        }
+
+        set org_draft_p [db_string org_draft_p { select draft_p from pinds_blog_entries where entry_id = :entry_id } ]
+
+        # Is this a publish?
+        if { [string equal $draft_p "t"] && [string equal $org_draft_p "f"] } {
+            # set the posted_date to now
+            lappend set_clauses [db_map now]
+        }
+    
+        db_dml update_entry {}
+
+        # Is this a publish?
+        if { [string equal $draft_p "t"] && [string equal $org_draft_p "f"] } {
+            # do notifications
+            lars_blogger::entry::do_notifications -entry_id $entry_id
+            # and ping weblogs.com
+            lars_blog_weblogs_com_update_ping
+        }
+    
+        lars_blog_flush_cache $package_id
     }
     
     if { [empty_string_p $return_url] } {
