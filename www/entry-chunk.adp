@@ -21,12 +21,18 @@
    @blog.content;noquote@
 </div>
 
-<div class="lars_blogger_poster">
+<p class="lars_blogger_poster">
+  @blog.posted_time_pretty@ 
   <if @show_poster_p@ true>
-    <br />
-    Posted by @blog.poster_first_names@ @blog.poster_last_name@ at @blog.posted_time_pretty@
+    by @blog.poster_first_names@ @blog.poster_last_name@
   </if>
+  <if @display_categories@ and @blog.category_id@ gt 0>
+    in <a href="@category_url@" title="@blog.category_name@">@blog.category_name@</a>
+  </if>
+  |
 
+  <a href="@blog.entry_archive_url@" title="Permanent URL for this entry">Permalink</a>
+  | <a href="@blog.comments_view_url@" title="View comments on this entry">Comments (@blog.num_comments@)</a>
   <if @blog.write_p@ true>
     | <a href="@blog.edit_url@">Edit</a>
     <if @blog.draft_p@ true>
@@ -36,12 +42,7 @@
       | <a href="@blog.revoke_url@">Draft</a>
     </else>
   </if>
-  | <a href="@blog.entry_archive_url@" title="Permanent URL for this entry">Permalink</a>
-  | <a href="@blog.comments_view_url@" title="View comments on this entry">Comments (@blog.num_comments@)</a>
-  <if @display_categories@ and @blog.category_id@ gt 0>
-    | <a href="@package_url@<if @screen_name@ not nil>user/@screen_name@/</if>cat/@blog.category_short_name@" title="@blog.category_name@">@blog.category_name@</a>
-  </if>
-</div>
+</p>
 
 </div>
 

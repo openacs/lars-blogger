@@ -63,4 +63,12 @@ set display_categories [lars_blog_categories_p -package_id [ad_conn package_id]]
 if { [string equal $show_comments_p "t"] } {
     lars_blogger::entry::get_comments -entry_id $entry_id
 }
-ad_return_template
+
+if { $blog(category_id) != 0 } {
+    set category_url "${package_url}"
+    if { [exists_and_not_null screen_name] } {
+	append category_url "user/$screen_name"
+    }
+    append category_url "cat/$blog(category_short_name)"
+}
+
