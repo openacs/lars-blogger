@@ -19,26 +19,30 @@ if { [empty_string_p $return_url] } {
     set return_url "[ad_conn url]?[ad_conn query]"
 }
 
-db_1row entry { *SQL* }
+set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
-set page_title $title
+db_1row entry { *SQL* } -column_array blog
+
+set page_title $blog(title)
 
 set context_bar [ad_context_bar $page_title]
 
-set title_html [ad_quotehtml $title]
-set content [ns_adp_parse -string $content]
-set content_html [ad_quotehtml $content]
-set entry_date_html [ad_quotehtml $entry_date]
-set draft_p_checked [ad_decode $draft_p "t" "checked" ""]
+set blog(title) [ad_quotehtml $blog(title)]
+set blog(content) [ns_adp_parse -string $blog(content)]
+set blog(draft_p_checked) [ad_decode $blog(draft_p) "t" "checked" ""]
 
-set edit_url "[ad_conn package_url]admin/entry-edit?[export_vars -url { entry_id return_url }]"
-set delete_url "[ad_conn package_url]admin/entry-delete?[export_vars -url { entry_id return_url }]"
+set blog(edit_url) "[ad_conn package_url]admin/entry-edit?[export_vars -url { entry_id return_url }]"
+set blog(delete_url) "[ad_conn package_url]admin/entry-delete?[export_vars -url { entry_id return_url }]"
 
-set publish_url "[ad_conn package_url]admin/entry-publish?[export_vars -url { entry_id return_url }]"
-set revoke_url "[ad_conn package_url]admin/entry-revoke?[export_vars -url { entry_id return_url }]"
+set blog(publish_url) "[ad_conn package_url]admin/entry-publish?[export_vars -url { entry_id return_url }]"
+set blog(revoke_url) "[ad_conn package_url]admin/entry-revoke?[export_vars -url { entry_id return_url }]"
+
+set blog(entry_archive_url) "[ad_conn package_url]one-entry?[export_vars { entry_id }]"
+set blog(google_url) "http://www.google.com/search?[export_vars { {q $blog(title) } }]"
+
 
 set comments_html [general_comments_get_comments -print_content_p 1 $entry_id]
 
-set comment_add_url "[general_comments_package_url]comment-add?[export_vars -url { { object_id $entry_id } { object_name $title } { return_url "[ad_conn package_url]flush-cache?[export_vars -url { return_url }]"} }]"
+set blog(comment_add_url) "[general_comments_package_url]comment-add?[export_vars -url { { object_id $entry_id } { object_name $blog(title) } { return_url "[ad_conn package_url]flush-cache?[export_vars -url { return_url }]"} }]"
 
 ad_return_template
