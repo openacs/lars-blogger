@@ -7,7 +7,7 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="1.0d1" url="http://openacs.org/repository/download/apm/lars-blogger-1.0d1.apm">
+    <version name="1.0d2" url="http://openacs.org/repository/download/apm/lars-blogger-1.0d2.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <owner url="mailto:simon@bcuni.net">Simon Carstensen</owner>
         <summary>Write your own web log</summary>
@@ -15,7 +15,7 @@
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
         <description format="text/html">Manages multiple weblogs for your wbsite.</description>
 
-        <provides url="lars-blogger" version="1.0d1"/>
+        <provides url="lars-blogger" version="1.0d2"/>
         <requires url="acs-datetime" version="4.0"/>
         <requires url="general-comments" version="4.0"/>
         <requires url="notifications" version="0.1"/>
