@@ -24,8 +24,6 @@ ad_proc -public lars_blogger::entry::require_write_permission {
     if { !$admin_p && [ad_conn user_id] != [db_string creation_user {}] } {
         ad_return_forbidden  "Permission Denied"  "<blockquote>
     You don't have permission to modify this entry.
-    <br>
-    This incident has been logged.
     </blockquote>"
         ad_script_abort
     } 
