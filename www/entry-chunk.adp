@@ -30,6 +30,8 @@
     <if @show_poster_p@ true>
       by @blog.poster_first_names@ @blog.poster_last_name@
     </if>
+    <if 1 eq 0>
+      I put this hack in because category_url is not valid.
       <multiple name="sw_category_multirow" delimiter=", ">
         <if @sw_category_multirow.rownum@ eq 1 and
             @sw_category_multirow.sw_category_name@ not nil>
@@ -37,12 +39,15 @@
         </if>
         <a href="@sw_category_multirow.sw_category_url@">@sw_category_multirow.sw_category_name@</a>
       </multiple>
-
+    </if>
+    <if 1 eq 0>
+      I put this hack in because category_url is not valid.
     <if @display_categories@ and @blog.category_id@ gt 0>
       in
       <a href="@category_url@" title="@blog.category_name@">@blog.category_name@</a>
     </if>
     |
+      </if>
 
     <a href="@blog.permalink_url@" title="Permanent URL for this entry">Permalink</a>
     <if @show_comments_p@ false>
