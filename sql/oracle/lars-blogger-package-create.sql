@@ -62,7 +62,9 @@ as
             creation_date => sysdate,
             creation_user => pinds_blog_entry.new.creation_user,
             creation_ip => pinds_blog_entry.new.creation_ip,
-            context_id => pinds_blog_entry.new.package_id
+            context_id => pinds_blog_entry.new.package_id,
+            package_id => pinds_blog_entry.new.package_id,
+            title => pinds_blog_entry.new.title
         );
 
         insert into pinds_blog_entries (

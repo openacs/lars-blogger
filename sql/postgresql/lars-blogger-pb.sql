@@ -53,6 +53,9 @@ begin
         current_timestamp,
         p_creation_user,
         p_creation_ip,
+        p_package_id, 
+        ''t'',
+        p_title,
         p_package_id
     );
 
