@@ -19,32 +19,56 @@ if { [regexp {^/(u|user)/([^/]+)/rss} $url ignore ignore2 screen_name] } {
 
 } else {
 
-    if { [regexp {/(u|user)/([^/]+)/?} $url ignore ignore2 screen_name] } {
-	rp_form_put screen_name $screen_name
-    }
-
-    if { [regexp {/(c|cat|category)/([^/]+)/?} $url ignore ignore2 category_short_name] } {
-	rp_form_put category_short_name $category_short_name
-    }
-
-    if { [regexp {/(a|archive)/?([0-9]*)/?([0-9]*)/?([0-9]*)/?} $url ignore ignore2 year month day] } {
-	if { [empty_string_p $year] && [empty_string_p $month] && [empty_string_p $day] } {
-	    # get year, month, day
-	    set date_list [dt_ansi_to_list [dt_sysdate]]
-	    set year [lindex $date_list 0]
-	    set month [format "%02d" [lindex $date_list 1]]
-	}
-
-	rp_form_put year $year
-	rp_form_put month $month
-	rp_form_put day $day
-    }
-
-    if { [regexp {one-entry$} $url] } {
-	# Backwards compatibility with user/<screen_name>/one-entry?entry_id=<entry_id>
-	rp_internal_redirect "/packages/lars-blogger/www/one-entry"
+    if { [regexp {^/+(u|user)/+([^/]+)(/*.*)} $url \
+        ignore_whole ignore_user screen_name rest_url] } {
+    	    rp_form_put screen_name $screen_name
+            # This is a /user/joe - style URL.  If there was something
+            # after /user/joe it is now stored in rest_url
     } else {
-	rp_internal_redirect "/packages/lars-blogger/www/index"
+        # This is not a /user/joe style URL.
+        set rest_url $url
     }
+
+     if {[regexp {^/+(c|cat|category)/+([^/]+)/*$} $rest_url \
+            ignore_whole ignore_cat category_short_name]} {
+         rp_form_put category_short_name $category_short_name
+    } elseif {[regexp {^/+(a|archive)/*([0-9]*)/*([0-9]*)/*([0-9]*)/*$} \
+                 $rest_url ignore_whole ignore_a year month day]} {
+          if {[empty_string_p $year] && [empty_string_p $month] && \
+                [empty_string_p $day]} {
+                    # get year, month, day
+                    set date_list [dt_ansi_to_list [dt_sysdate]]
+                    set year [lindex $date_list 0]
+                    set month [format "%02d" [lindex $date_list 1]]
+        
+                    rp_form_put year $year
+                    rp_form_put month $month
+                    rp_form_put day $day
+        	}
+    } elseif {[regexp {^/+swcat/+([^/]+)/*} $rest_url \
+                  ignore_whole sw_category_id]} {
+
+          # SWC (Site-wide categories)
+          # As the categories package currently doesn't have short names we
+          # are using IDs. We don't check whether this is a valid integer here
+          # because index.tcl will take care of that.
+          rp_form_put sw_category_id $sw_category_id
+
+    } elseif { [regexp {one-entry$} $url] } {
+	      # Backwards compatibility with user/<screen_name>/one-entry?entry_id=<entry_id>
+	      rp_internal_redirect "/packages/lars-blogger/www/one-entry"
+
+    } elseif {[regexp {^/*$} $rest_url ignore_whole]} {
+
+          # This is just the home page, no categories or archives.
+          # Do nothing.
+
+    } else {
+          # This is not a known URL format.  Bail out
+          ad_return_exception_page 400 "Bad URL" "We are sorry.  The \
+            URL $url is in unrecognized format."
+    }
+
 }
 
+rp_internal_redirect "/packages/lars-blogger/www/index"

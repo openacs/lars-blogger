@@ -82,6 +82,12 @@ if { [string equal [lars_blog_categories_p] "1"] } {
     }
 }
 
+# SWC (Site-wide categories):
+category::ad_form::add_widgets \
+    -container_object_id $package_id \
+    -categorized_object_id [value_if_exists entry_id] \
+    -form_name entry
+
 ad_form -extend -name entry -form {
     {content:richtext(richtext)
         {html {cols 80 rows 20}}
@@ -133,6 +139,11 @@ ad_form -extend -name entry -form {
         set entry_date [element get_value entry entry_date]
         set draft_p [element get_value entry draft_p]
         set draft_p [ad_decode $draft_p "" "f" $draft_p]
+
+        # SWC Collect categories from all the category widgets
+        set category_ids [category::ad_form::get_categories \
+          -object_id $package_id]
+
     } \
     -new_data {
         lars_blogger::entry::new \
@@ -145,6 +156,13 @@ ad_form -extend -name entry -form {
             -content_format $content_format \
             -entry_date $entry_date \
             -draft_p "$draft_p"
+
+        # SWC
+        category::map_object \
+            -remove_old \
+            -object_id $entry_id \
+            $category_ids
+
     } \
     -edit_data {
         lars_blogger::entry::edit \
@@ -156,6 +174,12 @@ ad_form -extend -name entry -form {
             -content_format $content_format \
             -entry_date $entry_date \
             -draft_p $draft_p
+
+        # SWC
+        category::map_object \
+            -remove_old \
+            -object_id $entry_id \
+            $category_ids
     } \
     -after_submit {
         if {"$draft_p" == "t"} {

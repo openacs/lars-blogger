@@ -6,6 +6,7 @@ ad_page_contract {
 } {
     {screen_name:optional {}}
     {category_short_name:optional {}}
+    {sw_category_id:integer,optional {}}
     year:optional,string_length_range(4|4)
     month:optional,string_length_range(2|2)
     day:optional,string_length_range(2|2)
@@ -39,6 +40,20 @@ if { ![empty_string_p $category_short_name] } {
     lappend context [list $context_base_url $category_name]
 } else {
     set category_id ""
+}
+
+# SWC
+
+if { ![empty_string_p $sw_category_id] } {
+    set sw_category_name [category::get_name $sw_category_id]
+    if { [empty_string_p $sw_category_name] } {
+        ad_return_error "No such category" "Site-wide Category with ID \
+          $sw_category_id doesn't exist"
+	    return
+    }
+    # Show Category in context bar
+    append context_base_url /swcat/$sw_category_id
+    lappend context [list $context_base_url $sw_category_name]
 }
 
 # Set up the <link> elements for the HTML <head>
