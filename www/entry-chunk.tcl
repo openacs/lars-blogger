@@ -49,6 +49,8 @@ set general_comments_package_url [general_comments_package_url]
 
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
+set entry_id $blog(entry_id)
+
 if { [empty_string_p $screen_name] } {
     set blog(permalink_url) "${package_url}one-entry?[export_vars { entry_id }]"
 } else {
@@ -60,7 +62,6 @@ lars_blogger::entry::htmlify \
     -more [ad_decode [ad_return_url] $blog(permalink_url) {} "<br><a href=\"$blog(permalink_url)\">(more)</a>"] \
     -array blog
 
-set entry_id $blog(entry_id)
 
 set blog(edit_url) [export_vars -base "${package_url}entry-edit" { entry_id return_url }]
 set blog(delete_url) [export_vars -base "${package_url}entry-delete" { entry_id return_url }]
