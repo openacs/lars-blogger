@@ -13,6 +13,8 @@ ad_page_contract {} {
 
 set package_id [ad_conn package_id]
 
+set write_p [permission::permission_p -object_id $package_id -privilege write]
+
 if { [empty_string_p $return_url] } {
     set return_url "[ad_conn url]?[ad_conn query]"
 }

@@ -10,4 +10,4 @@
   </tr>
 </table>
 
-<include src="entry-chunk" &="blog" show_comments_p="t" screen_name="@screen_name@">
+<include src="entry-chunk" &="blog" show_comments_p="t" screen_name="@screen_name@" write_p="@write_p@">
