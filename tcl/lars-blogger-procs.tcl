@@ -1,0 +1,75 @@
+ad_library {
+     Procs used by the blogger module.
+     @author Lars Pind
+     @creation-date 
+     @cvs-id $Id$
+}
+
+ad_proc -private lars_package_url_from_package_id_internal { 
+	package_id
+} {
+	Internal function to get SiteMap URL given a package_id
+} {
+    return [db_string site_url { *SQL* }]
+}
+
+ad_proc -public lars_package_url_from_package_id { 
+	package_id
+} {
+    Return the URL of the www pages of this package (cached)
+} {
+    return [util_memoize "lars_package_url_from_package_id_internal {$package_id}"]
+}
+
+ad_proc -public lars_blog_entry_add {
+    {-entry_id:required}
+    {-package_id:required}
+    {-title:required}
+    {-content:required}
+    {-entry_date:required}
+    {-draft_p:required}
+} {
+	Add the blog entry and then flush the cache so that the new entry shows up.
+} {
+    set creation_user [ad_conn user_id]
+    set creation_ip [ns_conn peeraddr]
+
+    set entry_id [db_exec_plsql entry_add { *SQL* }]
+
+    lars_blog_flush_cache $package_id
+
+    return $entry_id
+}
+
+
+
+ad_proc -private lars_blog_get_as_string_mem { 
+    {-package_id:required}
+	{-admin_p:required}
+} {
+    return [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/blog" [list package_id $package_id]]
+}
+
+    
+ad_proc -public lars_blog_get_as_string { 
+    -package_id
+    -url
+} {
+    if { ![exists_and_not_null package_id] } {
+        array set blog_site_node [site_node $url]
+        set package_id $blog_site_node(object_id)
+    }
+    set admin_p [ad_permission_p $package_id admin]
+    return [util_memoize "lars_blog_get_as_string_mem $package_id $admin_p" 600]
+}
+
+ad_proc lars_blog_flush_cache {
+    {package_id ""}
+} {
+    if { [empty_string_p $package_id] } {
+        set package_id [ad_conn package_id]
+    }
+    # Flush both admin and non-admin version
+    util_memoize_flush "lars_blog_get_as_string_mem $package_id 0"
+    util_memoize_flush "lars_blog_get_as_string_mem $package_id 1"
+}

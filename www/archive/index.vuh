@@ -1,0 +1,25 @@
+set extra_url_list [split [ad_conn extra_url] "/"]
+
+set year [lindex $extra_url_list 1]
+set month [lindex $extra_url_list 2]
+set day [lindex $extra_url_list 3]
+
+if { [empty_string_p $year] && [empty_string_p $month] && [empty_string_p $day] } {
+
+    ad_conn -set file "[acs_root_dir]/packages/lars-blogger/www/archive-index.tcl"
+
+} else {
+
+    if { [empty_string_p [ns_getform]] } {
+        global _ns_form
+        set _ns_form [ns_set create]
+    }
+    
+    ns_set put [ns_getform] year $year
+    ns_set put [ns_getform] month $month
+    ns_set put [ns_getform] day $day
+    
+    ad_conn -set file "[acs_root_dir]/packages/lars-blogger/www/archive-display.tcl"
+}
+
+adp_parse_ad_conn_file
