@@ -199,7 +199,7 @@ ad_proc lars_blogger::entry::trackback { -entry_id } {
 	trackback::auto_ping -url $url \
                 -title $entry(title) \
 		-excerpt $excerpt \
-                -content $entry(content) \
+                -content "$entry(title_url) $entry(content)" \
                 -blog_name $blog_name
 
     }
