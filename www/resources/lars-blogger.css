@@ -158,10 +158,11 @@
 }
 
 .lars_blogger_blogroll {
-	display: inline;
+  display: inline;
+  padding: 0px;
 }
 
 .lars_blogger_blogroll_entry {
-	list-style-type: none;
+  list-style-type: none;
 }
 
