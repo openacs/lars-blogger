@@ -46,6 +46,11 @@
   text-align: left;
   font-size: 8pt;
   color: #999;
+  border-top: 1px dotted #999999;
+  font-weight: bold;
+  margin-bottom: 24px;
+  line-height: normal;
+  padding: 2px;
 }
 .lars_blogger_poster a {
   font-size: 8pt;
