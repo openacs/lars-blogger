@@ -27,7 +27,13 @@ if { [string length $return_url]==0 } {
 form create category -cancel_url [ad_decode $return_url "" "." $return_url]
 
 element create category name -label "Category" -datatype text -html { size 50 }
-element create category short_name -label "Category Short Name" -datatype text -html { size 20 } -optional
+
+element create category short_name \
+    -label "Category Short Name" \
+    -datatype text \
+    -html { size 20 } \
+    -optional \
+    -help_text "This is used to provide a pretty URL for viewing postings in this category"
 
 element create category category_id -widget hidden -datatype text
 element create category return_url -widget hidden -datatype text -value $return_url
@@ -108,22 +114,3 @@ switch -- $insert_or_update {
 }
 
 set context [list $page_title]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
