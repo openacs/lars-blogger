@@ -190,5 +190,5 @@ ad_proc -public lars_blog_stylesheet_url {
     if { ![exists_and_not_null package_id] } {
         set package_id [ad_conn package_id]
     }
-    return [ad_parameter -package_id $package_id "StylesheetURL" "lars-blogger" "%lars-blogger.css"] 
+    return [parameter::get -package_id $package_id -parameter "StylesheetURL" -default "/resources/lars-blogger/lars-blogger.css"] 
 }

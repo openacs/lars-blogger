@@ -134,6 +134,5 @@ if { [llength $context] > 0 } {
     set context [lreplace $context end end [lindex [lindex $context end] end]]
 }
 
-# Load the StylesheetURL into $stylesheet_url
-regsub \% [lars_blog_stylesheet_url] $package_url stylesheet_url
+set stylesheet_url [lars_blog_stylesheet_url]
 
