@@ -57,8 +57,9 @@
         | <a href="@blog.publish_url@">Publish</a>
       </if>
       <else>
-        | <a href="@blog.revoke_url@">Draft</a>
+        | <a href="@blog.revoke_url@">Unpublish</a>
       </else>
+      | <a href="@blog.delete_url@">Delete</a>
     </if>
   </p>
 </div>

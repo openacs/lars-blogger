@@ -207,3 +207,5 @@ if {$sw_cats} {
 if { [llength $context] > 0 } {
     set context [lreplace $context end end [lindex [lindex $context end] end]]
 }
+
+set blog_name [lars_blog_name]

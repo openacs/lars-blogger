@@ -71,11 +71,15 @@
       <if @create_p@ true>
         <div class="lars_blogger_portlet">
           <h2>Actions</h2>
-          <a href="@package_url@entry-edit" title="Add an entry to this blog">Add entry</a><br>
-          <a href="@package_url@drafts" title="View draft entries">Draft entries<a/>
-          <if @admin_p@ true>
-            <br><a href="@package_url@admin/" title="Visit administration pages">Administer</a>
-          </if>
+	  <div class="action-links">
+	  <ul>
+            <li><a href="@package_url@entry-edit" title="Add an entry to this blog">Add @blog_name@ Item</a></li>
+            <li><a href="@package_url@drafts" title="View draft entries">Draft entries</a></li>
+            <if @admin_p@ true>
+              <li><a href="@package_url@admin/" title="Visit administration pages">Administer</a></li>
+            </if>
+	  </ul>
+	  </div>
         </div>
       </if>
       <if @notification_chunk@ not nil>
