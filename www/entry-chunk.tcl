@@ -64,6 +64,6 @@ if { $blog(category_id) != 0 } {
     if { [exists_and_not_null screen_name] } {
 	append category_url "user/$screen_name"
     }
-    append category_url "cat/$blog(category_short_name)"
+    append category_url "/cat/$blog(category_short_name)"
 }
 
