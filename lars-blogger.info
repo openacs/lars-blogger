@@ -7,7 +7,7 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
 
-    <version name="0.8" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.apm">
+    <version name="0.8d1" url="http://openacs.org/repository/download/apm/lars-blogger-0.8d1.apm">
     <database-support>
         <database>oracle</database>
         <database>postgresql</database>
