@@ -46,7 +46,9 @@ set page_title $blog(title)
 if {![exists_and_not_null screen_name]} {
     set screen_name ""
     set context [list $page_title]
+    set blog(permalink_url) "${package_url}one-entry?[export_vars { entry_id }]"
 } else {
+    set blog(permalink_url) "${package_url}user/$screen_name/one-entry?[export_vars { entry_id }]"
     set context [list $screen_name]
 }
 

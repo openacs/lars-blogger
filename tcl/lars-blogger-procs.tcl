@@ -80,22 +80,32 @@ ad_proc lars_blog_setup_feed {
 
 ad_proc -private lars_blog_get_as_string_mem { 
     package_id
-    admin_p
+    create_p
+    display_template
 } {
-    return [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/blog" [list package_id $package_id]]
+    return [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/blog" [list package_id $package_id create_p $create_p display_template $display_template]]
 }
 
-    
+
 ad_proc -public lars_blog_get_as_string { 
     -package_id
     -url
+    {-display_template /packages/lars-blogger/www/blog}
 } {
+    Return the blog entries as a string (which is memoized and cached
+    for 10 minutes).
+
+    provide either url (like /blog) or package_id
+
+    display_template is what to use to render the blog (instead of
+    the default blog.adp).
+} { 
     if { ![exists_and_not_null package_id] } {
         array set blog_site_node [site_node $url]
         set package_id $blog_site_node(object_id)
     }
-    set admin_p [ad_permission_p $package_id admin]
-    return [util_memoize "lars_blog_get_as_string_mem $package_id $admin_p" 600]
+    set create_p [ad_permission_p $package_id create]
+    return [util_memoize [list lars_blog_get_as_string_mem $package_id $create_p $display_template] 600]
 }
 
 ad_proc lars_blog_flush_cache {
@@ -105,8 +115,7 @@ ad_proc lars_blog_flush_cache {
         set package_id [ad_conn package_id]
     }
     # Flush both admin and non-admin version
-    util_memoize_flush "lars_blog_get_as_string_mem $package_id 0"
-    util_memoize_flush "lars_blog_get_as_string_mem $package_id 1"
+    util_memoize_flush_regexp "lars_blog_get_as_string_mem $package_id"
 }
 
 ad_proc -public lars_blog_public_package_url {

@@ -9,6 +9,8 @@
 #  min_num_entries: optional
 #  num_days: optional
 #  max_content_length:integer,optional
+#  create_p:boolean
+#  display_template:
 
 # If the caller specified a URL, then we gather the package_id from that URL
 if { [info exists url] } {
@@ -21,7 +23,9 @@ if { ![info exists package_id] } {
     set package_id [ad_conn package_id]
 }
 
-set create_p [permission::permission_p -object_id $package_id -privilege create]
+if {! [info exists create_p] } { 
+    set create_p [permission::permission_p -object_id $package_id -privilege create]
+}
 
 if { ![info exists category_id] } {
     set blog_category_id {}
@@ -172,7 +176,7 @@ if { [string length $blog_sw_category_id] } {
 set output_rows_count 0
 
 db_multirow -extend {category_name category_short_name
-  sw_category_multirow} blog blog {} {
+  sw_category_multirow permalink_url} blog blog {} {
 
     # Putting the limit in the query won't give correct results.  We
     # need to do it here:
@@ -195,6 +199,8 @@ db_multirow -extend {category_name category_short_name
         }
         append sw_category_url "swcat/$sw_category_id"
     }
+
+    set permalink_url "${package_url}one-entry?[export_vars { entry_id }]"
 
     # Inner multirow.  Here's its magic name:
     set sw_category_multirow "__branimir__multirow__blog/$entry_id"
@@ -231,3 +237,6 @@ set stylesheet_url [lars_blog_stylesheet_url -package_id $package_id]
 
 set rss_file_url [lars_blogger::get_rss_file_url -package_id $package_id]
 
+if { [exists_and_not_null display_template] } {
+    ad_return_template $display_template
+}
