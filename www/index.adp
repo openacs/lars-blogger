@@ -5,164 +5,86 @@
 
 <div class="lars_blogger_body">
 
-<if @display_bloggers_p@ eq 1>
-
-
-  <if @bloggers:rowcount@ gt 0>
-    <ul>
-      <multiple name="bloggers">
-        <li><a href="@package_url@user/@bloggers.screen_name@">@bloggers.screen_name@</a></li>
-      </multiple>
-    </ul>
-  </if>
-  <else>
-    <i>No bloggers here.</i>
-  </else>
-
-  <if @create_p@ true>
-    <if @user_has_blog_p@ true>
-      <p>
-        <b>&raquo;</b> <a href="@package_url@entry-edit" title="Add an entry to your weblog">Add entry</a><br>
-      </p>
+  <if @display_bloggers_p@ eq 1>
+    <if @bloggers:rowcount@ gt 0>
+      <ul>
+        <multiple name="bloggers">
+          <li><a href="@package_url@user/@bloggers.screen_name@">@bloggers.screen_name@</a></li>
+        </multiple>
+      </ul>
     </if>
     <else>
-      <p>
-        <b>&raquo;</b> <a href="@package_url@entry-edit" title="Start your weblog">Start your weblog</a><br>
-      </p>
+      <i>No bloggers here.</i>
     </else>
+    <if @create_p@ true>
+      <if @user_has_blog_p@ true>
+        <p>
+          <b>&raquo;</b> <a href="@package_url@entry-edit" title="Add an entry to your weblog">Add entry</a><br>
+        </p>
+      </if>
+      <else>
+        <p>
+          <b>&raquo;</b> <a href="@package_url@entry-edit" title="Start your weblog">Start your weblog</a><br>
+        </p>
+      </else>
+    </if>
+    <if @admin_p@ true>
+      <p>
+        <b>&raquo;</b> <a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
+      </p>
+    </if>
   </if>
+  <else>
 
-  <if @admin_p@ true>
-    <p>
-      <b>&raquo;</b> <a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
-    </p>
-  </if>
-  
-</if>
-
-<else>
-
-<table width="100%">
-  <tr>
-    <td valign="top" align="center">
-      <table class="lars_blogger_content_table" width="100%"><tr><td>
+    <div id="lars_blogger_left">
+      <div class="lars_blogger_content_table">
         <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@">
-      </td></tr></table>
-    </td>
-    <td valign="top" align="center">
-      
-    </td>
-    <td valign="top">
-
-      <div class="lars_blogger_menu">
-      <table width="100%" cellspacing="0" cellpadding="2" class="lars_blogger_menu_table">
-        <tr>
-          <th bgcolor="@header_background_color@">
-            Archive
-          </th>
-        </tr>
-        <tr>
-          <td nowrap align="center">
-            <include src="calendar" date="@date@" screen_name="@screen_name@">
-          </td>
-        </tr>
-        <tr>
-          <td height="16">
-            <table><tr><td></td></tr></table>
-          </td>
-        </tr>
-
-        <include-optional src="blog-months" screen_name="@screen_name@">
-          <tr>
-            <td nowrap align="center">
-              <include-output>
-            </td>
-          </tr>
-          <tr>
-            <td height="16">
-              <table><tr><td></td></tr></table>
-            </td>
-          </tr>
-        </include-optional>
-
-        <if @display_categories@ eq 1>
-        <tr>
-          <th>
-            Categories
-          </th>
-        </tr>
-        <tr>
-          <td nowrap align="center">
-            <multiple name="categories">
-                <a href="@package_url_with_extras@cat/@categories.category_short_name@">@categories.category_name@</a><br>
-            </multiple>
-          </td>
-        </tr>
-        <tr>
-          <td height="16">
-            <table><tr><td></td></tr></table>
-          </td>
-        </tr>
-        </if>
-
-
-        <if @create_p@ true>
-          <tr>
-            <th bgcolor="@header_background_color@">
-              Actions
-            </th>
-          </tr>
-          <tr>
-            <td align="center">
-              <a href="@package_url@entry-edit" title="Add an entry to this blog">Add entry</a><br>
-              <a href="@package_url@drafts" title="View draft entries">Draft entries<a/>
-	      <if @admin_p@ true>
-                <br><a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
-	      </if>
-            </td>
-          </tr>
-          <tr>
-            <td height="16">&nbsp;</td>
-          </tr>
-        </if>
-
-        <if @notification_chunk@ not nil>
-          <tr>
-            <th bgcolor="@header_background_color@">
-              Notifications
-            </th>
-          </tr>
-          <tr>
-            <td align="center">
-              @notification_chunk;noquote@            
-            </td>
-          </tr>
-          <tr>
-            <td height="16">
-              <table><tr><td></td></tr></table>
-            </td>
-          </tr>
-        </if>
-
-        <if @rss_file_url@ not nil>
-          <tr>
-            <th bgcolor="@header_background_color@" nowrap>
-              Syndication Feed
-            </th>
-          </tr>
-          <tr>
-            <td nowrap align="center">
-              <a href="@rss_file_url@" title="RSS 2.0 feed"><img src="/resources/lars-blogger/xml.gif" width="36" height="14" border="0" alt="XML"></a>
-            </td>
-          </tr>
-        </if>
-      </table>
       </div>
+    </div>
 
-    </td>
-  </tr>
-</table>
+    <div id="lars_blogger_right">
+      <div class="lars_blogger_portlet">
+        <h2>Archive</h2>
+	<div align="center">
+          <include src="calendar" date="@date@" screen_name="@screen_name@">
+	</div>
+        <include-optional src="blog-months" screen_name="@screen_name@">
+          <include-output>
+        </include-optional>
+      </div>
+      <if @display_categories@ eq 1>
+        <div class="lars_blogger_portlet">
+          <h2>Categories</h2>
+          <multiple name="categories">
+            <a href="@package_url_with_extras@cat/@categories.category_short_name@">@categories.category_name@</a><br>
+          </multiple>
+        </div>
+      </if>
+      <if @create_p@ true>
+        <div class="lars_blogger_portlet">
+          <h2>Actions</h2>
+          <a href="@package_url@entry-edit" title="Add an entry to this blog">Add entry</a><br>
+          <a href="@package_url@drafts" title="View draft entries">Draft entries<a/>
+          <if @admin_p@ true>
+            <br><a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
+          </if>
+        </div>
+      </if>
+      <if @notification_chunk@ not nil>
+        <div class="lars_blogger_portlet">
+          <h2>Notifications</h2>
+          @notification_chunk;noquote@            
+        </div>
+      </if>
+      <if @rss_file_url@ not nil>
+        <div class="lars_blogger_portlet">
+          <h2>Syndication Feed</h2>
+          <a href="@rss_file_url@" title="RSS 2.0 feed"><img src="/resources/lars-blogger/xml.gif" width="36" height="14" border="0" alt="XML"></a>
+        </div>
+      </if>
+    </div>
 
-</else>
+
+  </else>
 
 </div>
