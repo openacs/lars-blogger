@@ -17,7 +17,7 @@ begin
         package_name => null,
         abstract_p => 'f',
         type_extension_table => null,
-        name_method => 'weblogger_channel.name'
+        name_method => null
     );
 end;
 /

@@ -19,6 +19,8 @@ set package_id [ad_conn package_id]
 set package_url [ad_conn package_url]
 set package_url_with_extras $package_url
 
+set index_page_p 1
+
 set context [list]
 set context_base_url $package_url
 
@@ -38,6 +40,8 @@ if { ![empty_string_p $category_short_name] } {
     # Show Category in context bar
     append context_base_url /category/$category_short_name
     lappend context [list $context_base_url $category_name]
+    
+    set index_page_p 0
 } else {
     set category_id ""
 }
@@ -124,6 +128,8 @@ set header_background_color [lars_blog_header_background_color]
 
 if { [exists_and_not_null year] } {
     
+    set index_page_p 0
+
     # Show Year and Month in context
     append context_base_url archive/
     lappend context [list $context_base_url Archive]
@@ -143,7 +149,7 @@ if { [exists_and_not_null year] } {
 
 	# Month and day in context
         append context_base_url /$month
-        lappend context [list $context_base_url $month]
+        lappend context [list $context_base_url [lc_time_fmt "1970-$month-01 01:01:01" %B]]
 	append context_base_url /$day
 	lappend context [list $context_base_url $day]
 
@@ -153,7 +159,7 @@ if { [exists_and_not_null year] } {
 
         # Month in context
         append context_base_url /$month
-        lappend context [list $context_base_url $month]
+        lappend context [list $context_base_url [lc_time_fmt "1970-$month-01 01:01:01" %B]]
     } else {
         set interval "year"
         db_1row archive_date_year {}

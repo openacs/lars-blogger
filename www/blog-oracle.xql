@@ -48,6 +48,8 @@
            entry_date,
            to_char(entry_date, 'YYYY-MM-DD HH24:MI:SS')
              as entry_date_ansi,
+           to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS')
+             as sysdate_ansi,
            title,  
            title_url,
            e.category_id,

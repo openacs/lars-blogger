@@ -26,7 +26,7 @@
   </div>
 
   <p class="lars_blogger_poster">
-    @blog.entry_date_pretty@ 
+    Posted @blog.posted_time_pretty@ 
     <if @show_poster_p@ true>
       by @blog.poster_first_names@ @blog.poster_last_name@
     </if>

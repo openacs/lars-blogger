@@ -166,9 +166,14 @@ ad_proc -public lars_blogger::entry::delete {
 
 
 ad_proc -public lars_blogger::entry::htmlify { 
+    {-ellipsis "..."}
+    {-more ""}
+    {-max_content_length 0}
     -array:required
 } {
     Make the entry displayable in an HTML page
+
+    @see ad_html_text_convert
 } {
     upvar $array row
 
@@ -187,7 +192,9 @@ ad_proc -public lars_blogger::entry::htmlify {
     catch {
         set row(content) [ns_adp_parse -string $row(content)]
     }
-    
+
+    set row(content) [util_close_html_tags $row(content) $max_content_length $max_content_length $ellipsis $more]
+
     # look for the base site name in the url
     if { [regexp {^https?://([^ /]+)} $row(title_url) initial base_url] } {
         set row(title_url_base) $base_url
