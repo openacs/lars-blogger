@@ -51,6 +51,8 @@
 		    select entry_id,
 		           to_char(entry_date, 'YYYY-MM-DD HH24:MI:SS') as entry_date_ansi,
 		           title,
+                           title_url,
+			   category_id,
 		           content,
                            content_format,
 		           draft_p,
