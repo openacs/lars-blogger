@@ -61,4 +61,12 @@ set entry_add_url "${package_url}admin/entry-edit"
 
 set header_background_color [lars_blog_header_background_color -package_id $package_id]
 
-ad_return_template 
+if { [catch {
+    set notification_chunk [notification::display::request_widget \
+                                -type lars_blogger_notif \
+                                -object_id [ad_conn package_id] \
+                                -pretty_name [lars_blog_name] \
+                                -url [lars_blog_public_package_url]]
+}] } {
+    set notification_chunk {}
+}

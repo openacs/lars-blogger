@@ -34,9 +34,13 @@
   
   <a href="@archive_url@"><img src="@arrow_url@" width="11" height="11" border="0" alt="Visit the archive for @blog_name@" title="Visit the archive for @blog_name@" /></a>
   <a href="@archive_url@" title="Visit the archive for @blog_name@" class="action_link">Archive</a><br />
-  
+
   <if @admin_p@ eq 1>
     <a href="@entry_add_url@"><img src="@arrow_url@" width="11" height="11" border="0" alt="Add an entry to @blog_name@" title="Add an entry to @blog_name@" /></a>
     <a href="@entry_add_url@" title="Add an entry to @blog_name@" class="action_link">Add entry</a>
+  </if>
+
+  <if @notification_chunk@ not nil>
+    <p>@notification_chunk@</p>
   </if>
 </p>
