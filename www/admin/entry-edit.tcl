@@ -1,6 +1,6 @@
 ad_page_contract {} {
     {entry_id:integer ""}
-    {return_url "."}
+    {return_url ""}
     {title ""}
     {content:allhtml ""}
 } -properties {
