@@ -85,11 +85,11 @@ create table weblogger_channels (
 
 create table weblogger_ping_urls (
   package_id        integer
-                    constraint weblogger_ping_urls_package_id_fk
+                    constraint weblogger_ping_urls_pkg_id_fk
                     references apm_packages(package_id)
                     on delete cascade,
   ping_url          varchar2(500)
-                    constraint weblogger_ping_urls_ping_url_nn
+                    constraint weblogger_ping_urls_pg_url_nn
                     not null,
   creation_date     date default sysdate,
   constraint weblogger_ping_urls_pk
