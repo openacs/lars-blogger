@@ -2,10 +2,6 @@
 <property name="title">@title;noquote@</property>
 <property name="context">@context;noquote@</property>
 
-<p>
-  These are your administrative options
-</p>
-
 <blockquote>
   <p>
     <b>&raquo;</b>

@@ -9,7 +9,7 @@ set admin_p [ad_require_permission $package_id admin]
 
 set context [list]
 
-set title [db_string package_name { *SQL* }]
+set title "Administration"
 
 set parameters_url [export_vars -base "/shared/parameters" { package_id { return_url [ad_return_url] } }]
 
