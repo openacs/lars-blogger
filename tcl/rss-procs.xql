@@ -2,7 +2,7 @@
 
 <queryset>
 
-    <fullquery name="lars_blog__rss_datasource.package_id">
+    <fullquery name="lars_blog__rss_datasource.select_package_id_user_id">
         <querytext>
 			select package_id, user_id from weblogger_channels where channel_id = :summary_context_id
         </querytext>
@@ -14,7 +14,7 @@
         </querytext>
     </fullquery>
 
-    <fullquery name="lars_blog__rss_lastUpdated.package_id">
+    <fullquery name="lars_blog__rss_lastUpdated.select_package_id_user_id">
         <querytext>
 			select package_id, user_id from weblogger_channels where channel_id = :summary_context_id
         </querytext>

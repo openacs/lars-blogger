@@ -20,82 +20,88 @@ ad_proc -public lars_blog_entry_add {
     set creation_user [ad_conn user_id]
     set creation_ip [ns_conn peeraddr]
 
-    set entry_id [db_exec_plsql entry_add {}]
-
-    # If publish directly
-    if { [string equal $draft_p "f"] } {
-        # do notifications
-        lars_blogger::entry::do_notifications -entry_id $entry_id
-        # and ping weblogs.com
-        lars_blog_weblogs_com_update_ping
+    db_transaction {
+        # Create the entry
+        set entry_id [db_exec_plsql entry_add {}]
+        lars_blog_flush_cache $package_id
     }
 
-    lars_blog_flush_cache $package_id
+    # If publish directly, fire off notifications and ping weblogs.com
+    if { [string equal $draft_p "f"] } {
+        lars_blogger::entry::publish \
+            -entry_id $entry_id \
+            -package_id $package_id \
+            -no_update
+    }
 
+    return $entry_id
+}
+
+ad_proc lars_blog_setup_feed {
+    -user:boolean
+    {-package_id ""}
+} {
+    if { [empty_string_p $package_id] } {
+        set package_id [ad_conn package_id]
+    }
+    
     set timeout [expr 30*60]
     set channel_title [lars_blog_name]
-
-    if { [parameter::get -parameter "package_rss_feed_p" -default 1]} {
-	# check whether there's been a feed setup for this instance
-	
-	set exists_instance_feed_p [db_string exists_instance_feed_p {}]
-	
-	if { [string equal $exists_instance_feed_p "0"] } {
-	    
-	#setup an RSS feed for this instance
-	    
-	    db_transaction {
-		
-		set channel_link [lars_blog_public_package_url]
-
-		set channel_id [db_nextval "acs_object_id_seq"]
-	
-		set summary_context_id [db_string create_instance_channel {}]
-		
-		set subscr_id [db_string create_subscr {}]
-		
-		db_dml update_subscr {}
-
+    set creation_user [ad_conn user_id]
+    set creation_ip [ns_conn peeraddr]
+    
+    if { !$user_p } {
+        if { [parameter::get -parameter "package_rss_feed_p" -default 1]} {
+            
+            # check whether there's been a channel setup for this instance
+            set summary_context_id [db_string select_instance_channel {} -default {}]
+            
+            if { [empty_string_p $summary_context_id] } {
+                # Setup a channel for this instance
+                set summary_context_id [db_exec_plsql create_instance_channel {}]
+            }
+            
+            # check whether there's been a feed setup for this instance
+            set exists_instance_feed_p [db_string exists_instance_feed_p {}]
+            
+            if { [string equal $exists_instance_feed_p "0"] } {
+                # Setup an RSS feed for this instance
+                set channel_link [lars_blog_public_package_url]
+                
+                set subscr_id [db_exec_plsql create_subscr {}]
+                db_dml update_subscr {}
+                
                 # Run it now
                 rss_gen_report $subscr_id
-		
-	    }
-	}
-    }
-    
-    if {[parameter::get -parameter "user_rss_feed_p" -default 0]} {
+            }
+        }
+    } else {
+        if {[parameter::get -parameter "user_rss_feed_p" -default 0]} {
 
-	# check whether there's been a feed setup for this user
-	
-        ns_log "Notice" "SIMON"
+            # check whether there's been a channel setup for this instance
+            set summary_context_id [db_string select_user_channel {} -default {}]
 
-	set exists_user_feed_p [db_string exists_user_feed_p {}]
-    
-        set screen_name [db_string screen_name {}]
+            if { [empty_string_p $summary_context_id] } {
+                # Setup a channel for this instance
+		set summary_context_id [db_exec_plsql create_user_channel {}]
+            }
 
-	if { [string equal $exists_user_feed_p "0"] && ![empty_string_p $screen_name] } {
-	    
-	    #setup an RSS feed for the user
-	    
-	    db_transaction {
+            # check whether there's been a feed setup for this user
+            set exists_user_feed_p [db_string exists_user_feed_p {}]
+            set screen_name [db_string screen_name {}]
 
+            if { [string equal $exists_user_feed_p "0"] && ![empty_string_p $screen_name] } {
+                # Setup an RSS feed for the user
 		set channel_link "[lars_blog_public_package_url]user/$screen_name/"
 
-		set channel_id [db_nextval "acs_object_id_seq"]
-		
-		set summary_context_id [db_string create_user_channel {}]
-		
-		set subscr_id [db_string create_subscr {}]
-		
+		set subscr_id [db_exec_plsql create_subscr {}]
 		db_dml update_subscr {}
 	
                 # Run it now
                 rss_gen_report $subscr_id
-
             }
-	}
+        }
     }
-    return $entry_id
 }
 
 

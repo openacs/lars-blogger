@@ -25,11 +25,14 @@
 					  as date_pretty,
 			       to_char(trunc(entry_date, 'month'), 'YYYY/MM/')
 					  as month_url_stub
-			from   pinds_blog_entries e, users u
-			where  draft_p = 'f'
-			and    package_id = :package_id
-			and    screen_name = :screen_name
-			and    u.user_id = e.user_id
+			from   pinds_blog_entries e, 
+                               acs_objects o,
+                               users u
+			where  e.draft_p = 'f'
+			and    e.package_id = :package_id
+			and    u.screen_name = :screen_name
+                        and    o.object_id = e.entry_id
+			and    u.user_id = o.creation_user
 			group  by trunc(entry_date, 'month')
 			order  by month_date desc
         </querytext>

@@ -2,11 +2,11 @@ set extra_url_list [split [ad_conn extra_url] "/"]
 
 set package_id [ad_conn package_id]
 
-set sql "select channel_id as summary_context_id
-         from   weblogger_channels w
-         where  w.package_id = :package_id
-         and    w.user_id = '0'"
-
-set summary_context_id [db_string package_id $sql]
+set summary_context_id [db_string package_id {
+     select channel_id as summary_context_id
+     from   weblogger_channels w
+     where  w.package_id = :package_id
+     and    w.user_id is null
+}]
 
 ns_returnfile 200 text/xml [rss_gen_report_file -summary_context_id $summary_context_id -impl_name pinds_blog_entries]

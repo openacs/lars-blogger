@@ -24,7 +24,7 @@
 <table width="100%">
   <tr>
     <td valign="top">
-      <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" write_p="@write_p@" registered_p="@registered_p@">
+      <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@">
     </td>
     <td valign="top">
 
@@ -45,7 +45,7 @@
           </td>
         </tr>
 
-          <if @registered_p@ gt 0>
+          <if @write_p@ gt 0>
           <tr>
             <th bgcolor="@header_background_color@">
               Actions
@@ -55,8 +55,8 @@
             <td align="center">
               <a href="@package_url@entry-edit" title="Add an entry to this blog">Add entry</a><br>
               <a href="@package_url@drafts" title="View draft entries">Draft entries<a/>
-	      <if @write_p@ true>
-              <br><a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
+	      <if @admin_p@ true>
+                <br><a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
 	      </if>
             </td>
           </tr>

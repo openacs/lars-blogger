@@ -16,7 +16,7 @@ ad_proc -private lars_blog__rss_datasource {
 
     db_transaction {
         
-        db_1row package_id {}
+        db_1row select_package_id_user_id {}
         
         set package_url [lars_blog_public_package_url -package_id $package_id]
         
@@ -50,7 +50,7 @@ ad_proc -private lars_blog__rss_datasource {
     set counter 0
 
 
-    if { [string equal $user_id 0] } {
+    if { [empty_string_p $user_id] } {
         set statement "blog_rss_items" 
     } else {
         set statement "user_blog_rss_items"
@@ -99,9 +99,9 @@ ad_proc -private lars_blog__rss_lastUpdated {
     @author Lars Pind (lars@pinds.com)
 } {
 
-    db_1row package_id {}
+    db_1row select_package_id_user_id {}
 
-    if { [string equal $user_id 0] } {
+    if { [empty_string_p $user_id] } {
         db_0or1row get_last_update {}
     } else {
         db_0or1row get_last_user_update {}

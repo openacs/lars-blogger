@@ -33,13 +33,8 @@ set package_id [ad_conn package_id]
 
 set package_url [ad_conn package_url]
 
-set write_p [ad_permission_p $package_id write]
-
-if {[parameter::get -parameter "AllowUsersToPost" -default 0] || $write_p} {
-    set registered_p [ad_conn user_id]
-} else {
-    set registered_p 0
-}
+set write_p [permission::permission_p -object_id $package_id -privilege write]
+set admin_p [permission::permission_p -object_id $package_id -privilege admin]
 
 set display_users_p [parameter::get -parameter "DisplayUsersP" -default 0]
 

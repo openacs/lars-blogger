@@ -14,6 +14,7 @@
     </querytext>
   </fullquery>
 
+
   <fullquery name="entry_dates">
     <querytext>
       select to_char(entry_date, 'J') as entry_date_julian

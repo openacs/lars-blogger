@@ -4,6 +4,8 @@
 #  type:optional (current, archive)
 #  archive_interval:optional
 #  archive_date:optional
+#  screen_name:optional
+
 
 # If the caller specified a URL, then we gather the package_id from that URL
 if { [info exists url] } {
@@ -14,6 +16,12 @@ if { [info exists url] } {
 # If they supplied neither url nor package_id, then we just use ad_conn package_id
 if { ![info exists package_id] } {
     set package_id [ad_conn package_id]
+}
+
+set write_p [permission::permission_p -object_id $package_id -privilege write]
+
+if { ![info exists screen_name] } {
+    set screen_name ""
 }
 
 if { ![info exists type] } {
@@ -43,7 +51,7 @@ if { [ad_conn isconnected] && ![string equal $package_url [string range [ad_conn
 
 set count 0
 
-if [empty_string_p $screen_name] {
+if { ![exists_and_not_null screen_name] } {
     
     db_multirow blog all_blogs { *SQL* } 
     set archive_url "${package_url}archive/"

@@ -11,6 +11,7 @@
                            b.content, 
                            b.content_format, 
                            b.draft_p, 
+			   o.creation_user as user_id,
                            to_char(b.entry_date, 'YYYY-MM-DD') as entry_date,
 		           to_char(b.entry_date, 'fmDayfm, fmMonthfm fmDDfm, YYYY') as entry_date_pretty, 
         		   p.first_names as poster_first_names,
@@ -27,6 +28,16 @@
 		    where  b.entry_id = :entry_id
                     and    o.object_id = b.entry_id
                     and    p.person_id = o.creation_user
+        </querytext>
+    </fullquery>
+
+    <fullquery name="lars_blogger::entry::publish.update_entry">
+        <querytext>
+		    update pinds_blog_entries
+		    set    entry_date = trunc(sysdate),
+		           draft_p = 'f',
+		           posted_date = sysdate
+		    where  entry_id = :entry_id
         </querytext>
     </fullquery>
 

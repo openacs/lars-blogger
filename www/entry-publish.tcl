@@ -3,15 +3,9 @@ ad_page_contract {} {
     {return_url "index"}
 }
 
-db_dml update_entry { *SQL* }
+lars_blogger::entry::require_write_permission -entry_id $entry_id
 
-# Notifications
-lars_blogger::entry::do_notifications -entry_id $entry_id
+lars_blogger::entry::publish \
+    -entry_id $entry_id \
+    -redirect_url $return_url
 
-# Ping weblogs.com
-lars_blog_weblogs_com_update_ping
-
-# Flush cache
-lars_blog_flush_cache
-
-ad_returnredirect $return_url

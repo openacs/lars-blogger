@@ -5,11 +5,9 @@ ad_page_contract {} {
     {content:allhtml ""}
 }
 
+permission::require_permission -object_id [ad_conn package_id] -privilege write
+
 set package_id [ad_conn package_id]
-
-ad_maybe_redirect_for_registration
-ad_require_permission $package_id write
-
 set today [db_string today { *SQL* }]
 set today_html [ad_quotehtml $today]
 
@@ -45,6 +43,8 @@ if { [form is_request entry] } {
     } else {
         set insert_or_update update
         
+        lars_blogger::entry::require_write_permission -entry_id $entry_id
+
         db_1row entry { *SQL* }
         
         element set_value entry title $title
@@ -88,6 +88,8 @@ if { [form is_valid entry] } {
                 -entry_date $entry_date \
                 -draft_p "$draft_p"
     } else {
+        lars_blogger::entry::require_write_permission -entry_id $entry_id
+
         set set_clauses { 
             "title = :title" 
             "title_url = :title_url"

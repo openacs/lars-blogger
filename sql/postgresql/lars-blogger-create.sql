@@ -165,7 +165,9 @@ create table weblogger_channels (
   package_id            integer
                         constraint weblogger_channels_package_id_kf
                         references apm_packages(package_id),
-  user_id		integer		
+  user_id		integer,
+  constraint weblogger_chnls_package_user_un
+  unique (package_id, user_id)
 );
 
 

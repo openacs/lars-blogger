@@ -14,6 +14,54 @@ ad_proc -public lars_blogger::entry::get {
     db_1row select_entry {} -column_array row 
 }
 
+ad_proc -public lars_blogger::entry::require_write_permission {
+    {-entry_id:required}
+} {
+    permission::require_permission -object_id $entry_id -privilege write
+    
+    set admin_p [permission::permission_p -privilege "admin" -object_id $entry_id]
+    
+    if { !$admin_p && [ad_conn user_id] != [db_string creation_user {}] } {
+        ad_return_forbidden  "Security Violation"  "<blockquote>
+    You don't have permission to modify this entry.
+    <br>
+    This incident has been logged.
+    </blockquote>"
+        ad_script_abort
+    } 
+}
+
+ad_proc -public lars_blogger::entry::publish {
+    {-entry_id:required}
+    {-package_id ""}
+    {-no_update:boolean}
+    {-redirect_url ""}
+} {
+    if { !$no_update_p } {
+        # Set draft_p = 'f'
+        db_dml update_entry { *SQL* }
+        # Flush cache
+        lars_blog_flush_cache
+    }
+    
+    if { ![empty_string_p $redirect_url] } {
+        ad_returnredirect $redirect_url
+        ns_conn close
+    }
+    
+    # Setup instance feed if needed
+    lars_blog_setup_feed -package_id $package_id
+    
+    # Setup user feed if needed
+    lars_blog_setup_feed -user -package_id $package_id
+    
+    # Notifications
+    lars_blogger::entry::do_notifications -entry_id $entry_id
+    
+    # Ping weblogs.com
+    lars_blog_weblogs_com_update_ping
+}
+
 
 ad_proc -public lars_blogger::entry::htmlify { 
     -array:required

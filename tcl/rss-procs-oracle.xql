@@ -46,13 +46,15 @@
                          0 as tzoffset_minute,
                          to_char(entry_date, 'DD Mon YYYY hh12:MI am') as entry_date_pretty,
                          to_char(entry_date, 'YYYY/MM/') as entry_archive_url
-                  from pinds_blog_entries e join 
-		           acs_objects o on (o.object_id = e.entry_id) join 
-		           users u on (u.user_id = o.creation_user)
+                  from   pinds_blog_entries e,
+		         acs_objects o, 
+                         users u
                   where e.package_id = :package_id
-                  and o.creation_user = :user_id
-                  and e.draft_p = 'f'
-                  and e.deleted_p = 'f'
+                  and   o.object_id = e.entry_id
+                  and   o.creation_user = :user_id
+                  and   u.user_id = o.creation_user
+                  and   e.draft_p = 'f'
+                  and   e.deleted_p = 'f'
                   order by e.entry_date desc, e.posted_date desc)
             where rownum < 11
         </querytext>

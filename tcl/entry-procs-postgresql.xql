@@ -31,4 +31,14 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="lars_blogger::entry::publish.update_entry">
+        <querytext>
+		    update pinds_blog_entries
+		    set    entry_date = date_trunc('day', current_timestamp),
+		           draft_p = 'f',
+		           posted_date = current_timestamp
+		    where  entry_id = :entry_id
+        </querytext>
+    </fullquery>
+
 </queryset>

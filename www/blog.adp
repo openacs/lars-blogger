@@ -33,7 +33,7 @@
   <b>&raquo;</b>
   <a href="@archive_url@" title="Visit the archive for @blog_name@" class="action_link">Archive</a><br />
   
-  <if @registered_p@ gt 0>
+  <if @write_p@ gt 0>
     <b>&raquo;</b>
     <a href="@entry_add_url@" title="Add an entry to @blog_name@" class="action_link">Add entry</a>
   </if>

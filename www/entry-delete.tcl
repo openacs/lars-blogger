@@ -3,12 +3,13 @@ ad_page_contract {} {
     {return_url ""}
 }
 
-ad_require_permission [ad_conn package_id] write
+lars_blogger::entry::require_write_permission -entry_id $entry_id
 
 db_dml delete {
     update pinds_blog_entries
     set deleted_p = 't'
     where entry_id = :entry_id
 }
+
 
 ad_returnredirect $return_url
