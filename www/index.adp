@@ -50,7 +50,7 @@
           <include-output>
         </include-optional>
       </div>
-      <if @display_categories@ eq 1>
+      <if @display_categories@ eq 1 and @categories:rowcount@ gt 0>
         <div class="lars_blogger_portlet">
           <h2>Categories</h2>
           <multiple name="categories">

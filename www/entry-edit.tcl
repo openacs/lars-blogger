@@ -38,8 +38,13 @@ element create entry title_url -label "Title URL" -datatype text -html { size 50
 
 # If categories are enabled, set up a select-box with option. 
 if { [string equal [lars_blog_categories_p] "1"] } {
-    set option_list [concat [list [list None ""]] [db_list_of_lists categories {}]]
-    element create entry category_id -label "Category" -datatype integer -widget select -options $option_list -optional
+    set options_list [db_list_of_lists categories {}]
+    if { [llength $options_list] > 0 } {
+        set option_list [concat [list [list None ""]] $options_list]
+        element create entry category_id -label "Category" -datatype integer -widget select -options $option_list -optional
+    } else {
+        element create entry category_id -datatype integer -widget hidden -value {} -optional
+    }
 }
 
 element create entry content -label "Content" -datatype richtext -widget richtext -html { cols 80 rows 20 }
