@@ -51,15 +51,17 @@
     <if @show_comments_p@ false>
       | <a href="@blog.permalink_url@" title="View comments on this entry">Comments (@blog.num_comments@)</a>
     </if>
-    <if @blog.write_p@ true>
-      | <a href="@blog.edit_url@">Edit</a>
-      <if @blog.draft_p@ true>
-        | <a href="@blog.publish_url@">Publish</a>
+    <if @manageown_p@ false or @blog.user_id@ eq @user_id@>
+      <if @blog.write_p@ true>
+        | <a href="@blog.edit_url@">Edit</a>
+        <if @blog.draft_p@ true>
+          | <a href="@blog.publish_url@">Publish</a>
+        </if>
+        <else>
+           <if @unpublish_p@ true>| <a href="@blog.revoke_url@">Unpublish</a></if>
+        </else>
+        | <a href="@blog.delete_url@">Delete</a>
       </if>
-      <else>
-        | <a href="@blog.revoke_url@">Unpublish</a>
-      </else>
-      | <a href="@blog.delete_url@">Delete</a>
     </if>
   </p>
 </div>

@@ -12,6 +12,8 @@
 #  max_content_length:integer,optional
 #  create_p:boolean
 #  display_template:
+#  unpublish_p
+#  manageown_p
 
 # If the caller specified a URL, then we gather the package_id from that URL
 if { [info exists url] } {
@@ -27,6 +29,14 @@ if { ![info exists package_id] } {
 if {! [info exists create_p] } { 
     set create_p [permission::permission_p -object_id $package_id -privilege create]
 }
+
+if {![exists_and_not_null unpublish_p]} { 
+    set unpublish_p 1
+}
+if {![exists_and_not_null manageown_p]} { 
+    set manageown_p [expr ![permission::permission_p -object_id $package_id -privilege admin]]
+}
+
 
 if { ![info exists category_id] } {
     set blog_category_id {}
@@ -75,8 +85,8 @@ if { ![exists_and_not_null max_content_length] } {
                                 -package_id $package_id \
                                 -parameter max_content_length \
                                 -default 0]
-}        
-        
+}
+
 
 if { ![info exists type] } {
     set type "current"
@@ -136,12 +146,12 @@ if { ![string equal $type "archive"] &&
     } else {
         set num_entries [db_string num_entries_by_date {}]
     }
-    
+
     if { $num_entries < $min_num_entries } {
        # Eliminate date clause, and set the limit to the minimum number of entries
        set date_clause {}
        set limit $min_num_entries
-   }  
+   }
 }
 
 set arr_category_name() None

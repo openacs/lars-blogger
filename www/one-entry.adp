@@ -7,5 +7,5 @@
   <property name="displayed_object_id">@entry_id;noquote@</property>
 
 <div class="lars_blogger_body">
-  <include src="entry-chunk" &="blog" screen_name="@screen_name@" perma_p="1" max_content_length="0">
+  <include src="entry-chunk" &="blog" screen_name="@screen_name@" perma_p="1" max_content_length="0" manageown_p="@manageown_p@" unpublish_p="@unpublish_p@" />
 </div>

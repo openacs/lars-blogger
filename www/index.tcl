@@ -61,9 +61,17 @@ if { ![empty_string_p [parameter::get -parameter "rss_file_name"]] } {
 set rsd_url ""
 if { [xmlrpc::enabled_p] } {
     set rsd_url "[ad_url]${package_url}rsd/"
-} 
+}
 
 set stylesheet_url [lars_blog_stylesheet_url]
+
+set unpublish_p [expr ![parameter::get -parameter ImmediatePublishP -default 0]]
+
+# We say manageown if manageown set and not admin on the package.
+set manageown_p [parameter::get -parameter OnlyManageOwnPostsP -default 0]
+if {$manageown_p} {
+    set manageown_p [expr ![permission::permission_p -object_id $package_id -privilege admin]]
+}
 
 # since ADP commands can't be evaluated in the <property> tags, we
 # create a separate ADP file for headerstuff. See Bart's post

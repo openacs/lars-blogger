@@ -38,7 +38,7 @@
 
     <div id="lars_blogger_left">
       <div class="lars_blogger_content_table">
-        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@" sw_category_id="@sw_category_id@" max_content_length="0">
+        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@" sw_category_id="@sw_category_id@" max_content_length="0" unpublish_p="@unpublish_p@" manageown_p="@manageown_p@">
       </div>
     </div>
 
@@ -74,7 +74,7 @@
 	  <div class="action-links">
 	  <ul>
             <li><a href="@package_url@entry-edit" title="Add an entry to this blog">Add @blog_name@ Item</a></li>
-            <li><a href="@package_url@drafts" title="View draft entries">Draft entries</a></li>
+                <if @unpublish_p@ true><li><a href="@package_url@drafts" title="View draft entries">Draft entries</a></li></if>
             <if @admin_p@ true>
               <li><a href="@package_url@admin/" title="Visit administration pages">Administer</a></li>
             </if>

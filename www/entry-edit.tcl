@@ -105,12 +105,29 @@ ad_form -extend -name entry -form {
             {(<a href="javascript:setEntryDateToToday()">Set to now</a>)}
         }
     }
-    {draft_p:text(select)
-        {options {{"Draft" "t"} {"Publish" "f"}}}
-        {label "Post Status"}
+}
+set unpublish_p [expr ![parameter::get -parameter ImmediatePublishP -default 0]]
+
+if {$unpublish_p} {
+    ad_form -extend -name entry -form {
+        {draft_p:text(select)
+            {options {{"Draft" "t"} {"Publish" "f"}}}
+            {label "Post Status"}
+        }
     }
-} \
+} else {
+    ad_form -extend -name entry -form {
+        {draft_p:text(hidden)}
+    }
+}
+
+ad_form -extend -name entry \
     -new_request {
+        if {$unpublish_p} {
+            set draft_p t
+        } else {
+            set draft_p f
+        }
         set entry_date $now_ansi
         set content [template::util::richtext::create $content {}]
     } \
