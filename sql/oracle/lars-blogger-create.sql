@@ -34,6 +34,10 @@ create table pinds_blog_entries (
                                 references apm_packages(package_id),
     title                       varchar(500),
     content                     clob,
+    content_format              varchar(50) 
+                                default 'text/html'
+                                constraint pinds_blog_entr_cnt_format_nn
+                                not null,
     entry_date                  date,
     posted_date                 date,
     draft_p                     char(1) default 'f'

@@ -30,6 +30,10 @@ create table pinds_blog_entries (
                         references apm_packages(package_id),
   title                 varchar(500),
   content               varchar(32000),
+  content_format        varchar(50) 
+                        default 'text/html'
+                        constraint pinds_blog_entr_cnt_format_nn
+                        not null,
   entry_date            timestamptz,
   posted_date           timestamptz,
   draft_p               char(1) default 'f'
@@ -42,7 +46,7 @@ create table pinds_blog_entries (
 
 create index pinds_blog_entry_pck_entr_idx on pinds_blog_entries (package_id, entry_date);
 
-create function pinds_blog_entry__title (integer)
+create or replace function pinds_blog_entry__title (integer)
 returns varchar as '
 declare
     p_entry_id        alias for $1;
@@ -56,25 +60,27 @@ end;
 ' language 'plpgsql';
 
 
-create function pinds_blog_entry__new (
+create or replace function pinds_blog_entry__new (
     integer,    -- entry_id
     integer,    -- package_id
     varchar,    -- title
     varchar,    -- content
+    varchar,    -- content_format
     timestamptz, -- entry_date
     char,       -- draft_p
     integer,    -- creation_user
     varchar     -- creation_ip
 ) returns integer as '
 declare
-    p_entry_id             alias for $1;         
+    p_entry_id             alias for $1;
     p_package_id           alias for $2;
-    p_title                alias for $3;         
-    p_content              alias for $4;         
-    p_entry_date           alias for $5;
-    p_draft_p              alias for $6;         
-    p_creation_user        alias for $7; 
-    p_creation_ip          alias for $8; 
+    p_title                alias for $3;
+    p_content              alias for $4;
+    p_content_format       alias for $5;
+    p_entry_date           alias for $6;
+    p_draft_p              alias for $7;
+    p_creation_user        alias for $8;
+    p_creation_ip          alias for $9;
     v_entry_id             integer;
 begin
     v_entry_id := acs_object__new (
@@ -91,6 +97,7 @@ begin
       package_id,
       title,
       content,
+      content_format,
       entry_date,
       posted_date,
       draft_p,
@@ -100,6 +107,7 @@ begin
       p_package_id,
       p_title,
       p_content,
+      p_content_format,
       p_entry_date,
       current_timestamp,
       p_draft_p,
@@ -111,7 +119,7 @@ end;
 ' language 'plpgsql';
 
 
-create function pinds_blog_entry__delete (integer)
+create or replace function pinds_blog_entry__delete (integer)
 returns integer as '
 declare
     p_entry_id alias for $1;

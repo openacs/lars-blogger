@@ -8,6 +8,7 @@
 		    select b.entry_id,  
                            b.title, 
                            b.content, 
+                           b.content_format, 
                            b.draft_p, 
                            to_char(b.entry_date, 'YYYY-MM-DD') as entry_date,
 		           to_char(b.entry_date, 'fmDayfm, Month fmDDfm, YYYY') as entry_date_pretty, 

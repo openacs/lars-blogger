@@ -7,20 +7,22 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
 
-    <version name="0.8.2" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.2.apm">
+    <version name="0.8.4" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.4.apm">
     <database-support>
         <database>oracle</database>
         <database>postgresql</database>
     </database-support>
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Write your own web log</summary>
-        <release-date>2002-09-16</release-date>
+        <release-date>2003-01-30</release-date>
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
         <description format="text/html">Manages multiple web logs for your site. Just mount multiple instances, and you can do all the blogging you want.</description>
 
+        <provides url="lars-blogger" version="0.8.4"/>
         <requires url="acs-datetime" version="4.0"/>
         <requires url="general-comments" version="4.0"/>
         <requires url="notifications" version="0.1"/>
+        <requires url="rss-support" version="0.2d1"/>
 
         <files>
             <file type="package_spec" path="lars-blogger.info"/>
@@ -33,6 +35,8 @@
             <file type="data_model" db_type="oracle" path="sql/oracle/rss-register.sql"/>
             <file type="data_model" db_type="oracle" path="sql/oracle/rss-unregister.sql"/>
             <file type="data_model_upgrade" db_type="oracle" path="sql/oracle/upgrade/upgrade-0.7d-0.8.sql"/>
+            <file type="data_model_upgrade" db_type="oracle" path="sql/oracle/upgrade/upgrade-0.8.2-0.8.3.sql"/>
+            <file type="data_model_upgrade" db_type="oracle" path="sql/oracle/upgrade/upgrade-0.8.3-0.8.4.sql"/>
             <file type="data_model_create" db_type="postgresql" path="sql/postgresql/lars-blogger-create.sql"/>
             <file type="data_model_drop" db_type="postgresql" path="sql/postgresql/lars-blogger-drop.sql"/>
             <file type="data_model" db_type="postgresql" path="sql/postgresql/lars-blogger-sc-create.sql"/>
@@ -44,8 +48,11 @@
             <file type="data_model" db_type="postgresql" path="sql/postgresql/upgrade/lars-blogger-sc-index.sql"/>
             <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.6.4d-0.7d.sql"/>
             <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.7d-0.8.sql"/>
+            <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.8.2-0.8.3.sql"/>
+            <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.8.3-0.8.4.sql"/>
+            <file type="query_file" db_type="oracle" path="tcl/entry-procs-oracle.xql"/>
+            <file type="query_file" db_type="postgresql" path="tcl/entry-procs-postgresql.xql"/>
             <file type="tcl_procs" path="tcl/entry-procs.tcl"/>
-            <file type="query_file" path="tcl/entry-procs.xql"/>
             <file type="query_file" db_type="oracle" path="tcl/lars-blogger-procs-oracle.xql"/>
             <file type="query_file" db_type="postgresql" path="tcl/lars-blogger-procs-postgresql.xql"/>
             <file type="tcl_procs" path="tcl/lars-blogger-procs.tcl"/>
@@ -65,17 +72,21 @@
             <file type="query_file" db_type="postgresql" path="www/admin/entry-edit-postgresql.xql"/>
             <file type="content_page" path="www/admin/entry-edit.adp"/>
             <file type="content_page" path="www/admin/entry-edit.tcl"/>
+            <file type="content_page" path="www/admin/entry-edit.tcl.orig"/>
+            <file type="content_page" path="www/admin/entry-edit.tcl.rej"/>
             <file type="query_file" path="www/admin/entry-edit.xql"/>
             <file type="query_file" db_type="oracle" path="www/admin/entry-publish-oracle.xql"/>
             <file type="query_file" db_type="postgresql" path="www/admin/entry-publish-postgresql.xql"/>
             <file type="content_page" path="www/admin/entry-publish.tcl"/>
             <file type="content_page" path="www/admin/entry-revoke.tcl"/>
-            <file type="content_page" path="www/admin/subscribers.adp"/>
-            <file type="content_page" path="www/admin/subscribers.tcl"/>
             <file type="query_file" path="www/admin/entry-revoke.xql"/>
             <file type="content_page" path="www/admin/index.adp"/>
             <file type="content_page" path="www/admin/index.tcl"/>
             <file type="query_file" path="www/admin/index.xql"/>
+            <file type="content_page" path="www/admin/rss-setup.tcl"/>
+            <file type="query_file" path="www/admin/rss-setup.xql"/>
+            <file type="content_page" path="www/admin/subscribers.adp"/>
+            <file type="content_page" path="www/admin/subscribers.tcl"/>
             <file type="content_page" path="www/archive/index.vuh"/>
             <file type="query_file" db_type="oracle" path="www/blog-months-oracle.xql"/>
             <file type="query_file" db_type="postgresql" path="www/blog-months-postgresql.xql"/>
@@ -85,9 +96,10 @@
             <file type="query_file" db_type="postgresql" path="www/blog-postgresql.xql"/>
             <file type="content_page" path="www/blog.adp"/>
             <file type="content_page" path="www/blog.tcl"/>
+            <file type="query_file" db_type="oracle" path="www/calendar-oracle.xql"/>
+            <file type="query_file" db_type="postgresql" path="www/calendar-postgresql.xql"/>
             <file type="content_page" path="www/calendar.adp"/>
             <file type="content_page" path="www/calendar.tcl"/>
-            <file type="query_file" path="www/calendar.xql"/>
             <file type="documentation" path="www/doc/index.html"/>
             <file type="content_page" path="www/entry-chunk.adp"/>
             <file type="content_page" path="www/entry-chunk.tcl"/>
@@ -100,6 +112,8 @@
             <file type="content_page" path="www/one-entry.tcl"/>
             <file type="content_page" path="www/rss/index.vuh"/>
         </files>
+        <callbacks>
+        </callbacks>
         <parameters>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="rss_file_url"  default="rss/rss.xml" description="What URL should we advertise the RSS feed under, relative to the blog mount point. Leave blank if no RSS feed." section_name="rss"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_height"  description="Height in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>

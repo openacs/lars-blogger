@@ -2,7 +2,7 @@
   <table cellspacing="0" cellpadding="2" border="0" width="100%">
     <tr>
       <th bgcolor="@header_background_color@" align="left">
-        <b><a name="blog-date-@blog.entry_date@"><font size="-1">@blog.entry_date_pretty@</font></a></b>
+        <b><a name="blog-date-@blog.entry_date@">@blog.entry_date_pretty@</a></b>
       </th>
       <if @blog.rownum@ eq 1>
         <th bgcolor="@header_background_color@"  align="right">

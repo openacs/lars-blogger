@@ -28,16 +28,20 @@
     </if>
     <tr>
       <td align="right">
-        <a href="@blog.entry_archive_url@" title="Permanent URL for this entry">#</a> -
-        <a href="@blog.google_url@" title="Search for @blog.title@ on Google">G</a> -
-        <if @comments_html@ nil>
-          <if @blog.comments_view_url@ not nil>
-            <if @blog.num_comments@ gt 0>
-              <a href="@blog.comments_view_url@" title="View comments on this entry">@blog.num_comments@ <if @blog.num_comments@ eq 1>comment</if><else>comments</else></a> -
+        <p>
+          <a href="@blog.entry_archive_url@" title="Permanent URL for this entry">#</a> -
+          <a href="@blog.google_url@" title="Search for @blog.title@ on Google">G</a>
+          <if @comments_html@ nil>
+            <if @blog.comments_view_url@ not nil>
+              <if @blog.num_comments@ gt 0>
+                - <a href="@blog.comments_view_url@" title="View comments on this entry">@blog.num_comments@ <if @blog.num_comments@ eq 1>comment</if><else>comments</else></a>
+              </if>
             </if>
           </if>
-        </if>
-        <a href="@blog.comment_add_url@" title="Comment on this entry">Add comment</a>
+          <if @blog.comment_add_url@ not nil>
+            - <a href="@blog.comment_add_url@" title="Comment on this entry">Add comment</a>
+          </if>
+        </p>
       </td>
     </tr>
   </table>

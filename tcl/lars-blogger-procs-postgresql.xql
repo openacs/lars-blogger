@@ -10,6 +10,7 @@
             	:package_id,
             	:title,
             	:content,
+            	:content_format,
             	to_date(:entry_date, 'YYYY-MM-DD'),
             	:draft_p,
             	:creation_user,

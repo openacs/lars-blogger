@@ -20,26 +20,18 @@
 		    select entry_id,
 		           to_char(entry_date, 'fmDayfm, Month fmDDfm, YYYY') as entry_date_pretty, 
 		           to_char(entry_date, 'YYYY/MM/DD/') as entry_archive_url,
-		           entry_date,
+		           to_char(entry_date, 'YYYY-MM-DD') as entry_date,
 		           title,
 		           content,
+                           content_format,
 		           draft_p,
-		           'f' as new_date_p,
 		           p.first_names as poster_first_names,
 		           p.last_name as poster_last_name,
 		           to_char(posted_date , 'HH24:MI') as posted_time_pretty,
 		           (select count(gc.comment_id) 
 		            from general_comments gc, cr_revisions cr 
 		            where gc.object_id = entry_id
-		            and   content_item.get_live_revision(gc.comment_id) = cr.revision_id) as num_comments,
-		           0 as row_number,
-		           '' as edit_url,
-		           '' as delete_url,
-		           '' as publish_url,
-		           '' as revoke_url,
-		           '' as comments_view_url,
-		           '' as comment_add_url,
-		           '' as google_url
+		            and   content_item.get_live_revision(gc.comment_id) = cr.revision_id) as num_comments
 		    from   pinds_blog_entries e,
 		           acs_objects o,
 		           persons p
