@@ -12,8 +12,8 @@
 
 select acs_sc_impl_alias__delete(
     'RssGenerationSubscriber',			-- impl_contract_name
-    'pinds_blog_entries',				-- impl_name
-    'lastUpdated',						-- impl_operation_name
+    'pinds_blog_entries',                       -- impl_name
+    'lastUpdated'				-- impl_operation_name
 );
 
 
