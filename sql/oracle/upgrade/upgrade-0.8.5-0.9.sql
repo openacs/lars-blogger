@@ -119,7 +119,7 @@ begin
   from apm_parameters
   where parameter_name = 'rss_file_name';
 
-  select apm.unregister_parameter(v_parameter_id) from dual;
+  apm.unregister_parameter(v_parameter_id);
 
 end;
 /
