@@ -3,7 +3,7 @@
 <if @rss_file_url@ not nil>
   <property name="header_stuff"><link rel="alternate" type="application/rss+xml" title="RSS" href="@rss_file_url@" /></property>
 </if>
-<property name="context_bar">@context_bar@</property>
+<property name="context_bar">@context_bar;noquote@</property>
 
 <if @display_bloggers_p@ eq 1>
 
@@ -94,7 +94,7 @@
           </tr>
           <tr>
             <td align="center">
-              @notification_chunk@            
+              @notification_chunk;noquote@            
             </td>
           </tr>
           <tr>

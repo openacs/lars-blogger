@@ -11,7 +11,7 @@
     <p><b>@blog.title@</b></p>
   </if>
 </else>
-@blog.content@
+@blog.content;noquote@
 </p>
   <br />
   <table cellpadding="0" cellspacing="0" border="0" width="100%">
