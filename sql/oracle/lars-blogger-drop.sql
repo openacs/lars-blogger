@@ -12,6 +12,14 @@
 @@ rss-unregister
 
 begin
+    acs_object_type.drop_type('weblogger_channel', 't');
+end;
+/
+show errors
+
+drop table weblogger_channels;
+
+begin
 
     for blog_entry in (select entry_id from pinds_blog_entries) loop
 		-- delete comments (which are acs_message's)
@@ -23,10 +31,7 @@ begin
         pinds_blog_entry.delete(blog_entry.entry_id);
     end loop;
 
-    acs_object_type.drop_type(
-        object_type => 'pinds_blog_entry',
-        cascade_p => 't'
-    );
+    acs_object_type.drop_type('weblogger_channel', 't');
 
 end;
 /
