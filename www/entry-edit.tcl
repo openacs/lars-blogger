@@ -158,7 +158,11 @@ ad_form -extend -name entry -form {
             -draft_p $draft_p
     } \
     -after_submit {
-        ad_returnredirect $return_url
+        if {"$draft_p" == "t"} {
+            ad_returnredirect one-entry?[export_url_vars entry_id]
+        } else {
+            ad_returnredirect $return_url
+        }
         ad_script_abort
     } \
     -validate {{
