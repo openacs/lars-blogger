@@ -183,3 +183,12 @@ ad_proc -public lars_blog_categories_p {
     }
     return [ad_parameter -package_id $package_id "EnableCategoriesP" "lars-blogger" "1"]
 }
+
+ad_proc -public lars_blog_stylesheet_url {
+    -package_id
+} {
+    if { ![exists_and_not_null package_id] } {
+        set package_id [ad_conn package_id]
+    }
+    return [ad_parameter -package_id $package_id "StylesheetURL" "lars-blogger" "%lars-blogger.css"] 
+}

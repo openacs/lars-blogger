@@ -1,0 +1,93 @@
+.lars_blogger_body {
+	text-align:left;
+}
+.lars_blogger_content_table 	{
+	width: 90%;
+} /* (table) */
+
+.lars_blogger_date_header {
+	width: 100%;
+	margin-bottom: .3em;
+	border: 1px solid #999999;
+	background-color: #ddd; 
+}
+.lars_blogger_date_header th a {
+	letter-spacing: .1em;  					
+	color: black;
+}
+
+
+.lars_blogger_entry_group {
+	margin-bottom: 30px;
+}
+
+.lars_blogger_entry 	{
+	margin-bottom: 30px;
+        border: 0px;
+}
+
+.lars_blogger_title 	{
+	text-align: left;
+	font-weight: bold;
+}
+.lars_blogger_category  {
+        font-size: 7pt;
+	text-align: bold;
+	font-weight: bold;
+        text-transform:uppercase;
+        margin-bottom: 4pt;
+        margin-top: 6pt;
+        margin-left: 6pt;
+}
+
+.lars_blogger_text 	{
+	text-align: left;
+}
+
+.lars_blogger_poster {
+	text-align: left;
+	font-size: 8pt;
+	color: #999;
+}
+.lars_blogger_poster a {
+	font-size: 8pt;
+}
+
+.lars_blogger_entry_options {
+	text-align: right;
+        border-bottom: 0px;
+}
+
+
+
+/* MENU */
+
+.lars_blogger_menu {
+        text-align: right;
+        padding-right: 50px;
+}
+
+.lars_blogger_menu_table 
+  {
+    border: 1px solid #ddd;
+    width: 200px;
+  }
+
+.lars_blogger_menu_table th {
+        background-color: #EEE;
+	text-align: center;
+}
+    
+.lars_blogger_menu_table td a:link {
+        color: #336699; 
+        text-decoration: none; 
+        font-weight:bold;
+}
+.lars_blogger_menu_table td a:hover {
+        color: #336699; 
+        text-decoration: underline; 
+}
+.lars_blogger_menu_table td a:visited {
+        color: #336699; 
+}
+

@@ -1,4 +1,8 @@
 <master>
+<property name="header_stuff">
+     <link rel="stylesheet" type="text/css" href="@stylesheet_url@" />
+</property>
+
 <property name="title">@page_title@</property>
 <property name="context_bar">@context_bar;noquote@</property>   
 

@@ -34,4 +34,7 @@ if {![exists_and_not_null screen_name]} {
 
 set header_background_color [lars_blog_header_background_color]
 
+# Load the StylesheetURL into $stylesheet_url
+regsub \% [lars_blog_stylesheet_url] $package_url stylesheet_url
+
 ad_return_template

@@ -143,4 +143,7 @@ set entry_add_url "${package_url}entry-edit"
 
 set header_background_color [lars_blog_header_background_color -package_id $package_id]
 
+# Load the StylesheetURL into $stylesheet_url
+regsub \% [lars_blog_stylesheet_url] $package_url stylesheet_url
+
 ad_return_template 

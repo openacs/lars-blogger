@@ -133,4 +133,7 @@ db_multirow categories categories { *SQL* }
 set l_context_bar [lreplace $l_context_bar end end [lindex [lindex $l_context_bar end] end]]
 eval "set context_bar \[ad_context_bar $l_context_bar\]"
 
+# Load the StylesheetURL into $stylesheet_url
+regsub \% [lars_blog_stylesheet_url] $package_url stylesheet_url
+
 ad_return_template

@@ -40,6 +40,7 @@
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="ShowPosterP"  default="1" description="Show who posted the entry and when"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="HeaderBackgroundColor"  default="#dcdcdc" description="Background color for the header bars, those with the entry date, calendar, etc."/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="DisplayUsersP"  default="0" description="Should we display a list of bloggers on the index page."/>
+            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="StylesheetURL"  default="%lars-blogger.css" description="The url to the stylesheet used in conjunction with the weblog instance. '%' is replaced with the package_url."/>
         </parameters>
 
     </version>

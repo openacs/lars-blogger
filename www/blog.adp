@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="@stylesheet_url@" />
+
 <multiple name="blog">
   <table cellspacing="0" cellpadding="2" border="0" width="100%">
     <tr>
