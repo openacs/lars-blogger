@@ -82,13 +82,14 @@ ad_proc -public blogger.newPost {
     set entry_id [db_nextval t_acs_object_id_seq]
     set entry_date [clock format [clock seconds] -format %Y-%m-%d]
 
-    return [list -string [lars_blog_entry_add -entry_id $entry_id \
-                           -package_id $package_id \
-                           -title " " \
-                           -content $content \
-                           -content_format "text/html" \
-                           -entry_date $entry_date \
-                           -draft_p [ad_decode $publish_p 1 f t]
+    return [list -string [lars_blogger::entry::new \
+                              -entry_id $entry_id \
+                              -package_id $package_id \
+                              -title " " \
+                              -content $content \
+                              -content_format "text/html" \
+                              -entry_date $entry_date \
+                              -draft_p [ad_decode $publish_p 1 f t]
                       ]]
 }
 

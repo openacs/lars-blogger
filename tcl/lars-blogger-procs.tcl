@@ -7,31 +7,6 @@ ad_library {
 
 namespace eval lars_blogger {}
 
-ad_proc -deprecated -warn lars_blog_entry_add {
-    {-entry_id:required}
-    {-package_id:required}
-    {-title:required}
-    {-title_url ""}
-    {-category_id ""}
-    {-content:required}
-    {-content_format:required}
-    {-entry_date:required}
-    {-draft_p:required}
-} {
-    Add the blog entry and then flush the cache so that the new entry shows up.
-} {
-    return [lars_blogger::entry::new \
-                -entry_id $entry_id \
-                -package_id $package_id \
-                -title $title \
-                -title_url $title_url \
-                -category_id $category_id \
-                -content $content \
-                -content_format $content_format \
-                -entry_date $entry_date \
-                -draft_p $draft_p]
-}
-
 ad_proc -public lars_blog_entry_edit {
     {-entry_id:required}
     {-title:required}

@@ -7,7 +7,7 @@ ad_library {
 }
 
 aa_register_case lars_blog_add_entry -cats {smoke api db} {
-    Test the lars_blog_entry_add proc.
+    Test the lars_blogger::entry::new proc
 } {    
 
     aa_run_with_teardown \
@@ -19,13 +19,13 @@ aa_register_case lars_blog_add_entry -cats {smoke api db} {
             set package_id [ad_conn package_id]
 
             # Add entry
-            set entry_id [lars_blog_entry_add \
+            set entry_id [lars_blogger::entry::new \
                               -entry_id $entry_id \
                               -package_id $package_id \
                               -title "Foobar" \
                               -content "Just a test" \
                               -content_format "text/plain" \
-                              -entry_date "2003-11-11" \
+                              -entry_date "2003-11-11 13:01:01" \
                               -draft_p t]
 
             set success_p [db_string success_p {
