@@ -70,8 +70,9 @@ ad_proc -private lars_blog__rss_datasource {
             set description $content_as_text
         }
 
-        # TODO: Figure out timezone ...
-        set entry_timestamp "[clock format [clock scan $posted_time_ansi] -format "%a, %d %b %Y %H:%M:%S %Z"]"
+        # Always convert timestamp to GMT
+        set posted_time_ansi [lc_time_tz_convert -from [lang::system::timezone] -to "Etc/GMT" -time_value $posted_time_ansi]
+        set entry_timestamp "[clock format [clock scan $posted_time_ansi] -format "%a, %d %b %Y %H:%M:%S"] GMT"
 
         lappend items [list \
                            link $entry_url \
