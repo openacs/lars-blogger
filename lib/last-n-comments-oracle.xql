@@ -5,6 +5,7 @@
         <querytext>
     select * from (
         select
+            c.comment_id,
             r.title,
             r.publish_date,
             e.entry_id,

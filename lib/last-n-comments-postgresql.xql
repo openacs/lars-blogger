@@ -4,6 +4,7 @@
     <fullquery name="select_n_comments">
         <querytext>
         select
+            c.comment_id,
             r.title,
             r.publish_date,
             e.entry_id,
