@@ -4,9 +4,9 @@
 
     <fullquery name="categories">
         <querytext>
-	        select category_id as tmp_category_id, name 
-                from pinds_blog_categories
-                where package_id = :package_id
+	        select name, category_id
+                from   pinds_blog_categories
+                where  package_id = :package_id
         </querytext>
     </fullquery>
 

@@ -39,10 +39,7 @@ element create entry title_url -label "Title URL (optional)" -datatype text -htm
 # Otherwise just set the category_id to 0 to support category support in the future.
 if { [string equal [lars_blog_categories_p] "1"] } {
     # It's probably possible to set up the widget directly from the datasource -- I just don't know how :-(
-    set option_list [list [list None 0]]
-    db_foreach categories { *SQL* } {
-        lappend option_list [list $name $tmp_category_id]
-    }
+    set option_list [concat [list [list None 0]] [db_list_of_lists categories {}]]
     element create entry category_id -label "Category" -datatype integer -widget select -options $option_list
 } else {
     element create entry category_id -widget hidden -datatype text -value 0
