@@ -37,7 +37,7 @@
           </th>
         </tr>
         <tr>
-          <td nowrap align="center">
+          <td align="center">
             @notification_chunk@            
           </td>
         </tr>
