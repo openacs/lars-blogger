@@ -11,6 +11,11 @@
 	border: 1px solid #999999;
 	background-color: #ddd; 
 }
+.lars_blogger_date_header th {
+	font-size:9pt;
+	letter-spacing: .1em;  					
+	color: black;
+}
 .lars_blogger_date_header th a {
 	letter-spacing: .1em;  					
 	color: black;
@@ -29,15 +34,6 @@
 .lars_blogger_title 	{
 	text-align: left;
 	font-weight: bold;
-}
-.lars_blogger_category  {
-        font-size: 7pt;
-	text-align: bold;
-	font-weight: bold;
-        text-transform:uppercase;
-        margin-bottom: 4pt;
-        margin-top: 6pt;
-        margin-left: 6pt;
 }
 
 .lars_blogger_text 	{
@@ -78,6 +74,9 @@
 	text-align: center;
 }
     
+.lars_blogger_menu_table td {
+	font-size:9pt;
+}
 .lars_blogger_menu_table td a:link {
         color: #336699; 
         text-decoration: none; 

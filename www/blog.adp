@@ -1,28 +1,26 @@
 <link rel="stylesheet" type="text/css" href="@stylesheet_url@" />
 
 <multiple name="blog">
-  <table cellspacing="0" cellpadding="2" border="0" width="100%">
+  <table cellspacing="0" cellpadding="2" border="0" width="100%" class="lars_blogger_date_header"
     <tr>
-      <th bgcolor="@header_background_color@" align="left">
-        <b><a name="blog-date-@blog.entry_date@"><font size="-1">@blog.entry_date_pretty@</font></a></b>
+      <th align="left">
+        <a name="blog-date-@blog.entry_date@">@blog.entry_date_pretty@</a>
       </th>
       <if @blog.rownum@ eq 1>
-        <th bgcolor="@header_background_color@"  align="right">
-          <font size="-1">
+        <th align="right">
             <a href="@entry_add_url@" title="Add an entry to @blog_name@">+</a>
             <if @blog_url@ not nil>
               <a href="@blog_url@" title="Visit @blog_name@ home">@blog_name@</a>
             </if>
-         </font>
         </th>
       </if>
     </tr>
   </table>
+  <div class="lars_blogger_entry_group">
   <group column="entry_date">
-    <div style="border-bottom:1px dashed #3366cc;">
       <include src="entry-chunk" &="blog" package_id="@package_id@" write_p="@write_p@" screen_name="@screen_name@">
-    </div>
   </group>
+  </div>
 </multiple>
 
 <p>

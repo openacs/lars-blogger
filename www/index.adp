@@ -13,6 +13,8 @@
 </else>
 <property name="context_bar">@context_bar;noquote@</property>
 
+<div class="lars_blogger_body">
+
 <if @display_bloggers_p@ eq 1>
 
 
@@ -52,12 +54,18 @@
 
 <table width="100%">
   <tr>
-    <td valign="top">
-      <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@">
+    <td valign="top" align="center">
+      <table class="lars_blogger_content_table" width="100%"><tr><td>
+        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@">
+      </td></tr></table>
+    </td>
+    <td valign="top" align="center">
+      
     </td>
     <td valign="top">
 
-      <table width="100%" cellspacing="0" cellpadding="2">
+      <div class="lars_blogger_menu">
+      <table width="100%" cellspacing="0" cellpadding="2" class="lars_blogger_menu_table">
         <tr>
           <th bgcolor="@header_background_color@">
             Archive
@@ -159,9 +167,12 @@
           </tr>
         </if>
       </table>
+      </div>
 
     </td>
   </tr>
 </table>
 
 </else>
+
+</div>
