@@ -37,7 +37,7 @@ ad_proc lars_blogger::category::edit {
 } {
     @return category_id of new category
 } {
-    return [db_exec_plsql update_category {}]
+    return [db_dml update_category {}]
 }
 
 ad_proc lars_blogger::category::get_existing_short_names {
