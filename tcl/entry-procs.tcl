@@ -112,10 +112,17 @@ ad_proc -public lars_blogger::entry::do_notifications {
         append new_content "$blog(title_url)\n"
     }
     append new_content "\n"
-    append new_content "[ad_convert_to_text -- [ns_adp_parse -string $blog(content)]]\n\n"
-    append new_content "This entry: $entry_url\n\n"
-    append new_content "$blog_name: $blog_url\n"
+    append new_content [ad_html_text_convert \
+                            -from $blog(content_format) \
+                            -to "text/plain" -- \
+                            [ns_adp_parse -string \
+                                 [ad_html_text_convert \
+                                      -from $blog(content_format) \
+                                      -to "text/html" -- $blog(content)]]] \n\n
 
+    append new_content "This entry: " $entry_url \n\n
+    append new_content "$blog_name: " $blog_url \n
+    
     # Do the notification for the forum
     notification::new \
         -type_id [notification::type::get_type_id \
