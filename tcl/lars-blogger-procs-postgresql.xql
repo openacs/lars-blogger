@@ -25,7 +25,7 @@
 		select weblogger_channel__new (
 			:channel_id,
             		:package_id,
-			'',
+			NULL,
 			:creation_user,
 			:creation_ip
         	)
