@@ -69,7 +69,7 @@ template::list::create \
 
 db_multirow -extend { entry_date_pretty edit_url publish_url delete_url preview_url } entries $statement {} {
     set entry_date_pretty [lc_time_fmt $entry_date_ansi "%q"]
-    set content [string_truncate -len 80 $content]
+    set content [string_truncate -len 80 -- $content]
 }
 
 set entry_add_url "entry-edit"
