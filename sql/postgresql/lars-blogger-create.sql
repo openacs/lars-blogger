@@ -153,7 +153,7 @@ select acs_object_type__create_type (
     null,               	-- package_name
     'f',        	        -- abstract_p
     null,   	                -- type_extension_table
-    'weblogger_channels.title'	-- name_method
+    null                        -- name_method
 );
 
 create table weblogger_channels (
