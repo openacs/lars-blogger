@@ -6,7 +6,6 @@
     <pretty-plural>Webloggers</pretty-plural>
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
-    <auto-mount>weblog</auto-mount>
 
     <version name="0.9" url="http://openacs.org/repository/download/apm/lars-blogger-0.9.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
