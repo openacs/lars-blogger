@@ -32,11 +32,13 @@ if { [form is_request entry] } {
         element set_properties entry draft_p -value "t"
 
         # Prefill title and content with supplied values
-        foreach element { content title } {
-            if { [exists_and_not_null $element] } {
-                element set_value entry $element [set $element]
-            }
+        if { [exists_and_not_null title] } {
+            element set_value entry title $title
         }
+        if { [exists_and_not_null content] } {
+            element set_value entry content [template::util::richtext::acquire contents $content]
+        }
+
     } else {
         db_1row entry {}
         
