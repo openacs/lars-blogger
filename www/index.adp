@@ -1,16 +1,6 @@
 <master>
 <property name="title">@page_title@</property>
-<if @rss_file_url@ not nil>
-  <property name="header_stuff">
-     <link rel="alternate" type="application/rss+xml" title="RSS" href="@rss_file_url@" />
-     <link rel="stylesheet" type="text/css" href="@stylesheet_url@" />
-  </property>
-</if>
-<else>
-  <property name="header_stuff">
-     <link rel="stylesheet" type="text/css" href="@stylesheet_url@" />
-  </property>
-</else>
+<property name="header_stuff">@headerstuff;noquote@</property>
 <property name="context">@context;noquote@</property>
 
 <div class="lars_blogger_body">

@@ -19,7 +19,7 @@ set package_url [ad_conn package_url]
 set package_url_with_extras $package_url
 
 set context [list]
-set context_base_url [ad_conn package_url]
+set context_base_url $package_url
 
 if { ![empty_string_p $screen_name] } {
     # Show Screen Name in context bar
@@ -41,16 +41,34 @@ if { ![empty_string_p $category_short_name] } {
     set category_id ""
 }
 
+# Set up the <link> elements for the HTML <head>
+# 3 items - RSS, RSD and stylesheet.
+set rss_file_url ""
 if { ![empty_string_p [parameter::get -parameter "rss_file_name"]] } {
-
     if {[exists_and_not_null screen_name]} {
-        set rss_file_url "[ad_conn package_url]user/$screen_name/rss/[parameter::get -parameter "rss_file_name"]"
+        set rss_file_url "${package_url}user/$screen_name/rss/[parameter::get -parameter "rss_file_name"]"
     } else {
-        set rss_file_url "[ad_conn package_url]rss/[parameter::get -parameter "rss_file_name"]"
+        set rss_file_url "${package_url}rss/[parameter::get -parameter "rss_file_name"]"
     }
-
 }
 
+# is XML-RPC installed and enabled?
+set rsd_url ""
+if { [xmlrpc::enabled_p] } {
+    set rsd_url "[ad_url]${package_url}rsd/"
+} 
+
+set stylesheet_url [lars_blog_stylesheet_url]
+
+# since ADP commands can't be evaluated in the <property> tags, we
+# create a separate ADP file for headerstuff. See Bart's post
+# http://openacs.org/forums/message-view?message_id=149849
+set cwd [file dirname [ad_conn file]]
+set headerstuff [template::adp_parse ${cwd}/headerstuff \
+                     [list \
+                          rss_file_url $rss_file_url \
+                          rsd_url $rsd_url \
+                          stylesheet_url $stylesheet_url]]
 
 set create_p [permission::permission_p -object_id $package_id -privilege read]
 set admin_p [permission::permission_p -object_id $package_id -privilege admin]
@@ -137,6 +155,3 @@ db_multirow categories categories {}
 if { [llength $context] > 0 } {
     set context [lreplace $context end end [lindex [lindex $context end] end]]
 }
-
-set stylesheet_url [lars_blog_stylesheet_url]
-
