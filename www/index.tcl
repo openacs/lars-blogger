@@ -52,7 +52,7 @@ if { ![empty_string_p [parameter::get -parameter "rss_file_name"]] } {
 }
 
 
-set write_p [permission::permission_p -object_id $package_id -privilege write]
+set create_p [permission::permission_p -object_id $package_id -privilege read]
 set admin_p [permission::permission_p -object_id $package_id -privilege admin]
 
 set display_users_p [parameter::get -parameter "DisplayUsersP" -default 0]

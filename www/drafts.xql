@@ -2,17 +2,46 @@
 
 <queryset>
 
+    <fullquery name="draft_entries">
+        <querytext>
+		    select e.entry_id,
+		           to_char(e.entry_date, 'YYYY-MM-DD HH24:MI:SS') as entry_date_ansi, 
+		           e.title,
+		           e.content,
+                           o.creation_user,
+                           u.first_names,
+                           u.last_name
+		    from   pinds_blog_entries e,
+                           acs_objects o,
+                           all_users u
+		    where  e.package_id = :package_id
+		    and    e.draft_p = 't'
+		    and    e.deleted_p = 'f'
+                    and    o.object_id = e.entry_id
+                    and    u.user_id = o.creation_user
+                    and    o.creation_user = :user_id
+		    order  by e.entry_date desc, e.posted_date desc
+        </querytext>
+    </fullquery>
+
     <fullquery name="all_draft_entries">
         <querytext>
-		    select entry_id,
-		           to_char(entry_date, 'YYYY-MM-DD') as entry_date_pretty, 
-		           title,
-		           content
-		    from   pinds_blog_entries
-		    where  package_id = :package_id
-		    and    draft_p = 't'
-		    and    deleted_p = 'f'
-		    order  by entry_date desc, posted_date desc
+		    select e.entry_id,
+		           to_char(e.entry_date, 'YYYY-MM-DD HH24:MI:SS') as entry_date_ansi, 
+		           e.title,
+		           e.content,
+                           o.creation_user,
+                           u.first_names,
+                           u.last_name
+		    from   pinds_blog_entries e,
+                           acs_objects o,
+                           all_users u
+		    where  e.package_id = :package_id
+		    and    e.draft_p = 't'
+		    and    e.deleted_p = 'f'
+                    and    o.object_id = e.entry_id
+                    and    u.user_id = o.creation_user
+		    order  by e.entry_date desc, e.posted_date desc
         </querytext>
     </fullquery>
 

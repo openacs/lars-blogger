@@ -17,9 +17,9 @@
     </tr>
   </table>
   <div class="lars_blogger_entry_group">
-  <group column="entry_date">
-      <include src="entry-chunk" &="blog" package_id="@package_id@" write_p="@write_p@" screen_name="@screen_name@">
-  </group>
+    <group column="entry_date">
+      <include src="entry-chunk" &="blog" package_id="@package_id@" screen_name="@screen_name@">
+    </group>
   </div>
 </multiple>
 
@@ -33,7 +33,7 @@
   <b>&raquo;</b>
   <a href="@archive_url@" title="Visit the archive for @blog_name@" class="action_link">Archive</a><br />
   
-  <if @write_p@ gt 0>
+  <if @create_p@ true>
     <b>&raquo;</b>
     <a href="@entry_add_url@" title="Add an entry to @blog_name@" class="action_link">Add entry</a>
   </if>

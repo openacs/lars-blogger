@@ -42,6 +42,8 @@ set blog(delete_url) "${package_url}entry-delete?[export_vars { entry_id return_
 set blog(publish_url) "${package_url}entry-publish?[export_vars { entry_id return_url }]"
 set blog(revoke_url) "${package_url}entry-revoke?[export_vars { entry_id return_url }]"
 
+set blog(write_p) [permission::write_permission_p -object_id $blog(entry_id) -creation_user $blog(user_id)]
+
 if { [empty_string_p $screen_name] } {
     set blog(entry_archive_url) "${package_url}one-entry?[export_vars { entry_id }]"
 } else {

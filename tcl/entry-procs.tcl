@@ -22,21 +22,6 @@ ad_proc -public lars_blogger::entry::get {
     }
 }
 
-ad_proc -public lars_blogger::entry::require_write_permission {
-    {-entry_id:required}
-} {
-    permission::require_permission -object_id $entry_id -privilege write
-    
-    set admin_p [permission::permission_p -privilege "admin" -object_id $entry_id]
-    
-    if { !$admin_p && [ad_conn user_id] != [db_string creation_user {}] } {
-        ad_return_forbidden  "Permission Denied"  "<blockquote>
-    You don't have permission to modify this entry.
-    </blockquote>"
-        ad_script_abort
-    } 
-}
-
 ad_proc -public lars_blogger::entry::publish {
     {-entry_id:required}
     {-package_id ""}
@@ -69,6 +54,35 @@ ad_proc -public lars_blogger::entry::publish {
 
     # trackback
     lars_blogger::entry::trackback -entry_id $entry_id
+}
+
+
+ad_proc -public lars_blogger::entry::draft {
+    {-entry_id:required}
+} { 
+    Mark a blog entry as drafted
+} {
+    permission::require_write_permission -object_id $entry_id
+    db_dml delete {
+        update pinds_blog_entries
+        set    draft_p = 't'
+        where  entry_id = :entry_id
+    }
+    lars_blog_flush_cache
+}
+
+ad_proc -public lars_blogger::entry::delete {
+    {-entry_id:required}
+} { 
+    Delete a blog entry
+} {
+    permission::require_write_permission -object_id $entry_id
+    db_dml delete {
+        update pinds_blog_entries
+        set    deleted_p = 't'
+        where  entry_id = :entry_id
+    }
+    lars_blog_flush_cache
 }
 
 

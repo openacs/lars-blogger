@@ -27,7 +27,7 @@
      Posted by @blog.poster_first_names@ @blog.poster_last_name@ at @blog.posted_time_pretty@
    </if>
 
-   <if @user_id@ eq @blog.user_id@ or @write_p@ eq 1>
+   <if @blog.write_p@ true>
       &nbsp;&nbsp;&nbsp;&nbsp;
       <a href="@blog.edit_url@">Edit</a> -
       <if @blog.draft_p@ true>

@@ -6,10 +6,10 @@ ad_page_contract {} {
 }
 
 # Must be logged in
-ad_maybe_redirect_for_registration
+auth::require_login
 
-# Must have write privilege
-permission::require_permission -object_id [ad_conn package_id] -privilege write
+# Must have create on the package
+permission::require_permission -object_id [ad_conn package_id] -privilege create
 
 # If we're in DisplayUserP mode, the user must have a screen name setup
 if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
@@ -28,7 +28,7 @@ if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
 
 
 set package_id [ad_conn package_id]
-set today [db_string today { *SQL* }]
+set today [clock format [clock seconds] -format "%Y-%m-%d"]
 
 form create entry -cancel_url [ad_decode $return_url "" "." $return_url]
 
@@ -73,9 +73,9 @@ if { [form is_request entry] } {
     } else {
         set insert_or_update update
         
-        lars_blogger::entry::require_write_permission -entry_id $entry_id
+        permission::require_write_permission -object_id $entry_id
 
-        db_1row entry { *SQL* }
+        db_1row entry {}
         
         element set_value entry title $title
         element set_value entry title_url $title_url
@@ -121,7 +121,7 @@ if { [form is_valid entry] } {
                 -entry_date $entry_date \
                 -draft_p "$draft_p"
     } else {
-        lars_blogger::entry::require_write_permission -entry_id $entry_id
+        permission::require_write_permission -object_id $entry_id
 
         set set_clauses { 
             "title = :title" 

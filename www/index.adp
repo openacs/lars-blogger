@@ -29,7 +29,7 @@
     <i>No bloggers here.</i>
   </else>
 
-  <if @write_p@ true>
+  <if @create_p@ true>
     <if @user_has_blog_p@ true>
       <p>
         <b>&raquo;</b> <a href="@package_url@entry-edit" title="Add an entry to your weblog">Add entry</a><br>
@@ -116,7 +116,7 @@
         </if>
 
 
-          <if @write_p@ true>
+        <if @create_p@ true>
           <tr>
             <th bgcolor="@header_background_color@">
               Actions
@@ -134,7 +134,7 @@
           <tr>
             <td height="16">&nbsp;</td>
           </tr>
-          </if>
+        </if>
 
         <if @notification_chunk@ not nil>
           <tr>

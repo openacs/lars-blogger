@@ -1,6 +1,6 @@
 ad_page_contract {} {
     entry_id:integer
-    {return_url ""}
+    {return_url {[ad_return_url]}}
 } -properties {
     context_bar
     title_html
@@ -13,15 +13,13 @@ ad_page_contract {} {
 
 set package_id [ad_conn package_id]
 
-set write_p [permission::permission_p -object_id $package_id -privilege write]
-
-if { [empty_string_p $return_url] } {
-    set return_url "[ad_conn url]?[ad_conn query]"
-}
-
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
 lars_blogger::entry::get -entry_id $entry_id -array blog
+
+if { [template::util::is_true $blog(draft_p)] } {
+    permission::require_write_permission -object_id $entry_id -creation_user $blog(user_id) -action "view"
+}
 
 set page_title $blog(title)
 
