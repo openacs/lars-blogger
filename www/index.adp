@@ -1,14 +1,14 @@
 <master>
-<property name="title">@page_title@</property>
+<property name="title">@page_title;noquote@</property>
 <if @rss_file_url@ not nil>
-  <property name="header_stuff"><link rel="alternate" type="application/rss+xml" title="RSS" href="@rss_file_url@" /></property>
+  <property name="header_stuff"><link rel="alternate" type="application/rss+xml" title="RSS" href="@rss_file_url;noquote@" /></property>
 </if>
-<property name="context_bar">@context_bar@</property>
+<property name="context_bar">@context_bar;noquote@</property>
 
 <table width="100%">
   <tr>
     <td valign="top">
-      <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@">
+      <include src="blog" type="@type;noquote@" archive_interval="@interval;noquote@" archive_date="@archive_date;noquote@">
     </td>
     <td valign="top">
 
@@ -20,7 +20,7 @@
         </tr>
         <tr>
           <td nowrap align="center">
-            <include src="calendar" date="@date@">
+            <include src="calendar" date="@date;noquote@">
           </td>
         </tr>
         <tr>
@@ -49,7 +49,7 @@
           </tr>
         </if>
 
-        <if @notification_chunk@ not nil>
+        <if @notification_chunk;noquote@ not nil>
           <tr>
             <th bgcolor="@header_background_color@">
               Notifications
@@ -57,7 +57,7 @@
           </tr>
           <tr>
             <td align="center">
-              @notification_chunk@            
+              @notification_chunk;noquote@            
             </td>
           </tr>
           <tr>

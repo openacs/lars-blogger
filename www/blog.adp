@@ -20,7 +20,7 @@
   </table>
   <group column="entry_date">
     <div style="border-bottom:1px dashed #3366cc;">
-      <include src="entry-chunk" &="blog" package_id="@package_id@">
+      <include src="entry-chunk" &="blog" package_id="@package_id;noquote@">
     </div>
   </group>
 </multiple>
