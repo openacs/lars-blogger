@@ -18,7 +18,7 @@
         <provides url="lars-blogger" version="1.0a3"/>
         <requires url="acs-datetime" version="4.0"/>
         <requires url="general-comments" version="4.0"/>
-        <requires url="notifications" version="5.0.0a5"/>
+        <requires url="notifications" version="5.0.0b4"/>
         <requires url="rss-support" version="0.3d1"/>
         <requires url="trackback" version="0.1d"/>
 
