@@ -110,3 +110,5 @@ create table weblogger_technorati_cache (
 
 \i rss-register.sql
 \i notifications-init.sql
+
+\i lars-blogger-sc-create.sql
