@@ -76,8 +76,11 @@ if { [form is_valid entry] } {
     } else {
         set set_clauses { "title = :title" "content = :content" "entry_date = to_date(:entry_date, 'YYYY-MM-DD')" "draft_p = :draft_p" }
 
-        if { [string equal $draft_p [db_string org_draft_p { select draft_p from pinds_blog_entries where entry_id = :entry_id } ]] } {
-            lappend set_clauses "[db_map now]"
+        set org_draft_p [db_string org_draft_p { select draft_p from pinds_blog_entries where entry_id = :entry_id } ]
+
+        if { [string equal $draft_p "t"] && [string equal $org_draft_p "f"] } {
+            # If this is a publish, set the posted_date to now
+            lappend set_clauses [db_map now]
         }
     
         db_dml update_entry { *SQL* }
