@@ -6,7 +6,7 @@
   <tr>
     <td bgcolor="#cccccc">
       <table cellspacing=1 cellpadding=2 border=0 width="100%">
-        <tr bgcolor="#e0d0b0">
+        <tr bgcolor="@header_background_color@">
           <th>Date</th>
           <th>Title</th>
           <th>Content</th>

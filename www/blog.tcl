@@ -63,4 +63,6 @@ set arrow_url "${package_url}graphics/arrow-box.gif"
 
 set entry_add_url "${package_url}admin/entry-edit"
 
+set header_background_color [lars_blog_header_background_color]
+
 ad_return_template 

@@ -37,4 +37,6 @@ set notification_chunk [notification::display::request_widget \
     -url [lars_blog_public_package_url] \
 ]
 
+set header_background_color [lars_blog_header_background_color]
+
 ad_return_template

@@ -17,4 +17,6 @@ db_multirow -extend { edit_url preview_url } entries entries { *SQL* } {
     set preview_url "[ad_conn package_url]admin/entry-preview?[export_vars { entry_id return_url }]"
 }
 
+set header_background_color [lars_blog_header_background_color]
+
 ad_return_template

@@ -4,7 +4,7 @@
 
 <table cellspacing="0" cellpadding="2" border="0" width="100%">
   <tr>
-    <th bgcolor="#e0d0b0" align=left>
+    <th bgcolor="@header_background_color@" align=left>
       <b><a name="blog-date-@blog.entry_date@">@blog.entry_date_pretty@</a></b>
     </th>
   </tr>

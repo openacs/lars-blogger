@@ -22,5 +22,7 @@ db_multirow -extend { edit_url publish_url delete_url preview_url } draft_entrie
 
 set entry_add_url "entry-edit"
 
+set header_background_color [lars_blog_header_background_color]
+
 ad_return_template
 

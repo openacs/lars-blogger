@@ -23,4 +23,6 @@ set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
 lars_blogger::entry::get -entry_id $entry_id -array blog
 
+set header_background_color [lars_blog_header_background_color]
+
 ad_return_template

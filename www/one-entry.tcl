@@ -27,4 +27,6 @@ set page_title $blog(title)
 
 set context_bar [ad_context_bar $page_title]
 
+set header_background_color [lars_blog_header_background_color]
+
 ad_return_template

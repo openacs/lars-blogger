@@ -16,7 +16,7 @@
 
       <table width="100%" cellspacing="0" cellpadding="2">
         <tr>
-          <th bgcolor="#e0d0b0">
+          <th bgcolor="@header_background_color@">
             Calendar
           </th>
         </tr>
@@ -32,7 +32,7 @@
         </tr>
 
         <tr>
-          <th bgcolor="#e0d0b0">
+          <th bgcolor="@header_background_color@">
             Notifications
           </th>
         </tr>
@@ -49,7 +49,7 @@
 
         <include-optional src="blog-months">
           <tr>
-            <th bgcolor="#e0d0b0">
+            <th bgcolor="@header_background_color@">
               Archive
             </th>
           </tr>
@@ -67,7 +67,7 @@
 
         <if @rss_file_url@ not nil>
           <tr>
-            <th bgcolor="#e0d0b0" nowrap>
+            <th bgcolor="@header_background_color@" nowrap>
               Syndication Feed
             </th>
           </tr>
