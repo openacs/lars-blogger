@@ -2,6 +2,27 @@
 
 <queryset>
 
+    <fullquery name="lars_blog_entry_edit.package_id">
+        <querytext>
+            select package_id from pinds_blog_entries 
+            where entry_id = :entry_id
+        </querytext>
+    </fullquery>
+
+    <fullquery name="lars_blog_entry_edit.org_draft_p">
+        <querytext>
+            select draft_p from pinds_blog_entries where entry_id = :entry_id
+        </querytext>
+    </fullquery>
+
+    <fullquery name="lars_blog_entry_edit.update_entry">
+        <querytext>
+            update pinds_blog_entries
+            set    [join $set_clauses ", "]
+            where  entry_id = :entry_id
+        </querytext>
+    </fullquery>
+
     <fullquery name="lars_blog_setup_feed.select_instance_channel">
         <querytext>
             select w.channel_id
@@ -62,6 +83,19 @@
     <fullquery name="lars_blog_setup_feed.screen_name">
         <querytext>
             select screen_name from users where user_id = :creation_user
+        </querytext>
+    </fullquery>
+
+    <fullquery name="lars_blog_list_user_blogs.blog_list">
+        <querytext>
+
+    select p.package_id 
+     from apm_packages p, acs_object_party_privilege_map perm
+    where p.package_key = 'lars-blogger' 
+      and p.package_id = perm.object_id
+      and perm.privilege = 'create'
+      and perm.party_id = :user_id
+
         </querytext>
     </fullquery>
 

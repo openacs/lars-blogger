@@ -22,6 +22,12 @@
         </querytext>
     </fullquery>
 
+    <partialquery name="lars_blog_entry_edit.now">
+        <querytext>
+			posted_date = sysdate
+        </querytext>
+    </partialquery>
+
    <fullquery name="lars_blog_setup_feed.create_instance_channel">
         <querytext>
                 begin

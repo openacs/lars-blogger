@@ -21,6 +21,12 @@
         </querytext>
     </fullquery>
 
+    <partialquery name="lars_blog_entry_edit.now">
+        <querytext>
+			posted_date = current_timestamp
+        </querytext>
+    </partialquery>
+
    <fullquery name="lars_blog_setup_feed.create_instance_channel">
         <querytext>
 		select weblogger_channel__new (
