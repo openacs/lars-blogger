@@ -10,7 +10,7 @@
                 to_char(entry_date, 'YYYY-MM-DD HH24:MI:SS') as entry_date_ansi,
                 title,
                 c.name as category,
-                content,
+                content
          from   pinds_blog_entries e, pinds_blog_categories c 
          where  e.category_id = c.category_id(+)
          and    e.package_id = :package_id
