@@ -18,8 +18,11 @@
                    posted_date,
                    to_char(posted_date, 'YYYY-MM-DD') as posted_date_string,
                    to_char(posted_date, 'HH:MI') as posted_time_string,
+                   extract(timezone_hour from now()) as tzoffset_hour,
+                   extract(timezone_minute from now()) as tzoffset_minute,
                    to_char(entry_date, 'DD Mon YYYY hh12:MI am') as entry_date_pretty,
                    to_char(entry_date, 'YYYY/MM/') as entry_archive_url
+    
             from pinds_blog_entries
             where package_id = :package_id
             and draft_p = 'f'

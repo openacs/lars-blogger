@@ -19,6 +19,8 @@
                          posted_date,
                          to_char(posted_date, 'YYYY-MM-DD') as posted_date_string,
                          to_char(posted_date, 'HH:MI') as posted_time_string,
+                         -6 as tzoffset_hour,
+                         0 as tzoffset_minute,
                          to_char(entry_date, 'DD Mon YYYY hh12:MI am') as entry_date_pretty,
                          to_char(entry_date, 'YYYY/MM/') as entry_archive_url
                   from pinds_blog_entries
