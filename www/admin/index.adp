@@ -12,6 +12,11 @@
     <a href="../entry-edit" title="Add new blog entry" class="action_link">Add new blog entry</a>
   </p>
   
+  <p>
+    <b>&raquo;</b>
+    <a href="bookmarklet" title="Generate a bookmarklet link" class="action_link">Bookmarklet</a>
+  </p>
+
   <if @categories@ eq 1>
   <p>
     <b>&raquo;</b>
@@ -50,5 +55,10 @@
     <p>
       <b>&raquo;</b>
         <a href="@parameters_url@&section=Trackback" title="Configure Trackback" class="action_link">Configure Trackback</a> (<a href="../what-is-trackback">what's trackback?</a>)
+    </p>
+    
+    <p>
+        <b>&raquo;</b>
+        <a href="ping-urls" title="Manage your ping URLs" class="action_link">Manage your ping URLs</a>
     </p>
 </blockquote>
