@@ -27,6 +27,8 @@
                    b.title, 
                    b.title_url, 
                    b.category_id, 
+	           c.name as category_name,
+                   c.short_name as category_short_name,
                    b.content, 
                    b.content_format, 
                    b.draft_p, 
@@ -41,9 +43,10 @@
                     from general_comments gc, cr_revisions cr 
                     where gc.object_id = entry_id
                     and   content_item__get_live_revision(gc.comment_id) = cr.revision_id) as num_comments
-            from   pinds_blog_entries b,
+            from   pinds_blog_entries b left outer join
+	           pinds_blog_categories c on (c.category_id = b.category_id),
                    acs_objects o,
-                   persons p
+                   persons p 
             where  b.entry_id = :entry_id
             and    o.object_id = b.entry_id
             and    p.person_id = o.creation_user

@@ -28,6 +28,8 @@
                            b.title, 
                            b.title_url, 
                            b.category_id, 
+	           	   c.name as category_name,
+                   	   c.short_name as category_short_name,
                            b.content, 
                            b.content_format, 
                            b.draft_p, 
@@ -44,11 +46,13 @@
 		            and content_item.get_live_revision(gc.comment_id) = cr.revision_id) as num_comments
 		    from   pinds_blog_entries b,
                            acs_objects o,
-                           persons p
+                           persons p,
+	                   pinds_blog_categories c
 		    where  b.entry_id = :entry_id
                     and    o.object_id = b.entry_id
                     and    p.person_id = o.creation_user
-            and    b.deleted_p = 'f'
+	            and    c.category_id (+) = b.category_id
+                    and    b.deleted_p = 'f'
         </querytext>
     </fullquery>
 
