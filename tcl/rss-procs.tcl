@@ -78,13 +78,15 @@ ad_proc -private lars_blog__rss_datasource {
                            title $title \
                            description $description \
                            value $content \
-                           timestamp $entry_timestamp]
-        
+                           timestamp $entry_timestamp \
+                           category $category]
+
         if { $counter == 0 } {
-            set column_array(channel_lastBuildDate) $entry_date_pretty
+            set column_array(channel_lastBuildDate) $entry_timestamp
             incr counter
         }
     }
+
     set column_array(items) $items
     set column_array(channel_language)               ""
     set column_array(channel_copyright)              ""

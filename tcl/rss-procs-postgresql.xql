@@ -11,25 +11,26 @@
 
     <fullquery name="lars_blog__rss_datasource.blog_rss_items">
         <querytext>
-            select entry_id,
-                   title, 
-                   content,
-                   entry_date,
-                   posted_date,
-                   to_char(posted_date, 'YYYY-MM-DD') as posted_date_string,
-                   to_char(posted_date, 'HH:MI') as posted_time_string,
-                   to_char(posted_date, 'YYYY-MM-DD HH24:MI:SS') as posted_time_ansi,
+            select e.entry_id,
+                   e.title, 
+                   e.content,
+                   e.entry_date,
+                   e.posted_date,
+                   to_char(e.posted_date, 'YYYY-MM-DD') as posted_date_string,
+                   to_char(e.posted_date, 'HH:MI') as posted_time_string,
+                   to_char(e.posted_date, 'YYYY-MM-DD HH24:MI:SS') as posted_time_ansi,
                    extract(timezone_hour from now()) as tzoffset_hour,
                    extract(timezone_minute from now()) as tzoffset_minute,
-                   to_char(entry_date, 'DD Mon YYYY hh12:MI am') as entry_date_pretty,
-                   to_char(entry_date, 'YYYY/MM/') as entry_archive_url
-    
-            from pinds_blog_entries
-            where package_id = :package_id
-            and draft_p = 'f'
-            and deleted_p = 'f'
-            order by entry_date desc, posted_date desc
-            limit 10
+                   to_char(e.entry_date, 'DD Mon YYYY hh12:MI am') as entry_date_pretty,
+                   to_char(e.entry_date, 'YYYY/MM/') as entry_archive_url,
+                   c.name as category
+            from   pinds_blog_entries e left outer join
+                   pinds_blog_categories c using (category_id)
+            where  e.package_id = :package_id
+            and    e.draft_p = 'f'
+            and    e.deleted_p = 'f'
+            order  by e.entry_date desc, e.posted_date desc
+            limit  10
         </querytext>
     </fullquery>
 
