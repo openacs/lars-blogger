@@ -25,4 +25,18 @@
     <a href="@parameters_url@"><img src="@arrow_url@" width="11" height="11" border="0" alt="Set parameters" title="Set parameters" /></a>
     <a href="@parameters_url@" title="Set parameters" class="action_link">Set parameters</a>
   </p>
+
+  <if @rss_feed_p@ false>
+    <p>
+      <a href="@rss_setup_url@"><img src="@arrow_url@" width="11" height="11" border="0" alt="Setup an RSS feed" title="Setup an RSS feed" /></a>
+      <a href="@rss_setup_url@" title="Setup an RSS feed" class="action_link">Setup an RSS feed</a>
+    </p>
+  </if>
+  <else>
+    <p>
+      <a href="@rss_manage_url@"><img src="@arrow_url@" width="11" height="11" border="0" alt="Manage your RSS feed" title="Manage your RSS feed" /></a>
+      <a href="@rss_manage_url@" title="Manage your RSS feed" class="action_link">Manage your RSS feed</a>
+    </p>
+  </else>
+
 </blockquote>
