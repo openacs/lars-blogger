@@ -1,9 +1,7 @@
 <master>
 <property name="title">@page_title@</property>
 <property name="focus">entry.title</property>   
-<h2>@page_title@</h2>
-@context_bar@
-<hr>
+<property name="context_bar">@context_bar@</property>   
 
 <script langauge="javascript">
     function setEntryDateToToday() {

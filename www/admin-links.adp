@@ -1,5 +1,5 @@
 <if @admin_p@ eq 1>
-  <table align="right" border="0">
+  <table border="0">
     <tr>
       <td>
         <multiple name="links">

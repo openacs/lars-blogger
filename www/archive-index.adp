@@ -1,10 +1,7 @@
 <master>
 <property name="title">@page_title@</property>
-<h2>@page_title@</h2>
+<property name="context_bar">@context_bar@</property>   
 <include src="admin-links">
-
-@context_bar@
-<hr>
 
 These are all the months that there's been blogging going on:
 

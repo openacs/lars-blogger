@@ -1,8 +1,6 @@
 <master>
 <property name="title">@page_title@</property>
-<h2>@page_title@</h2>
-@context_bar@
-<hr>
+<property name="context_bar">@context_bar@</property>   
 
 <if @title@ not nil>
   <h4>@title@</h4>

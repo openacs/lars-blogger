@@ -5,11 +5,7 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" target=_test href="@rss_file_url@" />
   </property>
 </if>
-<h2>@page_title@</h2>
 <include src="admin-links">
-
-@context_bar@
-<hr>
 
 <table width="100%">
   <tr>
