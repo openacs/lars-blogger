@@ -1,14 +1,21 @@
-# Expects:
-#  package_id:optional
-#  url:optional
-#  type:optional (current, archive)
-#  archive_interval:optional
-#  archive_date:optional
-#  screen_name:optional
-#  max_num_entries: optional
-#  min_num_entries: optional
-#  num_days: optional
-#  max_content_length:integer,optional
+ad_page_element_contract {
+    Display a blog
+
+    @params type Display type. Valid values are current, archive.
+} {
+    package_id:optional
+    url:optional
+    type:optional
+    archive_interval:optional
+    archive_date:optional
+    screen_name:optional
+    max_num_entries:optional
+    min_num_entries:optional
+    num_days:optional
+    max_content_length:integer,optional
+    comments_page
+}
+
 
 # If the caller specified a URL, then we gather the package_id from that URL
 if { [info exists url] } {

@@ -1,13 +1,11 @@
-ad_page_contract {} {
+ad_page_element_contract {} {
     entry_id:integer
     {return_url {[ad_return_url]}}
 }
 
-set package_id [ad_conn package_id]
-
-set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
-
 lars_blogger::entry::get -entry_id $entry_id -array blog
+
+set package_id $blog(package_id)
 
 # SWC
 
@@ -50,7 +48,5 @@ if {![exists_and_not_null screen_name]} {
     set context [list $screen_name]
 }
 
-set header_background_color [lars_blog_header_background_color]
-
-set stylesheet_url [lars_blog_stylesheet_url]
+set stylesheet_url [lars_blog_stylesheet_url -package_id $package_id]
 

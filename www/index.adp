@@ -46,9 +46,7 @@
       <div class="lars_blogger_portlet">
         <h2>Archive</h2>
         <include src="calendar" date="@date@" screen_name="@screen_name@">
-        <include-optional src="blog-months" screen_name="@screen_name@">
-          <include-output>
-        </include-optional>
+        <include src="blog-months" screen_name="@screen_name@">
       </div>
       <if @display_categories@ eq 1 and @categories:rowcount@ gt 0>
         <div class="lars_blogger_portlet">
@@ -81,7 +79,7 @@
       <if @notification_chunk@ not nil>
         <div class="lars_blogger_portlet">
           <h2>Notifications</h2>
-          @notification_chunk;noquote@            
+          @notification_chunk;noquote@
         </div>
       </if>
       <if @rss_file_url@ not nil>

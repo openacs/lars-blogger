@@ -42,9 +42,7 @@
       in
       <a href="@category_url@" title="@blog.category_name@">@blog.category_name@</a>
     </if>
-    |
 
-    <a href="@blog.permalink_url@" title="Permanent URL for this entry">Permalink</a>
     <if @show_comments_p@ false>
       | <a href="@blog.permalink_url@" title="View comments on this entry">Comments (@blog.num_comments@)</a>
     </if>

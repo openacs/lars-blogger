@@ -1,10 +1,9 @@
-#
-# Expects:
-# date:onevalue,optional
-#
-
-if { ![info exist date] } {
-    set date [dt_sysdate]
+ad_page_element_contract {
+    Display the mini-calendar for a blog
+} {
+    {package_id:optional {[ad_conn package_id]}}
+    {date:optional {[dt_sysdate]}}
+    {screen_name {}}
 }
 
 dt_get_info $date
@@ -14,10 +13,8 @@ dt_get_info $date
 
 set calendar_details [ns_set create calendar_details]
 
-set package_url [lars_blog_public_package_url]
+set package_url [lars_blog_public_package_url -package_id $package_id]
 set month_number [clock format [clock scan $date] -format %m]
-
-set package_id [ad_conn package_id]
 
 if {[empty_string_p $screen_name]} {
     db_foreach all_entry_dates { * SQL * } {
