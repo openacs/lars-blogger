@@ -23,8 +23,10 @@ form create entry
 
 element create entry title -label "Title" -datatype text -html { size 50 }
 element create entry content -label "Content" -datatype text -widget textarea -html { cols 80 rows 20 }
-element create entry entry_date -label "Entry date" -datatype text
-element create entry entry_date_today -label "Set to today" -datatype text -widget inform -value {(<a href="javascript:setEntryDateToToday()">Set to today</a>)}
+element create entry entry_date -label "Entry date" -datatype text \
+        -help_text "If you set this to something other than today's date, you must use this form to publish your entry, otherwise the entry date will be set to the date you publish the item." \
+        -after_html {(<a href="javascript:setEntryDateToToday()">Set to today</a>)}
+
 element create entry draft_p -label "Draft" -datatype text -widget checkbox -options { { "This is a draft, don't publish it" "t" } } -optional
 
 element create entry entry_id -widget hidden -datatype text

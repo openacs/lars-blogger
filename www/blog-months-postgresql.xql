@@ -6,11 +6,10 @@
     <fullquery name="months">
         <querytext>
 			select date_trunc('month', entry_date) as month_date,
-			       to_char(date_trunc('month', entry_date), 'fmMonthfm, YYYY')
+			       to_char(date_trunc('month', entry_date), 'fmMonthfm YYYY')
 					  as date_pretty,
 			       to_char(date_trunc('month', entry_date), 'YYYY/MM/')
-					  as month_url_stub,
-			       '' as url
+					  as month_url_stub
 			from   pinds_blog_entries
 			where  draft_p = 'f'
 			and    package_id = :package_id

@@ -5,21 +5,15 @@ set month [lindex $extra_url_list 2]
 set day [lindex $extra_url_list 3]
 
 if { [empty_string_p $year] && [empty_string_p $month] && [empty_string_p $day] } {
-
-    ad_conn -set file "[acs_root_dir]/packages/lars-blogger/www/archive-index.tcl"
-
+    # get year, month, day
+    set date_list [dt_ansi_to_list [dt_sysdate]]
+    
+    ad_returnredirect "[ad_conn package_url]archive/[lindex $date_list 0]/[format "%02d" [lindex $date_list 1]]/"
 } else {
+    rp_form_put year $year
+    rp_form_put month $month
+    rp_form_put day $day
 
-    if { [empty_string_p [ns_getform]] } {
-        global _ns_form
-        set _ns_form [ns_set create]
-    }
-    
-    ns_set put [ns_getform] year $year
-    ns_set put [ns_getform] month $month
-    ns_set put [ns_getform] day $day
-    
-    ad_conn -set file "[acs_root_dir]/packages/lars-blogger/www/archive-display.tcl"
+    rp_internal_redirect "/packages/lars-blogger/www/archive-display"
 }
 
-adp_parse_ad_conn_file

@@ -24,7 +24,7 @@ if { [empty_string_p $day] } {
 
     db_1row archive_date_month_day { *SQL* }
 
-    set context_bar [ad_context_bar [list "[ad_conn package_url]archive/" "Archive"] $archive_date_pretty]
+    set context_bar [ad_context_bar [list "[ad_conn package_url]archive/" "Archive"] [list "[ad_conn package_url]archive/$year/$month/" $archive_month_pretty] $archive_date_pretty]
 
 }
 
