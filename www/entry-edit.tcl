@@ -81,10 +81,11 @@ if { [string equal [lars_blog_categories_p] "1"] } {
 
     }
 }
+set container_id [ad_conn [parameter::get -parameter CategoryContainer -default package_id]]
 
 # SWC (Site-wide categories):
 category::ad_form::add_widgets \
-    -container_object_id $package_id \
+    -container_object_id $container_id \
     -categorized_object_id [value_if_exists entry_id] \
     -form_name entry
 
@@ -142,7 +143,7 @@ ad_form -extend -name entry -form {
 
         # SWC Collect categories from all the category widgets
         set category_ids [category::ad_form::get_categories \
-          -container_object_id $package_id]
+                              -container_object_id $container_id]
 
     } \
     -new_data {

@@ -63,7 +63,7 @@
          <multiple name="sw_categories">
            <h2>@sw_categories.tree_name@</h2>
            <group column="tree_id">
-             <a href="@package_url_with_extras@swcat/@sw_categories.sw_category_id@">@sw_categories.sw_category_name@</a><br>
+             <if @sw_categories.count@ gt 0>@sw_categories.pad;noquote@<a href="@package_url_with_extras@swcat/@sw_categories.category_id@">@sw_categories.category_name@</a> (@sw_categories.count@)<br /></if>
            </group>
          </multiple>
         </div>
@@ -81,7 +81,7 @@
       <if @notification_chunk@ not nil>
         <div class="lars_blogger_portlet">
           <h2>Notifications</h2>
-          @notification_chunk;noquote@            
+          @notification_chunk;noquote@
         </div>
       </if>
       <if @rss_file_url@ not nil>
