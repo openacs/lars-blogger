@@ -75,13 +75,11 @@ ad_form -name category -cancel_url $return_url -form {
     db_exec_plsql insert_category {}
     
 } -edit_data {
-    
-
     db_dml update_category {}
-    
+} -after_submit {
     ad_returnredirect $return_url
     ad_script_abort
-} 
+}
 
 
 
