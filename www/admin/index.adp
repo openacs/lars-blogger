@@ -47,5 +47,8 @@
         <a href="@rss_setup_url@" title="Setup instance RSS feed" class="action_link">Setup instance RSS feed</a>
     </p>
   </if>
-
+    <p>
+      <b>&raquo;</b>
+        <a href="@parameters_url@&section=Trackback" title="Configure Trackback" class="action_link">Configure Trackback</a> (<a href="../what-is-trackback">what's trackback?</a>)
+    </p>
 </blockquote>
