@@ -6,7 +6,11 @@
   <li><a href="../entry-edit" title="Add new blog entry" class="action_link">Add new blog entry</a></li>
   <li><a href="bookmarklet" title="Generate a bookmarklet link" class="action_link">Bookmarklet</a></li>
   <if @categories@ eq 1>
-    <li><a href="../category-edit" title="Categories" class="action_link">Categories</a></li>
+    <li>[Deprecated] <a href="../category-edit" title="Categories"
+class="action_link">Old style Weblogger-only Categories</a>
+  (<a href="migrate-categories" title="Migrate Categories"
+         class="action_link">Migrate Categories</a>)
+</li>
   </if>
   <li><a href="@category_map_url@" class="action_link">Site-Wide Categories</a>
   <li><a href="blogroll" title="View blogroll" class="action_link">Blogroll</a></li>

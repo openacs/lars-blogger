@@ -30,8 +30,17 @@
     <if @show_poster_p@ true>
       by @blog.poster_first_names@ @blog.poster_last_name@
     </if>
+      <multiple name="sw_category_multirow" delimiter=", ">
+        <if @sw_category_multirow.rownum@ eq 1 and
+            @sw_category_multirow.sw_category_name@ not nil>
+          in
+        </if>
+        <a href="@sw_category_multirow.sw_category_url@">@sw_category_multirow.sw_category_name@</a>
+      </multiple>
+
     <if @display_categories@ and @blog.category_id@ gt 0>
-      in <a href="@category_url@" title="@blog.category_name@">@blog.category_name@</a>
+      in
+      <a href="@category_url@" title="@blog.category_name@">@blog.category_name@</a>
     </if>
     |
 

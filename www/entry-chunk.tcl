@@ -6,6 +6,16 @@
 # screen_name:onevalue,optional
 # perma_p: 1/0 (defaults to 0 -- set to 1 if this is the permalink page)
 
+# Nested multirows!
+
+# Get the name of the multirow contained in sw_category_multirow column
+set mrname $blog(sw_category_multirow)
+
+# The following command will create a locally bound multirow pointing to
+# the nested multirow.  The name we fetched above refers to the level of
+# the template we are included from.
+template::multirow -local -ulevel 1 upvar $mrname sw_category_multirow
+
 if { ![exists_and_not_null perma_p] } {
     set perma_p 0
 }

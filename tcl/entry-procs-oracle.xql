@@ -12,6 +12,7 @@
                                 title => :title,
                                 title_url => :title_url,
                                 content => :content,
+                                category_id => :category_id,
                                 content_format => :content_format,
                                 entry_date => nvl(to_date(:entry_date, 'YYYY-MM-DD  HH24:MI:SS'), sysdate),
                                 draft_p => :draft_p,

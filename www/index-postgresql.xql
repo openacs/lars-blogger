@@ -3,6 +3,16 @@
 <queryset>
     <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
+    <fullquery name="archive_date_year">
+        <querytext>
+			select to_date(:year, 'YYYY') 
+				as archive_date, 
+			to_char(to_date(:year, 'YYYY'), 'YYYY')
+				as archive_date_pretty
+			from dual
+        </querytext>
+    </fullquery>
+
     <fullquery name="bloggers">
         <querytext>
 		    select distinct u.screen_name, u.user_id

@@ -58,6 +58,16 @@
           </multiple>
         </div>
       </if>
+      <if @sw_categories:rowcount@ gt 0>
+        <div class="lars_blogger_portlet">
+         <multiple name="sw_categories">
+           <h2>@sw_categories.tree_name@</h2>
+           <group column="tree_id">
+             <a href="@package_url_with_extras@swcat/@sw_categories.sw_category_id@">@sw_categories.sw_category_name@</a><br>
+           </group>
+         </multiple>
+        </div>
+      </if>
       <if @create_p@ true>
         <div class="lars_blogger_portlet">
           <h2>Actions</h2>
@@ -88,12 +98,17 @@
         </div>
       </include-optional>
 
+<if 0>
+Temporarly turning off this feature which hasn't been ported to Oracle
+yet so that it at least doesn't completely break the application.
+
       <include-optional src="/packages/lars-blogger/lib/blogroll">
         <div class="lars_blogger_portlet">
           <h2>Blogroll</h2>
           <include-output>
         </div>
       </include-optional>
+</if>
 
       <include-optional src="/packages/lars-blogger/lib/technorati">
 	<div class="lars_blogger_portlet">

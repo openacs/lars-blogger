@@ -6,7 +6,6 @@
 #  archive_date:optional
 #  screen_name:optional
 
-
 # If the caller specified a URL, then we gather the package_id from that URL
 if { [info exists url] } {
     array set blog_site_node [site_node $url]
@@ -31,6 +30,7 @@ if { ![info exists sw_category_id] } {
     set blog_sw_category_id {}
 } else {
     set blog_sw_category_id $sw_category_id
+    unset sw_category_id
 }
 
 if { ![info exists screen_name] } {
@@ -123,18 +123,83 @@ db_foreach categories {} {
 }
 
 if { [empty_string_p $blog_user_id] } {
-    set blog_query_name all_blogs
+    set user_filter_where_clause ""
     set archive_url "${package_url}archive/"
 } else {
-    set blog_query_name blog
+    set user_filter_where_clause [db_map user_filter_where_clause]
     set archive_url "${package_url}user/$screen_name/archive/"
 }
 
+# SWC
 
-db_multirow -extend {category_name category_short_name } \
-      blog $blog_query_name {} {
+# In case we are filtering by blog_sw_category_id we will need to join
+# against category_object_map twice: once to restrict to the one
+# category and second time to get other categories this item is in.
+
+if { [string length $blog_sw_category_id] } {
+  set sw_category_filter_where_clause \
+    [db_map sw_category_filter_where_clause]
+  set sw_category_filter_join_clause \
+    [db_map sw_category_filter_join_clause]
+  # This is the thing that doesn't exist in PostgreSQL:
+  set sw_category_filter_join_where_clause \
+    [db_map sw_category_filter_join_where_clause]
+} else {
+  set sw_category_filter_where_clause ""
+  set sw_category_filter_join_clause ""
+  set sw_category_filter_join_where_clause ""
+}
+
+# Our query will have more than one row per item_id.  This variable
+# keeps count of the actual rows that get inserted in the multirow.
+
+set output_rows_count 0
+
+db_multirow -extend {category_name category_short_name
+  sw_category_multirow} blog blog {} {
+
+    # Putting the limit in the query won't give correct results.  We
+    # need to do it here:
+
+    if {$limit != ""} {
+      if {$output_rows_count >= $limit} {break}
+    }
+
+    # Filtering by old blog-specific categories is still done here.
+    # This code will be removed eventually
+
     if { [string length $blog_category_id] && \
       $category_id != $blog_category_id} {continue}
+
+    set sw_category_url ""
+    if { $sw_category_id != "" } {
+        set sw_category_url "${package_url}"
+        if { [exists_and_not_null screen_name] } {
+    	  append sw_category_url "user/$screen_name"
+        }
+        append sw_category_url "swcat/$sw_category_id"
+    }
+
+    # Inner multirow.  Here's its magic name:
+    set sw_category_multirow "__branimir__multirow__blog/$entry_id"
+
+    if {![template::multirow exists $sw_category_multirow]} {
+      # This is the first row in this group so create the inner multirow
+      template::multirow create $sw_category_multirow sw_category_id \
+        sw_category_name sw_category_url
+    }
+
+    # Add a row to the inner multirow:
+    template::multirow append $sw_category_multirow $sw_category_id \
+      [category::get_name $sw_category_id] $sw_category_url
+
+    if {[db_multirow_group_last_row_p -column entry_id]} {
+      incr output_rows_count
+    } {
+      # This is not the last multirow in the group.  Skip creating rows
+      # in the main multirow:
+      continue
+    }
 
     set category_name "$arr_category_name($category_id)"
     set category_short_name $arr_category_short_name($category_id)

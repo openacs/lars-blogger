@@ -1,6 +1,3 @@
-namespace eval ::lars_blogger {
-uplevel {
-
 ad_page_contract {
     The Weblogger index page.
 
@@ -135,7 +132,13 @@ if { [exists_and_not_null year] } {
     lappend context [list $context_base_url $year]
 
     if { [exists_and_not_null day] } {
-        set interval "day"
+        if {[db_type] == "oracle"} {
+          # Oracle does have format called 'day' but it means
+          # something else...
+          set interval "ddd"
+        } {
+          set interval "day"
+        }
         db_1row archive_date_month_day {}
 
 	# Month and day in context
@@ -170,13 +173,18 @@ if { [exists_and_not_null year] } {
 db_multirow categories categories {}
 
 # SWC
-# Proc to retrieve all trees and categories goes here...
+
+db_multirow -unclobber -extend {sw_category_name tree_name} \
+  sw_categories sw_categories {
+  select c.category_id as sw_category_id, c.tree_id
+    from categories c, category_tree_map ctm
+   where ctm.tree_id = c.tree_id
+     and ctm.object_id = :package_id} {
+  set sw_category_name [category::get_name $sw_category_id]
+  set tree_name [category_tree::get_name $tree_id]
+}
 
 # Cut the URL off the last item in the context bar
 if { [llength $context] > 0 } {
     set context [lreplace $context end end [lindex [lindex $context end] end]]
-}
-
-
-}
 }
