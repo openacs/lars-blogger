@@ -31,6 +31,8 @@
 		           p.last_name as poster_last_name,
 			   o.creation_user as user_id,
 		           to_char(posted_date , 'HH24:MI') as posted_time_pretty,
+		           to_char(e.entry_date , 'YYYY-MM-DD ')||to_char(e.posted_date , 'HH24:MI:SS') as entry_date_ansi,
+                           to_char(sysdate,'YYYY-MM-DD HH24:MI:SS') as sysdate_ansi,
 		           (select count(gc.comment_id) 
 		            from general_comments gc, cr_revisions cr 
 		            where gc.object_id = entry_id
@@ -63,6 +65,8 @@
 		           p.last_name as poster_last_name,
 			   o.creation_user as user_id,
 		           to_char(posted_date , 'HH24:MI') as posted_time_pretty,
+		           to_char(e.entry_date , 'YYYY-MM-DD ')||to_char(e.posted_date , 'HH24:MI:SS') as entry_date_ansi,
+                           to_char(sysdate,'YYYY-MM-DD HH24:MI:SS') as sysdate_ansi,
 		           (select count(gc.comment_id) 
 		            from general_comments gc, cr_revisions cr 
 		            where gc.object_id = entry_id

@@ -5,7 +5,10 @@
 #  archive_interval:optional
 #  archive_date:optional
 #  screen_name:optional
-
+#  max_num_entries: optional
+#  min_num_entries: optional
+#  num_days: optional
+#  max_content_length:integer,optional
 
 # If the caller specified a URL, then we gather the package_id from that URL
 if { [info exists url] } {
@@ -33,26 +36,30 @@ if { ![info exists screen_name] } {
     set blog_user_id [cc_screen_name_user $screen_name]
 }
 
-# TODO:
-# - Upgrade the installed package to get the latest parameters
-# - Test on PG and Oracle
+if { ![exists_and_not_null max_num_entries] } {
+    set max_num_entries [parameter::get \
+                             -package_id $package_id \
+                             -parameter MaxNumEntriesOnFrontPage \
+                             -default {}]
+}
 
+if { ![exists_and_not_null min_num_entries] } {
+    set min_num_entries [parameter::get \
+                             -package_id $package_id \
+                             -parameter MinNumEntriesOnFrontPage \
+                             -default {}]
+}
 
-set max_num_entries [parameter::get \
-                       -package_id $package_id \
-                       -parameter MaxNumEntriesOnFrontPage \
-                       -default {}]
+if { ![exists_and_not_null num_days] } {
+    set num_days [parameter::get \
+                      -package_id $package_id \
+                      -parameter NumDaysOnFrontPage \
+                      -default {}]
+}
 
-set min_num_entries [parameter::get \
-                         -package_id $package_id \
-                         -parameter MinNumEntriesOnFrontPage \
-                         -default {}]
-
-set num_days [parameter::get \
-                  -package_id $package_id \
-                  -parameter NumDaysOnFrontPage \
-                  -default {}]
-        
+if { ![exists_and_not_null max_content_length] } {
+    set max_content_length 0
+}        
         
 
 if { ![info exists type] } {
@@ -143,4 +150,6 @@ set entry_add_url "${package_url}entry-edit"
 
 set header_background_color [lars_blog_header_background_color -package_id $package_id]
 
-set stylesheet_url [lars_blog_stylesheet_url]
+set stylesheet_url [lars_blog_stylesheet_url -package_id $package_id]
+
+set rss_file_url [lars_blogger::get_rss_file_url -package_id $package_id]

@@ -5,6 +5,8 @@ ad_library {
      @cvs-id $Id$
 }
 
+namespace eval lars_blogger {}
+
 ad_proc -deprecated -warn lars_blog_entry_add {
     {-entry_id:required}
     {-package_id:required}
@@ -186,4 +188,46 @@ ad_proc -public lars_blog_stylesheet_url {
         set package_id [ad_conn package_id]
     }
     return [parameter::get -package_id $package_id -parameter "StylesheetURL" -default "/resources/lars-blogger/lars-blogger.css"] 
+}
+
+ad_proc -public lars_blogger::count {
+    -package_id
+} {
+    @return the number of published blog entries in the package.
+} {
+    if { ![exists_and_not_null package_id] } {
+        set package_id [ad_conn package_id]
+    }
+    return [db_string entry_count {}]
+}
+
+
+ad_proc -public lars_blogger::get_rss_file_url {
+    -package_id
+    -screen_name
+} {
+    @param package_id The package_id of the lars-blogger instance. Defaults to current package.
+    
+    @param screen_name If specified, returns the RSS feed for just that user's postings.
+    
+    @return The URL of the RSS feed.
+} {
+    if { ![exists_and_not_null package_id] } {
+        set package_id [ad_conn package_id]
+    }
+
+    set rss_file_url {}
+    
+    set rss_file_name [parameter::get -parameter "rss_file_name" -package_id $package_id]
+
+    if { ![empty_string_p $rss_file_name] } {
+        set package_url [lars_blog_public_package_url -package_id $package_id]
+
+        if { [exists_and_not_null screen_name] } {
+            set rss_file_url "${package_url}user/$screen_name/rss/$rss_file_name"
+        } else {
+            set rss_file_url "${package_url}rss/$rss_file_name"
+        }
+    }
+    return $rss_file_url
 }

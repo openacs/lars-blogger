@@ -36,6 +36,8 @@
         		   p.first_names as poster_first_names,
 		           p.last_name as poster_last_name,
 		           to_char(b.posted_date , 'HH24:MI') as posted_time_pretty,
+		           to_char(b.entry_date , 'YYYY-MM-DD ')||to_char(b.posted_date , 'HH24:MI:SS') as entry_date_ansi,
+                           to_char(current_timestamp,'YYYY-MM-DD HH24:MI:SS') as sysdate_ansi,
                            b.package_id,
 		           (select count(gc.comment_id) 
 		            from general_comments gc, cr_revisions cr 

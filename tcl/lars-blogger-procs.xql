@@ -59,4 +59,13 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="lars_blogger::count.entry_count">
+        <querytext>
+            select count(*) 
+              from pinds_blog_entries 
+             where package_id = :package_id 
+               and draft_p = 'f'
+        </querytext>
+    </fullquery>
+
 </queryset>

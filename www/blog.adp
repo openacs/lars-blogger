@@ -18,23 +18,25 @@
   </table>
   <div class="lars_blogger_entry_group">
     <group column="entry_date">
-      <include src="entry-chunk" &="blog" package_id="@package_id@" screen_name="@screen_name@">
+      <include src="entry-chunk" &="blog" package_id="@package_id@" screen_name="@screen_name@" max_content_length="@max_content_length@">
     </group>
   </div>
 </multiple>
 
-<p>
-  <if @blog_url@ not nil>
+<if @blog_url@ nil>
+  <p>
     <b>&raquo;</b>
-    <a href="@blog_url@" title="Visit @blog_name@ home"
-       class="action_link">@blog_name@</a><br />
-  </if>
-  
-  <b>&raquo;</b>
-  <a href="@archive_url@" title="Visit the archive for @blog_name@" class="action_link">Archive</a><br />
-  
-  <if @create_p@ true>
+    <a href="@archive_url@" title="Visit the archive for @blog_name@" class="action_link">Archive</a><br />
+  </p>
+</if>    
+
+<if @create_p@ true>
+  <p>
     <b>&raquo;</b>
     <a href="@entry_add_url@" title="Add an entry to @blog_name@" class="action_link">Add entry</a>
-  </if>
-</p>
+  </p>
+</if>
+
+<if @rss_file_url@ not nil>
+  <a href="@rss_file_url@" title="RSS 2.0 feed"><img src="/resources/lars-blogger/xml.gif" width="36" height="14" border="0" alt="XML"></a>
+</if>
