@@ -4,23 +4,61 @@ ad_page_contract {
     @author Lars Pind (lars@pinds.com)
     @creation-date February 2002
 } {
+    screen_name:optional
     year:optional,string_length_range(4|4)
     month:optional,string_length_range(2|2)
     day:optional,string_length_range(2|2)
-} -properties {
-    context_bar
-    page_title
 }
-
-set context_bar [ad_context_bar]
 
 set page_title [lars_blog_name]
 
-if { ![empty_string_p [ad_parameter "rss_file_url"]] } {
-    set rss_file_url "[ad_url][lars_blog_public_package_url][ad_parameter "rss_file_url"]"
+if {![exists_and_not_null screen_name]} {
+    set screen_name ""
+    set context_bar [ad_context_bar]
+} else {
+    set context_bar [ad_context_bar $screen_name]
 }
 
-set admin_p [ad_permission_p [ad_conn package_id] admin]
+if { ![empty_string_p [parameter::get -parameter "rss_file_name"]] } {
+
+    if {[exists_and_not_null screen_name]} {
+        set rss_file_url "[ad_url][lars_blog_public_package_url]user/$screen_name/rss/[parameter::get -parameter "rss_file_name"]"
+    } else {
+        set rss_file_url "[ad_url][lars_blog_public_package_url]rss/[parameter::get -parameter "rss_file_name"]"
+    }
+
+}
+
+set package_id [ad_conn package_id]
+
+set package_url [ad_conn package_url]
+
+set write_p [permission::permission_p -object_id $package_id -privilege write]
+set admin_p [permission::permission_p -object_id $package_id -privilege admin]
+
+set display_users_p [parameter::get -parameter "DisplayUsersP" -default 0]
+
+if {$display_users_p && ![exists_and_not_null screen_name]} {
+
+    set display_bloggers_p 1
+
+    db_multirow bloggers bloggers { *SQL* }
+
+    set user_has_blog_p 0
+    multirow foreach bloggers {
+        if { $user_id == [ad_conn user_id] } {
+            set user_has_blog_p 1
+            break
+        }
+    }
+
+    ad_return_template
+
+} else {
+
+    set display_bloggers_p 0
+
+}
 
 set notification_chunk [notification::display::request_widget \
     -type lars_blogger_notif \
@@ -40,11 +78,19 @@ if { [exists_and_not_null year] } {
     if { [exists_and_not_null day] } {
         set interval "day"
         db_1row archive_date_month_day { *SQL* }
-        set context_bar [ad_context_bar [list "[ad_conn package_url]archive/" "Archive"] [list "[ad_conn package_url]archive/$year/$month/" $archive_month_pretty] $archive_date_pretty]
+	if {[empty_string_p $screen_name]} {
+	    set context_bar [ad_context_bar [list "$package_url/archive/" "Archive"] [list "$package_url/archive/$year/$month/" $archive_month_pretty] $archive_date_pretty]
+	} else {
+	    set context_bar [ad_context_bar [list "$package_url/user/$screen_name/" "$screen_name"] [list "$package_url/user/$screen_name/archive/" "Archive"] [list "$package_url/user/$screen_name/archive/$year/$month/" $archive_month_pretty] $archive_date_pretty]
+	}
     } else {
         set interval "month"
         db_1row archive_date_month { *SQL* }
-        set context_bar [ad_context_bar [list "[ad_conn package_url]archive/" "Archive"] $archive_date_pretty]
+	if {[empty_string_p $screen_name]} {
+	    set context_bar [ad_context_bar [list "$package_url/archive/" "Archive"] $archive_date_pretty]
+	} else {
+	    set context_bar [ad_context_bar [list "$package_url/user/$screen_name/" "$screen_name"] [list "$package_url/user/$screen_name/archive/" "Archive"] $archive_date_pretty]
+	}
     }
 
     append page_title " Archive"

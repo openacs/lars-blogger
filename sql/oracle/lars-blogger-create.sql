@@ -33,6 +33,7 @@ create table pinds_blog_entries (
     package_id                  constraint pinds_blog_entry_package_id_fk
                                 references apm_packages(package_id),
     title                       varchar(500),
+    title_url                   varchar(500),
     content                     clob,
     content_format              varchar(50) 
                                 default 'text/html'
@@ -46,6 +47,36 @@ create table pinds_blog_entries (
     deleted_p                   char(1) default 'f'
                                 constraint pinds_blog_entries_deleted_ck
                                 check (deleted_p in ('t','f'))
+);
+
+declare
+begin
+    acs_object_type.create_type(
+        object_type => 'weblogger_channel',
+        pretty_name => 'Weblogger Channel',
+        pretty_plural => 'Weblogger Channels',
+        supertype => 'acs_object',
+        table_name => 'weblogger_channel',
+        id_column => 'channel_id',
+        package_name => null,
+        abstract_p => 'f',
+        type_extension_table => null,
+        name_method => null
+    );
+end;
+/
+show errors
+
+create table weblogger_channels (
+  channel_id    	        constraint weblogger_channels_cid_fk
+                                references acs_objects(object_id)
+                                constraint weblogger_channels_cid_pk
+                                primary key,
+  package_id                    constraint weblogger_channels_pid_kf
+                                references apm_packages(package_id),
+  user_id		        integer,
+  constraint weblogger_chnls_pck_user_un
+  unique (package_id, user_id)
 );
 
 

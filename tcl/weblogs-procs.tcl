@@ -106,7 +106,7 @@ if [string match "" $length] {set length -1}
             return -code error -errorinfo $errorInfo $errMsg
         }
     } errmsg ] {
-        ns_log error "lars_blog_weblogs_com_update_ping error: $errmsg"
+        ns_log warning "lars_blog_weblogs_com_update_ping error: $errmsg"
         return -1
     } else {
         ns_log notice "lars_blog_weblogs_com_update_ping: $page"

@@ -1,7 +1,16 @@
-<if @blog.title@ not nil>
-  <h4>@blog.title@</h4>
+<if @blog.title_url@ not nil>
+  <p>
+    <a href="@blog.title_url@"><b><if @blog.title@ not nil>@blog.title@</if><else>@blog.title_url@</else></b></a>
+    <if @blog.title_url_base@ not nil>
+      &nbsp;&nbsp;<span style="font-size: 80%; font-style: italic;">[@blog.title_url_base@]</span>
+    </if>
+  </p>
 </if>
-<p>
+<else>
+  <if @blog.title@ not nil>
+    <p><b>@blog.title@</b></p>
+  </if>
+</else>
 @blog.content@
 </p>
   <br />
@@ -12,7 +21,7 @@
           <font size="-2" color="#999999">
             <br />
             Posted by @blog.poster_first_names@ @blog.poster_last_name@ at @blog.posted_time_pretty@
-            <if @admin_p@ eq 1>
+            <if @user_id@ eq @blog.user_id@ or @write_p@ eq 1>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <a href="@blog.edit_url@">Edit</a> - 
               <if @blog.draft_p@ true>
@@ -31,7 +40,7 @@
         <p>
           <a href="@blog.entry_archive_url@" title="Permanent URL for this entry">#</a> -
           <a href="@blog.google_url@" title="Search for @blog.title@ on Google">G</a>
-          <if @comments_html;noquote@ nil>
+          <if @comments_html@ nil>
             <if @blog.comments_view_url@ not nil>
               <if @blog.num_comments@ gt 0>
                 - <a href="@blog.comments_view_url@" title="View comments on this entry">@blog.num_comments@ <if @blog.num_comments@ eq 1>comment</if><else>comments</else></a>
@@ -46,11 +55,11 @@
     </tr>
   </table>
 
-<if @comments_html;noquote@ not nil>
+<if @comments_html@ not nil>
   <table align=center width="50%"><tr><td><hr></td></tr></table>
   <h4>Comments</h4>
   <blockquote>
-   @comments_html;noquote@
+   @comments_html@
   </blockquote>
   <center><a href="@blog.comment_add_url@" title="Comment on this entry">Add comment</a></center>
 </if>

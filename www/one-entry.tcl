@@ -13,8 +13,6 @@ ad_page_contract {} {
 
 set package_id [ad_conn package_id]
 
-set admin_p [ad_permission_p $package_id admin]
-
 if { [empty_string_p $return_url] } {
     set return_url "[ad_conn url]?[ad_conn query]"
 }
@@ -25,7 +23,12 @@ lars_blogger::entry::get -entry_id $entry_id -array blog
 
 set page_title $blog(title)
 
-set context_bar [ad_context_bar $page_title]
+if {![exists_and_not_null screen_name]} {
+    set screen_name ""
+    set context_bar [ad_context_bar $page_title]
+} else {
+    set context_bar [ad_context_bar $screen_name]
+}
 
 set header_background_color [lars_blog_header_background_color]
 

@@ -7,11 +7,13 @@
         <querytext>
 		    select b.entry_id,  
                            b.title, 
+                           b.title_url, 
                            b.content, 
                            b.content_format, 
                            b.draft_p, 
+			   o.creation_user as user_id,
                            to_char(b.entry_date, 'YYYY-MM-DD') as entry_date,
-		           to_char(b.entry_date, 'fmDayfm, Month fmDDfm, YYYY') as entry_date_pretty, 
+		           to_char(b.entry_date, 'fmDayfm, fmMonthfm fmDDfm, YYYY') as entry_date_pretty, 
         		   p.first_names as poster_first_names,
 		           p.last_name as poster_last_name,
 		           to_char(b.posted_date , 'HH24:MI') as posted_time_pretty,
@@ -26,6 +28,16 @@
 		    where  b.entry_id = :entry_id
                     and    o.object_id = b.entry_id
                     and    p.person_id = o.creation_user
+        </querytext>
+    </fullquery>
+
+    <fullquery name="lars_blogger::entry::publish.update_entry">
+        <querytext>
+		    update pinds_blog_entries
+		    set    entry_date = date_trunc('day', current_timestamp),
+		           draft_p = 'f',
+		           posted_date = current_timestamp
+		    where  entry_id = :entry_id
         </querytext>
     </fullquery>
 

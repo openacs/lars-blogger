@@ -17,3 +17,5 @@ begin
         notification_type.delete(row.type_id);
     end loop;
 end;
+/
+show errors
