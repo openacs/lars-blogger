@@ -128,11 +128,12 @@ ad_proc -public blogger.editPost {
         -object_id $entry_id \
         -privilege write
 
-    lars_blog_entry_edit -entry_id $entry_id \
+    lars_blogger::entry::edit \
+        -entry_id $entry_id \
         -title " " \
         -content $content \
         -content_format "text/html" \
-        -entry_date [clock format [clock seconds] -format %Y-%m-%d] \
+        -entry_date [clock format [clock seconds] -format "%Y-%m-%d %H:%M:%S"] \
         -draft_p [ad_decode $publish_p 1 f t]
 
     return [list -boolean 1]

@@ -7,56 +7,6 @@ ad_library {
 
 namespace eval lars_blogger {}
 
-ad_proc -public lars_blog_entry_edit {
-    {-entry_id:required}
-    {-title:required}
-    {-title_url ""}
-    {-category_id ""}
-    {-content:required}
-    {-content_format:required}
-    {-entry_date:required}
-    {-draft_p:required}
-} {
-    Edit the blog entry and then optionally perform notifications 
-    and RSS operations if the blog was a draft before and now is 
-    being published.
-    
-    @param entry_date Date of the entry in full ANSI format (YYYY-MM-DD HH24:MI:SS)
-
-    @return entry_id of edited entry
-
-    @author Vinod Kurup vinod@kurup.com
-    @creation-date 2003-10-04
-} {
-    # can't just use ad_conn package_id since the 
-    # request may be coming via XML-RPC
-    set package_id [db_string package_id {}]
-    
-    set set_clauses { 
-        "title = :title" 
-        "title_url = :title_url"
-        "category_id = :category_id"
-        "content = :content"
-        "content_format = :content_format"
-        "entry_date = to_date(:entry_date, 'YYYY-MM-DD HH24:MI:SS')" 
-        "draft_p = :draft_p" 
-    }
-    
-    set org_draft_p [db_string org_draft_p {}]
-    
-    db_dml update_entry {}
-            
-    # Is this a publish?
-    if { [string equal $draft_p "t"] && [string equal $org_draft_p "f"] } {
-        # do notifications
-        lars_blogger::entry::do_notifications -entry_id $entry_id
-        # and ping weblogs.com
-        lars_blog_weblogs_com_update_ping -package_id $package_id
-    }
-    
-    lars_blog_flush_cache $package_id
-}
-
 ad_proc lars_blog_setup_feed {
     -user:boolean
     {-package_id ""}
