@@ -17,6 +17,8 @@ class="action_link">Old style Weblogger-only Categories</a>
   <li><a href="../drafts" title="View draft entries" class="action_link">View draft entries</a></li>
   <li><a href="subscribers" title="Show E-Mail subscribers" class="action_link">Show E-Mail subscribers</a></li>
   <li><a href="@parameters_url@" title="Set parameters" class="action_link">Set parameters</a></li>
+  <li><a href="@permission_url@" title="Change permissions"
+  class="action_link">Change permissions</a></li>
   <if @instance_feed_p@ true>
     <li><a href="@rss_manage_url@" title="Manage your RSS feeds" class="action_link">Manage your RSS feeds</a> (<a href="@rss_file_url@">View instance feed XML</a>)</li>
   </if>
