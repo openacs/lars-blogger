@@ -38,7 +38,7 @@
 
     <div id="lars_blogger_left">
       <div class="lars_blogger_content_table">
-        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@">
+        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@" sw_category_id="@sw_category_id@">
       </div>
     </div>
 

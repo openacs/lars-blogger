@@ -26,6 +26,13 @@ if { ![info exists category_id] } {
     set blog_category_id $category_id
 }
 
+# SWC
+if { ![info exists sw_category_id] } {
+    set blog_sw_category_id {}
+} else {
+    set blog_sw_category_id $sw_category_id
+}
+
 if { ![info exists screen_name] } {
     set screen_name ""
     set blog_user_id {}
@@ -115,21 +122,22 @@ db_foreach categories {} {
     set arr_category_short_name($category_id) $short_name
 }
 
-
 if { [empty_string_p $blog_user_id] } {
-    db_multirow -extend {category_name category_short_name} blog all_blogs {} {
-        if { [string length $blog_category_id] && $category_id != $blog_category_id } {continue}
-        set category_name "$arr_category_name($category_id)"
-        set category_short_name $arr_category_short_name($category_id)
-    }
+    set blog_query_name all_blogs
     set archive_url "${package_url}archive/"
 } else {
-    db_multirow -extend {category_name category_short_name} blog blog {} {
-        if { [string length $blog_category_id] && $category_id != $blog_category_id } {continue}
-        set category_name "$arr_category_name($category_id)"
-        set category_short_name $arr_category_short_name($category_id)
-    }
+    set blog_query_name blog
     set archive_url "${package_url}user/$screen_name/archive/"
+}
+
+
+db_multirow -extend {category_name category_short_name } \
+      blog $blog_query_name {} {
+    if { [string length $blog_category_id] && \
+      $category_id != $blog_category_id} {continue}
+
+    set category_name "$arr_category_name($category_id)"
+    set category_short_name $arr_category_short_name($category_id)
 }
 
 set arrow_url "${package_url}graphics/arrow-box.gif"

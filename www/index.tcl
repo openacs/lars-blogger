@@ -1,3 +1,6 @@
+namespace eval ::lars_blogger {
+uplevel {
+
 ad_page_contract {
     The Weblogger index page.
 
@@ -47,8 +50,8 @@ if { ![empty_string_p $category_short_name] } {
 if { ![empty_string_p $sw_category_id] } {
     set sw_category_name [category::get_name $sw_category_id]
     if { [empty_string_p $sw_category_name] } {
-        ad_return_error "No such category" "Site-wide Category with ID \
-          $sw_category_id doesn't exist"
+        ad_return_exception_page 404 "No such category" "Site-wide \
+          Category with ID $sw_category_id doesn't exist"
 	    return
     }
     # Show Category in context bar
@@ -166,7 +169,14 @@ if { [exists_and_not_null year] } {
 
 db_multirow categories categories {}
 
+# SWC
+# Proc to retrieve all trees and categories goes here...
+
 # Cut the URL off the last item in the context bar
 if { [llength $context] > 0 } {
     set context [lreplace $context end end [lindex [lindex $context end] end]]
+}
+
+
+}
 }
