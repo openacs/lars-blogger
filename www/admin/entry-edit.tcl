@@ -1,7 +1,7 @@
 ad_page_contract {} {
     {entry_id:integer ""}
     {return_url ""}
-    {title ""}
+    {title:allhtml ""}
     {content:allhtml ""}
 } -properties {
     context_bar
