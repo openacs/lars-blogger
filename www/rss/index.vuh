@@ -7,6 +7,10 @@ set summary_context_id [db_string package_id {
      from   weblogger_channels w
      where  w.package_id = :package_id
      and    w.user_id is null
-}]
+} -default {}]
 
-ns_returnfile 200 text/xml [rss_gen_report_file -summary_context_id $summary_context_id -impl_name pinds_blog_entries]
+if { ![empty_string_p $summary_context_id] } {
+    ns_returnfile 200 text/xml [rss_gen_report_file -summary_context_id $summary_context_id -impl_name pinds_blog_entries]
+} else {
+    ns_returnnotfound
+}
