@@ -177,3 +177,8 @@ update apm_parameters
             description = 'What name should we advertise the RSS feed under, relative to the blog mount point. Leave blank if no RSS feed.',
             default_value = 'rss.xml'
         where parameter_name = 'rss_file_url';
+
+
+-- missing: create weblogger_channels
+
+

@@ -58,7 +58,10 @@ if { ![exists_and_not_null num_days] } {
 }
 
 if { ![exists_and_not_null max_content_length] } {
-    set max_content_length 0
+    set max_content_length [parameter::get \
+                                -package_id $package_id \
+                                -parameter max_content_length \
+                                -default 0]
 }        
         
 

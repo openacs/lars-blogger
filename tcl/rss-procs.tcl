@@ -83,6 +83,11 @@ ad_proc -private lars_blog__rss_datasource {
         set statement "user_blog_rss_items"
     }
 
+    set rss_max_description_length [parameter::get -parameter rss_max_description_length -package_id $package_id -default 0]
+    if { [empty_string_p $rss_max_description_length] } {
+        set rss_max_description_length 0
+    }
+
     db_foreach $statement {} {
         set entry_url [export_vars -base "[ad_url]${package_url}one-entry" { entry_id }]
 
@@ -90,9 +95,8 @@ ad_proc -private lars_blog__rss_datasource {
 
         regsub -all {<[^>]*>} $content {} content_as_text
 
-        set truncate_len 100
-        if { [string length $content_as_text] > $truncate_len } {
-            set description "[string range $content_as_text 0 [expr {$truncate_len-3}]]..."
+        if { $rss_max_description_length > 0 && [string length $content_as_text] > $rss_max_description_length } {
+            set description "[string range $content_as_text 0 [expr {$rss_max_description_length-3}]]..."
         } else {
             set description $content_as_text
         }
