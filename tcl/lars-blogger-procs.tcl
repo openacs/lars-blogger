@@ -10,7 +10,7 @@ ad_proc -public lars_blog_entry_add {
     {-package_id:required}
     {-title:required}
     {-title_url ""}
-    {-category_id "0"}
+    {-category_id ""}
     {-content:required}
     {-content_format:required}
     {-entry_date:required}

@@ -36,11 +36,9 @@ element create entry title -label "Title" -datatype text -html { size 50 }
 element create entry title_url -label "Title URL" -datatype text -html { size 50 } -optional
 
 # If categories are enabled, set up a select-box with option. 
-# Otherwise just set the category_id to null to support category support in the future.
 if { [string equal [lars_blog_categories_p] "1"] } {
-    # It's probably possible to set up the widget directly from the datasource -- I just don't know how :-(
-    set option_list [concat [list [list None 0]] [db_list_of_lists categories {}]]
-    element create entry category_id -label "Category" -datatype integer -widget select -options $option_list
+    set option_list [concat [list [list None ""]] [db_list_of_lists categories {}]]
+    element create entry category_id -label "Category" -datatype integer -widget select -options $option_list -optional
 }
 
 element create entry content -label "Content" -datatype richtext -widget richtext -html { cols 80 rows 20 }
