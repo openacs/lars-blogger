@@ -7,7 +7,7 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="1.0a1" url="http://openacs.org/repository/download/apm/lars-blogger-1.0a1.apm">
+    <version name="1.0a2" url="http://openacs.org/repository/download/apm/lars-blogger-1.0a2.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <owner url="mailto:simon@bcuni.net">Simon Carstensen</owner>
         <summary>Write your own web log</summary>
@@ -15,7 +15,7 @@
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
         <description format="text/html">Manages multiple weblogs for your wbsite.</description>
 
-        <provides url="lars-blogger" version="1.0a1"/>
+        <provides url="lars-blogger" version="1.0a2"/>
         <requires url="acs-datetime" version="4.0"/>
         <requires url="general-comments" version="4.0"/>
         <requires url="notifications" version="5.0.0a5"/>
@@ -27,7 +27,7 @@
         </callbacks>
         <parameters>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="DisplayUsersP"  default="0" description="Should we display a list of bloggers on the index page."/>
-            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableAutoDiscoveyAndPing"  default="1" description="Enable auto-discovery and sending of trackback pings" section_name="Trackback"/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableAutoDiscoveryAndPing"  default="1" description="Enable auto-discovery and sending of trackback pings" section_name="Trackback"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableCategoriesP"  default="1" description="Should entries be categorized?"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableIncomingTrackback"  default="1" description="Enable incoming trackback" section_name="Trackback"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="HeaderBackgroundColor"  default="#dcdcdc" description="Background color for the header bars, those with the entry date, calendar, etc."/>
