@@ -10,10 +10,10 @@
     <version name="1.0a3" url="http://openacs.org/repository/download/apm/lars-blogger-1.0a3.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <owner url="mailto:simon@bcuni.net">Simon Carstensen</owner>
-        <summary>Write your own web log</summary>
+        <summary>Individual or collaborative web logs.</summary>
         <release-date>2003-11-10</release-date>
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
-        <description format="text/html">Manages multiple weblogs for your wbsite.</description>
+        <description format="text/html">Weblog creation and management with notifications, RSS, archives, draft and published entries, includable templates for presenting on other pages, and permissioning for multiple users.</description>
 
         <provides url="lars-blogger" version="1.0a3"/>
         <requires url="acs-datetime" version="4.0"/>
