@@ -29,7 +29,6 @@ if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
 
 set package_id [ad_conn package_id]
 set today [db_string today { *SQL* }]
-set today_html [ad_quotehtml $today]
 
 form create entry -cancel_url [ad_decode $return_url "" "." $return_url]
 

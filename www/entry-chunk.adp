@@ -59,7 +59,7 @@
   <table align=center width="50%"><tr><td><hr></td></tr></table>
   <h4>Comments</h4>
   <blockquote>
-   @comments_html@
+   @comments_html;noquote@
   </blockquote>
   <center><a href="@blog.comment_add_url@" title="Comment on this entry">Add comment</a></center>
 </if>

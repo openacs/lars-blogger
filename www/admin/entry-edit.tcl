@@ -9,7 +9,6 @@ ad_page_contract {} {
 }
 
 set today [db_string today {}]
-set today_html [ad_quotehtml $today]
 
 form create entry -cancel_url [ad_decode $return_url "" "../" $return_url]
 

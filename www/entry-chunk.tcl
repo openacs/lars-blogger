@@ -25,8 +25,6 @@ set general_comments_package_url [general_comments_package_url]
 
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
-set blog(title) [ad_quotehtml $blog(title)]
-
 # LARS:
 # Not sure we should do the ns_adp_parse thing here, but heck, why not
 # It should be safe, given the security checks
