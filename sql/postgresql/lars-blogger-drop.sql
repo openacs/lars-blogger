@@ -41,7 +41,7 @@ drop function pinds_blog_entry__new(
     integer,    -- package_id
     varchar,    -- title
     varchar,    -- content
-    timestamp,   -- entry_date
+    timestamptz,  -- entry_date
     char,       -- draft_p
     integer,    -- creation_user
     varchar     -- creation_ip

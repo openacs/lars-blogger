@@ -30,8 +30,8 @@ create table pinds_blog_entries (
                         references apm_packages(package_id),
   title                 varchar(500),
   content               varchar(32000),
-  entry_date            timestamp,
-  posted_date           timestamp,
+  entry_date            timestamptz,
+  posted_date           timestamptz,
   draft_p               char(1) default 'f'
                         constraint pinds_blog_entries_draft_ck
                         check (draft_p in ('t','f')),
@@ -61,7 +61,7 @@ create function pinds_blog_entry__new (
     integer,    -- package_id
     varchar,    -- title
     varchar,    -- content
-    timestamp,   -- entry_date
+    timestamptz, -- entry_date
     char,       -- draft_p
     integer,    -- creation_user
     varchar     -- creation_ip

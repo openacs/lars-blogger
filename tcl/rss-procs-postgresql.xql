@@ -35,7 +35,7 @@
     <fullquery name="lars_blog__rss_lastUpdated.get_last_update">
         <querytext>
                 select coalesce (date_part('epoch',
-                                max(posted_date::timestamp with time zone)
+                                max(posted_date::timestamptz)
                                 ),0) as last_update
                 from   pinds_blog_entries
 	        where  package_id = :package_id
