@@ -16,7 +16,7 @@ if { [info exists cancel] } {
     ad_script_abort
 }
 
-set today [db_string today { *SQL* }]
+set today [db_string today {}]
 set today_html [ad_quotehtml $today]
 
 form create entry
@@ -30,20 +30,16 @@ element create entry entry_date -label "Entry date" -datatype text \
 element create entry draft_p -label "Post Status" -datatype text -widget select -options { { "Draft" "t" } { "Publish" "f" } }
 
 element create entry entry_id -widget hidden -datatype text
-element create entry insert_or_update -widget hidden -datatype text
 element create entry return_url -widget hidden -datatype text -value $return_url
 
 if { [form is_request entry] } {
 
     if { [empty_string_p $entry_id] } {
-        set insert_or_update insert
         set entry_id [db_nextval "acs_object_id_seq"]
         element set_properties entry entry_date -value $today
         element set_properties entry draft_p -value "t"
     } else {
-        set insert_or_update update
-        
-        db_1row entry { *SQL* }
+        db_1row entry {}
         
         element set_properties entry title -value $title
         element set_properties entry content -value $content
@@ -52,7 +48,6 @@ if { [form is_request entry] } {
     }
 
     element set_properties entry entry_id -value $entry_id
-    element set_properties entry insert_or_update -value $insert_or_update
 }
 
 
@@ -65,9 +60,9 @@ if { [form is_valid entry] } {
     set draft_p [ad_decode $draft_p "" "f" $draft_p]
 
     set return_url [element get_value entry return_url]
-    set insert_or_update [element get_value entry insert_or_update]
+    
 
-    if { [string equal $insert_or_update "insert"] } {
+    if { [db_string entry_exists {}] == 0 } {
         lars_blog_entry_add \
                 -entry_id $entry_id \
                 -package_id [ad_conn package_id] \
@@ -78,14 +73,14 @@ if { [form is_valid entry] } {
     } else {
         set set_clauses { "title = :title" "content = :content" "entry_date = to_date(:entry_date, 'YYYY-MM-DD')" "draft_p = :draft_p" }
 
-        set org_draft_p [db_string org_draft_p { select draft_p from pinds_blog_entries where entry_id = :entry_id } ]
+        set org_draft_p [db_string org_draft_p {} ]
 
         if { [string equal $draft_p "t"] && [string equal $org_draft_p "f"] } {
             # If this is a publish, set the posted_date to now
             lappend set_clauses [db_map now]
         }
     
-        db_dml update_entry { *SQL* }
+        db_dml update_entry {}
 
         lars_blog_flush_cache [ad_conn package_id]
     }
@@ -98,18 +93,7 @@ if { [form is_valid entry] } {
     ad_script_abort
 } 
 
-if { ![form is_request entry] && ![form is_valid entry] } {
-    set insert_or_update [element get_value entry insert_or_update]
-}
-
-switch -- $insert_or_update {
-    insert {
-        set page_title "Add Blog Entry"
-    }
-    update {
-        set page_title "Edit Blog Entry"
-    }
-}
+set page_title "Blog Entry"
 
 set context_bar [ad_context_bar $page_title]
 
