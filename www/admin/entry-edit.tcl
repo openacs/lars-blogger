@@ -1,27 +1,17 @@
 ad_page_contract {} {
     {entry_id:integer ""}
-    {return_url ""}
+    {return_url "."}
     {title ""}
     {content:allhtml ""}
-    cancel:optional
 } -properties {
     context_bar
     today_html
 }
 
-if { [info exists cancel] } {
-    catch { set return_url [element get_value entry return_url] }
-    if { [empty_string_p $return_url] } {
-        set return_url "."
-    }
-    ad_returnredirect $return_url
-    ad_script_abort
-}
-
 set today [db_string today { *SQL* }]
 set today_html [ad_quotehtml $today]
 
-form create entry
+form create entry -cancel_url $return_url
 
 element create entry title -label "Title" -datatype text -html { size 50 }
 element create entry title_url -label "Title URL (optional)" -datatype text -html { size 50 } -optional
@@ -57,6 +47,12 @@ if { [form is_request entry] } {
         
         element set_value entry title $title
         element set_value entry title_url $title_url
+
+        set content_data [template::util::richtext::acquire contents $content]
+        set content_data [template::util::richtext::set_property format $content_data $content_format]
+
+        element set_value entry content $content_data
+
         element set_value entry entry_date $entry_date
         element set_value entry draft_p $draft_p
     }
@@ -86,6 +82,7 @@ if { [form is_valid entry] } {
                 -title $title \
                 -title_url $title_url \
                 -content $content \
+                -content_format $content_format \
                 -entry_date $entry_date \
                 -draft_p "$draft_p"
     } else {
