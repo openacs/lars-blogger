@@ -2,7 +2,7 @@ ad_page_contract {
     Blog archive index page.
 
     @author Lars Pind (lars@pinds.com)
-    @created June 1, 2002
+    @creation-date June 1, 2002
 } -properties {
     page_title:onevalue
     context_bar:onevalue
