@@ -2,6 +2,7 @@ ad_page_contract {} {
     {entry_id:integer ""}
     {return_url ""}
     {title:allhtml ""}
+    {title_url ""}
     {content:allhtml ""}
 }
 
@@ -61,11 +62,14 @@ if { [form is_request entry] } {
         element set_properties entry draft_p -value "t"
 
         # Prefill title and content with supplied values
-        foreach element { content title } {
+        foreach element { title title_url } {
             if { [exists_and_not_null $element] } {
                 element set_value entry $element [set $element]
             }
         }
+	if { [exists_and_not_null content] } {
+	    element set_value entry content [template::util::richtext::create $content]
+	}
     } else {
         set insert_or_update update
         
