@@ -11,9 +11,8 @@
     <p><b>@blog.title@</b></p>
   </if>
 </else>
-
 @blog.content@
-
+</p>
   <br />
   <table cellpadding="0" cellspacing="0" border="0" width="100%">
     <if @show_poster_p@ true>
@@ -22,7 +21,7 @@
           <font size="-2" color="#999999">
             <br />
             Posted by @blog.poster_first_names@ @blog.poster_last_name@ at @blog.posted_time_pretty@
-            <if @admin_p@ eq 1>
+            <if @user_id@ eq @blog.user_id@ or @write_p@ eq 1>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <a href="@blog.edit_url@">Edit</a> - 
               <if @blog.draft_p@ true>

@@ -13,8 +13,9 @@
         <querytext>
             select count(*)
             from   rss_gen_subscrs s,
-                   acs_sc_impls i
-            where  s.summary_context_id = :package_id
+                   acs_sc_impls i, weblogger_channels w
+            where  w.package_id = :package_id
+            and    s.summary_context_id = w.channel_id
             and    s.impl_id = i.impl_id
             and    i.impl_name = 'pinds_blog_entries'
             and    i.impl_owner_name = 'lars-blogger'

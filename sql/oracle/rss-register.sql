@@ -7,10 +7,11 @@
 --
 
 declare
+    impl_id integer;
     foo integer;
 begin
 
-    foo := acs_sc_impl.new(
+    impl_id := acs_sc_impl.new(
         impl_contract_name => 'RssGenerationSubscriber',
         impl_name => 'pinds_blog_entries',
         impl_owner_name => 'lars-blogger'

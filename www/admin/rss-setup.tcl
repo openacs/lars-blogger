@@ -15,8 +15,8 @@ set channel_link [lars_blog_public_package_url]
 
 db_transaction {
 
-    if { [empty_string_p [parameter::get -parameter "rss_file_url"]] } {
-        parameter::set_value -parameter "rss_file_url" -value "rss/rss.xml"
+    if { [empty_string_p [parameter::get -parameter "rss_file_name"]] } {
+        parameter::set_value -parameter "rss_file_name" -value "rss/rss.xml"
     } 
 
     set subscr_id [db_exec_plsql create_subscr {}]

@@ -1,9 +1,9 @@
-# no ad_page_contract because this is intended to be included in other files
-#    package_id:integer,optional
-#    url:optional
-#    {type "current"}  (allowed values: current archive)
-#    {archive_interval ""}
-#    {archive_date ""}
+# Expects:
+#  package_id:optional
+#  url:optional
+#  type:optional (current, archive)
+#  archive_interval:optional
+#  archive_date:optional
 
 # If the caller specified a URL, then we gather the package_id from that URL
 if { [info exists url] } {
@@ -22,14 +22,14 @@ if { ![info exists type] } {
 
 switch -exact $type {
     archive {
-        set date_clause "[db_map date_clause_archive_$archive_interval]"
+        set date_clause "[db_map date_clause_archive]"
     }
     default {
         set date_clause "[db_map date_clause_default]"
     }
 }
 
-set show_poster_p [parameter::get -package_id $package_id -parameter "ShowPosterP" -default "1"]
+set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
 set package_url [lars_blog_public_package_url -package_id $package_id]
 
@@ -41,34 +41,24 @@ if { [ad_conn isconnected] && ![string equal $package_url [string range [ad_conn
     set blog_url {}
 }
 
-set admin_p [ad_permission_p $package_id admin]
+set count 0
 
-set limit_clause {}
+if [empty_string_p $screen_name] {
+    
+    db_multirow blog all_blogs { *SQL* } 
+    set archive_url "${package_url}archive/"
 
-if { ![string equal $type "archive"] } {
-   set num_entries [db_string num_entries {}]
+} else {
 
-   if { $num_entries < 3 } {
-       set date_clause {1=1}
-       set limit_clause [db_map limit_clause]
-   }  
+    db_multirow blog blog { *SQL* }
+    set archive_url "${package_url}user/$screen_name/archive/"
+
 }
 
-db_multirow blog blog {} 
-
-set archive_url "${package_url}archive/"
 set arrow_url "${package_url}graphics/arrow-box.gif"
 
-set entry_add_url "${package_url}admin/entry-edit"
+set entry_add_url "${package_url}entry-edit"
 
 set header_background_color [lars_blog_header_background_color -package_id $package_id]
 
-if { [catch {
-    set notification_chunk [notification::display::request_widget \
-                                -type lars_blogger_notif \
-                                -object_id [ad_conn package_id] \
-                                -pretty_name [lars_blog_name] \
-                                -url [lars_blog_public_package_url]]
-}] } {
-    set notification_chunk {}
-}
+ad_return_template 

@@ -1,6 +1,6 @@
 <master>
 <property name="title">@page_title@</property>
-<property name="context">@context@</property>   
+<property name="context_bar">@context_bar@</property>   
 
 <table cellspacing="0" cellpadding="2" border="0" width="100%">
   <tr>
@@ -10,4 +10,4 @@
   </tr>
 </table>
 
-<include src="entry-chunk" &="blog" show_comments_p="t">
+<include src="entry-chunk" &="blog" show_comments_p="t" screen_name="@screen_name@">

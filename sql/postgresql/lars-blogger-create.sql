@@ -119,6 +119,12 @@ begin
       ''f''
     );
 
+    PERFORM acs_permission__grant_permission(
+        v_entry_id,
+	p_creation_user,
+	''admin''
+    );
+
     return v_entry_id;   
 end;
 ' language 'plpgsql';
@@ -136,6 +142,83 @@ begin
 end;
 ' language 'plpgsql';
 
+
+select acs_object_type__create_type (
+    'weblogger_channel',        -- object_type
+    'Weblogger Channel',        -- pretty_name
+    'Weblogger Channels',       -- pretty_plural
+    'acs_object',               -- supertype
+    'weblogger_channels',       -- table_name
+    'channel_id',       	-- id_column
+    null,               	-- package_name
+    'f',        	        -- abstract_p
+    null,   	                -- type_extension_table
+    'weblogger_channels.name'	-- name_method
+);
+
+create table weblogger_channels (
+  channel_id    	integer
+                        constraint channel_id_fk
+                        references acs_objects(object_id)
+                        constraint weblogger_channels_pk
+                        primary key,
+  package_id            integer
+                        constraint weblogger_channels_package_id_kf
+                        references apm_packages(package_id),
+  user_id		integer		
+);
+
+
+
+create or replace function weblogger_channel__new (
+    integer,     -- channel_id
+    integer,     -- package_id
+    integer,     -- user_id
+    integer,     -- creation_user
+    varchar      -- creation_ip
+) returns integer as '
+declare
+    p_channel_id           alias for $1;
+    p_package_id           alias for $2;
+    p_user_id		   alias for $3;
+    p_creation_user        alias for $4;
+    p_creation_ip          alias for $5;
+    v_channel_id           integer;
+begin
+    v_channel_id := acs_object__new (
+        p_channel_id,
+        ''weblogger_channel'',
+        current_timestamp,
+        p_creation_user,
+        p_creation_ip,
+        p_package_id
+    );
+
+    insert into weblogger_channels (
+      channel_id, 
+      package_id,
+      user_id      
+    ) values (
+      v_channel_id, 
+      p_package_id,
+      p_user_id
+    );
+
+    return v_channel_id;   
+end;
+' language 'plpgsql';
+
+create or replace function weblogger_channel__delete (integer)
+returns integer as '
+declare
+    p_channel_id alias for $1;
+begin
+    delete from weblogger_channels
+        where channel_id = p_channel_id;
+    PERFORM acs_object__delete(p_channel_id);
+    return 0;
+end;
+' language 'plpgsql';
 
 \i rss-register.sql
 \i notifications-init.sql

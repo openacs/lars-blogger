@@ -8,12 +8,12 @@
 <blockquote>
   <p>
     <b>&raquo;</b>
-    <a href="entry-edit" title="Add new blog entry" class="action_link">Add new blog entry</a>
+    <a href="../entry-edit" title="Add new blog entry" class="action_link">Add new blog entry</a>
   </p>
   
   <p>
     <b>&raquo;</b>
-    <a href="drafts" title="View draft entries" class="action_link">View draft entries</a>
+    <a href="../drafts" title="View draft entries" class="action_link">View draft entries</a>
   </p>
   
   <p>

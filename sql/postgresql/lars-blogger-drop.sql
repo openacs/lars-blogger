@@ -34,6 +34,18 @@ end;' language 'plpgsql';
 select inline_0();
 drop function inline_0();
 
+drop function weblogger_channel__new(
+    integer,      -- channel_id
+    integer,      -- package_id
+    integer,      -- user_id
+    integer,      -- creation_user
+    varchar       -- creation_ip
+);
+
+drop function weblogger_channel__delete (integer);
+
+drop table weblogger_channels;
+select acs_object_type__drop_type ('weblogger_channel', true);
 
 drop function pinds_blog_entry__title (integer);
 drop function pinds_blog_entry__new(

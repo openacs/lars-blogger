@@ -3,27 +3,15 @@
 <queryset>
     <rdbms><type>oracle</type><version>8.1.6</version></rdbms>
 
-	<partialquery name="date_clause_archive_month">
+	<partialquery name="date_clause_archive">
 		<querytext>
-			trunc(entry_date, 'MONTH') = :archive_date
-		</querytext>
-	</partialquery>
-
-	<partialquery name="date_clause_archive_day">
-		<querytext>
-			trunc(entry_date, 'DD') = :archive_date
+			trunc(entry_date, :archive_interval) = :archive_date
 		</querytext>
 	</partialquery>
 
 	<partialquery name="date_clause_default">
 		<querytext>
 			entry_date > sysdate - 30
-		</querytext>
-	</partialquery>
-
-	<partialquery name="limit_clause">
-		<querytext>
-                    and rownum < 3
 		</querytext>
 	</partialquery>
 
@@ -34,7 +22,6 @@
 		           to_char(entry_date, 'YYYY/MM/DD/') as entry_archive_url,
 		           to_char(entry_date, 'YYYY-MM-DD') as entry_date,
 		           title,
-		           title_url,
 		           content,
                            content_format,
 		           draft_p,
@@ -54,7 +41,6 @@
 		    and    $date_clause
 		    and    draft_p = 'f'
 		    and    deleted_p = 'f'
-                    $limit_clause
 		    order  by entry_date desc, posted_date desc
         </querytext>
     </fullquery>

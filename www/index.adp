@@ -5,10 +5,26 @@
 </if>
 <property name="context_bar">@context_bar@</property>
 
+<if @display_bloggers_p@ eq 1>
+
+  <ul>
+
+  <multiple name="bloggers">
+  
+    <li><a href="@package_url@user/@bloggers.screen_name@">@bloggers.screen_name@</a></li>
+ 
+  </multiple>
+
+  </ul>
+
+</if>
+
+<else>
+
 <table width="100%">
   <tr>
     <td valign="top">
-      <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@">
+      <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" write_p="@write_p@" registered_p="@registered_p@">
     </td>
     <td valign="top">
 
@@ -20,7 +36,7 @@
         </tr>
         <tr>
           <td nowrap align="center">
-            <include src="calendar" date="@date@">
+            <include src="calendar" date="@date@" screen_name="@screen_name@">
           </td>
         </tr>
         <tr>
@@ -29,7 +45,7 @@
           </td>
         </tr>
 
-        <if @admin_p@ true>
+          <if @registered_p@ gt 0>
           <tr>
             <th bgcolor="@header_background_color@">
               Actions
@@ -37,17 +53,17 @@
           </tr>
           <tr>
             <td align="center">
-              <a href="admin/entry-edit" title="Add an entry to this blog">Add entry</a><br>
-              <a href="admin/drafts" title="View draft entries">Draft entries<a/><br>
-              <a href="admin/" title="Visit administration pages">Administer<a/>
+              <a href="@package_url@entry-edit" title="Add an entry to this blog">Add entry</a><br>
+              <a href="@package_url@drafts" title="View draft entries">Draft entries<a/>
+	      <if @write_p@ true>
+              <br><a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
+	      </if>
             </td>
           </tr>
           <tr>
-            <td height="16">
-              <table><tr><td></td></tr></table>
-            </td>
+            <td height="16">&nbsp;</td>
           </tr>
-        </if>
+          </if>
 
         <if @notification_chunk@ not nil>
           <tr>
@@ -67,7 +83,7 @@
           </tr>
         </if>
 
-        <include-optional src="blog-months">
+        <include-optional src="blog-months" screen_name="@screen_name@">
           <tr>
             <th bgcolor="@header_background_color@">
               Archive
@@ -103,3 +119,4 @@
   </tr>
 </table>
 
+</else>

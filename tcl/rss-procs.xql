@@ -2,9 +2,21 @@
 
 <queryset>
 
+    <fullquery name="lars_blog__rss_datasource.package_id">
+        <querytext>
+			select package_id, user_id from weblogger_channels where channel_id = :summary_context_id
+        </querytext>
+    </fullquery>
+
     <fullquery name="lars_blog__rss_datasource.package_name">
         <querytext>
 			select instance_name from apm_packages where package_id = :package_id
+        </querytext>
+    </fullquery>
+
+    <fullquery name="lars_blog__rss_lastUpdated.package_id">
+        <querytext>
+			select package_id, user_id from weblogger_channels where channel_id = :summary_context_id
         </querytext>
     </fullquery>
 

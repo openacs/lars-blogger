@@ -20,7 +20,7 @@ ad_proc -public lars_blog_entry_add {
     set creation_user [ad_conn user_id]
     set creation_ip [ns_conn peeraddr]
 
-    set entry_id [db_exec_plsql entry_add { *SQL* }]
+    set entry_id [db_exec_plsql entry_add {}]
 
     # If publish directly
     if { [string equal $draft_p "f"] } {
@@ -32,9 +32,71 @@ ad_proc -public lars_blog_entry_add {
 
     lars_blog_flush_cache $package_id
 
+    set timeout [expr 30*60]
+    set channel_title [lars_blog_name]
+
+    if { [parameter::get -parameter "package_rss_feed_p" -default 1]} {
+	# check whether there's been a feed setup for this instance
+	
+	set exists_instance_feed_p [db_string exists_instance_feed_p {}]
+	
+	if { [string equal $exists_instance_feed_p "0"] } {
+	    
+	#setup an RSS feed for this instance
+	    
+	    db_transaction {
+		
+		set channel_link [lars_blog_public_package_url]
+
+		set channel_id [db_nextval "acs_object_id_seq"]
+	
+		set summary_context_id [db_string create_instance_channel {}]
+		
+		set subscr_id [db_string create_subscr {}]
+		
+		db_dml update_subscr {}
+
+                # Run it now
+                rss_gen_report $subscr_id
+		
+	    }
+	}
+    }
+    
+    if {[parameter::get -parameter "user_rss_feed_p" -default 0]} {
+
+	# check whether there's been a feed setup for this user
+	
+        ns_log "Notice" "SIMON"
+
+	set exists_user_feed_p [db_string exists_user_feed_p {}]
+    
+        set screen_name [db_string screen_name {}]
+
+	if { [string equal $exists_user_feed_p "0"] && ![empty_string_p $screen_name] } {
+	    
+	    #setup an RSS feed for the user
+	    
+	    db_transaction {
+
+		set channel_link "[lars_blog_public_package_url]user/$screen_name/"
+
+		set channel_id [db_nextval "acs_object_id_seq"]
+		
+		set summary_context_id [db_string create_user_channel {}]
+		
+		set subscr_id [db_string create_subscr {}]
+		
+		db_dml update_subscr {}
+	
+                # Run it now
+                rss_gen_report $subscr_id
+
+            }
+	}
+    }
     return $entry_id
 }
-
 
 
 ad_proc -private lars_blog_get_as_string_mem { 

@@ -6,22 +6,29 @@ ad_library {
 }
 
 ad_proc -private lars_blog__rss_datasource {
-    package_id
+    summary_context_id
 } {
     This procedure implements the "datasource" operation of the
     RssGenerationSubscriber service contract.  
 
     @author Lars Pind (lars@pinds.com)
 } {
-    set package_url [lars_blog_public_package_url -package_id $package_id]
 
-    set blog_title [db_string package_name { *SQL* }]
+    db_transaction {
+        
+        db_1row package_id {}
+        
+        set package_url [lars_blog_public_package_url -package_id $package_id]
+        
+        set blog_title [db_string package_name {}]
 
-    set blog_url "[ad_url]$package_url"
-    
+        set blog_url "[ad_url]$package_url"
+        
+    }
+
     set column_array(channel_title) $blog_title
     set column_array(channel_description) $blog_title
-    set column_array(channel_pubDate) [db_string now { *SQL* }]
+    set column_array(channel_pubDate) [db_string now {}]
 
     set column_array(version) 1.00
 
@@ -42,7 +49,14 @@ ad_proc -private lars_blog__rss_datasource {
     set items [list]
     set counter 0
 
-    db_foreach blog_rss_items { *SQL* } {
+
+    if { [string equal $user_id 0] } {
+        set statement "blog_rss_items" 
+    } else {
+        set statement "user_blog_rss_items"
+    }
+
+    db_foreach $statement {} {
         set TZoffset [format "%+03d:%02d" $tzoffset_hour $tzoffset_minute]
         
         set entry_url "[ad_url]${package_url}archive/${entry_archive_url}#blog-entry-$entry_id"
@@ -77,21 +91,20 @@ ad_proc -private lars_blog__rss_datasource {
 }
 
 ad_proc -private lars_blog__rss_lastUpdated {
-    package_id
+    summary_context_id
 } {
     Returns the time that the last blog entry was posted,
     in Unix time.  Returns 0 otherwise.
 
     @author Lars Pind (lars@pinds.com)
 } {
-    db_0or1row get_last_update {
-        select coalesce (date_part('epoch',
-                                  max(posted_date::timestamp with time zone)
-                                  ),0) as last_update
-        from   pinds_blog_entries
-        where  package_id = :package_id
-        and    draft_p = 'f'
-        and    deleted_p = 'f'
+
+    db_1row package_id {}
+
+    if { [string equal $user_id 0] } {
+        db_0or1row get_last_update {}
+    } else {
+        db_0or1row get_last_user_update {}
     }
 
     return $last_update

@@ -1,20 +1,20 @@
 <html>
 <head>
-<title>Lars Pind's Blogger Documentation</title>
+<title>Weblogger Documentation</title>
 </head>
 <body bgcolor=white>
-<h2>Lars Pind's Blogger Documentation</h2>
-By <a href="http://www.pinds.com/lars/">Lars Pind</a>
+<h2>Weblogger Documentation</h2>
+By <a href="http://www.pinds.com/lars/">Lars Pind</a> and <a href="http://bcuni.net">Simon Carstensen</a>
 <hr>
 
-<h3>Why</h3>
+<!--<h3>Why</h3>
 
 <p>
   I wrote this blogger package for my own web site at <a
   href="http://www.pinds.com/">pinds.com</a>. For background
   information, please visit <a
   href="http://www.pinds.com/download/">http://www.pinds.com/download</a>.
-</p>
+</p>-->
 
 <h3>Download</h3>
 
@@ -27,8 +27,8 @@ By <a href="http://www.pinds.com/lars/">Lars Pind</a>
 
 <p>
   Install the package on your system, mount a new instance somewhere
-  on the site map, make sure you have admin permission on the
-  instance, and then visit /admin under the URL where you mounted
+  on the site map, make sure you have write permission on the
+  instance, and then visit the URL where you mounted
   it. Now you can add your first blog entry.
 </p>
 
@@ -88,18 +88,21 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
 <h3>Technical Info</h3>
 
 <p>
-  The package fully supports multiple instances, i.e., you can mount
+  The package fully supports multiple instances. You can mount
   several instances in your site map, and they'll stay properly isolated
-  from each other.
+  from each other. Alternatively you can let multiple users post to one 
+  instance by granting write permissions. Mounting Weblogger under, say, 
+  /blog, you will have /blog/user/screenname displaying the entries of one
+  user and /blog displaying either a list of all bloggers (this is done by
+  setting the parameter DisplayUsersP to 1) or all entries posted to the
+  instance (the default).
 </p>
 
 <p>
   Contents in your blog entries are assumed to be full-blooded
-  ADP-ified HTML, so don't give people access to post a blog unless
-  you trust them. I guess it should be made configurable whether to
-  allow this or not, but since I'm developing this for my own site
-  primarily, I haven't done so. This also means that if you've added
-  custom ADP tags, those are also available to you in your blog.
+  ADP-ified HTML, so don't give people access to post a blog (i.e. grant
+  write permissions on the instance) unless you trust them. This also means 
+  that if you've added custom ADP tags, those are also available to you in your blog.
 </p>
 
 <h3>weblogs.com update ping</h3>
@@ -124,7 +127,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
 
 <p>
   Then you'll need to set the parameters and say that your
-  rss_file_url is at
+  rss_file_name is at
   /where-your-blogger-instnace-sists/rss/rss.xml. If you leave this
   blank, we won't advertise your RSS feed URL anywhere.
 </p>
@@ -137,35 +140,36 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
 <h3>Road Map</h3>
 
 <ul>
-  <li>
-    Categorize and full-text-search-index blog entries so the archives
-    are more useful.
-  </li>
+  <li>Categorize and full-text-search-index blog entries so the archives
+    are more useful.</li>
   <li>
     Use content repository.
   </li>
-  <li>
-    Community-maintained blog ... everybody with 'write' can post entries.
-  </li>
+  <li>Ability to modify templates for each instance individually through
+    the UI. </li>
+  <li>Support for Trackback</li>
+  <li>Support for the Blogger and MetaWeblog APIs</li>
+  <li>WYISIYG editor</li>
+  <li>Improved RSS feed</li>
+  <li>Improved Configuration Settings.</li>
+  <li>Make it safe to use in a not-so-protected environment, e.g.,
+    disable &lt;% ... %&gt; ADP notation.</li>
+  <li>Better documentation.</li>
   <li>
     Moderation-feature: Entries posted by non-admins must go through a
     workflow-administered approval process.
   </li>
   <li>
-    Ability to modify templates for each instance individually through
-    the UI (<a href="http://openacs.org/forums/message-view?message_id=87313">see this thread</a>)
-  </li>
-  <li>
     Nicer interface (MovableType)
-  </li>
-  <li>
-    More thorough documentation and some setup/config pages.
   </li>
 </ul>
 
 <h3>Version History</h3>
 
 <ul>
+<li>
+    <b>0.9</b> Added support for multiple users. (June 10, 2003)
+  </li>
   <li>
     <b>0.8.7</b> Fixed notifications to include the title_url, and 
     to not have extra spaces in the month name. (May 11, 2003)
