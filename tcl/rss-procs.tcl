@@ -30,7 +30,7 @@ ad_proc -private lars_blog__rss_datasource {
     set column_array(channel_description) $blog_title
     set column_array(channel_pubDate) [db_string now {}]
 
-    set column_array(version) 1.00
+    set column_array(version) 2.0
 
     set column_array(channel_link) $blog_url
 
@@ -57,9 +57,7 @@ ad_proc -private lars_blog__rss_datasource {
     }
 
     db_foreach $statement {} {
-        set TZoffset [format "%+03d:%02d" $tzoffset_hour $tzoffset_minute]
-        
-        set entry_url "[ad_url]${package_url}archive/${entry_archive_url}#blog-entry-$entry_id"
+        set entry_url [export_vars -base "[ad_url]${package_url}one-entry" { entry_id }]
 
         set content [ns_adp_parse -string $content]
 
@@ -72,7 +70,16 @@ ad_proc -private lars_blog__rss_datasource {
             set description $content_as_text
         }
 
-        lappend items [list link $entry_url title $title description $description value $content timestamp "${posted_date_string}T${posted_time_string}$TZoffset"]
+        # TODO: Figure out timezone ...
+        set entry_timestamp "[clock format [clock scan $posted_time_ansi] -format "%a, %d %b %Y %H:%M:%S %Z"]"
+
+        lappend items [list \
+                           link $entry_url \
+                           title $title \
+                           description $description \
+                           value $content \
+                           timestamp $entry_timestamp]
+        
         if { $counter == 0 } {
             set column_array(channel_lastBuildDate) $entry_date_pretty
             incr counter
