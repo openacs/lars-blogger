@@ -68,7 +68,7 @@
 <if @comments:rowcount@ not nil>
   <multiple name="comments">
     <h3 class="lars_blogger_comment_title">@comments.title@</h3>
-    <p class="lars_blogger_comment_text">@comments.content@</p>
+    <p class="lars_blogger_comment_text">@comments.content;noquote@</p>
     <p><if @comments.trackback_p@ eq "f">by @comments.author@</if><else>Trackback from <a href="@comments.trackback_url@" title="@comments.trackback_name@">@comments.trackback_name@</a></else> on @comments.pretty_date@</p>
   </multiple>
   <center><a href="@blog.comment_add_url@" title="Comment on this entry">Add comment</a></center>
