@@ -90,34 +90,38 @@ set notification_chunk [notification::display::request_widget \
 set header_background_color [lars_blog_header_background_color]
 
 if { [exists_and_not_null year] } {
-    if { ![exists_and_not_null month] } {
-        ad_return_complaint 1 "<li>You must specify both year and month."
-        ad_script_abort
-    }
     
-    # Show Archive, Year and Month i context
-    append context_base_url /archive
+    # Show Year and Month in context
+    append context_base_url archive/
     lappend context [list $context_base_url Archive]
+
     append context_base_url /$year
     lappend context [list $context_base_url $year]
-    append context_base_url /$month
-    lappend context [list $context_base_url $month]
-
 
     if { [exists_and_not_null day] } {
         set interval "day"
         db_1row archive_date_month_day {}
 
-	# Day in context
+	# Month and day in context
+        append context_base_url /$month
+        lappend context [list $context_base_url $month]
 	append context_base_url /$day
 	lappend context [list $context_base_url $day]
-    } else {
+
+    } elseif { [exists_and_not_null month] } {
         set interval "month"
         db_1row archive_date_month {}
+
+        # Month in context
+        append context_base_url /$month
+        lappend context [list $context_base_url $month]
+    } else {
+        set interval "year"
+        db_1row archive_date_year {}
     }
 
     append page_title " Archive"
-    set date "$year-$month-[ad_decode $day "" "01" $day]"
+    set date "$year-[ad_decode $month "" "01" $month]-[ad_decode $day "" "01" $day]"
     set type "archive"
 
 } else {

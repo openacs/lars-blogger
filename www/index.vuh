@@ -14,8 +14,6 @@ if { [regexp {^/(u|user)/([^/]+)/rss} $url ignore ignore2 screen_name] } {
            and    w.package_id = :package_id"
 
     set summary_context_id [db_string select_user_id $sql]
-  
-    ns_log "Notice" "SUM: $summary_context_id"
 
     ns_returnfile 200 text/xml [rss_gen_report_file -summary_context_id $summary_context_id -impl_name pinds_blog_entries]
 

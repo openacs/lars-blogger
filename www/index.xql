@@ -2,6 +2,16 @@
 
 <queryset>
 
+    <fullquery name="archive_date_year">
+        <querytext>
+			select to_date(:year, 'YYYY') 
+				as archive_date, 
+			to_char(to_date(:year, 'YYYY'), 'YYYY')
+				as archive_date_pretty
+			from dual
+        </querytext>
+    </fullquery>
+
     <fullquery name="archive_date_month">
         <querytext>
 			select to_date(:year || :month, 'YYYYMM') 
