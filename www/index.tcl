@@ -179,23 +179,29 @@ if { ![empty_string_p $sw_category_id] } {
     set type "all"
 }
 
-db_multirow -unclobber -extend { sw_category_name tree_name } sw_categories sw_categories {
-    select c.category_id as sw_category_id, c.tree_id
-    from   categories c, category_tree_map ctm
-    where  ctm.tree_id = c.tree_id
-    and    ctm.object_id = :package_id
-} {
-    set sw_category_name [category::get_name $sw_category_id]
-    set tree_name [category_tree::get_name $tree_id]
-}
-
 set counts {}
+set sw_cats 0
 db_foreach catcount {select c.category_id as catid, count(*) as count from category_object_map c, pinds_blog_entries e where e.package_id = :package_id and c.object_id = e.entry_id group by c.category_id} { 
     lappend counts $catid $count
+    if {$count > 0} {
+        incr sw_cats
+    }
 }
 
-set container_id [ad_conn [parameter::get -parameter CategoryContainer -default package_id]]
-category_tree::get_multirow -datasource sw_categories -container_id $container_id -category_counts $counts
+if {$sw_cats} {
+    db_multirow -unclobber -extend { sw_category_name tree_name } sw_categories sw_categories {
+        select c.category_id as sw_category_id, c.tree_id
+        from   categories c, category_tree_map ctm
+        where  ctm.tree_id = c.tree_id
+        and    ctm.object_id = :package_id
+    } {
+        set sw_category_name [category::get_name $sw_category_id]
+        set tree_name [category_tree::get_name $tree_id]
+    }
+
+    set container_id [ad_conn [parameter::get -parameter CategoryContainer -default package_id]]
+    category_tree::get_multirow -datasource sw_categories -container_id $container_id -category_counts $counts
+}
 
 # Cut the URL off the last item in the context bar
 if { [llength $context] > 0 } {
