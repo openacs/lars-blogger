@@ -21,7 +21,7 @@ if { ![info exists package_id] } {
     set package_id [ad_conn package_id]
 }
 
-set create_p [permission::permission_p -object_id $package_id -privilege read]
+set create_p [permission::permission_p -object_id $package_id -privilege create]
 
 if { ![info exists category_id] } {
     set blog_category_id {}

@@ -8,7 +8,9 @@
       </th>
       <if @blog.rownum@ eq 1>
         <th align="right">
-            <a href="@entry_add_url@" title="Add an entry to @blog_name@">+</a>
+            <if @create_p@ true>
+              <a href="@entry_add_url@" title="Add an entry to @blog_name@">+</a>
+            </if>
             <if @blog_url@ not nil>
               <a href="@blog_url@" title="Visit @blog_name@ home">@blog_name@</a>
             </if>
