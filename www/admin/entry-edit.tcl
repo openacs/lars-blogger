@@ -1,6 +1,8 @@
 ad_page_contract {} {
     {entry_id:integer ""}
     {return_url ""}
+    {title ""}
+    {content:allhtml ""}
 } -properties {
     context_bar
     today_html
@@ -28,6 +30,13 @@ if { [form is_request entry] } {
         set entry_id [db_nextval "acs_object_id_seq"]
         element set_properties entry entry_date -value $today
         element set_properties entry draft_p -value "t"
+
+        # Prefill title and content with supplied values
+        foreach element { content title } {
+            if { [exists_and_not_null $element] } {
+                element set_value entry $element [set $element]
+            }
+        }
     } else {
         db_1row entry {}
         
