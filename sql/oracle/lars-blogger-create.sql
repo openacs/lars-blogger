@@ -45,7 +45,6 @@ create table pinds_blog_entries (
                                 constraint pinds_blog_entr_cnt_format_nn
                                 not null,
     entry_date                  date,
-    posted_date                 date,
     draft_p                     char(1) default 'f'
                                 constraint pinds_blog_entries_draft_ck
                                 check (draft_p in ('t','f')),
@@ -82,6 +81,19 @@ create table weblogger_channels (
   user_id		        integer,
   constraint weblogger_chnls_pck_user_un
   unique (package_id, user_id)
+);
+
+create table weblogger_ping_urls (
+  package_id        integer
+                    constraint weblogger_ping_urls_package_id_fk
+                    references apm_packages(package_id)
+                    on delete cascade,
+  ping_url          varchar2(500)
+                    constraint weblogger_ping_urls_ping_url_nn
+                    not null,
+  creation_date     date default sysdate,
+  constraint weblogger_ping_urls_pk
+  primary key(package_id, ping_url)
 );
 
 

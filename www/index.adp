@@ -45,9 +45,7 @@
     <div id="lars_blogger_right">
       <div class="lars_blogger_portlet">
         <h2>Archive</h2>
-	<div align="center">
-          <include src="calendar" date="@date@" screen_name="@screen_name@">
-	</div>
+        <include src="calendar" date="@date@" screen_name="@screen_name@">
         <include-optional src="blog-months" screen_name="@screen_name@">
           <include-output>
         </include-optional>
@@ -82,11 +80,10 @@
           <a href="@rss_file_url@" title="RSS 2.0 feed"><img src="/resources/lars-blogger/xml.gif" width="36" height="14" border="0" alt="XML"></a>
         </div>
       </if>
-
-        <div class="lars_blogger_portlet">
-	  <h2>Recent Comments</h2>
-	  <include src="/packages/lars-blogger/lib/last-n-comments" number_of_comments="10">
-        </div>
+      <div class="lars_blogger_portlet">
+        <h2>Recent Comments</h2>
+        <include src="/packages/lars-blogger/lib/last-n-comments" number_of_comments="10">
+      </div>
 
     </div>
 

@@ -44,6 +44,8 @@ ad_proc -public lars_blog_entry_edit {
     and RSS operations if the blog was a draft before and now is 
     being published.
     
+    @param entry_date Date of the entry in full ANSI format (YYYY-MM-DD HH24:MI:SS)
+
     @return entry_id of edited entry
 
     @author Vinod Kurup vinod@kurup.com
@@ -59,17 +61,11 @@ ad_proc -public lars_blog_entry_edit {
         "category_id = :category_id"
         "content = :content"
         "content_format = :content_format"
-        "entry_date = to_date(:entry_date, 'YYYY-MM-DD')" 
+        "entry_date = to_date(:entry_date, 'YYYY-MM-DD HH24:MI:SS')" 
         "draft_p = :draft_p" 
     }
     
     set org_draft_p [db_string org_draft_p {}]
-    
-    # Is this a publish?
-    if { [string equal $draft_p "t"] && [string equal $org_draft_p "f"] } {
-        # set the posted_date to now
-        lappend set_clauses [db_map now]
-    }
     
     db_dml update_entry {}
             
@@ -120,7 +116,7 @@ ad_proc lars_blog_setup_feed {
             
             # Run it now
             rss_gen_report $subscr_id
-        }
+	}
     }
 
     if { [parameter::get -parameter "user_rss_feed_p" -package_id $package_id -default 0] } {

@@ -13,7 +13,7 @@
                         :category_id,
 	            	:content,
         	    	:content_format,
-            		coalesce(to_date(:entry_date, 'YYYY-MM-DD'), current_timestamp),
+            		coalesce(to_timestamp(:entry_date, 'YYYY-MM-DD HH24:MI:SS'), current_timestamp),
 	            	:draft_p,
         	    	:creation_user,
             		:creation_ip
@@ -33,11 +33,9 @@
                    b.content_format, 
                    b.draft_p, 
                    o.creation_user as user_id,
-                   to_char(b.entry_date, 'YYYY-MM-DD') as entry_date,
-                   to_char(b.entry_date, 'fmDayfm, fmMonthfm fmDDfm, YYYY') as entry_date_pretty, 
+                   to_char(b.entry_date, 'YYYY-MM-DD HH24:MI:SS') as entry_date_ansi,
                    p.first_names as poster_first_names,
                    p.last_name as poster_last_name,
-                   to_char(b.posted_date , 'HH24:MI') as posted_time_pretty,
                    b.package_id,
                    (select count(gc.comment_id) 
                     from general_comments gc, cr_revisions cr 
@@ -57,9 +55,7 @@
     <fullquery name="lars_blogger::entry::publish.update_entry">
         <querytext>
 		    update pinds_blog_entries
-		    set    entry_date = date_trunc('day', current_timestamp),
-		           draft_p = 'f',
-		           posted_date = current_timestamp
+		    set    draft_p = 'f'
 		    where  entry_id = :entry_id
         </querytext>
     </fullquery>
@@ -73,12 +69,11 @@
                     r.mime_type,
                     o.creation_user,
                     acs_object__name(o.creation_user) as author,
-                    to_char(o.creation_date, 'MM-DD-YYYY') as pretty_date,
-                    to_char(o.creation_date, 'Month DD, YYYY HH12:MI PM') as pretty_date2,
+                    to_char(o.creation_date, 'YYYY-MM-DD HH24:MI:SS') as creation_date_ansi,
 		    case when tb.comment_id is not null then 't' else 'f' end as trackback_p,
 		    tb.tb_url as trackback_url,
 		    coalesce(tb.name, tb.tb_url) as trackback_name
-               from general_comments g left join trackback_pings tb on g.comment_id=tb.comment_id,
+               from general_comments g left join trackback_pings tb on g.comment_id = tb.comment_id,
                     cr_revisions r,
 	            cr_items ci,
                     acs_objects o

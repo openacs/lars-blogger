@@ -18,9 +18,7 @@
     <fullquery name="all_blogs">
         <querytext>
 		    select entry_id,
-		           to_char(entry_date, 'fmDayfm, Month fmDDfm, YYYY') as entry_date_pretty, 
-		           to_char(entry_date, 'YYYY/MM/DD/') as entry_archive_url,
-		           to_char(entry_date, 'YYYY-MM-DD') as entry_date,
+		           to_char(entry_date, 'YYYY-MM-DD HH24:MI:SS') as entry_date_ansi,
 		           title,
                            title_url,
 			   category_id,
@@ -30,7 +28,6 @@
 		           p.first_names as poster_first_names,
 		           p.last_name as poster_last_name,
 			   o.creation_user as user_id,
-		           to_char(posted_date , 'HH24:MI') as posted_time_pretty,
 		           (select count(gc.comment_id) 
 		            from general_comments gc, cr_revisions cr 
 		            where gc.object_id = entry_id
@@ -42,7 +39,7 @@
 		    [ad_decode $date_clause "" "" "and    $date_clause"]
 		    and    draft_p = 'f'
 		    and    deleted_p = 'f'
-		    order  by entry_date desc, posted_date desc
+		    order  by entry_date desc
 		    [ad_decode $limit "" "" "limit $limit"]
         </querytext>
     </fullquery>
@@ -50,9 +47,7 @@
     <fullquery name="blog">
         <querytext>
                     select entry_id,
-                           to_char(entry_date, 'fmDayfm, Month fmDDfm, YYYY') as entry_date_pretty,
-                           to_char(entry_date, 'YYYY/MM/DD/') as entry_archive_url,
-                           to_char(entry_date, 'YYYY-MM-DD') as entry_date,
+		           to_char(entry_date, 'YYYY-MM-DD HH24:MI:SS') as entry_date_ansi,
                            title,
 	                   category_id, 
                            content,
@@ -61,7 +56,6 @@
                            p.first_names as poster_first_names,
                            p.last_name as poster_last_name,
                            o.creation_user as user_id,
-                           to_char(posted_date , 'HH24:MI') as posted_time_pretty,
                            (select count(gc.comment_id)
                             from general_comments gc, cr_revisions cr
                             where gc.object_id = entry_id
@@ -74,7 +68,7 @@
 		    [ad_decode $date_clause "" "" "and    $date_clause"]
                     and    draft_p = 'f'
                     and    deleted_p = 'f'
-                    order  by entry_date desc, posted_date desc
+                    order  by entry_date desc
 		    [ad_decode $limit "" "" "limit $limit"]
         </querytext>
     </fullquery>

@@ -29,7 +29,7 @@ if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
 
 
 set package_id [ad_conn package_id]
-set today [clock format [clock seconds] -format "%Y-%m-%d"]
+set now_ansi [clock format [clock seconds] -format "%Y-%m-%d %H:%M:%S"]
 
 form create entry -cancel_url [ad_decode $return_url "" "." $return_url]
 
@@ -43,9 +43,11 @@ if { [string equal [lars_blog_categories_p] "1"] } {
 }
 
 element create entry content -label "Content" -datatype richtext -widget richtext -html { cols 80 rows 20 }
+
 element create entry entry_date -label "Entry date" -datatype text \
-        -help_text "If you set this to something other than today's date, you must use this form to publish your entry, otherwise the entry date will be set to the date you publish the item." \
-        -after_html {(<a href="javascript:setEntryDateToToday()">Set to today</a>)}
+    -help_text "Format: YYYY-MM-DD HH24:MI:SS" \
+    -html { size 20 } \
+    -after_html {(<a href="javascript:setEntryDateToToday()">Set to now</a>)}
 
 element create entry draft_p -label "Post Status" -datatype text -widget select -options { { "Draft" "t" } { "Publish" "f" } }
 
@@ -58,7 +60,7 @@ if { [form is_request entry] } {
     if { [empty_string_p $entry_id] } {
         set insert_or_update insert
         set entry_id [db_nextval "acs_object_id_seq"]
-        element set_properties entry entry_date -value $today
+        element set_properties entry entry_date -value $now_ansi
         element set_properties entry draft_p -value "t"
 
         # Prefill title and content with supplied values
@@ -110,20 +112,20 @@ if { [form is_valid entry] } {
     set insert_or_update [element get_value entry insert_or_update]
 
     if { [string equal $insert_or_update "insert"] } {
-        lars_blog_entry_add \
-                -entry_id $entry_id \
-                -package_id $package_id \
-                -title $title \
-                -title_url $title_url \
-                -category_id $category_id \
-                -content $content \
-                -content_format $content_format \
-                -entry_date $entry_date \
-                -draft_p "$draft_p"
+        lars_blogger::entry::new \
+	    -entry_id $entry_id \
+	    -package_id $package_id \
+	    -title $title \
+	    -title_url $title_url \
+	    -category_id $category_id \
+	    -content $content \
+	    -content_format $content_format \
+	    -entry_date $entry_date \
+	    -draft_p "$draft_p"
     } else {
         permission::require_write_permission -object_id $entry_id
 
-        lars_blog_entry_edit \
+        lars_blogger::entry::edit \
             -entry_id $entry_id \
             -title $title \
             -title_url $title_url \
@@ -135,7 +137,7 @@ if { [form is_valid entry] } {
     }
     
     if { [empty_string_p $return_url] } {
-        set return_url "[ad_conn package_url]one-entry?[export_vars { entry_id }]"
+        set return_url "one-entry?[export_vars { entry_id }]"
     }
 
     ad_returnredirect $return_url

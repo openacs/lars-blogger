@@ -6,15 +6,5 @@
   <property name="context">@context;noquote@</property>   
 
 <div class="lars_blogger_body">
-
-<table cellspacing="0" cellpadding="2" border="0" width="100%" class="lars_blogger_date_header">
-  <tr>
-    <th bgcolor="@header_background_color@" align=left>
-      <b><a name="blog-date-@blog.entry_date@">@blog.entry_date_pretty@</a></b>
-    </th>
-  </tr>
-</table>
-
-<include src="entry-chunk" &="blog" show_comments_p="t" screen_name="@screen_name@">
-
+  <include src="entry-chunk" &="blog" screen_name="@screen_name@" perma_p="1">
 </div>

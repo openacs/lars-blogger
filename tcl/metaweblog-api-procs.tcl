@@ -188,30 +188,18 @@ ad_proc -public metaWeblog.getPost {
     array set content [list]
     lars_blogger::entry::get -entry_id $entry_id -array content
 
-    set category [value_if_exists content(category_name)]
-
-    # get the package_id from the entry_id
-    set package_id [db_string package_id {}]
-
-    # get the permanent URL of this entry - use this as
-    # the link, guid and comments url
-    set perm_url "[ad_url][lars_blog_public_package_url -package_id $package_id]one-entry?[export_vars { entry_id }]"
-
-    # put the date in readable format
-    set posted_date "$content(entry_date) $content(posted_time_pretty)"
-
     return [list -struct \
                 [list \
                      title [list -string $content(title)] \
-                     link [list -string $perm_url] \
+                     link [list -string $content(permalink_url)] \
                      postid [list -string $entry_id] \
                      userid [list -string $user_id] \
                      description [list -string $content(content)] \
-                     category [list -string $category] \
+                     category [list -string $category_name] \
                      comments [list -string $perm_url] \
                      guid [list -string $perm_url] \
-                     pubDate [list -date $posted_date] \
-                     dateCreated [list -date $posted_date] \
+                     pubDate [list -date $entry_date_ansi] \
+                     dateCreated [list -date $entry_date_ansi] \
                     ]]
 }
 
@@ -245,9 +233,6 @@ ad_proc -public metaWeblog.getRecentPosts {
     db_foreach get_n_entries {} {
         set perm_url "${blog_url}[export_vars { entry_id }]"
         
-        # put the date in readable format
-        set posted_date "${entry_date} ${posted_time_pretty}"
-
         set struct [list -struct \
                         [list \
                              title [list -string $title] \
@@ -255,11 +240,11 @@ ad_proc -public metaWeblog.getRecentPosts {
                              postid [list -string $entry_id] \
                              userid [list -string $user_id] \
                              description [list -string $content] \
-                             category [list -string $category] \
+                             category [list -string $category_name] \
                              comments [list -string $perm_url] \
                              guid [list -string $perm_url] \
-                             pubDate [list -date $posted_date] \
-                             dateCreated [list -date $posted_date] \
+                             pubDate [list -date $entry_date_ansi] \
+                             dateCreated [list -date $entry_date_ansi] \
                             ]]
         
         lappend result $struct

@@ -37,6 +37,11 @@
   text-align: left;
   font-weight: bold;
 }
+.lars_blogger_title_url {
+  color: #999;
+  font-weight: normal;
+  font-size: 90%;
+}
 
 .lars_blogger_text {
   text-align: left;
@@ -75,8 +80,7 @@
 }
 
 .lars_blogger_portlet {
-  align: center;
-  text-align: center;
+  text-align: left;
   margin-bottom: 24px;
   font-size: 90%;
 }
@@ -145,10 +149,11 @@
 }
 
 .lars_blogger_n_comments {
-	display: inline;
+  display: inline;
+  padding: 0px;
 }
 
 .lars_blogger_n_comments_n {
-	list-style-type: none;
+  list-style-type: none;
 }
 

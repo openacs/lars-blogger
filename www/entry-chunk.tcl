@@ -1,13 +1,18 @@
 # Expects:
 # blog:onerow
-# show_comments_p:onevalue,optional
+# show_comments_p:boolean
 # retrun_url:onevalue,optional
 # package_id:optional
 # screen_name:onevalue,optional
+# perma_p: 1/0 (defaults to 0 -- set to 1 if this is the permalink page)
 
-if { ![exists_and_not_null show_comments_p] } {
-    set show_comments_p "f"
+if { ![exists_and_not_null perma_p] } {
+    set perma_p 0
 }
+if { ![exists_and_not_null show_comments_p] } {
+    set show_comments_p $perma_p
+}
+
 
 # Maybe package_id is supplied, but maybe not
 if { ![info exists package_id] } {
@@ -29,10 +34,7 @@ set general_comments_package_url [general_comments_package_url]
 
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
-# LARS:
-# Not sure we should do the ns_adp_parse thing here, but heck, why not
-# It should be safe, given the security checks
-set blog(content) [ns_adp_parse -string [ad_html_text_convert -from $blog(content_format) -to "text/html" -- $blog(content)]]
+lars_blogger::entry::htmlify -array blog
 
 set entry_id $blog(entry_id)
 
@@ -45,23 +47,16 @@ set blog(revoke_url) "${package_url}entry-revoke?[export_vars { entry_id return_
 set blog(write_p) [permission::write_permission_p -object_id $blog(entry_id) -creation_user $blog(user_id)]
 
 if { [empty_string_p $screen_name] } {
-    set blog(entry_archive_url) "${package_url}one-entry?[export_vars { entry_id }]"
+    set blog(permalink_url) "${package_url}one-entry?[export_vars { entry_id }]"
 } else {
-    set blog(entry_archive_url) "${package_url}user/$screen_name/one-entry?[export_vars { entry_id }]"
+    set blog(permalink_url) "${package_url}user/$screen_name/one-entry?[export_vars { entry_id }]"
 }
-
-set blog(google_url) "http://www.google.com/search?[export_vars { {q $blog(title) } }]"
-
-if { ![empty_string_p $general_comments_package_url] } {
-    set blog(comment_add_url) "${general_comments_package_url}comment-add?[export_vars { { object_id $entry_id } { object_name $blog(title) } { return_url "${package_url}flush-cache?[export_vars { return_url }]"} }]"
-}
-
-set blog(comments_view_url) "${package_url}one-entry?[export_vars { entry_id }]"
 
 set display_categories [lars_blog_categories_p -package_id [ad_conn package_id]]
 
-if { [string equal $show_comments_p "t"] } {
+if { [template::util::is_true $show_comments_p] } {
     lars_blogger::entry::get_comments -entry_id $entry_id
+    set blog(comment_add_url) "${general_comments_package_url}comment-add?[export_vars { { object_id $entry_id } { object_name $blog(title) } { return_url "${package_url}flush-cache?[export_vars { return_url }]"} }]"
 }
 
 if { $blog(category_id) != 0 } {

@@ -41,7 +41,6 @@ create table pinds_blog_entries (
                         constraint pinds_blog_entr_cnt_format_nn
                         not null,
   entry_date            timestamptz,
-  posted_date           timestamptz,
   draft_p               char(1) default 'f'
                         constraint pinds_blog_entries_draft_ck
                         check (draft_p in ('t','f')),

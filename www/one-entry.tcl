@@ -1,14 +1,6 @@
 ad_page_contract {} {
     entry_id:integer
     {return_url {[ad_return_url]}}
-} -properties {
-    context_bar
-    title_html
-    content_html
-    draft_p_checked
-    entry_date_html
-    form_export_vars
-    return_url
 }
 
 set package_id [ad_conn package_id]

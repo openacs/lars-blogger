@@ -272,16 +272,13 @@ ad_proc -public blogger.getPost {
 
     array set e [list]
 
-    if { ![catch {lars_blogger::entry::get -entry_id $entry_id -array e} errmsg] } {
-        # put the date in readable format
-        set posted_date "$e(entry_date) $e(posted_time_pretty)"
-
+    if { ![catch { lars_blogger::entry::get -entry_id $entry_id -array e } errmsg] } {
         array set struct [list]
         # note: Blogger has no space for title, so we ignore title
         set struct(content) [list -string "$e(content)"]
         set struct(userid) [list -string $user_id]
         set struct(postid) [list -string $entry_id]
-        set struct(dateCreated) [list -date $posted_date]
+        set struct(dateCreated) [list -date $entry_date_ansi]
     }
 
     return [list -struct [array get struct]]
@@ -322,12 +319,11 @@ ad_proc -public blogger.getRecentPosts {
 
     db_foreach get_n_entries {} {
         # put the date in readable format
-        set posted_date "${entry_date} ${posted_time_pretty}"
         array unset struct
         set struct(content) [list -string $content]
         set struct(postid) [list -string $entry_id]
         set struct(userid) [list -string $user_id]
-        set struct(dateCreated) [list -date $posted_date]
+        set struct(dateCreated) [list -date $entry_date_ansi]
         
         lappend return_array [list -struct [array get struct]]
     }

@@ -98,8 +98,8 @@ ad_proc -private lars_blog__rss_datasource {
         }
 
         # Always convert timestamp to GMT
-        set posted_time_ansi [lc_time_tz_convert -from [lang::system::timezone] -to "Etc/GMT" -time_value $posted_time_ansi]
-        set entry_timestamp "[clock format [clock scan $posted_time_ansi] -format "%a, %d %b %Y %H:%M:%S"] GMT"
+        set entry_date_ansi [lc_time_tz_convert -from [lang::system::timezone] -to "Etc/GMT" -time_value $entry_date_ansi]
+        set entry_timestamp "[clock format [clock scan $entry_date_ansi] -format "%a, %d %b %Y %H:%M:%S"] GMT"
 
         lappend items [list \
                            link $entry_url \

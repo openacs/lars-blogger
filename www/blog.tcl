@@ -33,11 +33,6 @@ if { ![info exists screen_name] } {
     set blog_user_id [cc_screen_name_user $screen_name]
 }
 
-# TODO:
-# - Upgrade the installed package to get the latest parameters
-# - Test on PG and Oracle
-
-
 set max_num_entries [parameter::get \
                        -package_id $package_id \
                        -parameter MaxNumEntriesOnFrontPage \
@@ -61,7 +56,7 @@ if { ![info exists type] } {
 
 switch -exact $type {
     archive {
-        set date_clause "[db_map date_clause_archive]"
+        set date_clause [db_map date_clause_archive]
         set limit {}
     }
     current {
@@ -144,3 +139,4 @@ set entry_add_url "${package_url}entry-edit"
 set header_background_color [lars_blog_header_background_color -package_id $package_id]
 
 set stylesheet_url [lars_blog_stylesheet_url]
+

@@ -20,7 +20,7 @@
                     and    o.object_id = e.entry_id
                     and    u.user_id = o.creation_user
                     and    o.creation_user = :user_id
-		    order  by e.entry_date desc, e.posted_date desc
+		    order  by e.entry_date desc
         </querytext>
     </fullquery>
 
@@ -41,7 +41,7 @@
 		    and    e.deleted_p = 'f'
                     and    o.object_id = e.entry_id
                     and    u.user_id = o.creation_user
-		    order  by e.entry_date desc, e.posted_date desc
+		    order  by e.entry_date desc
         </querytext>
     </fullquery>
 

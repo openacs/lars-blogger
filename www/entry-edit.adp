@@ -5,7 +5,7 @@
 
 <script langauge="javascript">
     function setEntryDateToToday() {
-        document.forms['entry'].entry_date.value = '@today@';
+        document.forms['entry'].entry_date.value = '@now_ansi@';
     }
 </script>
 

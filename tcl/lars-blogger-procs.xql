@@ -2,27 +2,6 @@
 
 <queryset>
 
-    <fullquery name="lars_blog_entry_edit.package_id">
-        <querytext>
-            select package_id from pinds_blog_entries 
-            where entry_id = :entry_id
-        </querytext>
-    </fullquery>
-
-    <fullquery name="lars_blog_entry_edit.org_draft_p">
-        <querytext>
-            select draft_p from pinds_blog_entries where entry_id = :entry_id
-        </querytext>
-    </fullquery>
-
-    <fullquery name="lars_blog_entry_edit.update_entry">
-        <querytext>
-            update pinds_blog_entries
-            set    [join $set_clauses ", "]
-            where  entry_id = :entry_id
-        </querytext>
-    </fullquery>
-
     <fullquery name="lars_blog_setup_feed.select_instance_channel">
         <querytext>
             select w.channel_id

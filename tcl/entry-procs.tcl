@@ -32,12 +32,60 @@ ad_proc -public lars_blogger::entry::new {
     }
 
     # If publish directly, fire off notifications and ping weblogs.com
-    if { [string equal $draft_p "f"] } {
+    if { ![template::util::is_true $draft_p] } {
         lars_blogger::entry::publish \
             -entry_id $entry_id \
             -package_id $package_id \
             -no_update
     }
+
+    lars_blog_flush_cache $package_id
+
+    return $entry_id
+}
+
+ad_proc -public lars_blogger::entry::edit {
+    {-entry_id:required}
+    {-title:required}
+    {-title_url ""}
+    {-category_id ""}
+    {-content:required}
+    {-content_format:required}
+    {-entry_date:required}
+    {-draft_p:required}
+} {
+    Edit the blog entry and then optionally perform notifications 
+    and RSS operations if the blog was a draft before and now is 
+    being published.
+    
+    @param entry_date Date of the entry in full ANSI format (YYYY-MM-DD HH24:MI:SS)
+
+    @return entry_id of edited entry
+
+    @author Vinod Kurup vinod@kurup.com
+    @creation-date 2003-10-04
+} {
+    set set_clauses { 
+        "title = :title" 
+        "title_url = :title_url"
+        "category_id = :category_id"
+        "content = :content"
+        "content_format = :content_format"
+        "entry_date = to_date(:entry_date, 'YYYY-MM-DD HH24:MI:SS')" 
+        "draft_p = :draft_p" 
+    }
+    
+    # Get old values first -- need draft_p and package_id
+    lars_blogger::entry::get -entry_id $entry_id -array entry
+    
+    db_dml update_entry {}
+            
+    # Is this a publish?
+    if { [template::util::is_true $draft_p "t"] && ![template::util::is_true $entry(draft_p)] } {
+	lars_blogger::entry::publish -entry_id $entry_id -package_id $entry(package_id)
+    }
+    
+    lars_blog_flush_cache $entry(package_id)
 
     return $entry_id
 }
@@ -46,10 +94,16 @@ ad_proc -public lars_blogger::entry::get {
     -entry_id:required
     -array:required
 } {
+    Get a blog entry. Also sets entry_date_pretty, package_url, permalink_url entries.
+} {
     # Select the info into the upvar'ed Tcl Array
     upvar $array row
 
     db_1row select_entry {} -column_array row 
+
+    set row(entry_date_pretty) [lc_time_fmt $row(entry_date_ansi) "%q %X"]
+    set row(package_url) [lars_blog_public_package_url -package_id $row(package_id)]
+    set row(permalink_url) [export_vars -base "${row(package_url)}one-entry" { entry_id }]
 }
 
 ad_proc -public lars_blogger::entry::publish {
@@ -58,6 +112,13 @@ ad_proc -public lars_blogger::entry::publish {
     {-no_update:boolean}
     {-redirect_url ""}
 } {
+    if { [empty_string_p $package_id] } {
+	# can't just use ad_conn package_id since the 
+	# request may be coming via XML-RPC
+	lars_blogger::entry::get -entry_id $entry_id -array entry
+	set package_id $entry(package_id)
+    }
+
     if { !$no_update_p } {
         # Set draft_p = 'f'
         db_dml update_entry {}
@@ -121,7 +182,7 @@ ad_proc -public lars_blogger::entry::htmlify {
 } {
     upvar $array row
 
-    set row(title) [ad_quotehtml $row(title)]
+    set row(title) $row(title)
 
     # LARS:
     # Not sure we should do the ns_adp_parse thing here, but heck, why not
@@ -130,6 +191,8 @@ ad_proc -public lars_blogger::entry::htmlify {
     
     set row(content) [ad_html_text_convert -from $row(content_format) -to "text/html" -- $row(content)]
     
+    set row(entry_date_pretty) [lc_time_fmt $row(entry_date_ansi) "%q %X"]
+
     # We wrap this in a catch so if it bombs, at least we won't break any pages
     catch {
         set row(content) [ns_adp_parse -string $row(content)]
@@ -157,14 +220,15 @@ ad_proc -public lars_blogger::entry::do_notifications {
     set blog_name [lars_blog_name -package_id $blog(package_id)]
 
     set new_content ""
-    append new_content "$blog(poster_first_names) $blog(poster_last_name) posted to $blog_name at $blog(posted_time_pretty) on $blog(entry_date_pretty):\n\n"
     append new_content "$blog(title)\n[string repeat "-" [string length $blog(title)]]\n"
     if { ![empty_string_p $blog(title_url)] } {
         append new_content "$blog(title_url)\n"
     }
     append new_content "\n"
     append new_content "[ad_convert_to_text -- [ns_adp_parse -string $blog(content)]]\n\n"
-    append new_content "This entry: $entry_url\n\n"
+    append new_content "$blog(entry_date_pretty) by $blog(poster_first_names) $blog(poster_last_name)" \n\n
+
+    append new_content "Permalink: $entry_url\n\n"
     append new_content "$blog_name: $blog_url\n"
 
     # Do the notification for the forum
@@ -210,6 +274,8 @@ ad_proc -public lars_blogger::entry::get_comments {
 
     set content_select [db_map content_select] ;# ", r.content"
     upvar $multirow $multirow 
-    db_multirow $multirow get_comments ""
-
+    db_multirow -extend { pretty_date pretty_date2 } $multirow get_comments {} {
+	set pretty_date [lc_time_fmt $creation_date_ansi "%x"]
+	set pretty_date2 [lc_time_fmt $creation_date_ansi "%q %X"]
+    }
 }

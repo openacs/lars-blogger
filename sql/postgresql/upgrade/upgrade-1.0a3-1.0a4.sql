@@ -13,3 +13,11 @@ create table weblogger_ping_urls (
     constraint weblogger_ping_urls_pk
         primary key(package_id, ping_url)
 );
+
+
+-- Merge entry_date and posted_date column
+update pinds_blog_entries
+set    entry_date = to_timestamp(to_char(entry_date, 'YYYY-MM-DD') || ' ' || to_char(posted_date, 'HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS');
+
+alter table pinds_blog_entries drop column posted_date;
+
