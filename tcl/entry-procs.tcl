@@ -81,7 +81,7 @@ ad_proc -public lars_blogger::entry::edit {
     db_dml update_entry {}
             
     # Is this a publish?
-    if { [template::util::is_true $draft_p "t"] && ![template::util::is_true $entry(draft_p)] } {
+    if { [template::util::is_true $draft_p] && ![template::util::is_true $entry(draft_p)] } {
 	lars_blogger::entry::publish -entry_id $entry_id -package_id $entry(package_id)
     }
     
