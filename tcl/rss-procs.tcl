@@ -13,9 +13,11 @@ ad_proc -private lars_blog__rss_datasource {
 
     @author Lars Pind (lars@pinds.com)
 } {
+    set package_url [lars_blog_public_package_url -package_id $package_id]
+
     set blog_title [db_string package_name { *SQL* }]
 
-    set blog_url "[ad_url][ad_parameter -package_id $package_id "public_url" "lars-blogger" [lars_package_url_from_package_id $package_id]]"
+    set blog_url "[ad_url]$package_url"
     
     set column_array(channel_title) $blog_title
     set column_array(channel_description) $blog_title
@@ -41,7 +43,7 @@ ad_proc -private lars_blog__rss_datasource {
     set counter 0
 
     db_foreach blog_rss_items { *SQL* } {
-        set entry_url "[ad_url][lars_package_url_from_package_id $package_id]archive/${entry_archive_url}#blog-entry-$entry_id"
+        set entry_url "[ad_url]${package_url}archive/${entry_archive_url}#blog-entry-$entry_id"
 
         set content [ns_adp_parse -string $content]
 

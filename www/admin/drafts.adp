@@ -19,6 +19,7 @@
             <td>@draft_entries.content@</td>
             <td align="center">
 	      <a href="@draft_entries.preview_url@">Preview</a>
+	      <a href="@draft_entries.publish_url@">Publish</a>
 	      <a href="@draft_entries.edit_url@">Edit</a>
 	      <a href="@draft_entries.delete_url@">Delete</a>
 	    </td>

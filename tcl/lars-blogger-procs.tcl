@@ -5,22 +5,6 @@ ad_library {
      @cvs-id $Id$
 }
 
-ad_proc -private lars_package_url_from_package_id_internal { 
-	package_id
-} {
-	Internal function to get SiteMap URL given a package_id
-} {
-    return [db_string site_url { *SQL* }]
-}
-
-ad_proc -public lars_package_url_from_package_id { 
-	package_id
-} {
-    Return the URL of the www pages of this package (cached)
-} {
-    return [util_memoize "lars_package_url_from_package_id_internal {$package_id}"]
-}
-
 ad_proc -public lars_blog_entry_add {
     {-entry_id:required}
     {-package_id:required}
@@ -72,4 +56,23 @@ ad_proc lars_blog_flush_cache {
     # Flush both admin and non-admin version
     util_memoize_flush "lars_blog_get_as_string_mem $package_id 0"
     util_memoize_flush "lars_blog_get_as_string_mem $package_id 1"
+}
+
+ad_proc -public lars_blog_public_package_url {
+    -package_id
+} {
+    if { ![exists_and_not_null package_id] } {
+        # No package_id given, so we'll just use ad_conn
+        set package_id [ad_conn package_id]
+        set default_url [ad_conn package_url]
+    } else {
+        if { [catch { 
+            # This will fail if the package has been mounted on more than one URL ... hm.
+            set default_url [apm_package_url_from_id $package_id]
+        }] } { 
+            # In that case, we'll just hope that they set up the parameter
+            set default_url ""
+        }
+    }
+    return [ad_parameter -package_id $package_id "public_url" "lars-blogger" $default_url] 
 }

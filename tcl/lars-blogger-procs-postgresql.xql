@@ -3,14 +3,6 @@
 <queryset>
     <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
-    <fullquery name="lars_package_url_from_package_id_internal.site_url">
-        <querytext>
-            select site_node__url(node_id)
-            from site_nodes
-            where object_id = :package_id 
-        </querytext>
-    </fullquery>
-
     <fullquery name="lars_blog_entry_add.entry_add">
         <querytext>
 			select pinds_blog_entry__new (

@@ -17,7 +17,7 @@
             <td>@entries.entry_date_pretty@</td>
             <td>@entries.title@</td>
             <td>@entries.content@</td>
-            <td align="center"><a href="@entries.edit_url@">Edit</a></td>
+            <td align="center"><a href="@entries.edit_url@">Edit</a> - <a href="@entries.preview_url@">View</a></td>
           </tr>
         </multiple>
       </table>

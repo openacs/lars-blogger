@@ -3,14 +3,6 @@
 <queryset>
     <rdbms><type>oracle</type><version>8.1.6</version></rdbms>
 
-    <fullquery name="lars_package_url_from_package_id_internal.site_url">
-        <querytext>
-            select site_node.url(node_id)
-            from site_nodes
-            where object_id = :package_id 
-        </querytext>
-    </fullquery>
-
     <fullquery name="lars_blog_entry_add.entry_add">
         <querytext>
 			begin

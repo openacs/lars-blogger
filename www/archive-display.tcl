@@ -6,9 +6,7 @@ ad_page_contract {} {
 
 set package_id [ad_conn package_id]
 
-set package_url [lars_package_url_from_package_id $package_id]
-
-set admin_p [ad_permission_p $package_id admin]
+set admin_p [ad_permission_p [ad_conn package_id] admin]
 
 set page_title "[db_string package_name { *SQL* }] Archive"
 
@@ -18,7 +16,7 @@ if { [empty_string_p $day] } {
 
     db_1row archive_date_month { *SQL* }
 
-    set context_bar [ad_context_bar [list "${package_url}archive/" "Archive"] $archive_date_pretty]
+    set context_bar [ad_context_bar [list "[ad_conn package_url]archive/" "Archive"] $archive_date_pretty]
 
 } else {
 
@@ -26,7 +24,7 @@ if { [empty_string_p $day] } {
 
     db_1row archive_date_month_day { *SQL* }
 
-    set context_bar [ad_context_bar [list "${package_url}archive/" "Archive"] $archive_date_pretty]
+    set context_bar [ad_context_bar [list "[ad_conn package_url]archive/" "Archive"] $archive_date_pretty]
 
 }
 

@@ -4,7 +4,8 @@
 
     <fullquery name="entry">
         <querytext>
-		    select b.title, 
+		    select b.entry_id,  
+                           b.title, 
                            b.content, 
                            b.draft_p, 
                            to_char(b.entry_date, 'YYYY-MM-DD') as entry_date,

@@ -7,7 +7,7 @@ ad_library {
 }
 
 ad_proc -private lars_blog_weblogs_com_update_ping {
-    {-package_id}
+    {-package_id ""}
     {-location}
     {-timeout 30}
     {-depth 0}
@@ -17,7 +17,9 @@ ad_proc -private lars_blog_weblogs_com_update_ping {
     @author Jerry Asher (jerry@theashergroup.com)
     @author Lars Pind (lars@pinds.com)
 } {
-    if { ![info exists package_id] } {
+    set package_url [lars_blog_public_package_url -package_id $package_id]
+
+    if { ![exists_and_not_null package_id] } {
         set package_id [ad_conn package_id]
     }
 
@@ -31,13 +33,13 @@ ad_proc -private lars_blog_weblogs_com_update_ping {
         set location [ad_parameter -package_id $package_id "weblogs_ping_url"]
     }
     if { [empty_string_p $location] } {
-        ns_log Error "lars_blog_weblogs_com_update_ping: No URL to post to"
+        ns_log Error "lars_blog_weblogs_com_update_ping: No URL to ping"
         return
     }
 
     set blog_title [db_string package_name { *SQL* }]
 
-    set blog_url "[ad_url][ad_parameter -package_id $package_id "public_url" "lars-blogger" [lars_package_url_from_package_id $package_id]]"
+    set blog_url "[ad_url]$package_url"
 
     ns_log notice "lars_blog_weblogs_com_update_ping:"
     if [catch {
