@@ -48,14 +48,5 @@
         </querytext>
     </fullquery>
 
-    <fullquery name="update_category">
-        <querytext>
-            update pinds_blog_categories
-            set    name = :name, 
-                   short_name = :short_name
-            where  category_id = :category_id
-        </querytext>
-    </fullquery>
-
 </queryset>
 

@@ -59,10 +59,4 @@
         </querytext>
     </fullquery>
 
-    <fullquery name="lars_blog_setup_feed.screen_name">
-        <querytext>
-            select screen_name from users where user_id = :creation_user
-        </querytext>
-    </fullquery>
-
 </queryset>

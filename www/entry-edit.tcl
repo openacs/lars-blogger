@@ -106,7 +106,7 @@ if { [form is_valid entry] } {
     set insert_or_update [element get_value entry insert_or_update]
 
     if { [string equal $insert_or_update "insert"] } {
-        lars_blog_entry_add \
+        lars_blogger::entry::new \
                 -entry_id $entry_id \
                 -package_id $package_id \
                 -title $title \
@@ -137,7 +137,7 @@ if { [form is_valid entry] } {
             lappend set_clauses [db_map now]
         }
     
-        db_dml update_entry { *SQL* }
+        db_dml update_entry {}
 
         # Is this a publish?
         if { [string equal $draft_p "t"] && [string equal $org_draft_p "f"] } {

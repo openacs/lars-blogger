@@ -56,10 +56,7 @@ ad_form -name category -cancel_url $return_url -form {
 
 } -on_submit {
     
-    if { [empty_string_p $short_name] } {
-        set existing_short_names [db_list short_names {}]
-        set short_name [util_text_to_url -existing_urls $existing_short_names -text $name]
-    } else {
+    if { ![empty_string_p $short_name] } {
 	db_1row short_name_exists { *SQL* }
 	if { $short_name_exists > 0 } {
 	    form set_error category short_name "This short name is already used by another category"
@@ -69,13 +66,18 @@ ad_form -name category -cancel_url $return_url -form {
 
 } -new_data {
 
-    set creation_user [ad_conn user_id]
-    set creation_ip [ns_conn peeraddr]
+    lars_blogger::category::new \
+        -name $name \
+        -category_id $category_id \
+        -short_name $short_name
 
-    db_exec_plsql insert_category {}
-    
 } -edit_data {
-    db_dml update_category {}
+
+    lars_blogger::category::edit \
+        -category_id $category_id \
+        -name $name \
+        -short_name $short_name
+
 } -after_submit {
     ad_returnredirect $return_url
     ad_script_abort
