@@ -48,7 +48,19 @@ By <a href="http://www.pinds.com/lars/">Lars Pind</a>
 </pre></blockquote>
 
 <p>
-  Or from a Tcl page:
+  ... for the non-cached version, and ...
+</p>
+
+<blockquote><pre>&lt;%=[lars_blog_get_as_string -url "/blog"]%&gt;</pre></blockquote>
+
+<p>
+  ... for the cached version. There shouldn't be any problems using
+  the cached version, as the cache should be flushed whenever anything
+  changes.
+</p>
+
+<p>
+  From a Tcl page:
 </p>
 
 <blockquote><pre>
@@ -56,127 +68,160 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
 </pre></blockquote>
 
 <p>
-  If you supply a URL, then the blog that matches that URL is served
-  (assuming that a lars-blogger package is mounted at that
-  URL). Alternatively, you can supply a <code>package_id</code>
-  parameter directly. If nothing is supplied, <code>[ad_conn
-  package_id]</code> is used.
-</p>
-
-<p>
-  Alternatively, there's a cached version of the same, which is useful
-  if you're including a blog on the front page of a highly trafficked
-  site.
+  ... for the non-cached version, and ...
 </p>
 
 <blockquote><pre>[lars_blog_get_as_string -url "/blog"]</pre></blockquote>
 
 <p>
-  This takes either a package_id or a url argument, just like the
-  others. To include this in an ADP, you can also say:
+  ... for the cached version.
 </p>
 
-<blockquote><pre>&lt;%=[lars_blog_get_as_string -url "/blog"]%&gt;</pre></blockquote>
+<p>
+  All of these are shown with an argument 'url' here, but they all
+  take a package_id argument instead, if you prefer that and know what
+  the package_id is. If nothing's supplied, the current package is
+  used, which is generally not what you want.
+</p>
 
 
 <h3>Technical Info</h3>
 
-The package fully supports multiple instances, i.e., you can mount
-several instances in your site map, and they'll stay properly isolated
-from each other.
+<p>
+  The package fully supports multiple instances, i.e., you can mount
+  several instances in your site map, and they'll stay properly isolated
+  from each other.
+</p>
 
 <p>
-
-Only supports PostgreSQL (please do port to Oracle if you want to).
-
-<p>
-
-Contents in your blog entries are assumed to be full-blood ADP-ified
-HTML, so don't give people access to post a blog unless you trust
-them. I guess it should be made configurable whether to allow this or
-not, but since I'm developing this for my own site primarily, I
-haven't done so. This also means that if you've added custom ADP tags,
-those are also available to you in your blog.
+  Contents in your blog entries are assumed to be full-blooded
+  ADP-ified HTML, so don't give people access to post a blog unless
+  you trust them. I guess it should be made configurable whether to
+  allow this or not, but since I'm developing this for my own site
+  primarily, I haven't done so. This also means that if you've added
+  custom ADP tags, those are also available to you in your blog.
+</p>
 
 <h3>weblogs.com update ping</h3>
 
-There are a couple parameters governing this feature. You can turn it
-on or off on a per-package basis. And you can specify which URL you
-want to export to weblogs.com, in case it's not the one the package
-instance is mounted at. This can be useful if you're including the
-blog on other pages, for example your site's front page. Thanks to
-Jerry Asher for the code to do this.
+<p>
+  There are a couple parameters governing this feature. You can turn it
+  on or off on a per-package basis. And you can specify which URL you
+  want to export to weblogs.com, in case it's not the one the package
+  instance is mounted at. This can be useful if you're including the
+  blog on other pages, for example your site's front page. Thanks to
+  Jerry Asher for the code to do this.
+</p>
 
 <h3>RSS Feed</h3>
 
-The RSS feed is version 1.0 only, and requires the rss-support package
-if you want to use it. I found that getting rss-support to register
-the Report Generation Subscripion (whatever that means) was
-hard. There seemed to be a bug, but the rss-support package was so
-hard for me to figure out that I'm not sure. In the end, I hacked on
-some page scripts and added a channel_title through SQL. Phew! Let me
-know if you try to get this running, so we can either fix the bug(s)
-or write some clear docs on how to.
+<p>
+  The RSS feed is version 1.0 only, and uses the rss-support
+  package. You should be able to simply visit the admin page of your
+  new blogger instance and click the "Setup RSS" link, and you'll have
+  an RSS feed.
+</p>
 
 <p>
+  Then you'll need to set the parameters and say that your
+  rss_file_url is at
+  /where-your-blogger-instnace-sists/rss/rss.xml. If you leave this
+  blank, we won't advertise your RSS feed URL anywhere.
+</p>
 
-You can supply your own channel image through the parameters. And you
-can specify which URL we should advertise the RSS fil under. Leave
-blank if you haven't set up an RSS feed for this package.
-
+<p>
+  You can also supply your own channel image through the
+  parameters.
+</p>
 
 <h3>Road Map</h3>
 
 <ul>
-
-<li>Categorize and full-text-search-index blog entries so the archives are more useful.
-
-<li>Dave Bauer is implementing this as an ETP application, interesting
-to see where that goes.
-
-<li>Calendar widget
-
-<li>Easier to set up RSS support (probably requires mucking with the rss-support package)
-
-<li>Nicer interface
-
-<li>Make it safe to use in a not-so-protected environment, e.g.,
-disable &lt;% ... %&gt; ADP notation.
-
-<li>More thorough documentation and some setup/config pages. 
-
+  <li>
+    Categorize and full-text-search-index blog entries so the archives
+    are more useful.
+  </li>
+  <li>
+    Use content repository.
+  </li>
+  <li>
+    Community-maintained blog ... everybody with 'write' can post entries.
+  </li>
+  <li>
+    Moderation-feature: Entries posted by non-admins must go through a
+    workflow-administered approval process.
+  </li>
+  <li>
+    Ability to modify templates for each instance individually through
+    the UI.
+  </li>
+  <li>
+    Nicer interface (MovableType)
+  </li>
+  <li>
+    Make it safe to use in a not-so-protected environment, e.g.,
+    disable &lt;% ... %&gt; ADP notation.
+  </li>
+  <li>
+    More thorough documentation and some setup/config pages.
+  </li>
 </ul>
 
 <h3>Version History</h3>
 
 <ul>
-
-<li><b>0.7d</b> Finished port to Oracle. Upgraded PG drop script. Renamed RSS proc which requires running the SQL upgrade script (for PG). Bug-fix to bypass 'draft' and publish directly. -vinodk (August 15, 2002)
-
-<li><b>0.6.4d</b> Added poster information, optional per
-parameter. Added "url" shortcut variable to the blog template. Updated
-documentation. (July 23, 2002)
-
-<li><b>0.6.3d</b> Added drop scripts, and made the create script call rss-register. Fixed minor bugs. (July 22, 2002)
-
-<li><b>0.6.1d</b> Fixed RSS last update bug. (Jun 2, 2002)
-
-<li><b>0.6d</b> Added RSS feed. Woohoo! (June 1, 2002)
-
-<li><b>0.5d</b> Added weblogs.com update ping. (June 1, 2002)
-
-<li><b>0.4d</b> Added Google link, new style. (May 31, 2002)
-
-<li><b>0.3.3d</b> Added Peter Marklund's arrow-box.gif patch. (May 13, 2002)
-
-<li><b>0.3.2d</b> Missing files from the distribution.
-
-<li><b>0.3d</b> Improved admin interface, added documentation. (March 24, 2002)
-
-<li><b>0.2d</b> Allow and show comments on blog. (March 23, 2002)
-
-<li><b>0.1d</b> Initial version. (February 18, 2002)
-
+  <li>
+    <b>0.8.4</b> Oops, getting behind on the version history. In the last
+    few releases, I've rearranged a bunch of templates to make it
+    more consistent and easier to customize; I've fixed the code that
+    sets up the RSS stuff, so you can now simply go to the admin page
+    and say "setup RSS"; I've integrated the new richtext widget which
+    I added to the templating system. (February 6, 2003)
+  </li>
+  <li>
+    <b>0.7d</b> Finished port to Oracle. Upgraded PG drop
+    script. Renamed RSS proc which requires running the SQL upgrade
+    script (for PG). Bug-fix to bypass 'draft' and publish
+    directly. -vinodk (August 15, 2002)
+  </li>
+  <li>
+    <b>0.6.4d</b> Added poster information, optional per
+    parameter. Added "url" shortcut variable to the blog
+    template. Updated documentation. (July 23, 2002)
+  </li>
+  <li>
+    <b>0.6.3d</b> Added drop scripts, and made the create script call
+    rss-register. Fixed minor bugs. (July 22, 2002)
+  </li>
+  <li>
+    <b>0.6.1d</b> Fixed RSS last update bug. (Jun 2, 2002)
+  </li>
+  <li>
+    <b>0.6d</b> Added RSS feed. Woohoo! (June 1, 2002)
+  </li>
+  <li>
+    <b>0.5d</b> Added weblogs.com update ping. (June 1, 2002)
+  </li>
+  <li>
+    <b>0.4d</b> Added Google link, new style. (May 31, 2002)
+  </li>
+  <li>
+    <b>0.3.3d</b> Added Peter Marklund's arrow-box.gif patch. (May 13,
+    2002)
+  </li>
+  <li>
+    <b>0.3.2d</b> Missing files from the distribution.
+  </li>
+  <li>
+    <b>0.3d</b> Improved admin interface, added documentation. (March
+    24, 2002)
+  </li>
+  <li>
+    <b>0.2d</b> Allow and show comments on blog. (March 23, 2002)
+  </li>
+  <li>
+    <b>0.1d</b> Initial version. (February 18, 2002)
+  </li>
 </ul>
 
 <h3>License</h3>
