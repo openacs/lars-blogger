@@ -38,7 +38,8 @@
           <tr>
             <td align="center">
               <a href="admin/entry-edit" title="Add an entry to this blog">Add entry</a><br>
-              <a href="admin/drafts" title="View draft entries">Draft entries<a/>
+              <a href="admin/drafts" title="View draft entries">Draft entries<a/><br>
+              <a href="admin/" title="View administration pages">Admin<a/>
             </td>
           </tr>
           <tr>
