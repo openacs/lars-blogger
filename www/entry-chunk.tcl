@@ -2,12 +2,16 @@
 # blog:onerow
 # show_comments_p:onevalue,optional
 # retrun_url:onevalue,optional
+# package_id:optional
 
 if { ![exists_and_not_null show_comments_p] } {
     set show_comments_p "f"
 }
 
-set package_id [ad_conn package_id]
+# Maybe package_id is supplied, but maybe not
+if { ![info exists package_id] } {
+    set package_id [ad_conn package_id]
+}
 
 set admin_p [ad_permission_p $package_id admin]
 
@@ -33,6 +37,7 @@ set blog(revoke_url) "${package_url}admin/entry-revoke?[export_vars { entry_id r
 set blog(entry_archive_url) "${package_url}one-entry?[export_vars { entry_id }]"
 set blog(google_url) "http://www.google.com/search?[export_vars { {q $blog(title) } }]"
 set blog(comment_add_url) "[general_comments_package_url]comment-add?[export_vars { { object_id $entry_id } { object_name $blog(title) } { return_url "${package_url}flush-cache?[export_vars { return_url }]"} }]"
+set blog(comments_view_url) "${package_url}one-entry?[export_vars { entry_id }]"
 
 if { [string equal $show_comments_p "t"] } {
     set comments_html [general_comments_get_comments -print_content_p 1 $entry_id]
