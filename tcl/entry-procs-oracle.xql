@@ -29,6 +29,7 @@
 		    where  b.entry_id = :entry_id
                     and    o.object_id = b.entry_id
                     and    p.person_id = o.creation_user
+            and    b.deleted_p = 'f'
         </querytext>
     </fullquery>
 
