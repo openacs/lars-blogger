@@ -30,6 +30,8 @@
     <if @show_poster_p@ true>
       by @blog.poster_first_names@ @blog.poster_last_name@
     </if>
+    <if 1 eq 0>
+      I put this hack in because category_url is not valid.
       <multiple name="sw_category_multirow" delimiter=", ">
         <if @sw_category_multirow.rownum@ eq 1 and
             @sw_category_multirow.sw_category_name@ not nil>
@@ -37,12 +39,15 @@
         </if>
         <a href="@sw_category_multirow.sw_category_url@">@sw_category_multirow.sw_category_name@</a>
       </multiple>
-
+    </if>
+    <if 1 eq 0>
+      I put this hack in because category_url is not valid.
     <if @display_categories@ and @blog.category_id@ gt 0>
       in
       <a href="@category_url@" title="@blog.category_name@">@blog.category_name@</a>
     </if>
     |
+      </if>
 
     <a href="@blog.permalink_url@" title="Permanent URL for this entry">Permalink</a>
     <if @show_comments_p@ false>
@@ -64,7 +69,7 @@
   <multiple name="comments">
     <a name="comment@comments.comment_id@"></a>
     <h3 class="lars_blogger_comment_title">@comments.title@</h3>
-    <p class="lars_blogger_comment_text">@comments.content@</p>
+    <p class="lars_blogger_comment_text">@comments.content;noquote@</p>
     <p><if @comments.trackback_p@ eq "f">by @comments.author@</if><else>Trackback from <a href="@comments.trackback_url@" title="@comments.trackback_name@">@comments.trackback_name@</a></else> on @comments.pretty_date@</p>
   </multiple>
   <center><a href="@blog.comment_add_url@" title="Comment on this entry">Add comment</a></center>

@@ -73,6 +73,9 @@ ad_proc -public lars_blogger::entry::edit {
     # Is this a publish?
     if { [template::util::is_true $draft_p] && ![template::util::is_true $entry(draft_p)] } {
 	lars_blogger::entry::publish -entry_id $entry_id -package_id $entry(package_id)
+    } else {
+        # Update instance/user feeds if needed
+        lars_blog_setup_feed -package_id $entry(package_id)
     }
     
     lars_blog_flush_cache $entry(package_id)

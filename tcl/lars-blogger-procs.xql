@@ -11,9 +11,9 @@
         </querytext>
     </fullquery>
 
-    <fullquery name="lars_blog_setup_feed.exists_instance_feed_p">
+    <fullquery name="lars_blog_setup_feed.instance_feed_subscr_id">
         <querytext>
-            select count(*)
+            select subscr_id
             from   rss_gen_subscrs s,
                    acs_sc_impls i, 
                    weblogger_channels w
@@ -35,9 +35,9 @@
         </querytext>
     </fullquery>
 
-    <fullquery name="lars_blog_setup_feed.exists_user_feed_p">
+    <fullquery name="lars_blog_setup_feed.user_feed_subscr_id">
         <querytext>
-            select count(*)
+            select subscr_id
             from   rss_gen_subscrs s,
                    acs_sc_impls i,
                    weblogger_channels w

@@ -9,5 +9,5 @@
     }
 </script>
 
-<formtemplate id="entry" style="standard-lars"></formtemplate>
+<formtemplate id="entry"></formtemplate>
 
