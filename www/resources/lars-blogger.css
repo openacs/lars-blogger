@@ -144,3 +144,11 @@
   color: #336699;
 }
 
+.lars_blogger_n_comments {
+	display: inline;
+}
+
+.lars_blogger_n_comments_n {
+	list-style-type: none;
+}
+

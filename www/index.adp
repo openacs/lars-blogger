@@ -82,9 +82,16 @@
           <a href="@rss_file_url@" title="RSS 2.0 feed"><img src="/resources/lars-blogger/xml.gif" width="36" height="14" border="0" alt="XML"></a>
         </div>
       </if>
+
+        <div class="lars_blogger_portlet">
+	  <h2>Recent Comments</h2>
+	  <include src="/packages/lars-blogger/lib/last-n-comments" number_of_comments="10">
+        </div>
+
     </div>
 
 
   </else>
+
 
 </div>
