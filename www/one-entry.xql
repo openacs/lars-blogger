@@ -10,7 +10,7 @@
                            to_char(b.entry_date, 'YYYY-MM-DD') as entry_date,
         		   p.first_names as poster_first_names,
 		           p.last_name as poster_last_name,
-		           to_char(b.posted_date , 'HH24:SS') as posted_time_pretty
+		           to_char(b.posted_date , 'HH24:MI') as posted_time_pretty
 		    from   pinds_blog_entries b,
                            acs_objects o,
                            persons p

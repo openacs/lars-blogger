@@ -27,7 +27,7 @@
 		           'f' as new_date_p,
 		           p.first_names as poster_first_names,
 		           p.last_name as poster_last_name,
-		           to_char(posted_date , 'HH24:SS') as posted_time_pretty,
+		           to_char(posted_date , 'HH24:MI') as posted_time_pretty,
 		           (select count(gc.comment_id) 
 		            from general_comments gc, cr_revisions cr 
 		            where gc.object_id = entry_id
