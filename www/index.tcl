@@ -82,7 +82,7 @@ if {$display_users_p && ![exists_and_not_null screen_name]} {
 
 set notification_chunk [notification::display::request_widget \
     -type lars_blogger_notif \
-    -object_id [ad_conn package_id] \
+    -object_id $package_id \
     -pretty_name [lars_blog_name] \
     -url [lars_blog_public_package_url] \
 ]
