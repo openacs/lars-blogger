@@ -85,6 +85,11 @@
         <include src="/packages/lars-blogger/lib/last-n-comments" number_of_comments="10">
       </div>
 
+	<div class="lars_blogger_portlet">
+	  <h2>Blogroll</h2>
+	  <include src="/packages/lars-blogger/lib/blogroll">
+	</div>
+
     </div>
 
 

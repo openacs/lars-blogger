@@ -42,5 +42,6 @@ ad_proc -private lars_blogger::install::package_uninstantiate {
     @author Vinod Kurup
 } {
     db_dml remove_ping_urls ""
+    lars_blogger::blogroll::delete_from_package -package_id $package_id
     db_exec_plsql clear_content {}
 }
