@@ -23,6 +23,7 @@
 		           to_char(entry_date, 'YYYY-MM-DD') as entry_date,
 		           title,
 		           content,
+                           content_format,
 		           draft_p,
 		           p.first_names as poster_first_names,
 		           p.last_name as poster_last_name,

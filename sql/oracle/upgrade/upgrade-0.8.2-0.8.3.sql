@@ -1,11 +1,15 @@
 --
--- lars-blogger-package-create.sql
+-- Upgrade script
 -- 
--- @author Lars Pind
--- @author Yon (Yon@milliped.com) Oracle Port
--- 
--- @cvs-id $Id$
+-- Adds format column
 --
+-- @author Lars Pind (lars@pinds.com)
+-- @creation-date 2003-01-27
+--
+
+alter table pinds_blog_entries add content_format varchar(50);
+
+update pinds_blog_entries set content_format = 'text/html';
 
 create or replace package pinds_blog_entry
 as

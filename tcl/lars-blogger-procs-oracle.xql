@@ -11,6 +11,7 @@
             		package_id => :package_id,
             		title => :title,
             		content => :content,
+            		content_format => :content_format,
             		entry_date => to_date(:entry_date, 'YYYY-MM-DD'),
             		draft_p => :draft_p,
             		creation_user => :creation_user,

@@ -1,28 +1,18 @@
 ad_page_contract {} {
     {entry_id:integer ""}
     {return_url ""}
-    cancel:optional
 } -properties {
     context_bar
     today_html
 }
 
-if { [info exists cancel] } {
-    catch { set return_url [element get_value entry return_url] }
-    if { [empty_string_p $return_url] } {
-        set return_url "."
-    }
-    ad_returnredirect $return_url
-    ad_script_abort
-}
-
 set today [db_string today {}]
 set today_html [ad_quotehtml $today]
 
-form create entry
+form create entry -cancel_url [ad_decode $return_url "" "../" $return_url]
 
 element create entry title -label "Title" -datatype text -html { size 50 }
-element create entry content -label "Content" -datatype text -widget textarea -html { cols 80 rows 20 }
+element create entry content -label "Content" -datatype richtext -widget richtext -html { cols 80 rows 20 }
 element create entry entry_date -label "Entry date" -datatype text \
         -help_text "If you set this to something other than today's date, you must use this form to publish your entry, otherwise the entry date will be set to the date you publish the item." \
         -after_html {(<a href="javascript:setEntryDateToToday()">Set to today</a>)}
@@ -41,10 +31,12 @@ if { [form is_request entry] } {
     } else {
         db_1row entry {}
         
-        element set_properties entry title -value $title
-        element set_properties entry content -value $content
-        element set_properties entry entry_date -value $entry_date
-        element set_properties entry draft_p -value $draft_p
+        element set_value entry content \
+                [template::util::richtext::set_property format [template::util::richtext::acquire contents $content] $content_format]
+        
+        element set_value entry title $title
+        element set_value entry entry_date $entry_date
+        element set_value entry draft_p $draft_p
     }
 
     element set_properties entry entry_id -value $entry_id
@@ -54,7 +46,8 @@ if { [form is_request entry] } {
 if { [form is_valid entry] } {
     set entry_id [element get_value entry entry_id]
     set title [element get_value entry title]
-    set content [element get_value entry content]
+    set content [template::util::richtext::get_property contents [element get_value entry content]]
+    set content_format [template::util::richtext::get_property format [element get_value entry content]]
     set entry_date [element get_value entry entry_date]
     set draft_p [element get_value entry draft_p]
     set draft_p [ad_decode $draft_p "" "f" $draft_p]
@@ -68,12 +61,19 @@ if { [form is_valid entry] } {
                 -package_id [ad_conn package_id] \
                 -title $title \
                 -content $content \
+                -content_format $content_format \
                 -entry_date $entry_date \
                 -draft_p "$draft_p"
     } else {
-        set set_clauses { "title = :title" "content = :content" "entry_date = to_date(:entry_date, 'YYYY-MM-DD')" "draft_p = :draft_p" }
+        set set_clauses { 
+            "title = :title" 
+            "content = :content"
+            "content_format = :content_format"
+            "entry_date = to_date(:entry_date, 'YYYY-MM-DD')" 
+            "draft_p = :draft_p" 
+        }
 
-        set org_draft_p [db_string org_draft_p {} ]
+        set org_draft_p [db_string org_draft_p {}]
 
         if { [string equal $draft_p "t"] && [string equal $org_draft_p "f"] } {
             # If this is a publish, set the posted_date to now

@@ -26,7 +26,11 @@ set general_comments_package_url [general_comments_package_url]
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
 set blog(title) [ad_quotehtml $blog(title)]
-set blog(content) [ns_adp_parse -string $blog(content)]
+
+# LARS:
+# Not sure we should do the ns_adp_parse thing here, but heck, why not
+# It should be safe, given the security checks
+set blog(content) [ns_adp_parse -string [ad_html_text_convert -from $blog(content_format) -to "text/html" $blog(content)]]
 
 set entry_id $blog(entry_id)
 

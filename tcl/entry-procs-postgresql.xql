@@ -1,12 +1,14 @@
 <?xml version="1.0"?>
 
 <queryset>
+    <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
     <fullquery name="lars_blogger::entry::get.select_entry">
         <querytext>
 		    select b.entry_id,  
                            b.title, 
                            b.content, 
+                           b.content_format, 
                            b.draft_p, 
                            to_char(b.entry_date, 'YYYY-MM-DD') as entry_date,
 		           to_char(b.entry_date, 'fmDayfm, Month fmDDfm, YYYY') as entry_date_pretty, 
