@@ -71,7 +71,6 @@ as
             content,
             content_format,
             entry_date,
-            posted_date,
             draft_p,
             deleted_p
         ) values (
@@ -82,7 +81,6 @@ as
             pinds_blog_entry.new.content,
             pinds_blog_entry.new.content_format,
             pinds_blog_entry.new.entry_date,
-            sysdate,
             pinds_blog_entry.new.draft_p,
             'f'
         );

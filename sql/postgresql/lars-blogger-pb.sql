@@ -65,7 +65,6 @@ begin
       content,
       content_format,
       entry_date,
-      posted_date,
       draft_p,
       deleted_p
     ) values (
@@ -77,7 +76,6 @@ begin
       p_content,
       p_content_format,
       p_entry_date,
-      current_timestamp,
       p_draft_p,
       ''f''
     );
