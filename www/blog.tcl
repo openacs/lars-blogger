@@ -31,7 +31,7 @@ switch -exact $type {
 
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
-set package_url [lars_blog_public_package_url]
+set package_url [lars_blog_public_package_url -package_id $package_id]
 
 set admin_p [ad_permission_p $package_id admin]
 

@@ -8,7 +8,7 @@
   </table>
   <group column="entry_date">
     <div style="border-bottom:1px dashed #3366cc; padding-bottom:14px;">
-      <include src="entry-chunk" &="blog">
+      <include src="entry-chunk" &="blog" package_id="@package_id@">
     </div>
   </group>
 </multiple>
