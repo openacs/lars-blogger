@@ -72,30 +72,26 @@ ad_proc -public metaWeblog.newPost {
     }
     
     # OpenACS time format YYYY-MM-DD
-    set fmt "%Y-%m-%d"
+    set fmt "%Y-%m-%d %H:%M:%S"
 
     # hopefully pubDate is in a readable format
     if { [catch {set pubDate [clock format [clock scan $content(pubDate)] -format $fmt]}] } {
         set pubDate [clock format [clock seconds] -format $fmt]
     }
     
-    # ignore 'enclosure' for now
-
     if { [exists_and_not_null content(categories)] } {
 	# Only looking at the first category
-	set category_name [lindex $content(categories) 0]
-	set category_id [db_string select_category_id { 
-	    select category_id
-	    from   pinds_blog_categories 
-	    where  package_id = :package_id 
-	    and    name = :category_name 
-	}]
+	set category_id [lars_blogger::category::get_id_by_name \
+			     -package_id $package_id \
+			     -name [lindex $content(categories) 0]]
     } else {
 	set category_id {}
     }
 	
-    
-    return [list -string [lars_blog_entry_add -entry_id $entry_id \
+    # ignore 'enclosure' for now
+
+    return [list -string [lars_blogger::entry::new \
+			      -entry_id $entry_id \
 			      -package_id $package_id \
 			      -title $content(title) \
 			      -content $content(description) \
@@ -144,16 +140,26 @@ ad_proc -public metaWeblog.editPost {
     }
     
     # OpenACS time format YYYY-MM-DD
-    set fmt "%Y-%m-%d"
+    set fmt "%Y-%m-%d %H:%M:%S"
 
     # hopefully pubDate is in a readable format
     if { [catch {set pubDate [clock format [clock scan $content(pubDate)] -format $fmt]}] } {
         set pubDate [clock format [clock seconds] -format $fmt]
     }
     
-    # ignore 'category', 'enclosure' for now
+    if { [exists_and_not_null content(categories)] } {
+	# Only looking at the first category
+	set category_id [lars_blogger::category::get_id_by_name \
+			     -package_id $package_id \
+			     -name [lindex $content(categories) 0]]
+    } else {
+	set category_id {}
+    }
+	
+    # ignore 'enclosure' for now
     
-    lars_blog_entry_edit -entry_id $entry_id \
+    lars_blogger::entry::edit \
+	-entry_id $entry_id \
         -title $content(title) \
         -content $content(description) \
         -content_format "text/html" \

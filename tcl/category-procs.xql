@@ -19,5 +19,14 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="lars_blogger::category::get_id_by_name.select_category_id">
+        <querytext>
+	select category_id
+	from   pinds_blog_categories 
+	where  package_id = :package_id 
+	and    name = :category_name 
+        </querytext>
+    </fullquery>
+
 </queryset>
 

@@ -46,3 +46,11 @@ ad_proc lars_blogger::category::get_existing_short_names {
     return [db_list short_names {}]
 }
 
+ad_proc lars_blogger::category::get_id_by_name {
+    {-package_id:required}
+    {-name:required}
+} {
+    Returns category ID from name (not short_name)
+} {
+    return [db_string select_category_id {} -default {}]
+}
