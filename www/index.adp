@@ -74,7 +74,7 @@
           <a href="@package_url@entry-edit" title="Add an entry to this blog">Add entry</a><br>
           <a href="@package_url@drafts" title="View draft entries">Draft entries<a/>
           <if @admin_p@ true>
-            <br><a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
+            <br><a href="@package_url@admin/" title="Visit administration pages">Administer</a>
           </if>
         </div>
       </if>
@@ -98,17 +98,12 @@
         </div>
       </include-optional>
 
-<if 0>
-Temporarly turning off this feature which hasn't been ported to Oracle
-yet so that it at least doesn't completely break the application.
-
       <include-optional src="/packages/lars-blogger/lib/blogroll">
         <div class="lars_blogger_portlet">
           <h2>Blogroll</h2>
           <include-output>
         </div>
       </include-optional>
-</if>
 
       <include-optional src="/packages/lars-blogger/lib/technorati">
 	<div class="lars_blogger_portlet">
