@@ -7,14 +7,14 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="0.8.6" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.6.apm">
+    <version name="0.8.7" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.7.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Write your own web log</summary>
         <release-date>2003-03-13</release-date>
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
         <description format="text/html">Manages multiple web logs for your site. Just mount multiple instances, and you can do all the blogging you want.</description>
 
-        <provides url="lars-blogger" version="0.8.6"/>
+        <provides url="lars-blogger" version="0.8.7"/>
         <requires url="acs-datetime" version="4.0"/>
         <requires url="general-comments" version="4.0"/>
         <requires url="notifications" version="0.1"/>

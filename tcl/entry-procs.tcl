@@ -59,7 +59,11 @@ ad_proc -public lars_blogger::entry::do_notifications {
 
     set new_content ""
     append new_content "$blog(poster_first_names) $blog(poster_last_name) posted to $blog_name at $blog(posted_time_pretty) on $blog(entry_date_pretty):\n\n"
-    append new_content "$blog(title)\n\n"
+    append new_content "$blog(title)\n[string repeat "-" [string length $blog(title)]]\n"
+    if { ![empty_string_p $blog(title_url)] } {
+        append new_content "$blog(title_url)\n"
+    }
+    append new_content "\n"
     append new_content "[ad_convert_to_text -- [ns_adp_parse -string $blog(content)]]\n\n"
     append new_content "This entry: $entry_url\n\n"
     append new_content "$blog_name: $blog_url\n"
