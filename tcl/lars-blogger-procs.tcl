@@ -44,8 +44,8 @@ ad_proc -public lars_blog_entry_add {
 
 
 ad_proc -private lars_blog_get_as_string_mem { 
-    {-package_id:required}
-	{-admin_p:required}
+    package_id
+    admin_p
 } {
     return [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/blog" [list package_id $package_id]]
 }
