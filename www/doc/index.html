@@ -7,15 +7,6 @@
 By <a href="http://www.pinds.com/lars/">Lars Pind</a> and <a href="http://bcuni.net">Simon Carstensen</a>
 <hr>
 
-<!--<h3>Why</h3>
-
-<p>
-  I wrote this blogger package for my own web site at <a
-  href="http://www.pinds.com/">pinds.com</a>. For background
-  information, please visit <a
-  href="http://www.pinds.com/download/">http://www.pinds.com/download</a>.
-</p>-->
-
 <h3>Download</h3>
 
 <p>
@@ -157,20 +148,42 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
   disallow access to your blog via XML-RPC.
 </p>
 
+<h3>Posting From News Aggregator via URL</h3>
+
+<p>
+  Some news aggregators can blog items you read via simply sending you
+  to the proper URL. Here's what you need to specify in <a
+  href="http://www.bradsoft.com/feeddemon/index.asp">FeedDemon</a> to
+  make Blog-this-item work there:
+</p>
+
+<pre>
+<i>URL-of-your-blog</i>/entry-edit?title=$ITEM_TITLE$&title_url=$ITEM_LINK$&content=$ITEM_DESCRIPTION$
+</pre>
+
 <h3>Road Map</h3>
 
 <ul>
-  <li>Categorize and full-text-search-index blog entries so the archives
-    are more useful.</li>
+  <li>
+    Full-text-search-index blog entries so the archives
+    are more useful.
+  </li>
+  <li>
+    Use new categories package for categorization
+  </li>
   <li>
     Use content repository.
   </li>
-  <li>Ability to modify templates for each instance individually through
-    the UI. </li>
-  <li>Support for Trackback</li>
+  <li>
+    Ability to modify templates for each instance and user individually through
+    the UI.
+  </li>
   <li>WYISIYG editor</li>
-  <li>Improved RSS feed</li>
+  <li>Improved RSS 2.0 feed stuff</li>
   <li>Improved Configuration Settings.</li>
+  <li>Technorati</li>
+  <li>Blogroll.</li>
+  <li>Integrate with bookshelf, photo-album in a portal</li>
   <li>Make it safe to use in a not-so-protected environment, e.g.,
     disable &lt;% ... %&gt; ADP notation.</li>
   <li>Better documentation.</li>
@@ -179,7 +192,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
     workflow-administered approval process.
   </li>
   <li>
-    Nicer interface (MovableType)
+    Nicer interface (MovableType/TypePad has a nice interface)
   </li>
 </ul>
 
