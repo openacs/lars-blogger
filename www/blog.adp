@@ -11,11 +11,8 @@
        class="action_link">@blog_name@</a><br />
   </if>
   
-  <b>&raquo;</b>
-  <a href="@archive_url@" title="Visit the archive for @blog_name@" class="action_link">Archive</a><br />
-  
+  <a href="@archive_url@" title="Visit the archive for @blog_name@" class="action">Archive</a>
   <if @create_p@ true>
-    <b>&raquo;</b>
-    <a href="@entry_add_url@" title="Add an entry to @blog_name@" class="action_link">Add entry</a>
+    <a href="@entry_add_url@" title="Add an entry to @blog_name@" class="action">Add entry</a>
   </if>
 </p>
