@@ -27,7 +27,7 @@
         </callbacks>
         <parameters>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="DisplayUsersP"  default="0" description="Should we display a list of bloggers on the index page."/>
-            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableAutoDiscoveyAndPing"  default="1" description="Enable auto-discovery and sedning of trackback pings" section_name="Trackback"/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableAutoDiscoveyAndPing"  default="1" description="Enable auto-discovery and sending of trackback pings" section_name="Trackback"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableCategoriesP"  default="1" description="Should entries be categorized?"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableIncomingTrackback"  default="1" description="Enable incoming trackback" section_name="Trackback"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="HeaderBackgroundColor"  default="#dcdcdc" description="Background color for the header bars, those with the entry date, calendar, etc."/>
