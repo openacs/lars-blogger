@@ -149,3 +149,29 @@ begin
     return 0;
 end;
 ' language 'plpgsql';
+
+-- Remove the new parameter rss_file_name and update the old one
+-- We do this since the APM does not know that the old parameter
+-- has been replaced and we want to retain the values of the old parameter
+create function inline_0 ()
+returns integer as '
+declare
+    v_parameter_id integer;
+begin
+  select parameter_id into v_parameter_id
+  from apm_parameters
+  where parameter_name = ''rss_file_name'';
+
+  perform apm__unregister_parameter(v_parameter_id);
+
+  return 0;
+end;
+' language 'plpgsql';
+select inline_0 ();
+drop function inline_0 ();
+
+update apm_parameters
+        set parameter_name = 'rss_file_name',
+            description = 'What name should we advertise the RSS feed under, relative to the blog mount point. Leave blank if no RSS feed.',
+            default_value = 'rss.xml'
+        where parameter_name = 'rss_file_url';
