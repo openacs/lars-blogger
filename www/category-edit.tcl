@@ -16,8 +16,8 @@ set context [list $page_title]
 # Must be logged in
 auth::require_login
 
-# Must have write privilege
-permission::require_permission -object_id [ad_conn package_id] -privilege write
+# Must have admin privilege (since categories are package-wide, not just per user)
+permission::require_permission -object_id [ad_conn package_id] -privilege admin
 
 set package_id [ad_conn package_id]
 
