@@ -28,7 +28,6 @@ ad_proc -private lars_blog__rss_datasource {
 
     set column_array(channel_title) $blog_title
     set column_array(channel_description) $blog_title
-    set column_array(channel_pubDate) [db_string now {}]
 
     set column_array(version) 2.0
 
