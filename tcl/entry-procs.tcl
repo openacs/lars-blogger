@@ -48,9 +48,9 @@ ad_proc -public lars_blogger::entry::publish {
     
     # Notifications
     lars_blogger::entry::do_notifications -entry_id $entry_id
-    
+
     # Ping weblogs.com
-    lars_blog_weblogs_com_update_ping
+    lars_blog_weblogs_com_update_ping -package_id $package_id
 
     # trackback
     lars_blogger::entry::trackback -entry_id $entry_id
@@ -175,8 +175,8 @@ ad_proc -public lars_blogger::entry::get_comments {
     -entry_id
     {-multirow "comments"}
 } {
-    @ param entry_id
-    @ param multirow
+    @param entry_id
+    @param multirow
     upvars a multirow in the caller to display comments
 } {
 

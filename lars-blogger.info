@@ -21,6 +21,7 @@
         <requires url="notifications" version="5.0.0a5"/>
         <requires url="rss-support" version="0.3d1"/>
         <requires url="trackback" version="0.1d"/>
+        <requires url="xml-rpc" version="0.1"/>
 
         <callbacks>
             <callback type="after-instantiate"  proc="lars_blogger::install::package_instantiate"/>
