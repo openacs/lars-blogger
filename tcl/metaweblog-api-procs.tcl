@@ -201,11 +201,11 @@ ad_proc -public metaWeblog.getPost {
                      postid [list -string $entry_id] \
                      userid [list -string $user_id] \
                      description [list -string $content(content)] \
-                     category [list -string $category_name] \
-                     comments [list -string $perm_url] \
-                     guid [list -string $perm_url] \
-                     pubDate [list -date $entry_date_ansi] \
-                     dateCreated [list -date $entry_date_ansi] \
+                     category [list -string $content(category_name)] \
+                     comments [list -string $content(permalink_url)] \
+                     guid [list -string $content(permalink_url)] \
+                     pubDate [list -date $content(entry_date_ansi)] \
+                     dateCreated [list -date $content(entry_date_ansi)] \
                     ]]
 }
 
@@ -246,7 +246,7 @@ ad_proc -public metaWeblog.getRecentPosts {
                              postid [list -string $entry_id] \
                              userid [list -string $user_id] \
                              description [list -string $content] \
-                             category [list -string $category_name] \
+                             category [list -string $category] \
                              comments [list -string $perm_url] \
                              guid [list -string $perm_url] \
                              pubDate [list -date $entry_date_ansi] \

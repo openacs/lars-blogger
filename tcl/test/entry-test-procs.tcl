@@ -2,7 +2,7 @@ ad_library {
     Test cases for the entry API.
 }
 
-aa_register_case rss_generation -cats {api db smoke} { 
+aa_register_case -cats {api db smoke} rss_generation { 
     Test RSS generation
 } {
     # Test case written to expose bug in RSS datasource generation: 

@@ -280,7 +280,7 @@ ad_proc -public blogger.getPost {
         set struct(content) [list -string "$e(content)"]
         set struct(userid) [list -string $user_id]
         set struct(postid) [list -string $entry_id]
-        set struct(dateCreated) [list -date $entry_date_ansi]
+        set struct(dateCreated) [list -date $e(entry_date_ansi)]
     }
 
     return [list -struct [array get struct]]

@@ -6,7 +6,7 @@ ad_library {
     @cvs-id $Id$
 }
 
-aa_register_case lars_blog_add_entry -cats {smoke api db} {
+aa_register_case -cats {smoke api db} lars_blog_add_entry {
     Test the lars_blogger::entry::new proc
 } {    
 
