@@ -3,7 +3,7 @@
 <property name="focus">category.name</property>   
 <property name="context">@context@</property>   
 
-<formtemplate id="category" style="standard-lars"></formtemplate>
+<formtemplate id="category"></formtemplate>
 
 <p><listtemplate name="categories"></listtemplate></p>
 
