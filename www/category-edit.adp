@@ -5,19 +5,6 @@
 
 <formtemplate id="category" style="standard-lars"></formtemplate>
 
+<p><listtemplate name="categories"></listtemplate></p>
 
-
-<ul>
-<multiple name="categories">
-  <li>
-  @categories.name@ &minus; @categories.short_name@
-  (<a href="category-edit?category_id=@categories.category_id@">edit</a>
-  |
-  <a href="category-delete?category_id=@categories.category_id@&return_url=category-edit">delete</a>)
-  </li>
-</multiple>
-</ul>
-<if @insert_or_update@ eq update>
-<a href="category-edit">Add new category</a>
-</if>
 

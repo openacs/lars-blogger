@@ -11,7 +11,7 @@ set context [list]
 
 set title [db_string package_name { *SQL* }]
 
-set parameters_url "/admin/site-map/parameter-set?[export_vars { package_id }]"
+set parameters_url [export_vars -base "/shared/parameters" { package_id { return_url [ad_return_url] } }]
 
 set arrow_url "[lars_blog_public_package_url -package_id $package_id]graphics/arrow-box.gif"
 

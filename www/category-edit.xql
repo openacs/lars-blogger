@@ -4,9 +4,15 @@
 
     <fullquery name="categories">
         <querytext>
-	        select * 
-                from pinds_blog_categories
-                where package_id = :package_id
+	        select c.category_id,
+                       c.name, 
+                       c.short_name,
+                       (select count(*) 
+                        from   pinds_blog_entries e
+                        where  e.category_id = c.category_id) as num_entries
+                from   pinds_blog_categories c
+                where  c.package_id = :package_id
+                order  by upper(c.name), c.name 
         </querytext>
     </fullquery>
 

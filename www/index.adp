@@ -11,7 +11,7 @@
      <link rel="stylesheet" type="text/css" href="@stylesheet_url@" />
   </property>
 </else>
-<property name="context_bar">@context_bar;noquote@</property>
+<property name="context">@context;noquote@</property>
 
 <div class="lars_blogger_body">
 
