@@ -152,7 +152,7 @@ ad_proc -private lars_blog_weblogs_com_update_ping {
     set blog_url "[ad_url]$package_url"
 
     ns_log debug "lars_blog_weblogs_com_update_ping:"
-    if { [catch {xmlrpc::remote_call -timeout 60 $location weblogUpdates.ping -string [ad_quotehtml $blog_title] -string [ad_quotehtml $blog_url]} errmsg ] } {
+    if { [catch {xmlrpc::remote_call $location weblogUpdates.ping -string [ad_quotehtml $blog_title] -string [ad_quotehtml $blog_url]} errmsg ] } {
         ns_log warning "lars_blog_weblogs_com_update_ping error: $errmsg"
         return -1
     } else {
