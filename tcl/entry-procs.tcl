@@ -29,7 +29,7 @@ ad_proc -public lars_blogger::entry::htmlify {
     # It should be safe, given the standard HTML filter security checks, which 
     # wouldn't let unsafe tags slip through, anyway
     
-    set row(content) [ad_html_text_convert -from $row(content_format) -to "text/html" $row(content)]
+    set row(content) [ad_html_text_convert -from $row(content_format) -to "text/html" -- $row(content)]
     
     # We wrap this in a catch so if it bombs, at least we won't break any pages
     catch {
