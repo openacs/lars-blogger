@@ -22,7 +22,7 @@ ad_proc -public lars_blogger::entry::require_write_permission {
     set admin_p [permission::permission_p -privilege "admin" -object_id $entry_id]
     
     if { !$admin_p && [ad_conn user_id] != [db_string creation_user {}] } {
-        ad_return_forbidden  "Security Violation"  "<blockquote>
+        ad_return_forbidden  "Permission Denied"  "<blockquote>
     You don't have permission to modify this entry.
     <br>
     This incident has been logged.
