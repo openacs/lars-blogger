@@ -16,8 +16,8 @@ set context_bar [ad_context_bar]
 
 set page_title [lars_blog_name]
 
-if { ![empty_string_p [ad_parameter "rss_file_url"]] } {
-    set rss_file_url "[ad_url][lars_blog_public_package_url][ad_parameter "rss_file_url"]"
+if { ![empty_string_p [parameter::get -parameter "rss_file_url"]] } {
+    set rss_file_url "[ad_url][lars_blog_public_package_url][parameter::get -parameter "rss_file_url"]"
 }
 
 set admin_p [ad_permission_p [ad_conn package_id] admin]

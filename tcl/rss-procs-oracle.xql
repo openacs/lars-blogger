@@ -5,7 +5,7 @@
 
     <fullquery name="lars_blog__rss_datasource.now">
         <querytext>
-			select to_char(sysdate,'DD Mon YYYY hh12:MI am') 
+			select to_char(sysdate,'DD Mon YYYY hh12:MI am')  from dual
         </querytext>
     </fullquery>
 

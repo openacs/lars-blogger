@@ -15,10 +15,17 @@ set channel_link [lars_blog_public_package_url]
 
 db_transaction {
 
-    set subscr_id [db_string create_subscr {}]
+    if { [empty_string_p [parameter::get -parameter "rss_file_url"]] } {
+        parameter::set_value -parameter "rss_file_url" -value "rss/rss.xml"
+    } 
+
+    set subscr_id [db_exec_plsql create_subscr {}]
     
     db_dml update_subscr {}
 
 }
+
+# Run it now
+rss_gen_report $subscr_id
 
 ad_returnredirect .

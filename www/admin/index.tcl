@@ -21,3 +21,6 @@ set rss_setup_url "rss-setup"
 
 set rss_manage_url "[apm_package_url_from_key "rss-support"]my-subscrs"
 
+if { ![empty_string_p [parameter::get -parameter "rss_file_url"]] } {
+    set rss_file_url "[ad_url][lars_blog_public_package_url][parameter::get -parameter "rss_file_url"]"
+}

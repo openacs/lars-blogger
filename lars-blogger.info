@@ -7,18 +7,18 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="0.8.5" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.5.apm">
+    <version name="0.8.6" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.6.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Write your own web log</summary>
         <release-date>2003-03-13</release-date>
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
         <description format="text/html">Manages multiple web logs for your site. Just mount multiple instances, and you can do all the blogging you want.</description>
 
-        <provides url="lars-blogger" version="0.8.5"/>
+        <provides url="lars-blogger" version="0.8.6"/>
         <requires url="acs-datetime" version="4.0"/>
         <requires url="general-comments" version="4.0"/>
         <requires url="notifications" version="0.1"/>
-        <requires url="rss-support" version="0.2d1"/>
+        <requires url="rss-support" version="0.2d2"/>
 
         <files>
             <file type="package_spec" path="lars-blogger.info"/>
@@ -34,7 +34,7 @@
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="channel_image_url"  description="The URL, relative to this server, to the image that corresponds to this blog in the rss channel" section_name="rss"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_width"  description="Width in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_height"  description="Height in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="rss_file_url"  default="rss/rss.xml" description="What URL should we advertise the RSS feed under, relative to the blog mount point. Leave blank if no RSS feed." section_name="rss"/>
+            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="rss_file_url"  default="" description="What URL should we advertise the RSS feed under, relative to the blog mount point. Leave blank if no RSS feed. Must start with rss/, and should typically be something like rss/rss.xml" section_name="rss"/>
         </parameters>
 
     </version>

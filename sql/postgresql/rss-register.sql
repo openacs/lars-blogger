@@ -27,3 +27,8 @@ select acs_sc_impl_alias__new(
        'lars_blog__rss_lastUpdated',            -- impl_alias
        'TCL'                                    -- impl_pl
 );
+
+select acs_sc_binding__new (
+    'RssGenerationSubscriber',                  -- contract_name
+    'pinds_blog_entries'                        -- impl_name
+);

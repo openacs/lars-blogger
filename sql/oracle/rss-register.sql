@@ -32,6 +32,11 @@ begin
         impl_pl => 'TCL'
     );
 
+    acs_sc_binding.new (
+        contract_name => 'RssGenerationSubscriber',
+        impl_name => 'pinds_blog_entries'
+     );
+
 end;
 /
 show errors
