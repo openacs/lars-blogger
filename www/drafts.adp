@@ -37,6 +37,5 @@
 </else>
 
 <p>
-  <a href="@entry_add_url@"><img src="@arrow_url@" width="11" height="11" border="0" alt="Add entry"></a>
-  <a href="@entry_add_url@" class="action_link">Add entry</a>
+  &raquo; <a href="@entry_add_url@" class="action_link">Add entry</a>
 </p>
