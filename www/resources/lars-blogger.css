@@ -157,3 +157,11 @@
   list-style-type: none;
 }
 
+.lars_blogger_blogroll {
+	display: inline;
+}
+
+.lars_blogger_blogroll_entry {
+	list-style-type: none;
+}
+
