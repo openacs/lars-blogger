@@ -18,6 +18,14 @@ list::create \
     -actions {
         "Add Link" "blogroll-ae" "Add a link to your blogroll"
     } -elements {
+        edit {
+            sub_class narrow
+            label ""
+            display_template {
+                <img src="/shared/images/Edit16.gif" height="16" width="16" border="0">
+            }
+            link_url_col edit_link
+        }
         name {
             label "Name"
         }
@@ -34,16 +42,11 @@ list::create \
                 <a href="@links.move_down_link@">Down</a>
             }
         }
-        edit {
-            label ""
-            display_template {
-                <a href="@links.edit_link@">Edit</a>
-            }
-        }
         delete {
             label ""
+            sub_class narrow
             display_template {
-                <a onclick="if (confirm('Are you sure that you want to delete this link?')) return true; else return false;" href="@links.delete_link@">Delete</a>
+                <a onclick="if (confirm('Are you sure that you want to delete this link?')) return true; else return false;" href="@links.delete_link@"><img src="/shared/images/Delete16.gif" height="16" width="16" border="0"></a>
             }
         }
     }
