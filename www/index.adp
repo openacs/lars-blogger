@@ -5,12 +5,12 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" target=_test href="@rss_file_url@" />
   </property>
 </if>
-<include src="admin-links">
+<property name="context_bar">@context_bar@</property>
 
 <table width="100%">
   <tr>
     <td valign="top">
-      <include src="blog">
+      <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@">
     </td>
     <td valign="top">
 
@@ -22,7 +22,7 @@
         </tr>
         <tr>
           <td nowrap align="center">
-            <include src="calendar">
+            <include src="calendar" date="@date@">
           </td>
         </tr>
         <tr>
@@ -30,6 +30,25 @@
             <table><tr><td></td></tr></table>
           </td>
         </tr>
+
+        <if @admin_p@ true>
+          <tr>
+            <th bgcolor="@header_background_color@">
+              Actions
+            </th>
+          </tr>
+          <tr>
+            <td align="center">
+              <a href="admin/entry-edit" title="Add an entry to this blog">Add entry</a><br>
+              <a href="admin/" title="Visit the administration pages for this blog">Administer<a/>
+            </td>
+          </tr>
+          <tr>
+            <td height="16">
+              <table><tr><td></td></tr></table>
+            </td>
+          </tr>
+        </if>
 
         <tr>
           <th bgcolor="@header_background_color@">

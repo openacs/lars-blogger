@@ -14,6 +14,6 @@ if { [empty_string_p $year] && [empty_string_p $month] && [empty_string_p $day] 
     rp_form_put month $month
     rp_form_put day $day
 
-    rp_internal_redirect "/packages/lars-blogger/www/archive-display"
+    rp_internal_redirect "/packages/lars-blogger/www/index"
 }
 

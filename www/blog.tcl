@@ -33,6 +33,14 @@ set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
 set package_url [lars_blog_public_package_url -package_id $package_id]
 
+set blog_name [lars_blog_name -package_id $package_id]
+
+if { [ad_conn isconnected] && ![string equal $package_url [string range [ad_conn url] 0 [string length $package_url]]] } {
+    set blog_url $package_url
+} else {
+    set blog_url {}
+}
+
 set admin_p [ad_permission_p $package_id admin]
 
 set count 0
