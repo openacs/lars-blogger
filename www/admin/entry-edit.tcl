@@ -27,7 +27,7 @@ element create entry entry_date -label "Entry date" -datatype text \
         -help_text "If you set this to something other than today's date, you must use this form to publish your entry, otherwise the entry date will be set to the date you publish the item." \
         -after_html {(<a href="javascript:setEntryDateToToday()">Set to today</a>)}
 
-element create entry draft_p -label "Draft" -datatype text -widget checkbox -options { { "This is a draft, don't publish it" "t" } } -optional
+element create entry draft_p -label "Post Status" -datatype text -widget select -options { { "Draft" "t" } { "Publish" "f" } }
 
 element create entry entry_id -widget hidden -datatype text
 element create entry insert_or_update -widget hidden -datatype text

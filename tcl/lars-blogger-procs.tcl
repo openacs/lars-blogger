@@ -76,3 +76,13 @@ ad_proc -public lars_blog_public_package_url {
     }
     return [ad_parameter -package_id $package_id "public_url" "lars-blogger" $default_url] 
 }
+
+ad_proc -public lars_blog_name { 
+    -package_id
+} {
+    if { ![exists_and_not_null package_id] } {
+        set package_id [ad_conn package_id]
+    }
+    array set site_node [site_node::get_from_object_id -object_id [ad_conn package_id]]
+    return $site_node(instance_name)
+}

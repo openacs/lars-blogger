@@ -19,7 +19,8 @@ set page_title "Preview Blog Entry"
 
 set context_bar [ad_context_bar $page_title]
 
-db_1row entry { *SQL* } -column_array blog
+set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
+lars_blogger::entry::get -entry_id $entry_id -array blog
 
 ad_return_template

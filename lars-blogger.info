@@ -7,19 +7,20 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
 
-    <version name="0.7d" url="http://openacs.org/repository/download/apm/lars-blogger-0.7d.apm">
+    <version name="0.8" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.apm">
     <database-support>
         <database>oracle</database>
         <database>postgresql</database>
     </database-support>
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Write your own web log</summary>
-        <release-date>2002-08-13</release-date>
+        <release-date>2002-09-15</release-date>
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
         <description format="text/html">Manages multiple web logs for your site. Just mount multiple instances, and you can do all the blogging you want.</description>
 
         <requires url="acs-datetime" version="4.0"/>
         <requires url="general-comments" version="4.0"/>
+        <requires url="notifications" version="0.1"/>
 
         <files>
             <file type="package_spec" path="lars-blogger.info"/>
@@ -27,13 +28,21 @@
             <file type="data_model_drop" db_type="oracle" path="sql/oracle/lars-blogger-drop.sql"/>
             <file type="data_model" db_type="oracle" path="sql/oracle/lars-blogger-package-create.sql"/>
             <file type="data_model" db_type="oracle" path="sql/oracle/lars-blogger-package-drop.sql"/>
+            <file type="data_model" db_type="oracle" path="sql/oracle/notifications-drop.sql"/>
+            <file type="data_model" db_type="oracle" path="sql/oracle/notifications-init.sql"/>
             <file type="data_model" db_type="oracle" path="sql/oracle/rss-register.sql"/>
             <file type="data_model" db_type="oracle" path="sql/oracle/rss-unregister.sql"/>
+            <file type="data_model_upgrade" db_type="oracle" path="sql/oracle/upgrade/upgrade-0.7d-0.8.sql"/>
             <file type="data_model_create" db_type="postgresql" path="sql/postgresql/lars-blogger-create.sql"/>
             <file type="data_model_drop" db_type="postgresql" path="sql/postgresql/lars-blogger-drop.sql"/>
+            <file type="data_model" db_type="postgresql" path="sql/postgresql/notifications-drop.sql"/>
+            <file type="data_model" db_type="postgresql" path="sql/postgresql/notifications-init.sql"/>
             <file type="data_model" db_type="postgresql" path="sql/postgresql/rss-register.sql"/>
             <file type="data_model" db_type="postgresql" path="sql/postgresql/rss-unregister.sql"/>
             <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.6.4d-0.7d.sql"/>
+            <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.7d-0.8.sql"/>
+            <file type="tcl_procs" path="tcl/entry-procs.tcl"/>
+            <file type="query_file" path="tcl/entry-procs.xql"/>
             <file type="query_file" db_type="oracle" path="tcl/lars-blogger-procs-oracle.xql"/>
             <file type="query_file" db_type="postgresql" path="tcl/lars-blogger-procs-postgresql.xql"/>
             <file type="tcl_procs" path="tcl/lars-blogger-procs.tcl"/>
@@ -92,10 +101,8 @@
             <file type="content_page" path="www/graphics/arrow-box.gif"/>
             <file type="content_page" path="www/index.adp"/>
             <file type="content_page" path="www/index.tcl"/>
-            <file type="query_file" path="www/index.xql"/>
             <file type="content_page" path="www/one-entry.adp"/>
             <file type="content_page" path="www/one-entry.tcl"/>
-            <file type="query_file" path="www/one-entry.xql"/>
         </files>
         <parameters>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="ShowPosterP"  default="1" description="Show who posted the entry and when"/>

@@ -30,4 +30,11 @@ if { [empty_string_p $day] } {
 
 set date "$year-$month-[ad_decode $day "" "01" $day]"
 
+set notification_chunk [notification::display::request_widget \
+    -type lars_blogger_notif \
+    -object_id [ad_conn package_id] \
+    -pretty_name [lars_blog_name] \
+    -url [lars_blog_public_package_url] \
+]
+
 ad_return_template

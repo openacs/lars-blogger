@@ -30,14 +30,15 @@
             <table><tr><td></td></tr></table>
           </td>
         </tr>
+
         <tr>
           <th bgcolor="#e0d0b0">
-            Archive
+            Notifications
           </th>
         </tr>
         <tr>
-          <td nowrap>
-            <include src="blog-months">
+          <td nowrap align="center">
+            @notification_chunk@            
           </td>
         </tr>
         <tr>
@@ -45,6 +46,25 @@
             <table><tr><td></td></tr></table>
           </td>
         </tr>
+
+        <include-optional src="blog-months">
+          <tr>
+            <th bgcolor="#e0d0b0">
+              Archive
+            </th>
+          </tr>
+          <tr>
+            <td nowrap align="center">
+              <include-output>
+            </td>
+          </tr>
+          <tr>
+            <td height="16">
+              <table><tr><td></td></tr></table>
+            </td>
+          </tr>
+        </include-optional>
+
         <if @rss_file_url@ not nil>
           <tr>
             <th bgcolor="#e0d0b0" nowrap>

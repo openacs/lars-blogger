@@ -125,3 +125,4 @@ end;
 
 
 \i rss-register.sql
+\i notifications-init.sql

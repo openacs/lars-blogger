@@ -47,3 +47,4 @@ create table pinds_blog_entries (
 
 @@ lars-blogger-package-create
 @@ rss-register
+@@ notifications-init

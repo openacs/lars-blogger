@@ -6,6 +6,7 @@
 -- @cvs-id $Id$
 --
 
+\i notifications-drop.sql
 \i rss-unregister.sql
 
 create function inline_0 ()

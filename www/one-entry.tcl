@@ -21,7 +21,7 @@ if { [empty_string_p $return_url] } {
 
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
-db_1row entry { *SQL* } -column_array blog
+lars_blogger::entry::get -entry_id $entry_id -array blog
 
 set page_title $blog(title)
 

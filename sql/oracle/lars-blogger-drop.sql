@@ -8,6 +8,7 @@
 -- @cvs-id $Id$
 --
 
+@@ notifications-drop
 @@ rss-unregister
 
 begin
