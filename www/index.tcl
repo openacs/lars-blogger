@@ -44,6 +44,14 @@ if {$display_users_p && ![exists_and_not_null screen_name]} {
 
     db_multirow bloggers bloggers { *SQL* }
 
+    set user_has_blog_p 0
+    multirow foreach bloggers {
+        if { $user_id == [ad_conn user_id] } {
+            set user_has_blog_p 1
+            break
+        }
+    }
+
     ad_return_template
 
 } else {

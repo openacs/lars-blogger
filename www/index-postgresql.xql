@@ -5,12 +5,12 @@
 
     <fullquery name="bloggers">
         <querytext>
-		    select distinct screen_name
+		    select distinct u.screen_name, u.user_id
 		    from   pinds_blog_entries e join 
 		           acs_objects o on (o.object_id = e.entry_id) join 
 		           users u on (u.user_id = o.creation_user)
-		    where  package_id = :package_id
-                    and    screen_name != ''
+		    where  e.package_id = :package_id
+                    and    u.screen_name != ''
         </querytext>
     </fullquery>
 

@@ -20,9 +20,16 @@
   </else>
 
   <if @write_p@ true>
-    <p>
-      <b>&raquo;</b> <a href="@package_url@entry-edit" title="Add an entry to your weblog, or start a new weblog">Add entry or start a new weblog</a><br>
-    </p>
+    <if @user_has_blog_p@ true>
+      <p>
+        <b>&raquo;</b> <a href="@package_url@entry-edit" title="Add an entry to your weblog">Add entry</a><br>
+      </p>
+    </if>
+    <else>
+      <p>
+        <b>&raquo;</b> <a href="@package_url@entry-edit" title="Start your weblog">Start your weblog</a><br>
+      </p>
+    </else>
   </if>
 
   <if @admin_p@ true>
@@ -30,7 +37,6 @@
       <b>&raquo;</b> <a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
     </p>
   </if>
-
   
 </if>
 
