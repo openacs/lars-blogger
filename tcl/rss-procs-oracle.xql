@@ -22,7 +22,7 @@
                   where  e.package_id = :package_id
                   and    e.draft_p = 'f'
                   and    e.deleted_p = 'f'
-                  and    c.category_id = e.category_id (+)
+                  and    c.category_id (+) = e.category_id
                   order  by e.entry_date desc)
             where rownum < 11
         </querytext>
