@@ -3,10 +3,10 @@ ad_page_contract {} {
     {return_url ""}
 }
 
-permission::require_permission -object_id [ad_conn package_id] -privilege write
+# Must have admin privilege (since categories are package-wide, not just per user)
+permission::require_permission -object_id [ad_conn package_id] -privilege admin
 
 db_exec_plsql delete {}
-
 
 ad_returnredirect $return_url
 
