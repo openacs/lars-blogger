@@ -42,4 +42,31 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="lars_blogger::entry::get_comments.get_comments">
+	<querytext>
+      
+             select g.comment_id,
+		    r.content,
+                    r.title,
+                    r.mime_type,
+                    o.creation_user,
+                    acs_object__name(o.creation_user) as author,
+                    to_char(o.creation_date, 'MM-DD-YYYY') as pretty_date,
+                    to_char(o.creation_date, 'Month DD, YYYY HH12:MI PM') as pretty_date2,
+		    case when tb.comment_id is not null then 't' else 'f' end as trackback_p,
+		    tb.tb_url as trackback_url,
+		    coalesce(tb.name, tb.tb_url) as trackback_name
+               from general_comments g left join trackback_pings tb on g.comment_id=tb.comment_id,
+                    cr_revisions r,
+	            cr_items ci,
+                    acs_objects o
+              where g.object_id = :entry_id
+		and r.revision_id = ci.live_revision
+	        and ci.item_id=g.comment_id 
+                and o.object_id = g.comment_id
+              order by o.creation_date
+		
+	</querytext>
+    </fullquery>
+
 </queryset>

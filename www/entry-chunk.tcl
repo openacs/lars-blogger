@@ -59,7 +59,6 @@ set blog(comments_view_url) "${package_url}one-entry?[export_vars { entry_id }]"
 set display_categories [lars_blog_categories_p -package_id [ad_conn package_id]]
 
 if { [string equal $show_comments_p "t"] } {
-    set comments_html [general_comments_get_comments -print_content_p 1 $entry_id]
+    lars_blogger::entry::get_comments -entry_id $entry_id
 }
-
 ad_return_template

@@ -66,6 +66,9 @@ ad_proc -public lars_blogger::entry::publish {
     
     # Ping weblogs.com
     lars_blog_weblogs_com_update_ping
+
+    # trackback
+    lars_blogger::entry::trackback -entry_id $entry_id
 }
 
 
@@ -130,4 +133,41 @@ ad_proc -public lars_blogger::entry::do_notifications {
         -response_id $blog(entry_id) \
         -notif_subject $blog(title) \
         -notif_text $new_content
+}
+
+ad_proc lars_blogger::entry::trackback { -entry_id } {
+    sends trackback ping (if enabled)
+} {
+
+    if {[parameter::get -parameter EnableAutoDiscoveryAndPing -default "1"]} {
+
+	lars_blogger::entry::get -entry_id $entry_id -array entry
+	set url [ad_url][pinds_blog_entry__url $entry_id]
+	set excerpt [string range $entry(content) 0 [parameter::get -parameter TrackbackMaxExcerpt -default 200]]
+	set blog_name [lars_blog_name -package_id $entry(package_id)]
+
+	ns_log notice "Trackback sending: url=$url title=$entry(title) excerpt=$excerpt content=$entry(content) blog_name=$blog_name"
+	trackback::auto_ping -url $url \
+                -title $entry(title) \
+		-excerpt $excerpt \
+                -content $entry(content) \
+                -blog_name $blog_name
+
+    }
+
+}
+
+ad_proc -public lars_blogger::entry::get_comments {
+    -entry_id
+    {-multirow "comments"}
+} {
+    @ param entry_id
+    @ param multirow
+    upvars a multirow in the caller to display comments
+} {
+
+    set content_select [db_map content_select] ;# ", r.content"
+    upvar $multirow $multirow 
+    db_multirow $multirow get_comments ""
+
 }

@@ -27,13 +27,16 @@
         </callbacks>
         <parameters>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="DisplayUsersP"  default="0" description="Should we display a list of bloggers on the index page."/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableAutoDiscoveyAndPing"  default="1" description="Enable auto-discovery and sedning of trackback pings" section_name="Trackback"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableCategoriesP"  default="1" description="Should entries be categorized?"/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="EnableIncomingTrackback"  default="1" description="Enable incoming trackback" section_name="Trackback"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="HeaderBackgroundColor"  default="#dcdcdc" description="Background color for the header bars, those with the entry date, calendar, etc."/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="MaxNumEntriesOnFrontPage"  description="Maximum number of entries to show on the weblog front page. 0 or empty string for no maximum."/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="MinNumEntriesOnFrontPage"  default="3" description="Minimum number of entries to show on the weblog front page. 0 or empty string for no minimum."/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="NumDaysOnFrontPage"  default="30" description="Number of days worth of entries on the weblog front page. Default is 30. Set to 0 or empty string for no date limit."/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="ShowPosterP"  default="1" description="Show who posted the entry and when"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="StylesheetURL"  default="%lars-blogger.css" description="The url to the stylesheet used in conjunction with the weblog instance. '%' is replaced with the package_url."/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="TrackbackMaxExcerpt"  default="200" description="Maximum length of excerpt to send for trackback" section_name="Trackback"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_height"  description="Height in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="channel_image_url"  description="The URL, relative to this server, to the image that corresponds to this blog in the rss channel" section_name="rss"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_width"  description="Width in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
