@@ -35,6 +35,7 @@ drop function weblogger_channel__new(
 
 drop function weblogger_channel__delete (integer);
 
+drop table weblogger_technorati_cache;
 drop table weblogger_ping_urls;
 
 drop table weblogger_channels;

@@ -191,3 +191,16 @@ begin
     return v_entry_id;   
 end;
 ' language 'plpgsql';
+
+-- Cache for the Technorati API calls
+create table weblogger_technorati_cache (
+    package_id      integer
+                    constraint weblogger_ping_urls_package_id_fk
+                        references apm_packages(package_id)
+                        on delete cascade,
+    name            varchar(500),
+    url             varchar(500),
+    creation_date   timestamptz
+			default now()
+);
+

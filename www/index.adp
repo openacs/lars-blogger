@@ -90,6 +90,13 @@
 	  <include src="/packages/lars-blogger/lib/blogroll">
 	</div>
 
+	<include-optional src="/packages/lars-blogger/lib/technorati">
+	<div class="lars_blogger_portlet">
+	  <h2>Technorati Blogs</h2>
+	  <include-output>
+        </div>
+	</include-optional>
+
     </div>
 
 
