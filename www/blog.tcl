@@ -46,17 +46,17 @@ db_multirow blog blog { *SQL* } {
     }
     set row_number [incr count]
 
-    set return_url "${package_url}one-entry?[export_vars -url { entry_id }]"
-    set edit_url "${package_url}admin/entry-edit?[export_vars -url { entry_id return_url }]"
-    set delete_url "${package_url}admin/entry-delete?[export_vars -url { entry_id return_url }]"
-    set publish_url "${package_url}admin/entry-publish?[export_vars -url { entry_id return_url }]"
-    set revoke_url "${package_url}admin/entry-revoke?[export_vars -url { entry_id return_url }]"
-    set entry_archive_url "${package_url}archive/${entry_archive_url}#blog-entry-$entry_id"
+    set return_url "${package_url}one-entry?[export_vars { entry_id }]"
+    set edit_url "${package_url}admin/entry-edit?[export_vars { entry_id return_url }]"
+    set delete_url "${package_url}admin/entry-delete?[export_vars { entry_id return_url }]"
+    set publish_url "${package_url}admin/entry-publish?[export_vars { entry_id return_url }]"
+    set revoke_url "${package_url}admin/entry-revoke?[export_vars { entry_id return_url }]"
+    set entry_archive_url "${package_url}one-entry?[export_vars { entry_id }]"
 
-    set comment_add_url "[general_comments_package_url]comment-add?[export_vars -url { { object_id $entry_id } { object_name {[ad_html_to_text -- $title]} } { return_url "${package_url}flush-cache?[export_vars -url { return_url }]"} }]"
-    set comments_view_url "${package_url}one-entry?[export_vars -url { entry_id }]"
+    set comment_add_url "[general_comments_package_url]comment-add?[export_vars { { object_id $entry_id } { object_name {[ad_html_to_text -- $title]} } { return_url "${package_url}flush-cache?[export_vars { return_url }]"} }]"
+    set comments_view_url "${package_url}one-entry?[export_vars { entry_id }]"
     
-    set google_url "http://www.google.com/search?[export_vars -url { {q $title } }]"
+    set google_url "http://www.google.com/search?[export_vars { {q $title } }]"
 
     set content [ns_adp_parse -string $content]
 }
