@@ -8,6 +8,7 @@
 --
 
 @@ lars-blogger-categories-create.sql
+@@ lars-blogger-blogroll-create.sql
 
 declare
 begin
