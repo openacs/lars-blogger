@@ -22,9 +22,9 @@ if {![exists_and_not_null screen_name]} {
 if { ![empty_string_p [parameter::get -parameter "rss_file_name"]] } {
 
     if {[exists_and_not_null screen_name]} {
-        set rss_file_url "[ad_url][lars_blog_public_package_url]user/$screen_name/[parameter::get -parameter "rss_file_name"]"
+        set rss_file_url "[ad_url][lars_blog_public_package_url]user/$screen_name/rss/[parameter::get -parameter "rss_file_name"]"
     } else {
-        set rss_file_url "[ad_url][lars_blog_public_package_url][parameter::get -parameter "rss_file_name"]"
+        set rss_file_url "[ad_url][lars_blog_public_package_url]rss/[parameter::get -parameter "rss_file_name"]"
     }
 
 }
