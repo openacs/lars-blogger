@@ -43,7 +43,7 @@ create table weblogger_blogroll_entries (
     url                 varchar(1000)
                         constraint weblogger_blogroll_entries_url_nn
                             not null,
-    sort_order		integer default 0
+    sort_order          integer default 0
 );
 
 create or replace function weblogger_blogroll_entry__name (integer)
