@@ -50,7 +50,7 @@
              as entry_date_ansi,
            to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS')
              as sysdate_ansi,
-           title,  
+           e.title,  
            title_url,
            e.category_id,
            com.category_id as sw_category_id,
@@ -70,7 +70,7 @@
 		           persons p,
                    category_object_map com
                    $sw_category_filter_join_clause
-    where package_id = :package_id
+    where e.package_id = :package_id
     [ad_decode $date_clause "" "" "and    $date_clause"]
       and    draft_p = 'f'
       and    deleted_p = 'f'
