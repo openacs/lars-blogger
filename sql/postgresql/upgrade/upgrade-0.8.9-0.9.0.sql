@@ -65,8 +65,8 @@ begin
 
     PERFORM acs_permission__grant_permission(
         v_entry_id,
-	p_creation_user,
-	''admin''
+        p_creation_user,
+        ''admin''
     );
 
     return v_entry_id;   
@@ -79,15 +79,15 @@ select acs_object_type__create_type (
     'Weblogger Channels',       -- pretty_plural
     'acs_object',               -- supertype
     'weblogger_channels',       -- table_name
-    'channel_id',       	-- id_column
-    null,               	-- package_name
-    'f',        	        -- abstract_p
-    null,   	                -- type_extension_table
-    'weblogger_channels.name'	-- name_method
+    'channel_id',               -- id_column
+    null,                       -- package_name
+    'f',                        -- abstract_p
+    null,                       -- type_extension_table
+    null                        -- name_method
 );
 
 create table weblogger_channels (
-  channel_id    	integer
+  channel_id            integer
                         constraint channel_id_fk
                         references acs_objects(object_id)
                         constraint weblogger_channels_pk
@@ -95,7 +95,9 @@ create table weblogger_channels (
   package_id            integer
                         constraint weblogger_channels_package_id_kf
                         references apm_packages(package_id),
-  user_id		integer		
+  user_id               integer,
+  constraint weblogger_chnls_package_user_un
+  unique (package_id, user_id)
 );
 
 
@@ -110,7 +112,7 @@ create or replace function weblogger_channel__new (
 declare
     p_channel_id           alias for $1;
     p_package_id           alias for $2;
-    p_user_id		   alias for $3;
+    p_user_id              alias for $3;
     p_creation_user        alias for $4;
     p_creation_ip          alias for $5;
     v_channel_id           integer;
