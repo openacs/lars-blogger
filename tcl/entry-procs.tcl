@@ -199,7 +199,7 @@ ad_proc -public lars_blogger::entry::htmlify {
     }
     
     # look for the base site name in the url
-    if {[regexp {^https?://([^ /]+)} $row(title_url) initial base_url] } {
+    if { [regexp {^https?://([^ /]+)} $row(title_url) initial base_url] } {
         set row(title_url_base) $base_url
     } else {
         set row(title_url_base) {}
@@ -225,7 +225,11 @@ ad_proc -public lars_blogger::entry::do_notifications {
         append new_content "$blog(title_url)\n"
     }
     append new_content "\n"
-    append new_content "[ad_convert_to_text -- [ns_adp_parse -string $blog(content)]]\n\n"
+
+    lars_blogger::entry::htmlify \
+        -array blog
+
+    append new_content "[ad_html_text_convert -from text/html -to text/plain -- $blog(content)]\n\n"
     append new_content "$blog(entry_date_pretty) by $blog(poster_first_names) $blog(poster_last_name)" \n\n
 
     append new_content "Permalink: $entry_url\n\n"
