@@ -85,3 +85,9 @@ if { [template::util::is_true $show_comments_p] } {
 set blog(posted_time_pretty) [util::age_pretty \
                                  -timestamp_ansi $blog(entry_date_ansi) \
                                  -sysdate_ansi $blog(sysdate_ansi)]
+
+if {[exists_and_not_null template]} {
+  ad_return_template $template
+} else {
+  ad_return_template
+}

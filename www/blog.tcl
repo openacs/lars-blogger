@@ -13,7 +13,8 @@ ad_page_element_contract {
     min_num_entries:optional
     num_days:optional
     max_content_length:integer,optional
-    comments_page
+    comments_page:optional
+    template:optional
 }
 
 
@@ -238,3 +239,8 @@ set stylesheet_url [lars_blog_stylesheet_url -package_id $package_id]
 
 set rss_file_url [lars_blogger::get_rss_file_url -package_id $package_id]
 
+if {[exists_and_not_null template]} {
+  ad_return_template $template
+} else {
+  ad_return_template
+}
