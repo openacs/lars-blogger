@@ -82,6 +82,10 @@ if { ![info exists type] } {
     set type "current"
 }
 
+if { ![info exists entry_chunk] } {
+    set entry_chunk "entry-chunk"
+}
+
 switch -exact $type {
     archive {
         set date_clause [db_map date_clause_archive]

@@ -75,7 +75,7 @@ set headerstuff [template::adp_parse ${cwd}/headerstuff \
                           rsd_url $rsd_url \
                           stylesheet_url $stylesheet_url]]
 
-set create_p [permission::permission_p -object_id $package_id -privilege read -party_id [ad_conn untrusted_user_id]]
+set create_p [permission::permission_p -object_id $package_id -privilege create -party_id [ad_conn untrusted_user_id]]
 set admin_p [permission::permission_p -object_id $package_id -privilege admin -party_id [ad_conn untrusted_user_id]]
 
 set display_users_p [parameter::get -parameter "DisplayUsersP" -default 0]
