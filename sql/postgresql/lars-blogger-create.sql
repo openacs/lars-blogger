@@ -11,12 +11,12 @@ select acs_object_type__create_type (
     'Blog Entry',                   -- pretty_name
     'Blog Entries',                 -- pretty_plural
     'acs_object',                   -- supertype
-    'PINDS_BLOG_ENTRIES',           -- table_name
-    'ENTRY_ID',                     -- id_column
+    'pinds_blog_entries',           -- table_name
+    'entry_id',                     -- id_column
     null,                           -- package_name
     'f',                            -- abstract_p
     null,                           -- type_extension_table
-    'PINDS_BLOG_ENTRY__TITLE'       -- name_method
+    'pinds_blog_entry__title'       -- name_method
 );
 
 create table pinds_blog_entries (

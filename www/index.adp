@@ -1,9 +1,7 @@
 <master>
 <property name="title">@page_title@</property>
 <if @rss_file_url@ not nil>
-  <property name="header_stuff">
-    <link rel="alternate" type="application/rss+xml" title="RSS" target=_test href="@rss_file_url@" />
-  </property>
+  <property name="header_stuff"><link rel="alternate" type="application/rss+xml" title="RSS" href="@rss_file_url@" /></property>
 </if>
 <property name="context_bar">@context_bar@</property>
 

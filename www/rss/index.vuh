@@ -1,0 +1,1 @@
+ns_returnfile 200 text/xml [rss_gen_report_file -summary_context_id [ad_conn package_id] -impl_name pinds_blog_entries]

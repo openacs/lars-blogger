@@ -43,6 +43,8 @@ ad_proc -private lars_blog__rss_datasource {
     set counter 0
 
     db_foreach blog_rss_items { *SQL* } {
+        set TZoffset [format "%+03d:%02d" $tzoffset_hour $tzoffset_minute]
+        
         set entry_url "[ad_url]${package_url}archive/${entry_archive_url}#blog-entry-$entry_id"
 
         set content [ns_adp_parse -string $content]
@@ -56,7 +58,7 @@ ad_proc -private lars_blog__rss_datasource {
             set description $content_as_text
         }
 
-        lappend items [list link $entry_url title $title description $description value $content timestamp "${posted_date_string}T${posted_time_string}-0600"]
+        lappend items [list link $entry_url title $title description $description value $content timestamp "${posted_date_string}T${posted_time_string}$TZoffset"]
         if { $counter == 0 } {
             set column_array(channel_lastBuildDate) $entry_date_pretty
             incr counter
@@ -83,7 +85,9 @@ ad_proc -private lars_blog__rss_lastUpdated {
     @author Lars Pind (lars@pinds.com)
 } {
     db_0or1row get_last_update {
-        select coalesce (date_part('epoch',max(posted_date)),0) as last_update
+        select coalesce (date_part('epoch',
+                                  max(posted_date::timestamp with time zone)
+                                  ),0) as last_update
         from   pinds_blog_entries
         where  package_id = :package_id
         and    draft_p = 'f'
@@ -92,5 +96,3 @@ ad_proc -private lars_blog__rss_lastUpdated {
 
     return $last_update
 }
-
-

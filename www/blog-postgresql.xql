@@ -20,7 +20,7 @@
 		    select entry_id,
 		           to_char(entry_date, 'fmDayfm, Month fmDDfm, YYYY') as entry_date_pretty, 
 		           to_char(entry_date, 'YYYY/MM/DD/') as entry_archive_url,
-		           entry_date,
+		           to_char(entry_date, 'YYYY-MM-DD') as entry_date,
 		           title,
 		           content,
 		           draft_p,
