@@ -109,7 +109,7 @@
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="channel_image_url"  description="The URL, relative to this server, to the image that corresponds to this blog in the rss channel" section_name="rss"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_width"  description="Width in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_height"  description="Height in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="rss_file_url"  description="What URL should we advertise the RSS feed under, relative to the site root. Leave blank if no RSS feed." section_name="rss"/>
+            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="rss_file_url"  default="rss/rss.xml" description="What URL should we advertise the RSS feed under, relative to the blog mount point. Leave blank if no RSS feed." section_name="rss"/>
         </parameters>
 
     </version>
