@@ -96,6 +96,11 @@ as
     )
     is
     begin
+        -- delete comments associated with this entry
+		for comment in (select comment_id from general_comments 
+					      where object_id = pinds_blog_entry.del.entry_id) loop
+			acs_message.del(comment.comment_id);
+		end loop;
 
         delete
         from pinds_blog_entries
@@ -190,6 +195,11 @@ as
     )
     is
     begin
+        -- delete rss_gen_subscrs which relate to this channel
+		for subscr in (select subscr_id from rss_gen_subscrs
+		      where summary_context_id = weblogger_channel.del.channel_id) loop
+			rss_gen_subscr.del(subscr.subscr_id);
+		end loop;
 
         delete
         from weblogger_channels

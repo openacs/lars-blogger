@@ -24,6 +24,7 @@
 
         <callbacks>
             <callback type="after-instantiate"  proc="lars_blogger::install::package_instantiate"/>
+            <callback type="before-uninstantiate"  proc="lars_blogger::install::package_uninstantiate"/>
         </callbacks>
         <parameters>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="DisplayUsersP"  default="0" description="Should we display a list of bloggers on the index page."/>

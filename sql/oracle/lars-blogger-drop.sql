@@ -22,12 +22,6 @@ drop table weblogger_channels;
 begin
 
     for blog_entry in (select entry_id from pinds_blog_entries) loop
-		-- delete comments (which are acs_message's)
-		for comment in (select comment_id from general_comments 
-							   where object_id = blog_entry.entry_id) loop
-			acs_message.del(comment.comment_id);
-		end loop;
-
         pinds_blog_entry.del(blog_entry.entry_id);
     end loop;
 

@@ -20,3 +20,15 @@ ad_proc -public lars_blogger::install::grant_gc_create { -package_id } {
 	              -party_id $party_id \
 	              -privilege "general_comments_create"
 }
+
+ad_proc -private lars_blogger::install::package_uninstantiate {
+    {-package_id:required}
+} {
+    Package un-instantiation callback proc. Permanently delete all the 
+    content associated with a blog. Deletes all entries, comments and rss 
+    feeds.
+
+    @author Vinod Kurup
+} {
+    db_exec_plsql clear_content {}
+}
