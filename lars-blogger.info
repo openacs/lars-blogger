@@ -7,14 +7,14 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="2.0d2" url="http://openacs.org/repository/download/apm/lars-blogger-2.0d2.apm">
+    <version name="2.0d3" url="http://openacs.org/repository/download/apm/lars-blogger-2.0d3.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Individual or collaborative web logs.</summary>
         <release-date>2004-02-11</release-date>
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
         <description format="text/html">Weblog creation and management with notifications, RSS, trackpack, technorati, blogroll, pings, archives, draft and published entries, includable templates for presenting on other pages, and permissioning for multiple users.</description>
 
-        <provides url="lars-blogger" version="2.0d2"/>
+        <provides url="lars-blogger" version="2.0d3"/>
         <requires url="acs-datetime" version="4.0"/>
         <requires url="acs-tcl" version="5.0.1"/>
         <requires url="general-comments" version="4.0"/>

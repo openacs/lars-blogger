@@ -43,7 +43,7 @@ end;' language 'plpgsql';
 create function pinds_blog_entries__utrg ()
 returns opaque as '
 begin
-    if (new.draft_p = ''f'' and old.draft_p = ''t'') or new.deleted_p = ''t'' then
+    if (new.draft_p = ''t'' and old.draft_p = ''f'') or new.deleted_p = ''t'' then
         perform search_observer__enqueue(old.entry_id,''DELETE'');
     else 
         perform search_observer__enqueue(old.entry_id,''UPDATE'');
