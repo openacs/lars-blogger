@@ -25,10 +25,10 @@ begin
 		-- delete comments (which are acs_message's)
 		for comment in (select comment_id from general_comments 
 							   where object_id = blog_entry.entry_id) loop
-			acs_message.delete(comment.comment_id);
+			acs_message.del(comment.comment_id);
 		end loop;
 
-        pinds_blog_entry.delete(blog_entry.entry_id);
+        pinds_blog_entry.del(blog_entry.entry_id);
     end loop;
 
     acs_object_type.drop_type('pinds_blog_entry', 't');

@@ -23,7 +23,7 @@ as
         creation_ip in acs_objects.creation_ip%TYPE default null
     ) return pinds_blog_entries.entry_id%TYPE;
 
-    procedure delete (
+    procedure del (
         entry_id in pinds_blog_entries.entry_id%TYPE
     );
 
@@ -91,7 +91,7 @@ as
 
     end new;
 
-    procedure delete (
+    procedure del (
         entry_id in pinds_blog_entries.entry_id%TYPE
     )
     is
@@ -99,11 +99,11 @@ as
 
         delete
         from pinds_blog_entries
-        where entry_id = pinds_blog_entry.delete.entry_id;
+        where entry_id = pinds_blog_entry.del.entry_id;
 
-        acs_object.delete(pinds_blog_entry.delete.entry_id);
+        acs_object.del(pinds_blog_entry.del.entry_id);
 
-    end delete;
+    end del;
 
     function title (
         entry_id in pinds_blog_entries.entry_id%TYPE
@@ -139,7 +139,7 @@ as
         creation_ip in acs_objects.creation_ip%TYPE default null
     ) return weblogger_channels.channel_id%TYPE;
 
-    procedure delete (
+    procedure del (
         channel_id in weblogger_channels.channel_id%TYPE
     );
 
@@ -185,7 +185,7 @@ as
 
     end new;
 
-    procedure delete (
+    procedure del (
         channel_id in weblogger_channels.channel_id%TYPE
     )
     is
@@ -193,11 +193,11 @@ as
 
         delete
         from weblogger_channels
-        where channel_id = weblogger_channel.delete.channel_id;
+        where channel_id = weblogger_channel.del.channel_id;
 
-        acs_object.delete(weblogger_channel.delete.channel_id);
+        acs_object.del(weblogger_channel.del.channel_id);
 
-    end delete;
+    end del;
 
 end weblogger_channel;
 /

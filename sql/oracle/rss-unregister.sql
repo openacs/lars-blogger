@@ -11,7 +11,7 @@
 
 begin
 
-	acs_sc_impl.delete(
+	acs_sc_impl.del(
 		impl_contract_name => 'RssGenerationSubscriber',
 		impl_name => 'pinds_blog_entries'
 	);

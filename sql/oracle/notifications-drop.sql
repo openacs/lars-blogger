@@ -14,7 +14,7 @@ begin
                 from notification_types
                 where short_name in ('lars_blogger_notif_type'))
     loop
-        notification_type.delete(row.type_id);
+        notification_type.del(row.type_id);
     end loop;
 end;
 /

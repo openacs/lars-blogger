@@ -19,6 +19,7 @@ begin
         impl_id := acs_sc_impl.new (
                       'NotificationType',
                       'lars_blogger_notif_type',
+                      'lars_blogger_notif_type',
                       'lars-blogger'
                    );
 

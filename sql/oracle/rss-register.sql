@@ -14,6 +14,7 @@ begin
     impl_id := acs_sc_impl.new(
         impl_contract_name => 'RssGenerationSubscriber',
         impl_name => 'pinds_blog_entries',
+	impl_pretty_name => 'pinds_blog_entries',
         impl_owner_name => 'lars-blogger'
     );
 
