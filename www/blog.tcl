@@ -15,7 +15,7 @@
 
 # If the caller specified a URL, then we gather the package_id from that URL
 if { [info exists url] } {
-    array set blog_site_node [site_node $url]
+    array set blog_site_node [site_node::get -url $url]
     set package_id $blog_site_node(object_id)
 }
 

@@ -101,7 +101,7 @@ ad_proc -public lars_blog_get_as_string {
     the default blog.adp).
 } { 
     if { ![exists_and_not_null package_id] } {
-        array set blog_site_node [site_node $url]
+        array set blog_site_node [site_node::get -url $url]
         set package_id $blog_site_node(object_id)
     }
     set create_p [ad_permission_p $package_id create]
