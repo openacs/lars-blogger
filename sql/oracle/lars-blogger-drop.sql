@@ -36,4 +36,5 @@ show errors
 
 drop table pinds_blog_entries;
 
+@@ lars-blogger-blogroll-drop.sql
 @@ lars-blogger-categories-drop.sql

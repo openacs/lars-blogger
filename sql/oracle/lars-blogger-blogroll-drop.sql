@@ -1,11 +1,24 @@
 --
--- lars-blogger-categories-drop.sql
+-- lars-blogger-blogroll-drop.sql
 --
 -- @author Guan Yang (guan@unicast.org)
+-- @author Andrew Grumet (aegrumet@alum.mit.edu)
 --
 
-drop function weblogger_blogroll_entry__delete(integer);
-drop function weblogger_blogroll_entry__new(integer, integer, varchar, varchar, integer, varchar);
-drop function weblogger_blogroll_entry__name(integer);
+begin
+
+  for blogroll_entry in (select link_id from weblogger_blogroll_entries)
+  loop
+    weblogger_blogroll_entry.del(blogroll_entry.link_id);
+  end loop;
+
+  acs_object_type.drop_type('weblogger_blogroll_entry', 't');
+
+end;
+/
+show errors
+
 drop table weblogger_blogroll_entries;
-select acs_object_type__drop_type('weblogger_blogroll_entry', true);
+drop package body weblogger_blogroll_entry;
+drop package weblogger_blogroll_entry;
+
