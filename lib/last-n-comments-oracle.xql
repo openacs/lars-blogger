@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 
+<rdbms><type>oracle</type><version>8.1.6</version></rdbms>
+
 <queryset>
     <fullquery name="select_n_comments">
         <querytext>
