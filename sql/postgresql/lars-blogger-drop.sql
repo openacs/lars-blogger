@@ -35,6 +35,8 @@ drop function weblogger_channel__new(
 
 drop function weblogger_channel__delete (integer);
 
+drop table weblogger_ping_urls;
+
 drop table weblogger_channels;
 select acs_object_type__drop_type ('weblogger_channel', true);
 
@@ -57,4 +59,5 @@ drop function pinds_blog_entry__delete (integer);
 drop table pinds_blog_entries;
 select acs_object_type__drop_type ('pinds_blog_entry', true);
 
+\i lars-blogger-blogroll-drop.sql
 \i lars-blogger-categories-drop.sql

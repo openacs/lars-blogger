@@ -7,6 +7,7 @@
 --
 
 \i lars-blogger-categories-create.sql
+\i lars-blogger-blogroll-create.sql
 
 select acs_object_type__create_type (
     'pinds_blog_entry',             -- object_type

@@ -23,6 +23,11 @@
     <a href="../category-edit" title="Categories" class="action_link">Categories</a>
   </p>
   </if>
+  
+  <p>
+    <b>&raquo;</b>
+    <a href="blogroll" title="View blogroll" class="action_link">Blogroll</a>
+  </p>
 
   <p>
     <b>&raquo;</b>
