@@ -41,7 +41,7 @@ ad_proc -private lars_blog_weblogs_com_update_ping {
 
     set blog_url "[ad_url]$package_url"
 
-    ns_log notice "lars_blog_weblogs_com_update_ping:"
+    ns_log debug "lars_blog_weblogs_com_update_ping:"
     if [catch {
         if {[incr depth] > 10} {
             return -code error "rss_weblogUpdatesping:  Recursive redirection:  $location"
@@ -72,8 +72,8 @@ ad_proc -private lars_blog_weblogs_com_update_ping {
         flush $wfd
         close $wfd
 
-    ns_log notice "lars_blog_weblogs_com_update_ping: pinging for blog $blog_title and url $blog_url"
-    ns_log notice message: \"$message\"
+    ns_log debug "lars_blog_weblogs_com_update_ping: pinging for blog $blog_title and url $blog_url"
+    ns_log debug "message: \"$message\""
 
         set headers $rpset
         set response [ns_set name $headers]
@@ -109,7 +109,7 @@ if [string match "" $length] {set length -1}
         ns_log warning "lars_blog_weblogs_com_update_ping error: $errmsg"
         return -1
     } else {
-        ns_log notice "lars_blog_weblogs_com_update_ping: $page"
+        ns_log debug "lars_blog_weblogs_com_update_ping: $page"
         return 1
     }
 }

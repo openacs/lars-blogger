@@ -160,7 +160,7 @@ ad_proc lars_blogger::entry::trackback { -entry_id } {
 	set excerpt [string range $entry(content) 0 [parameter::get -parameter TrackbackMaxExcerpt -default 200]]
 	set blog_name [lars_blog_name -package_id $entry(package_id)]
 
-	ns_log notice "Trackback sending: url=$url title=$entry(title) excerpt=$excerpt content=$entry(content) blog_name=$blog_name"
+	ns_log debug "Trackback sending: url=$url title=$entry(title) excerpt=$excerpt content=$entry(content) blog_name=$blog_name"
 	trackback::auto_ping -url $url \
                 -title $entry(title) \
 		-excerpt $excerpt \
