@@ -128,7 +128,6 @@ ad_proc -public lars_blogger::entry::publish {
     lars_blogger::entry::do_notifications -entry_id $entry_id
 
     # Ping weblogs.com
-    #lars_blog_weblogs_com_update_ping -package_id $package_id
     lars_blogger::instance::send_pings -package_id $package_id
 
     # trackback

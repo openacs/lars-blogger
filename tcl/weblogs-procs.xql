@@ -2,13 +2,6 @@
 
 <queryset>
 
-    <fullquery name="lars_blog_weblogs_com_update_ping.package_name">
-        <querytext>
-			select instance_name from apm_packages 
-			where package_id = :package_id
-        </querytext>
-    </fullquery>
-    
     <fullquery name="lars_blogger::instance::remove_ping_url.remove_ping_url">
         <querytext>
             delete from weblogger_ping_urls
