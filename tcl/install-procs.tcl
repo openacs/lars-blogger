@@ -9,7 +9,18 @@ ad_proc -public lars_blogger::install::package_instantiate { -package_id } {
 } {
 
     lars_blogger::install::grant_gc_create -package_id $package_id
+    lars_blogger::install::setup_ping_urls -package_id $package_id
+}
 
+ad_proc -public lars_blogger::install::setup_ping_urls { -package_id } {
+    Sets up the default ping URL with the weblogs.com ping URL. If it
+    already exists, we don't care.
+    
+    @author Guan Yang
+    @creation-date 2003-12-13
+} {
+    set default_ping_url [ad_parameter -package_id $package_id weblogs_ping_url]
+    catch { db_dml setup_ping_urls "" }
 }
 
 ad_proc -public lars_blogger::install::grant_gc_create { -package_id } {
@@ -30,5 +41,6 @@ ad_proc -private lars_blogger::install::package_uninstantiate {
 
     @author Vinod Kurup
 } {
+    db_dml remove_ping_urls ""
     db_exec_plsql clear_content {}
 }

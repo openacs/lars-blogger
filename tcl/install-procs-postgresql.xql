@@ -3,6 +3,25 @@
 <queryset>
     <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
+    <fullquery name="lars_blogger::install::package_uninstantiate.remove_ping_urls">
+        <querytext>
+        delete from weblogger_ping_urls
+            where package_id = :package_id
+        </querytext>
+    </fullquery>
+
+    <fullquery name="lars_blogger::install::setup_ping_urls.setup_ping_urls">
+        <querytext>
+        insert into weblogger_ping_urls (
+            package_id,
+            ping_url
+        ) values (
+            :package_id,
+            :default_ping_url
+        )
+        </querytext>
+    </fullquery>
+    
     <fullquery name="lars_blogger::install::package_uninstantiate.clear_content">
         <querytext>
 
