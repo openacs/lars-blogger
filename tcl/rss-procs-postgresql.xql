@@ -34,8 +34,10 @@
 
     <fullquery name="lars_blog__rss_lastUpdated.get_last_update">
         <querytext>
-	        select coalesce (date_part('epoch',max(posted_date)),0) as last_update
-	        from   pinds_blog_entries
+                select coalesce (date_part('epoch',
+                                max(posted_date::timestamp with time zone)
+                                ),0) as last_update
+                from   pinds_blog_entries
 	        where  package_id = :package_id
 	        and    draft_p = 'f'
 	        and    deleted_p = 'f'

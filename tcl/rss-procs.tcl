@@ -85,7 +85,9 @@ ad_proc -private lars_blog__rss_lastUpdated {
     @author Lars Pind (lars@pinds.com)
 } {
     db_0or1row get_last_update {
-        select coalesce (date_part('epoch',max(posted_date)),0) as last_update
+        select coalesce (date_part('epoch',
+                                  max(posted_date::timestamp with time zone)
+                                  ),0) as last_update
         from   pinds_blog_entries
         where  package_id = :package_id
         and    draft_p = 'f'
