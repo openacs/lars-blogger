@@ -91,7 +91,7 @@ if { [form is_valid entry] } {
     }
     
     if { [empty_string_p $return_url] } {
-        set return_url "entry-preview?[export_vars { entry_id }]"
+        set return_url "[ad_conn package_url]one-entry?[export_vars { entry_id }]"
     }
 
     ad_returnredirect $return_url

@@ -40,7 +40,7 @@
           <tr>
             <td align="center">
               <a href="admin/entry-edit" title="Add an entry to this blog">Add entry</a><br>
-              <a href="admin/" title="Visit the administration pages for this blog">Administer<a/>
+              <a href="admin/drafts" title="View draft entries">Draft entries<a/>
             </td>
           </tr>
           <tr>
