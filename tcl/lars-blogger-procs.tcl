@@ -1,7 +1,7 @@
 ad_library {
      Procs used by the blogger module.
-     @author Lars Pind
-     @creation-date 
+     @author Lars Pind (lars@pinds.com)
+     @creation-date 2002
      @cvs-id $Id$
 }
 

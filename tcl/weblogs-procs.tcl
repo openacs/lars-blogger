@@ -1,3 +1,11 @@
+ad_library {
+    Weblog support routines
+
+    @author Lars Pind (lars@pinds.com)
+    @creation-date 2002
+    @cvs-id $Id$
+}
+
 ad_proc -private lars_blog_weblogs_com_update_ping {
     {-package_id}
     {-location}
