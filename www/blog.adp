@@ -21,15 +21,6 @@
     <h4><a name="blog-entry-@blog.entry_id@">@blog.title@</a></h4>
   </if>
     @blog.content@
-    <if @admin_p@ eq 1>
-      (<a href="@blog.edit_url@">Edit</a>) (<a href="@blog.delete_url@">Delete</a>)
-      <if @draft_p@ eq "t">
-	(<a href="@blog.publish_url@">Publish</a>)
-      </if>
-      <else>
-	(<a href="@blog.revoke_url@">Revoke</a>)
-      </else>
-    </if>
     <br>
     <table cellpadding="0" cellspacing="0" border="0" width="100%">
       <if @show_poster_p@ true>
@@ -38,6 +29,16 @@
             <font size="-2" color="#999999">
               <br>
               Posted by @blog.poster_first_names@ @blog.poster_last_name@ at @blog.posted_time_pretty@
+              <if @admin_p@ eq 1>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="@blog.edit_url@">Edit</a> - <a href="@blog.delete_url@">Delete</a> -
+                <if @draft_p@ eq "t">
+                  <a href="@blog.publish_url@">Publish</a>
+                </if>
+                <else>
+                  <a href="@blog.revoke_url@">Revoke</a>
+                </else>
+              </if>
             </font>
           </td>
         </tr>
