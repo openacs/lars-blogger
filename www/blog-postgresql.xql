@@ -11,7 +11,7 @@
 
 	<partialquery name="date_clause_default">
 		<querytext>
-			entry_date > current_timestamp - interval '30 days'
+			entry_date > current_timestamp - interval '$num_days days'
 		</querytext>
 	</partialquery>
 
@@ -38,10 +38,11 @@
 		           acs_objects o on (o.object_id = e.entry_id) join 
 		           persons p on (p.person_id = o.creation_user)
 		    where  package_id = :package_id
-		    and    $date_clause
+		    [ad_decode $date_clause "" "" "and    $date_clause"]
 		    and    draft_p = 'f'
 		    and    deleted_p = 'f'
 		    order  by entry_date desc, posted_date desc
+		    [ad_decode $limit "" "" "limit $limit"]
         </querytext>
     </fullquery>
 
@@ -63,16 +64,16 @@
                             from general_comments gc, cr_revisions cr
                             where gc.object_id = entry_id
                             and   content_item__get_live_revision(gc.comment_id) = cr.revision_id) as num_comments
-                    from   users u, pinds_blog_entries e join
+                    from   pinds_blog_entries e join
                            acs_objects o on (o.object_id = e.entry_id) join
                            persons p on (p.person_id = o.creation_user)
                     where  package_id = :package_id
-	            and    u.user_id = o.creation_user
-		    and    u.screen_name = :screen_name
-                    and    $date_clause
+	            and    o.creation_user = :blog_user_id
+		    [ad_decode $date_clause "" "" "and    $date_clause"]
                     and    draft_p = 'f'
                     and    deleted_p = 'f'
                     order  by entry_date desc, posted_date desc
+		    [ad_decode $limit "" "" "limit $limit"]
         </querytext>
     </fullquery>
 

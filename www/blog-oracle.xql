@@ -11,7 +11,7 @@
 
 	<partialquery name="date_clause_default">
 		<querytext>
-			entry_date > sysdate - 30
+			entry_date > sysdate - :num_days
 		</querytext>
 	</partialquery>
 
@@ -40,9 +40,10 @@
 		    where  e.entry_id = o.object_id
 		    and    p.person_id = o.creation_user
 		    and    package_id = :package_id
-		    and    $date_clause
+		    [ad_decode $date_clause "" "" "and    $date_clause"]
 		    and    draft_p = 'f'
 		    and    deleted_p = 'f'
+                    [ad_decode $limit "" "" "and    rownum <= $limit"]
 		    order  by entry_date desc, posted_date desc
         </querytext>
     </fullquery>
@@ -70,10 +71,12 @@
 		           persons p
 		    where  e.entry_id = o.object_id
 		    and    p.person_id = o.creation_user
+                    and    o.creation_user = :blog_user_id
 		    and    package_id = :package_id
-		    and    $date_clause
+		    [ad_decode $date_clause "" "" "and    $date_clause"]
 		    and    draft_p = 'f'
 		    and    deleted_p = 'f'
+                    [ad_decode $limit "" "" "and    rownum <= $limit"]
 		    order  by entry_date desc, posted_date desc
         </querytext>
     </fullquery>

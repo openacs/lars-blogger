@@ -31,7 +31,7 @@ set package_id [ad_conn package_id]
 set today [db_string today { *SQL* }]
 set today_html [ad_quotehtml $today]
 
-form create entry -cancel_url $return_url
+form create entry -cancel_url [ad_decode $return_url "" "." $return_url]
 
 element create entry title -label "Title" -datatype text -html { size 50 }
 element create entry title_url -label "Title URL (optional)" -datatype text -html { size 50 } -optional
