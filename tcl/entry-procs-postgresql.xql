@@ -8,6 +8,7 @@
 		    select b.entry_id,  
                            b.title, 
                            b.title_url, 
+                           b.category_id, 
                            b.content, 
                            b.content_format, 
                            b.draft_p, 

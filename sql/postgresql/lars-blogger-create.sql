@@ -6,6 +6,8 @@
 -- @cvs-id $Id$
 --
 
+\i lars-blogger-categories-create.sql
+
 select acs_object_type__create_type (
     'pinds_blog_entry',             -- object_type
     'Blog Entry',                   -- pretty_name
@@ -30,6 +32,7 @@ create table pinds_blog_entries (
                         references apm_packages(package_id),
   title                 varchar(500),
   title_url             varchar(500),
+  category_id           integer not null default 0,
   content               varchar(32000),
   content_format        varchar(50) 
                         default 'text/html'
@@ -66,6 +69,7 @@ create or replace function pinds_blog_entry__new (
     integer,     -- package_id
     varchar,     -- title
     varchar,     -- title_url
+    integer,     -- category_id
     varchar,     -- content
     varchar,     -- content_format
     timestamptz, -- entry_date
@@ -78,12 +82,13 @@ declare
     p_package_id           alias for $2;
     p_title                alias for $3;
     p_title_url            alias for $4;
-    p_content              alias for $5;
-    p_content_format       alias for $6;
-    p_entry_date           alias for $7;
-    p_draft_p              alias for $8;
-    p_creation_user        alias for $9;
-    p_creation_ip          alias for $10;
+    p_category_id          alias for $5;
+    p_content              alias for $6;
+    p_content_format       alias for $7;
+    p_entry_date           alias for $8;
+    p_draft_p              alias for $9;
+    p_creation_user        alias for $10;
+    p_creation_ip          alias for $11;
     v_entry_id             integer;
 begin
     v_entry_id := acs_object__new (
@@ -100,6 +105,7 @@ begin
       package_id,
       title,
       title_url,
+      category_id,
       content,
       content_format,
       entry_date,
@@ -111,6 +117,7 @@ begin
       p_package_id,
       p_title,
       p_title_url,
+      p_category_id,
       p_content,
       p_content_format,
       p_entry_date,

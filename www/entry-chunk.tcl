@@ -3,6 +3,7 @@
 # show_comments_p:onevalue,optional
 # retrun_url:onevalue,optional
 # package_id:optional
+# screen_name:onevalue,optional
 
 if { ![exists_and_not_null show_comments_p] } {
     set show_comments_p "f"
@@ -15,6 +16,9 @@ if { ![info exists package_id] } {
 
 if { ![exists_and_not_null return_url] } {
     set return_url "[ad_conn url]?[ad_conn query]"
+}
+if { ![exists_and_not_null screen_name] } {
+    set screen_name ""
 }
 
 set package_url [lars_blog_public_package_url -package_id $package_id]
@@ -51,6 +55,8 @@ if { ![empty_string_p $general_comments_package_url] } {
 }
 
 set blog(comments_view_url) "${package_url}one-entry?[export_vars { entry_id }]"
+
+set display_categories [lars_blog_categories_p -package_id [ad_conn package_id]]
 
 if { [string equal $show_comments_p "t"] } {
     set comments_html [general_comments_get_comments -print_content_p 1 $entry_id]

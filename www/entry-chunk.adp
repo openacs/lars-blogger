@@ -50,6 +50,11 @@
           <if @blog.comment_add_url@ not nil>
             - <a href="@blog.comment_add_url@" title="Comment on this entry">Add comment</a>
           </if>
+
+	  <if @display_categories@ and @blog.category_id@ gt 0>
+	      -
+              <a href="@package_url@<if @screen_name@ not nil>user/@screen_name@/</if>cat/@blog.category_short_name@" title="@blog.category_name@">@blog.category_name@</a>
+          </if>
         </p>
       </td>
     </tr>

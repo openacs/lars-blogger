@@ -44,17 +44,3 @@ set widget [dt_widget_month_small \
         -calendar_details $calendar_details \
         -day_number_template $day_number_template]
 
-if {[empty_string_p $screen_name]} {
-
-    set prev_month_url "${package_url}archive/[clock format [clock scan $prev_month] -format %Y/%m]/"
-    set next_month_url "${package_url}archive/[clock format [clock scan $next_month] -format %Y/%m]/"
-
-} else {
-
-    set prev_month_url "${package_url}user/$screen_name/archive/[clock format [clock scan $prev_month] -format %Y/%m]/"
-    set next_month_url "${package_url}user/$screen_name/archive/[clock format [clock scan $next_month] -format %Y/%m]/"
-
-}
-# Add year to the link
-append next_month_name " [string range $next_month 0 3]"
-append prev_month_name " [string range $prev_month 0 3]"

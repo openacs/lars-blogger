@@ -15,6 +15,8 @@ set parameters_url "/admin/site-map/parameter-set?[export_vars { package_id }]"
 
 set arrow_url "[lars_blog_public_package_url -package_id $package_id]graphics/arrow-box.gif"
 
+set categories [lars_blog_categories_p -package_id $package_id]
+
 set instance_feed_p [db_string rss_feed_p {}]
 
 set rss_setup_url "rss-setup"

@@ -45,14 +45,14 @@
 <table width="100%">
   <tr>
     <td valign="top">
-      <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@">
+      <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@">
     </td>
     <td valign="top">
 
       <table width="100%" cellspacing="0" cellpadding="2">
         <tr>
           <th bgcolor="@header_background_color@">
-            Calendar
+            Archive
           </th>
         </tr>
         <tr>
@@ -65,6 +65,40 @@
             <table><tr><td></td></tr></table>
           </td>
         </tr>
+
+        <include-optional src="blog-months" screen_name="@screen_name@">
+          <tr>
+            <td nowrap align="center">
+              <include-output>
+            </td>
+          </tr>
+          <tr>
+            <td height="16">
+              <table><tr><td></td></tr></table>
+            </td>
+          </tr>
+        </include-optional>
+
+        <if @display_categories@ eq 1>
+        <tr>
+          <th>
+            Categories
+          </th>
+        </tr>
+        <tr>
+          <td nowrap align="center">
+            <multiple name="categories">
+                <a href="@package_url_with_extras@cat/@categories.category_short_name@">@categories.category_name@</a><br>
+            </multiple>
+          </td>
+        </tr>
+        <tr>
+          <td height="16">
+            <table><tr><td></td></tr></table>
+          </td>
+        </tr>
+        </if>
+
 
           <if @write_p@ true>
           <tr>
@@ -103,24 +137,6 @@
             </td>
           </tr>
         </if>
-
-        <include-optional src="blog-months" screen_name="@screen_name@">
-          <tr>
-            <th bgcolor="@header_background_color@">
-              Archive
-            </th>
-          </tr>
-          <tr>
-            <td nowrap align="center">
-              <include-output>
-            </td>
-          </tr>
-          <tr>
-            <td height="16">
-              <table><tr><td></td></tr></table>
-            </td>
-          </tr>
-        </include-optional>
 
         <if @rss_file_url@ not nil>
           <tr>

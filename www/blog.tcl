@@ -20,6 +20,12 @@ if { ![info exists package_id] } {
 
 set write_p [permission::permission_p -object_id $package_id -privilege write]
 
+if { ![info exists category_id] } {
+    set blog_category_id {}
+} else {
+    set blog_category_id $category_id
+}
+
 if { ![info exists screen_name] } {
     set screen_name ""
     set blog_user_id {}
@@ -107,11 +113,27 @@ if { ![string equal $type "archive"] && \
    }  
 }
 
+set arr_category_name(0) None
+set arr_category_short_name(0) none
+db_foreach categories { *SQL* } {
+    set arr_category_name($category_id) $name
+    set arr_category_short_name($category_id) $short_name
+}
+
+
 if { [empty_string_p $blog_user_id] } {
-    db_multirow blog all_blogs { *SQL* } 
+    db_multirow -extend {category_name category_short_name} blog all_blogs { *SQL* } {
+        if { [string length $blog_category_id] && $category_id != $blog_category_id } {continue}
+        set category_name "$arr_category_name($category_id)"
+        set category_short_name $arr_category_short_name($category_id)
+    }
     set archive_url "${package_url}archive/"
 } else {
-    db_multirow blog blog { *SQL* }
+    db_multirow -extend {category_name category_short_name} blog blog { *SQL* } {
+        if { [string length $blog_category_id] && $category_id != $blog_category_id } {continue}
+        set category_name "$arr_category_name($category_id)"
+        set category_short_name $arr_category_short_name($category_id)
+    }
     set archive_url "${package_url}user/$screen_name/archive/"
 }
 

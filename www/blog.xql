@@ -25,4 +25,12 @@
 		    and    deleted_p = 'f'
         </querytext>
     </fullquery>
+
+    <fullquery name="categories">
+        <querytext>
+	        select * 
+                from pinds_blog_categories
+                where package_id = :package_id
+        </querytext>
+    </fullquery>
 </queryset>

@@ -34,6 +34,20 @@ form create entry -cancel_url [ad_decode $return_url "" "." $return_url]
 
 element create entry title -label "Title" -datatype text -html { size 50 }
 element create entry title_url -label "Title URL (optional)" -datatype text -html { size 50 } -optional
+
+# If categories are enabled, set up a select-box with option. 
+# Otherwise just set the category_id to 0 to support category support in the future.
+if { [string equal [lars_blog_categories_p] "1"] } {
+    # It's probably possible to set up the widget directly from the datasource -- I just don't know how :-(
+    set option_list [list [list None 0]]
+    db_foreach categories { *SQL* } {
+        lappend option_list [list $name $tmp_category_id]
+    }
+    element create entry category_id -label "Category" -datatype integer -widget select -options $option_list
+} else {
+    element create entry category_id -widget hidden -datatype text -value 0
+}
+
 element create entry content -label "Content" -datatype richtext -widget richtext -html { cols 80 rows 20 }
 element create entry entry_date -label "Entry date" -datatype text \
         -help_text "If you set this to something other than today's date, you must use this form to publish your entry, otherwise the entry date will be set to the date you publish the item." \
@@ -72,6 +86,7 @@ if { [form is_request entry] } {
         set content_data [template::util::richtext::acquire contents $content]
         set content_data [template::util::richtext::set_property format $content_data $content_format]
 
+        element set_value entry category_id $category_id
         element set_value entry content $content_data
 
         element set_value entry entry_date $entry_date
@@ -87,6 +102,7 @@ if { [form is_valid entry] } {
     set entry_id [element get_value entry entry_id]
     set title [element get_value entry title]
     set title_url [element get_value entry title_url]
+    set category_id [element get_value entry category_id]
     set content [template::util::richtext::get_property contents [element get_value entry content]]
     set content_format [template::util::richtext::get_property format [element get_value entry content]]
     set entry_date [element get_value entry entry_date]
@@ -102,6 +118,7 @@ if { [form is_valid entry] } {
                 -package_id $package_id \
                 -title $title \
                 -title_url $title_url \
+                -category_id $category_id \
                 -content $content \
                 -content_format $content_format \
                 -entry_date $entry_date \
@@ -112,6 +129,7 @@ if { [form is_valid entry] } {
         set set_clauses { 
             "title = :title" 
             "title_url = :title_url"
+            "category_id = :category_id"
             "content = :content"
             "content_format = :content_format"
             "entry_date = to_date(:entry_date, 'YYYY-MM-DD')" 

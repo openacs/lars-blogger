@@ -12,6 +12,13 @@
     <a href="../entry-edit" title="Add new blog entry" class="action_link">Add new blog entry</a>
   </p>
   
+  <if @categories@ eq 1>
+  <p>
+    <b>&raquo;</b>
+    <a href="../category-edit" title="Categories" class="action_link">Categories</a>
+  </p>
+  </if>
+
   <p>
     <b>&raquo;</b>
     <a href="../drafts" title="View draft entries" class="action_link">View draft entries</a>

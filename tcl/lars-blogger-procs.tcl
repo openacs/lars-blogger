@@ -10,6 +10,7 @@ ad_proc -public lars_blog_entry_add {
     {-package_id:required}
     {-title:required}
     {-title_url ""}
+    {-category_id "0"}
     {-content:required}
     {-content_format:required}
     {-entry_date:required}
@@ -172,4 +173,13 @@ ad_proc -public lars_blog_header_background_color {
         set package_id [ad_conn package_id]
     }
     return [ad_parameter -package_id $package_id "HeaderBackgroundColor" "lars-blogger" "#dcdcdc"] 
+}
+
+ad_proc -public lars_blog_categories_p {
+    -package_id
+} {
+    if { ![exists_and_not_null package_id] } {
+        set package_id [ad_conn package_id]
+    }
+    return [ad_parameter -package_id $package_id "EnableCategoriesP" "lars-blogger" "1"]
 }

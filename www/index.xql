@@ -24,4 +24,20 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="get_category_from_short_name">
+        <querytext>
+			select category_id, name as category_name
+			from pinds_blog_categories
+			where short_name = :category_short_name and package_id = :package_id
+        </querytext>
+    </fullquery>
+
+    <fullquery name="categories">
+        <querytext>
+			select short_name as category_short_name, name as category_name
+			from pinds_blog_categories
+			where package_id = :package_id
+        </querytext>
+    </fullquery>
+
 </queryset>

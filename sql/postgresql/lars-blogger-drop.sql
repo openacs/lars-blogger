@@ -64,3 +64,5 @@ drop function pinds_blog_entry__delete (integer);
 
 drop table pinds_blog_entries;
 select acs_object_type__drop_type ('pinds_blog_entry', true);
+
+\i lars-blogger-categories-drop.sql

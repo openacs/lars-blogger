@@ -12,6 +12,14 @@ ad_proc -public lars_blogger::entry::get {
     upvar $array row
 
     db_1row select_entry {} -column_array row 
+
+    # If there's a category set up for the entry, we need to fill the array with the proper information.
+    if { $row(category_id) > 0 } {
+        set category_id $row(category_id)
+        db_1row select_category { *SQL* }
+        set row(category_name) $category_name
+        set row(category_short_name) $category_short_name
+    }
 }
 
 ad_proc -public lars_blogger::entry::require_write_permission {
