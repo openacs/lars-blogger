@@ -15,7 +15,7 @@ declare
 begin
     for row in select nt.type_id
                from notification_types nt
-               where nt.short_name in (''lars_blogger_notif_type'')
+               where nt.short_name in (''lars_blogger_notif_type'',''lars_blogger_notif'')
     loop
         perform notification_type__delete(row.type_id);
     end loop;
