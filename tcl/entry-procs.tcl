@@ -65,16 +65,6 @@ ad_proc -public lars_blogger::entry::edit {
     @author Vinod Kurup vinod@kurup.com
     @creation-date 2003-10-04
 } {
-    set set_clauses { 
-        "title = :title" 
-        "title_url = :title_url"
-        "category_id = :category_id"
-        "content = :content"
-        "content_format = :content_format"
-        "entry_date = to_date(:entry_date, 'YYYY-MM-DD HH24:MI:SS')" 
-        "draft_p = :draft_p" 
-    }
-    
     # Get old values first -- need draft_p and package_id
     lars_blogger::entry::get -entry_id $entry_id -array entry
     

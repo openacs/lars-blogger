@@ -21,6 +21,20 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="lars_blogger::entry::edit.update_entry">
+        <querytext>
+            update pinds_blog_entries
+            set    title = :title,
+                   title_url = :title_url,
+                   category_id = :category_id,
+                   content = :content,
+                   content_format = :content_format,
+                   entry_date = to_timestamp(:entry_date, 'YYYY-MM-DD HH24:MI:SS'),
+                   draft_p = :draft_p
+            where  entry_id = :entry_id
+        </querytext>
+    </fullquery>
+
     <fullquery name="lars_blogger::entry::get.select_entry">
         <querytext>
             select b.entry_id,  

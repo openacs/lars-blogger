@@ -82,19 +82,18 @@ if { [form is_request entry] } {
         
         permission::require_write_permission -object_id $entry_id
 
-        db_1row entry {}
+        lars_blogger::entry::get \
+            -entry_id $entry_id \
+            -array row
         
-        element set_value entry title $title
-        element set_value entry title_url $title_url
+        element set_value entry title $row(title)
+        element set_value entry title_url $row(title_url)
 
-        set content_data [template::util::richtext::acquire contents $content]
-        set content_data [template::util::richtext::set_property format $content_data $content_format]
+        element set_value entry category_id $row(category_id)
+        element set_value entry content [template::util::richtext::create $row(content) $row(content_format)]
 
-        element set_value entry category_id $category_id
-        element set_value entry content $content_data
-
-        element set_value entry entry_date $entry_date
-        element set_value entry draft_p $draft_p
+        element set_value entry entry_date $row(entry_date_ansi)
+        element set_value entry draft_p $row(draft_p)
     }
 
     element set_properties entry entry_id -value $entry_id
@@ -129,7 +128,7 @@ if { [form is_valid entry] } {
 	    -draft_p "$draft_p"
     } else {
         permission::require_write_permission -object_id $entry_id
-
+        
         lars_blogger::entry::edit \
             -entry_id $entry_id \
             -title $title \
