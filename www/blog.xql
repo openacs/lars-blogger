@@ -16,7 +16,7 @@
         <querytext>
 		    select count(entry_id)
 		    from   pinds_blog_entries e,
-                           acs_objects i
+                           acs_objects o
 		    where  e.package_id = :package_id
                     and    o.object_id = e.entry_id
                     and    o.creation_user = :blog_user_id
@@ -25,5 +25,4 @@
 		    and    deleted_p = 'f'
         </querytext>
     </fullquery>
-
 </queryset>
