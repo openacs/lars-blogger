@@ -142,7 +142,7 @@ ad_form -extend -name entry -form {
 
         # SWC Collect categories from all the category widgets
         set category_ids [category::ad_form::get_categories \
-          -object_id $package_id]
+          -container_object_id $package_id]
 
     } \
     -new_data {
