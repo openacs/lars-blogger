@@ -23,14 +23,9 @@ set package_url [lars_blog_public_package_url -package_id $package_id]
 
 set general_comments_package_url [general_comments_package_url]
 
-set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
+set show_poster_p [parameter::get -package_id $package_id -parameter "ShowPosterP" -default "1"]
 
-set blog(title) [ad_quotehtml $blog(title)]
-
-# LARS:
-# Not sure we should do the ns_adp_parse thing here, but heck, why not
-# It should be safe, given the security checks
-set blog(content) [ns_adp_parse -string [ad_html_text_convert -from $blog(content_format) -to "text/html" $blog(content)]]
+lars_blogger::entry::htmlify -array blog
 
 set entry_id $blog(entry_id)
 

@@ -10,6 +10,7 @@
             		entry_id => :entry_id,
             		package_id => :package_id,
             		title => :title,
+                        title_url => :title_url,
             		content => :content,
             		content_format => :content_format,
             		entry_date => to_date(:entry_date, 'YYYY-MM-DD'),

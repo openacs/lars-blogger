@@ -2,7 +2,6 @@ ad_library {
     Entry procs for blogger.
 }
 
-
 namespace eval lars_blogger::entry {}
 
 ad_proc -public lars_blogger::entry::get { 
@@ -16,7 +15,39 @@ ad_proc -public lars_blogger::entry::get {
 }
 
 
-ad_proc -public do_notifications {
+ad_proc -public lars_blogger::entry::htmlify { 
+    -array:required
+} {
+    Make the entry displayable in an HTML page
+} {
+    upvar $array row
+
+    set row(title) [ad_quotehtml $row(title)]
+
+    # LARS:
+    # Not sure we should do the ns_adp_parse thing here, but heck, why not
+    # It should be safe, given the standard HTML filter security checks, which 
+    # wouldn't let unsafe tags slip through, anyway
+    
+    set row(content) [ad_html_text_convert -from $row(content_format) -to "text/html" $row(content)]
+    
+    # We wrap this in a catch so if it bombs, at least we won't break any pages
+    catch {
+        set row(content) [ns_adp_parse -string $row(content)]
+    }
+    
+    # look for the base site name in the url
+    if {[regexp {^https?://([^ /]+)} $row(title_url) initial base_url] } {
+        set row(title_url_base) $base_url
+    } else {
+        set row(title_url_base) {}
+    }
+}
+
+
+
+
+ad_proc -public lars_blogger::entry::do_notifications {
     {-entry_id:required}
 } {
     # Select all the important information

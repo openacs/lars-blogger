@@ -7,7 +7,9 @@
 		    select entry_id,
 		           to_char(entry_date, 'YYYY-MM-DD') as entry_date_pretty, 
 		           title,
-		           content
+                           title_url,
+		           content,
+                           content_format
 		    from   pinds_blog_entries
 		    where  package_id = :package_id
 		    and    draft_p = 't'

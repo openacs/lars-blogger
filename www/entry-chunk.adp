@@ -1,6 +1,14 @@
-<if @blog.title@ not nil>
-  <h4>@blog.title@</h4>
+<if @blog.title_url@ not nil>
+  <div>
+    <a href="@blog.title_url@" style="font-weight: bold;"><if @blog.title@ not nil>@blog.title@</if><else>@blog.title_url@</else></a>
+    &nbsp;&nbsp;<span style="font-size: 80%; font-style: italic;">[@blog.title_url_base@]</span>
+  </div>
 </if>
+<else>
+  <if @blog.title@ not nil>
+    <div style="font-weight: bold;">@blog.title@</div>
+  </if>
+</else>
 <p>
 @blog.content@
 </p>

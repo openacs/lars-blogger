@@ -3,7 +3,13 @@
 <queryset>
     <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
-	<partialquery name="date_clause_archive">
+	<partialquery name="date_clause_archive_month">
+		<querytext>
+			date_trunc(:archive_interval, entry_date) = :archive_date
+		</querytext>
+	</partialquery>
+
+	<partialquery name="date_clause_archive_day">
 		<querytext>
 			date_trunc(:archive_interval, entry_date) = :archive_date
 		</querytext>
@@ -15,6 +21,12 @@
 		</querytext>
 	</partialquery>
 
+	<partialquery name="limit_clause">
+		<querytext>
+                    limit 3
+		</querytext>
+	</partialquery>
+
     <fullquery name="blog">
         <querytext>
 		    select entry_id,
@@ -22,6 +34,7 @@
 		           to_char(entry_date, 'YYYY/MM/DD/') as entry_archive_url,
 		           to_char(entry_date, 'YYYY-MM-DD') as entry_date,
 		           title,
+                           title_url,
 		           content,
                            content_format,
 		           draft_p,
@@ -40,6 +53,7 @@
 		    and    draft_p = 'f'
 		    and    deleted_p = 'f'
 		    order  by entry_date desc, posted_date desc
+                    $limit_clause
         </querytext>
     </fullquery>
 

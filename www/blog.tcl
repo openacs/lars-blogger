@@ -1,9 +1,9 @@
-# Expects:
-#  package_id:optional
-#  url:optional
-#  type:optional (current, archive)
-#  archive_interval:optional
-#  archive_date:optional
+# no ad_page_contract because this is intended to be included in other files
+#    package_id:integer,optional
+#    url:optional
+#    {type "current"}  (allowed values: current archive)
+#    {archive_interval ""}
+#    {archive_date ""}
 
 # If the caller specified a URL, then we gather the package_id from that URL
 if { [info exists url] } {
@@ -22,14 +22,14 @@ if { ![info exists type] } {
 
 switch -exact $type {
     archive {
-        set date_clause "[db_map date_clause_archive]"
+        set date_clause "[db_map date_clause_archive_$archive_interval]"
     }
     default {
         set date_clause "[db_map date_clause_default]"
     }
 }
 
-set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
+set show_poster_p [parameter::get -package_id $package_id -parameter "ShowPosterP" -default "1"]
 
 set package_url [lars_blog_public_package_url -package_id $package_id]
 
@@ -43,9 +43,16 @@ if { [ad_conn isconnected] && ![string equal $package_url [string range [ad_conn
 
 set admin_p [ad_permission_p $package_id admin]
 
-set count 0
+set num_entries [db_string num_entries {}]
 
-db_multirow blog blog { *SQL* } 
+if { $num_entries < 3 } {
+    set date_clause {1=1}
+    set limit_clause [db_map limit_clause]
+} else {
+    set limit_clause {}
+}
+
+db_multirow blog blog {} 
 
 set archive_url "${package_url}archive/"
 set arrow_url "${package_url}graphics/arrow-box.gif"

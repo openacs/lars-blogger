@@ -5,10 +5,6 @@ ad_page_contract {} {
 
 db_dml update_entry { *SQL* }
 
-ad_returnredirect $return_url
-
-#ns_conn close
-
 # Notifications
 lars_blogger::entry::do_notifications -entry_id $entry_id
 
@@ -17,3 +13,5 @@ lars_blog_weblogs_com_update_ping
 
 # Flush cache
 lars_blog_flush_cache
+
+ad_returnredirect $return_url

@@ -56,7 +56,7 @@ begin
         insert into notification_types_intervals
         (type_id, interval_id)
         select v_foo, interval_id
-        from notification_intervals where name in (''instant'',''hourly'',''daily'');
+        from notification_intervals where name in (''instant'',''hourly'',''daily'',''weekly'');
 
         insert into notification_types_del_methods
         (type_id, delivery_method_id)

@@ -9,6 +9,7 @@
             	:entry_id,
             	:package_id,
             	:title,
+                :title_url,
             	:content,
             	:content_format,
             	to_date(:entry_date, 'YYYY-MM-DD'),

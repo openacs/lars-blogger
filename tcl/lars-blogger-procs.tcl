@@ -9,6 +9,7 @@ ad_proc -public lars_blog_entry_add {
     {-entry_id:required}
     {-package_id:required}
     {-title:required}
+    {-title_url ""}
     {-content:required}
     {-content_format:required}
     {-entry_date:required}
@@ -20,6 +21,14 @@ ad_proc -public lars_blog_entry_add {
     set creation_ip [ns_conn peeraddr]
 
     set entry_id [db_exec_plsql entry_add { *SQL* }]
+
+    # If publish directly
+    if { [string equal $draft_p "f"] } {
+        # do notifications
+        lars_blogger::entry::do_notifications -entry_id $entry_id
+        # and ping weblogs.com
+        lars_blog_weblogs_com_update_ping
+    }
 
     lars_blog_flush_cache $package_id
 

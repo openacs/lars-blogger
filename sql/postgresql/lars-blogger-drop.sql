@@ -37,14 +37,16 @@ drop function inline_0();
 
 drop function pinds_blog_entry__title (integer);
 drop function pinds_blog_entry__new(
-    integer,    -- entry_id
-    integer,    -- package_id
-    varchar,    -- title
-    varchar,    -- content
+    integer,      -- entry_id
+    integer,      -- package_id
+    varchar,      -- title
+    varchar,      -- title_url
+    varchar,      -- content
+    varchar,      -- content_format
     timestamptz,  -- entry_date
-    char,       -- draft_p
-    integer,    -- creation_user
-    varchar     -- creation_ip
+    char,         -- draft_p
+    integer,      -- creation_user
+    varchar       -- creation_ip
 );
 drop function pinds_blog_entry__delete (integer);
 

@@ -29,6 +29,7 @@ create table pinds_blog_entries (
                         constraint pinds_blog_entry_package_id_kf
                         references apm_packages(package_id),
   title                 varchar(500),
+  title_url             varchar(500),
   content               varchar(32000),
   content_format        varchar(50) 
                         default 'text/html'
@@ -61,26 +62,28 @@ end;
 
 
 create or replace function pinds_blog_entry__new (
-    integer,    -- entry_id
-    integer,    -- package_id
-    varchar,    -- title
-    varchar,    -- content
-    varchar,    -- content_format
+    integer,     -- entry_id
+    integer,     -- package_id
+    varchar,     -- title
+    varchar,     -- title_url
+    varchar,     -- content
+    varchar,     -- content_format
     timestamptz, -- entry_date
-    char,       -- draft_p
-    integer,    -- creation_user
-    varchar     -- creation_ip
+    char,        -- draft_p
+    integer,     -- creation_user
+    varchar      -- creation_ip
 ) returns integer as '
 declare
     p_entry_id             alias for $1;
     p_package_id           alias for $2;
     p_title                alias for $3;
-    p_content              alias for $4;
-    p_content_format       alias for $5;
-    p_entry_date           alias for $6;
-    p_draft_p              alias for $7;
-    p_creation_user        alias for $8;
-    p_creation_ip          alias for $9;
+    p_title_url            alias for $4;
+    p_content              alias for $5;
+    p_content_format       alias for $6;
+    p_entry_date           alias for $7;
+    p_draft_p              alias for $8;
+    p_creation_user        alias for $9;
+    p_creation_ip          alias for $10;
     v_entry_id             integer;
 begin
     v_entry_id := acs_object__new (
@@ -96,6 +99,7 @@ begin
       entry_id, 
       package_id,
       title,
+      title_url,
       content,
       content_format,
       entry_date,
@@ -106,6 +110,7 @@ begin
       v_entry_id, 
       p_package_id,
       p_title,
+      p_title_url,
       p_content,
       p_content_format,
       p_entry_date,

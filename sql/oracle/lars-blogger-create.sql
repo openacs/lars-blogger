@@ -33,6 +33,7 @@ create table pinds_blog_entries (
     package_id                  constraint pinds_blog_entry_package_id_fk
                                 references apm_packages(package_id),
     title                       varchar(500),
+    title_url                   varchar(500),
     content                     clob,
     content_format              varchar(50) 
                                 default 'text/html'

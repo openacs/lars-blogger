@@ -1,11 +1,16 @@
 --
--- lars-blogger-package-create.sql
+-- Upgrade script
 -- 
--- @author Lars Pind
--- @author Yon (Yon@milliped.com) Oracle Port
--- 
--- @cvs-id $Id$
+-- Adds the title_url column to blog entries and __new function
 --
+-- @author Lars Pind (lars@pinds.com)
+-- @creation-date 2003-03-13
+--
+
+alter table pinds_blog_entries add (
+  title_url             varchar(500)
+);
+
 
 create or replace package pinds_blog_entry
 as

@@ -6,19 +6,15 @@
     <pretty-plural>Lars Bloggers</pretty-plural>
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
-
-    <version name="0.8.4" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.4.apm">
-    <database-support>
-        <database>oracle</database>
-        <database>postgresql</database>
-    </database-support>
+    
+    <version name="0.8.5" url="http://openacs.org/repository/download/apm/lars-blogger-0.8.5.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Write your own web log</summary>
-        <release-date>2003-01-30</release-date>
+        <release-date>2003-03-13</release-date>
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
         <description format="text/html">Manages multiple web logs for your site. Just mount multiple instances, and you can do all the blogging you want.</description>
 
-        <provides url="lars-blogger" version="0.8.4"/>
+        <provides url="lars-blogger" version="0.8.5"/>
         <requires url="acs-datetime" version="4.0"/>
         <requires url="general-comments" version="4.0"/>
         <requires url="notifications" version="0.1"/>
@@ -26,104 +22,19 @@
 
         <files>
             <file type="package_spec" path="lars-blogger.info"/>
-            <file type="data_model_create" db_type="oracle" path="sql/oracle/lars-blogger-create.sql"/>
-            <file type="data_model_drop" db_type="oracle" path="sql/oracle/lars-blogger-drop.sql"/>
-            <file type="data_model" db_type="oracle" path="sql/oracle/lars-blogger-package-create.sql"/>
-            <file type="data_model" db_type="oracle" path="sql/oracle/lars-blogger-package-drop.sql"/>
-            <file type="data_model" db_type="oracle" path="sql/oracle/notifications-drop.sql"/>
-            <file type="data_model" db_type="oracle" path="sql/oracle/notifications-init.sql"/>
-            <file type="data_model" db_type="oracle" path="sql/oracle/rss-register.sql"/>
-            <file type="data_model" db_type="oracle" path="sql/oracle/rss-unregister.sql"/>
-            <file type="data_model_upgrade" db_type="oracle" path="sql/oracle/upgrade/upgrade-0.7d-0.8.sql"/>
-            <file type="data_model_upgrade" db_type="oracle" path="sql/oracle/upgrade/upgrade-0.8.2-0.8.3.sql"/>
-            <file type="data_model_upgrade" db_type="oracle" path="sql/oracle/upgrade/upgrade-0.8.3-0.8.4.sql"/>
-            <file type="data_model_create" db_type="postgresql" path="sql/postgresql/lars-blogger-create.sql"/>
-            <file type="data_model_drop" db_type="postgresql" path="sql/postgresql/lars-blogger-drop.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/lars-blogger-sc-create.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/lars-blogger-sc-drop.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/notifications-drop.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/notifications-init.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/rss-register.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/rss-unregister.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/upgrade/lars-blogger-sc-index.sql"/>
-            <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.6.4d-0.7d.sql"/>
-            <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.7d-0.8.sql"/>
-            <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.8.2-0.8.3.sql"/>
-            <file type="data_model_upgrade" db_type="postgresql" path="sql/postgresql/upgrade/upgrade-0.8.3-0.8.4.sql"/>
-            <file type="query_file" db_type="oracle" path="tcl/entry-procs-oracle.xql"/>
-            <file type="query_file" db_type="postgresql" path="tcl/entry-procs-postgresql.xql"/>
-            <file type="tcl_procs" path="tcl/entry-procs.tcl"/>
-            <file type="query_file" db_type="oracle" path="tcl/lars-blogger-procs-oracle.xql"/>
-            <file type="query_file" db_type="postgresql" path="tcl/lars-blogger-procs-postgresql.xql"/>
-            <file type="tcl_procs" path="tcl/lars-blogger-procs.tcl"/>
-            <file type="tcl_procs" path="tcl/pinds-blog-entry-sc-procs.tcl"/>
-            <file type="query_file" db_type="oracle" path="tcl/rss-procs-oracle.xql"/>
-            <file type="query_file" db_type="postgresql" path="tcl/rss-procs-postgresql.xql"/>
-            <file type="tcl_procs" path="tcl/rss-procs.tcl"/>
-            <file type="query_file" path="tcl/rss-procs.xql"/>
-            <file type="tcl_procs" path="tcl/weblogs-procs.tcl"/>
-            <file type="query_file" path="tcl/weblogs-procs.xql"/>
-            <file type="content_page" path="www/admin/drafts.adp"/>
-            <file type="content_page" path="www/admin/drafts.tcl"/>
-            <file type="query_file" path="www/admin/drafts.xql"/>
-            <file type="content_page" path="www/admin/entry-delete.tcl"/>
-            <file type="query_file" path="www/admin/entry-delete.xql"/>
-            <file type="query_file" db_type="oracle" path="www/admin/entry-edit-oracle.xql"/>
-            <file type="query_file" db_type="postgresql" path="www/admin/entry-edit-postgresql.xql"/>
-            <file type="content_page" path="www/admin/entry-edit.adp"/>
-            <file type="content_page" path="www/admin/entry-edit.tcl"/>
-            <file type="content_page" path="www/admin/entry-edit.tcl.orig"/>
-            <file type="content_page" path="www/admin/entry-edit.tcl.rej"/>
-            <file type="query_file" path="www/admin/entry-edit.xql"/>
-            <file type="query_file" db_type="oracle" path="www/admin/entry-publish-oracle.xql"/>
-            <file type="query_file" db_type="postgresql" path="www/admin/entry-publish-postgresql.xql"/>
-            <file type="content_page" path="www/admin/entry-publish.tcl"/>
-            <file type="content_page" path="www/admin/entry-revoke.tcl"/>
-            <file type="query_file" path="www/admin/entry-revoke.xql"/>
-            <file type="content_page" path="www/admin/index.adp"/>
-            <file type="content_page" path="www/admin/index.tcl"/>
-            <file type="query_file" path="www/admin/index.xql"/>
-            <file type="content_page" path="www/admin/rss-setup.tcl"/>
-            <file type="query_file" path="www/admin/rss-setup.xql"/>
-            <file type="content_page" path="www/admin/subscribers.adp"/>
-            <file type="content_page" path="www/admin/subscribers.tcl"/>
-            <file type="content_page" path="www/archive/index.vuh"/>
-            <file type="query_file" db_type="oracle" path="www/blog-months-oracle.xql"/>
-            <file type="query_file" db_type="postgresql" path="www/blog-months-postgresql.xql"/>
-            <file type="content_page" path="www/blog-months.adp"/>
-            <file type="content_page" path="www/blog-months.tcl"/>
-            <file type="query_file" db_type="oracle" path="www/blog-oracle.xql"/>
-            <file type="query_file" db_type="postgresql" path="www/blog-postgresql.xql"/>
-            <file type="content_page" path="www/blog.adp"/>
-            <file type="content_page" path="www/blog.tcl"/>
-            <file type="query_file" db_type="oracle" path="www/calendar-oracle.xql"/>
-            <file type="query_file" db_type="postgresql" path="www/calendar-postgresql.xql"/>
-            <file type="content_page" path="www/calendar.adp"/>
-            <file type="content_page" path="www/calendar.tcl"/>
-            <file type="documentation" path="www/doc/index.html"/>
-            <file type="content_page" path="www/entry-chunk.adp"/>
-            <file type="content_page" path="www/entry-chunk.tcl"/>
-            <file type="content_page" path="www/flush-cache.tcl"/>
-            <file type="content_page" path="www/graphics/arrow-box.gif"/>
-            <file type="content_page" path="www/index.adp"/>
-            <file type="content_page" path="www/index.tcl"/>
-            <file type="query_file" path="www/index.xql"/>
-            <file type="content_page" path="www/one-entry.adp"/>
-            <file type="content_page" path="www/one-entry.tcl"/>
-            <file type="content_page" path="www/rss/index.vuh"/>
         </files>
         <callbacks>
         </callbacks>
         <parameters>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="rss_file_url"  default="rss/rss.xml" description="What URL should we advertise the RSS feed under, relative to the blog mount point. Leave blank if no RSS feed." section_name="rss"/>
-            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_height"  description="Height in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
-            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_width"  description="Width in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="channel_image_url"  description="The URL, relative to this server, to the image that corresponds to this blog in the rss channel" section_name="rss"/>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="weblogs_ping_url"  default="http://rpc.weblogs.com/RPC2" description="The URL to post the update ping message to" section_name="weblogs-com"/>
-            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="weblogs_update_ping_p"  default="1" description="Should we ping weblogs.com on updates to this blog?" section_name="weblogs-com"/>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="public_url"  description="The public URL for this blog (in case you've put the blog on your front page, for example)" section_name="weblogs-com"/>
-            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="ShowPosterP"  default="1" description="Show who posted the entry and when"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="HeaderBackgroundColor"  default="#dcdcdc" description="Background color for the header bars, those with the entry date, calendar, etc."/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="ShowPosterP"  default="1" description="Show who posted the entry and when"/>
+            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="public_url"  description="The public URL for this blog (in case you've put the blog on your front page, for example)" section_name="weblogs-com"/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="weblogs_update_ping_p"  default="1" description="Should we ping weblogs.com on updates to this blog?" section_name="weblogs-com"/>
+            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="weblogs_ping_url"  default="http://rpc.weblogs.com/RPC2" description="The URL to post the update ping message to" section_name="weblogs-com"/>
+            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="channel_image_url"  description="The URL, relative to this server, to the image that corresponds to this blog in the rss channel" section_name="rss"/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_width"  description="Width in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="channel_image_height"  description="Height in pixels of the image to be used for this blog as an RSS channel" section_name="rss"/>
+            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="rss_file_url"  default="rss/rss.xml" description="What URL should we advertise the RSS feed under, relative to the blog mount point. Leave blank if no RSS feed." section_name="rss"/>
         </parameters>
 
     </version>
