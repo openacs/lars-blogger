@@ -79,6 +79,7 @@
       $sw_category_filter_join_where_clause
       and p.person_id = o.creation_user
       and com.object_id (+) = e.entry_id
+      and o.object_id = e.entry_id
 ) x, pinds_blog_entries y
 where x.entry_id=y.entry_id
 order by x.entry_date desc, x.entry_id, x.sw_category_id

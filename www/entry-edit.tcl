@@ -112,6 +112,7 @@ ad_form -extend -name entry -form {
 } \
     -new_request {
         set entry_date $now_ansi
+        set content [template::util::richtext::create $content {}]
     } \
     -edit_request {
         permission::require_write_permission -object_id $entry_id

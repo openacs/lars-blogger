@@ -134,7 +134,7 @@ if { [exists_and_not_null year] } {
     append context_base_url archive/
     lappend context [list $context_base_url Archive]
 
-    append context_base_url /$year
+    append context_base_url $year
     lappend context [list $context_base_url $year]
 
     if { [exists_and_not_null day] } {
