@@ -92,7 +92,7 @@
           </tr>
           <tr>
             <td nowrap>
-              <a href="@rss_file_url@">RSS 1.0/RDF/XML</a>
+              <a href="@rss_file_url@" title="Link to the RSS feed">RSS 1.0/RDF/XML</a>
             </td>
           </tr>
         </if>

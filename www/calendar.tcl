@@ -26,8 +26,11 @@ db_foreach entry_dates { * SQL * } {
 set widget [dt_widget_month_small \
         -date $date \
         -calendar_details $calendar_details \
-        -day_number_template "\[ad_decode \[ns_set get \$calendar_details \$julian_date\] 1 \"<a href=\\\"${package_url}archive/\$year/$month_number/\[format \"%02d\" \$day_number\]/\\\"><b>\$day_number</b></a>\" \$day_number\]"]
+        -day_number_template "\[ad_decode \[ns_set get \$calendar_details \$julian_date\] 1 \"<a href=\\\"${package_url}archive/\$year/$month_number/\[format \"%02d\" \$day_number\]/\\\" title=\\\"View the entries for this date\\\"><b>\$day_number</b></a>\" \$day_number\]"]
 
 set prev_month_url "${package_url}archive/[clock format [clock scan $prev_month] -format %Y/%m]/"
 set next_month_url "${package_url}archive/[clock format [clock scan $next_month] -format %Y/%m]/"
 
+# Add year to the link
+append next_month_name " [string range $next_month 0 3]"
+append prev_month_name " [string range $prev_month 0 3]"
