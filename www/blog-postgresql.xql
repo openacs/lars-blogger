@@ -42,8 +42,8 @@
              as entry_date_ansi,
            to_char(current_timestamp,'YYYY-MM-DD HH24:MI:SS') 
              as sysdate_ansi,
-           title,  
-           title_url,
+           e.title,  
+           e.title_url,
            e.category_id,
            com.category_id as sw_category_id,
            content,
@@ -64,7 +64,7 @@
            left outer join category_object_map com
              on (com.object_id = e.entry_id)
                       $sw_category_filter_join_clause
-    where package_id = :package_id
+    where e.package_id = :package_id
     [ad_decode $date_clause "" "" "and    $date_clause"]
       and    draft_p = 'f'
       and    deleted_p = 'f'
