@@ -26,6 +26,7 @@
 
         <callbacks>
             <callback type="before-uninstantiate"  proc="lars_blogger::install::package_uninstantiate"/>
+            <callback type="after-mount"  proc="lars_blogger::install::after_mount"/>
             <callback type="after-instantiate"  proc="lars_blogger::install::package_instantiate"/>
         </callbacks>
         <parameters>

@@ -55,7 +55,7 @@ ad_form -name entry \
             {html {size 50}}}
         {title_url:text,optional
             {label "Title URL"}
-            {help_text "If this entry is a rant on a web page you can \
+            {help_text "If this entry is about a web page you can \
                 put the full URL here, e.g. ${valid_url_example}.  The \
                 title of your entry will then become a hyperlink to \
                 that web page."}

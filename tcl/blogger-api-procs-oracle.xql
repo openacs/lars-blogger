@@ -13,7 +13,7 @@
           and    package_id = :package_id
           and    draft_p = 'f'
           and    deleted_p = 'f'
-          order  by entry_date desc
+          order  by entry_date desc, entry_id desc
         ) where rownum <= :numberOfPosts
       </querytext>
 </fullquery>

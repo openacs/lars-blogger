@@ -46,8 +46,12 @@ aa_register_init_class create_blog_and_user {
 } {
     # destructor
 
-    apm_package_instance_delete $blog_id
-    acs_user::delete -permanent -user_id $user_id
+    if {[catch { 
+        apm_package_instance_delete $blog_id
+        acs_user::delete -permanent -user_id $user_id
+    } errMsg]} {
+        ns_log error "create_blog_and_user teardown failed: $errMsg"
+    }
 }
 
 aa_register_case -cats web -init_classes {

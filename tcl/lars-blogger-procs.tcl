@@ -16,7 +16,7 @@ ad_proc lars_blog_setup_feed {
     }
     
     set timeout [expr 30*60]
-    set channel_title [lars_blog_name]
+    set channel_title [lars_blog_name -package_id $package_id]
     set creation_user [ad_conn user_id]
     set creation_ip [ns_conn peeraddr]
     
