@@ -82,6 +82,7 @@
 	<querytext>
       
              select g.comment_id,
+                    r.content,
                     r.title,
                     r.mime_type,
                     o.creation_user,
