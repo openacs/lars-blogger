@@ -5,7 +5,27 @@ ad_page_contract {} {
     {content:allhtml ""}
 }
 
+# Must be logged in
+ad_maybe_redirect_for_registration
+
+# Must have write privilege
 permission::require_permission -object_id [ad_conn package_id] -privilege write
+
+# If we're in DisplayUserP mode, the user must have a screen name setup
+if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
+    acs_user::get -user_id [ad_conn user_id] -array user_info
+    if { [empty_string_p $user_info(screen_name)] } {
+
+        set page_title "Screen Name"
+        set context [list $page_title]
+        set pvt_home_url [ad_pvt_home]
+        set pvt_home_name [ad_pvt_home_name]
+
+        ad_return_template screen-name-setup
+        return
+    }
+}
+
 
 set package_id [ad_conn package_id]
 set today [db_string today { *SQL* }]

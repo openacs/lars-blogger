@@ -31,11 +31,12 @@ begin
         pinds_blog_entry.delete(blog_entry.entry_id);
     end loop;
 
-    acs_object_type.drop_type('weblogger_channel', 't');
+    acs_object_type.drop_type('pinds_blog_entry', 't');
 
 end;
 /
 show errors
+
 
 @@ lars-blogger-package-drop
 

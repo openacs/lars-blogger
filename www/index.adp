@@ -7,16 +7,31 @@
 
 <if @display_bloggers_p@ eq 1>
 
-  <ul>
 
-  <multiple name="bloggers">
+  <if @bloggers:rowcount@ gt 0>
+    <ul>
+      <multiple name="bloggers">
+        <li><a href="@package_url@user/@bloggers.screen_name@">@bloggers.screen_name@</a></li>
+      </multiple>
+    </ul>
+  </if>
+  <else>
+    <i>No bloggers here.</i>
+  </else>
+
+  <if @write_p@ true>
+    <p>
+      <b>&raquo;</b> <a href="@package_url@entry-edit" title="Add an entry to your weblog, or start a new weblog">Add entry or start a new weblog</a><br>
+    </p>
+  </if>
+
+  <if @admin_p@ true>
+    <p>
+      <b>&raquo;</b> <a href="@package_url@admin/" title="Visit administration pages">Administer<a/>
+    </p>
+  </if>
+
   
-    <li><a href="@package_url@user/@bloggers.screen_name@">@bloggers.screen_name@</a></li>
- 
-  </multiple>
-
-  </ul>
-
 </if>
 
 <else>
@@ -45,7 +60,7 @@
           </td>
         </tr>
 
-          <if @write_p@ gt 0>
+          <if @write_p@ true>
           <tr>
             <th bgcolor="@header_background_color@">
               Actions
