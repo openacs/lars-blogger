@@ -20,12 +20,6 @@ aa_register_init_class create_blog_and_user {
                         -node_name $node_name \
                         -package_key lars-blogger]
 
-    # set package parameters
-    parameter::set_value \
-        -package_id $blog_id \
-        -parameter weblogs_update_ping_p \
-        -value 0
-
     # create the user
     set username [ad_generate_random_string]
     set password [ad_generate_random_string]

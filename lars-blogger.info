@@ -55,8 +55,6 @@
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="TechnoratiApiUrl"  description="The URL which will be used in Technorati API lookups. If you leave this empty it will default to the blog's URL." section_name="technorati"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="TrackbackMaxExcerpt"  default="200" description="Maximum length of excerpt to send for trackback" section_name="Trackback"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="user_rss_feed_p"  default="0" description="Should we build an RSS feed for each user." section_name="rss"/>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="weblogs_ping_url"  default="http://rpc.weblogs.com/RPC2" description="The URL to post the update ping message to" section_name="weblogs-com"/>
-            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="weblogs_update_ping_p"  default="1" description="Should we ping weblogs.com on updates to this blog?" section_name="weblogs-com"/>
         </parameters>
 
     </version>

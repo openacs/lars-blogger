@@ -27,5 +27,5 @@ ad_form -name ping_url_add -form {
         -package_id $package_id \
         -ping_url $ping_url
 } -after_submit {
-    ad_returnredirect "ping-urls"
+    ad_returnredirect -message "Ping URL \"$ping_url\" has been added."  "ping-urls"
 }

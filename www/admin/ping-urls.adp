@@ -16,3 +16,11 @@
 </p>
 
 <listtemplate name="ping_urls"></listtemplate>
+
+<if @default_pings:rowcount@ gt 0>
+  <h2>Suggested Ping Services</h2>
+  <p>
+    These are standard ping services which you might want to add.
+  </p>
+  <listtemplate name="default_pings"></listtemplate>
+</if>

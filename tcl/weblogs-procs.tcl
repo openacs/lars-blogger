@@ -68,16 +68,6 @@ ad_proc -private lars_blogger::instance::send_pings {
         set package_id [ad_conn package_id]
     }
     
-    # Should we ping?
-    set ping_p [parameter::get -boolean \
-                    -package_id $package_id \
-                    -parameter "weblogs_update_ping_p" \
-                    -default 0]
-
-    if { !$ping_p } {
-        return
-    }
-    
     set package_url [lars_blog_public_package_url -package_id $package_id]
 
     set blog_title [lars_blog_name]
