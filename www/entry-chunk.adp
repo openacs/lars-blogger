@@ -12,7 +12,7 @@
 </if>
 <else>
   <if @blog.title@ not nil>
-    <p><b>@blog.title@</b></p>
+    <p><b>@blog.title;noquote@</b></p>
   </if>
 </else>
 </div> 
