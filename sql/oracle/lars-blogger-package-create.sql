@@ -196,11 +196,12 @@ as
         channel_id in weblogger_channels.channel_id%TYPE
     )
     is
+      v_foo integer;
     begin
         -- delete rss_gen_subscrs which relate to this channel
 		for subscr in (select subscr_id from rss_gen_subscrs
 		      where summary_context_id = weblogger_channel.del.channel_id) loop
-			rss_gen_subscr.del(subscr.subscr_id);
+			v_foo := rss_gen_subscr.del(subscr.subscr_id);
 		end loop;
 
         delete
