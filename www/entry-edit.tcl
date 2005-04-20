@@ -21,9 +21,9 @@ permission::require_permission -object_id [ad_conn package_id] -privilege create
 # need it sooner.
 
 if {[ad_form_new_p -key entry_id]} {
-    set page_title "[_ lars-blogger._Add_6]"
+    set page_title "[_ lars-blogger.Add_Blog_Entry]"
 } else {
-    set page_title "[_ lars-blogger._Edit_2]"
+    set page_title "[_ lars-blogger.Edit_Blog_Entry]"
 }
 
 set valid_url_example "http://www.example.com/foo"
@@ -33,7 +33,7 @@ if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
     acs_user::get -user_id [ad_conn user_id] -array user_info
     if { [empty_string_p $user_info(screen_name)] } {
 
-        set page_title "Screen Name"
+        set page_title "[_ lars-blogger.Screen_Name]"
         set context [list $page_title]
         set pvt_home_url [ad_pvt_home]
         set pvt_home_name [ad_pvt_home_name]
@@ -51,11 +51,11 @@ ad_form -name entry \
     -cancel_url [ad_decode $return_url "" "." $return_url] \
     -form {entry_id:key(acs_object_id_seq)
         {title:text
-            {label "[_ lars-blogger.Title]"}
+            {label Title}
             {html {size 50}}}
         {title_url:text,optional
-            {label "[_ lars-blogger._Title]"}
-            {help_text "[_ lars-blogger._If]"}
+            {label "[_ lars-blogger.Title_URL]"}
+            {help_text "[_ lars-blogger.lt_If_this_entry_is_abou]"}
             {html {size 50}}
         }
     } \
@@ -78,10 +78,11 @@ if { [string equal [lars_blog_categories_p] "1"] } {
 
     }
 }
+set container_id [ad_conn [parameter::get -parameter CategoryContainer -default package_id]]
 
 # SWC (Site-wide categories):
 category::ad_form::add_widgets \
-    -container_object_id $package_id \
+    -container_object_id $container_id \
     -categorized_object_id [value_if_exists entry_id] \
     -form_name entry
 
@@ -94,19 +95,36 @@ ad_form -extend -name entry -form {
 
 ad_form -extend -name entry -form {
     {entry_date:text
-        {label "[_ lars-blogger._Entry]"}
-        {help_text "Format: YYYY-MM-DD HH24:MI:SS"}
+        {label "[_ lars-blogger.Entry_date]"}
+        {help_text "[_ lars-blogger.lt_Format_YYYY-MM-DD_HH2]"}
         {html {size 20}}
         {after_html
-            {(<a href="javascript:setEntryDateToToday()">[_ lars-blogger._Set]</a>)}
+            {(<a href="javascript:setEntryDateToToday()">Set to now</a>)}
         }
     }
-    {draft_p:text(select)
-        {options {{"[_ lars-blogger.Draft]" "t"} {"[_ lars-blogger.Publish]" "f"}}}
-        {label "[_ lars-blogger._Post]"}
+}
+set unpublish_p [expr ![parameter::get -parameter ImmediatePublishP -default 0]]
+
+if {$unpublish_p} {
+    ad_form -extend -name entry -form {
+        {draft_p:text(select)
+            {options {{"[_ lars-blogger.Draft]" "t"} {"[_ lars-blogger.Publish]" "f"}}}
+            {label "[_ lars-blogger.Post_Status]"}
+        }
     }
-} \
+} else {
+    ad_form -extend -name entry -form {
+        {draft_p:text(hidden)}
+    }
+}
+
+ad_form -extend -name entry \
     -new_request {
+        if {$unpublish_p} {
+            set draft_p t
+        } else {
+            set draft_p f
+        }
         set entry_date $now_ansi
         set content [template::util::richtext::create $content {}]
     } \
@@ -140,7 +158,7 @@ ad_form -extend -name entry -form {
 
         # SWC Collect categories from all the category widgets
         set category_ids [category::ad_form::get_categories \
-          -container_object_id $package_id]
+                              -container_object_id $container_id]
 
     } \
     -new_data {
@@ -194,7 +212,7 @@ ad_form -extend -name entry -form {
                 [util_url_valid_p $title_url]
             }
         ]}
-        "[_ lars-blogger._Your]"
+        "[_ lars-blogger.lt_Your_input_title_url_]"
     }}
 
 set context [list $page_title]

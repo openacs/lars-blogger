@@ -15,4 +15,4 @@ catch {
                                 -ping_url $ping_url
 }
 
-ad_returnredirect -message "Ping URL \"$ping_url\" has been removed." "ping-urls"
+ad_returnredirect -message "[_ lars-blogger.lt_Ping_URL_ping_url_has_1]" "ping-urls"

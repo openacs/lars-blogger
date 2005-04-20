@@ -13,6 +13,14 @@ lars_blogger::entry::get -entry_id $entry_id -array blog
 
 set sw_category_multirow "__branimir__multirow__blog/$entry_id"
 
+set unpublish_p [expr ![parameter::get -parameter ImmediatePublishP -default 0]]
+
+# We say manageown if manageown set and not admin on the package.
+set manageown_p [parameter::get -parameter OnlyManageOwnPostsP -default 0]
+if {$manageown_p} {
+    set manageown_p [expr ![permission::permission_p -object_id $package_id -privilege admin]]
+}
+
 template::multirow create $sw_category_multirow sw_category_id \
   sw_category_name sw_category_url
 
@@ -46,7 +54,9 @@ set page_title $blog(title)
 if {![exists_and_not_null screen_name]} {
     set screen_name ""
     set context [list $page_title]
+    set blog(permalink_url) "${package_url}one-entry?[export_vars { entry_id }]"
 } else {
+    set blog(permalink_url) "${package_url}user/$screen_name/one-entry?[export_vars { entry_id }]"
     set context [list $screen_name]
 }
 

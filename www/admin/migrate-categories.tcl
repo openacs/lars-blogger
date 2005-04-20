@@ -11,7 +11,7 @@ set admin_p [ad_require_permission $package_id admin]
 
 set context {{Categories Migration}}
 
-set title "Categories Migration"
+set title "[_ lars-blogger.Categories_Migration]"
 
 set fp [open [ns_info pageroot]/../packages/lars-blogger/www/admin/migrate-categories-1.tcl]
 set meat [read $fp]

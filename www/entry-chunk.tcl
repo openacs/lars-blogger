@@ -51,15 +51,9 @@ set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
 set entry_id $blog(entry_id)
 
-if { [empty_string_p $screen_name] } {
-    set blog(permalink_url) "${package_url}one-entry?[export_vars { entry_id }]"
-} else {
-    set blog(permalink_url) "${package_url}user/$screen_name/one-entry?[export_vars { entry_id }]"
-}
-
 lars_blogger::entry::htmlify \
     -max_content_length $max_content_length \
-    -more [ad_decode [ad_return_url] $blog(permalink_url) {} "<p><a href=\"$blog(permalink_url)\">Continued...</a>"] \
+    -more [ad_decode [ad_return_url] $blog(permalink_url) {} "<p><a href=\"[ad_quotehtml $blog(permalink_url)]\">Continued...</a>"] \
     -array blog
 
 

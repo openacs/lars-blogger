@@ -34,7 +34,7 @@ if { ![empty_string_p $screen_name] } {
 
 if { ![empty_string_p $category_short_name] } {
     if { ![db_0or1row get_category_from_short_name {}] } {
-	ad_return_error "Category doesn't exist" "The specified category wasn't valid."
+	ad_return_error "[_ lars-blogger.lt_Category_doesnt_exist]" "[_ lars-blogger.lt_The_specified_categor]"
 	return
     }
     # Show Category in context bar
@@ -61,9 +61,17 @@ if { ![empty_string_p [parameter::get -parameter "rss_file_name"]] } {
 set rsd_url ""
 if { [xmlrpc::enabled_p] } {
     set rsd_url "[ad_url]${package_url}rsd/"
-} 
+}
 
 set stylesheet_url [lars_blog_stylesheet_url]
+
+set unpublish_p [expr ![parameter::get -parameter ImmediatePublishP -default 0]]
+
+# We say manageown if manageown set and not admin on the package.
+set manageown_p [parameter::get -parameter OnlyManageOwnPostsP -default 0]
+if {$manageown_p} {
+    set manageown_p [expr ![permission::permission_p -object_id $package_id -privilege admin]]
+}
 
 # since ADP commands can't be evaluated in the <property> tags, we
 # create a separate ADP file for headerstuff. See Bart's post
@@ -151,7 +159,7 @@ if { [exists_and_not_null year] } {
         db_1row archive_date_year {}
     }
 
-    append page_title " Archive"
+    append page_title "[_ lars-blogger.Archive]"
     set date "$year-[ad_decode $month "" "01" $month]-[ad_decode $day "" "01" $day]"
     set type "archive"
 
@@ -179,17 +187,33 @@ if { ![empty_string_p $sw_category_id] } {
     set type "all"
 }
 
-db_multirow -unclobber -extend { sw_category_name tree_name } sw_categories sw_categories {
-    select c.category_id as sw_category_id, c.tree_id
-    from   categories c, category_tree_map ctm
-    where  ctm.tree_id = c.tree_id
-    and    ctm.object_id = :package_id
-} {
-    set sw_category_name [category::get_name $sw_category_id]
-    set tree_name [category_tree::get_name $tree_id]
+set counts {}
+set sw_cats 0
+db_foreach catcount {select c.category_id as catid, count(*) as count from category_object_map c, pinds_blog_entries e where e.package_id = :package_id and c.object_id = e.entry_id group by c.category_id} { 
+    lappend counts $catid $count
+    if {$count > 0} {
+        incr sw_cats
+    }
+}
+
+if {$sw_cats} {
+    db_multirow -unclobber -extend { sw_category_name tree_name } sw_categories sw_categories {
+        select c.category_id as sw_category_id, c.tree_id
+        from   categories c, category_tree_map ctm
+        where  ctm.tree_id = c.tree_id
+        and    ctm.object_id = :package_id
+    } {
+        set sw_category_name [category::get_name $sw_category_id]
+        set tree_name [category_tree::get_name $tree_id]
+    }
+
+    set container_id [ad_conn [parameter::get -parameter CategoryContainer -default package_id]]
+    category_tree::get_multirow -datasource sw_categories -container_id $container_id -category_counts $counts
 }
 
 # Cut the URL off the last item in the context bar
 if { [llength $context] > 0 } {
     set context [lreplace $context end end [lindex [lindex $context end] end]]
 }
+
+set blog_name [lars_blog_name]

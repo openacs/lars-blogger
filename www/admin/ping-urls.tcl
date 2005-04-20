@@ -13,21 +13,21 @@ list::create \
     -name ping_urls \
     -multirow ping_urls \
     -key ping_url \
-    -row_pretty_plural "[_ lars-blogger.URLs] \
+    -row_pretty_plural "[_ lars-blogger.URLs]" \
     -actions {
-        "[_ lars-blogger._Add_2] "ping-url-add" "[_ lars-blogger._Add_3]
+        "[_ lars-blogger.Add_Ping_URL]" "ping-url-add" "[_ lars-blogger.lt_Add_another_ping-comp]"
     } -elements {
         ping_url {
-            label "[_ lars-blogger._Ping_1]
+            label "[_ lars-blogger.Ping_URL]"
         }
         remove_url {
             label ""
-            display_template {<a onclick="if (confirm('Are you sure that you want to delete this ping URL?')) return true; else return false;" href="@ping_urls.remove_url@">Remove</a>}
+            display_template {<a onclick="if (confirm('[_ lars-blogger.lt_Are_you_sure_that_you_1]')) return true; else return false;" href="@ping_urls.remove_url@">[_ lars-blogger.Remove]</a>}
         }
     }
     
 set blog_name [lars_blog_name]
-set context "[_ lars-blogger._Ping_2]"
+set context "[_ lars-blogger.Ping_URLs]"
 
 multirow create ping_urls ping_url remove_url
 
@@ -50,10 +50,10 @@ template::list::create \
     -name default_pings \
     -elements {
         service {
-            label "[_ lars-blogger.Service]
+            label "[_ lars-blogger.Service]"
         }
         ping_url {
-            label "[_ lars-blogger._Ping_1]
+            label "[_ lars-blogger.Ping_URL]"
         }
         add {
             display_template {Add}

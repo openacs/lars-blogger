@@ -1,52 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <message_catalog package_key="lars-blogger" package_version="2.1.1" locale="en_US" charset="ISO-8859-1">
-
-  <msg key="_Add">Link</msg>
-  <msg key="_Add_1">a link to your blogroll</msg>
-  <msg key="_Add_2">Ping URL</msg>
-  <msg key="_Add_3">another ping-compatible site</msg>
-  <msg key="_Add_4">category</msg>
-  <msg key="_Add_5">new category</msg>
-  <msg key="_Add_6">Blog Entry</msg>
-  <msg key="_Are">you sure that you want to delete this link?</msg>
-  <msg key="_Categories">are not supported. Modify the package parameters to add support.</msg>
-  <msg key="_Category">migration finished. $count objects recategorized.</msg>
-  <msg key="_Category_1">Short Name</msg>
-  <msg key="_Delete">category</msg>
-  <msg key="_Delete_1">entry</msg>
-  <msg key="_Draft">Entries</msg>
-  <msg key="_Edit">category</msg>
-  <msg key="_Edit_1">entry</msg>
-  <msg key="_Edit_2">Blog Entry</msg>
-  <msg key="_Entry">date</msg>
-  <msg key="_If">this entry is a rant on a web page you can \
-                put the full URL here, e.g. ${valid_url_example}.  The \
-                title of your entry will then become a hyperlink to \
-                that web page.</msg>
-  <msg key="_It">might be a good idea to take a look at your log file.
-Some useful information about the progress of migration will be written
-there.</msg>
-  <msg key="_Migrating">categories ...</msg>
-  <msg key="_Migrating_1">categories, please wait ...</msg>
-  <msg key="_No">category support</msg>
-  <msg key="_Ping">URL \&quot;$ping_url\&quot; has been added.</msg>
-  <msg key="_Ping_1">URL</msg>
-  <msg key="_Ping_2">URLs</msg>
-  <msg key="_Post">Status</msg>
-  <msg key="_Preview">entry</msg>
-  <msg key="_Publish">entry</msg>
-  <msg key="_Set">to now</msg>
-  <msg key="_This">category tree is a result of migration of old \
-      Weblogger-specific categories performed on [ns_fmttime [ns_time]]</msg>
-  <msg key="_This_1">is used to provide a pretty URL for viewing postings in this category</msg>
-  <msg key="_This_2">short name is already used by another category</msg>
-  <msg key="_Title">URL</msg>
-  <msg key="_Your">input \&quot;$title_url\&quot; doesn't look like a valid URL. \
-            Example of a valid URL: $valid_url_example</msg>
   <msg key="Actions">Actions</msg>
+  <msg key="Add_Blog_Entry">Add Blog Entry</msg>
+  <msg key="Add_category">Add category</msg>
   <msg key="Add_comment">Add comment</msg>
   <msg key="Add_entry">Add entry</msg>
+  <msg key="Add_Link">Add Link</msg>
   <msg key="Add_new_blog_entry">Add new blog entry</msg>
+  <msg key="Add_new_category">Add new category</msg>
+  <msg key="Add_Ping_URL">Add Ping URL</msg>
   <msg key="Administer">Administer</msg>
   <msg key="Administration">Administration</msg>
   <msg key="Archive">Archive</msg>
@@ -57,50 +19,88 @@ there.</msg>
   <msg key="Bookmarklet_Link">Bookmarklet Link</msg>
   <msg key="by_commentsauthor">by %comments.author%</msg>
   <msg key="Categories">Categories</msg>
+  <msg key="Categories_Migration">Categories Migration</msg>
   <msg key="Category">Category</msg>
+  <msg key="Category_Short_Name">Category Short Name</msg>
   <msg key="Change_permissions">Change permissions</msg>
   <msg key="Configure_Trackback">Configure Trackback</msg>
+  <msg key="Confirm_Delete">Confirm Delete</msg>
   <msg key="Content">Content</msg>
   <msg key="Date">Date</msg>
   <msg key="Delete">Delete</msg>
+  <msg key="Delete_category">Delete category</msg>
+  <msg key="Delete_entry">Delete entry</msg>
   <msg key="Deprecated">[Deprecated]</msg>
+  <msg key="Down">Down</msg>
   <msg key="Draft">Draft</msg>
+  <msg key="Draft_Entries">Draft Entries</msg>
   <msg key="Draft_entries">Draft entries</msg>
   <msg key="E-mail_subscribers">E-mail subscribers</msg>
   <msg key="Edit">Edit</msg>
+  <msg key="Edit_Blog_Entry">Edit Blog Entry</msg>
+  <msg key="Edit_category">Edit category</msg>
+  <msg key="Edit_entry">Edit entry</msg>
+  <msg key="Entry_date">Entry date</msg>
   <msg key="in">in</msg>
+  <msg key="links">links</msg>
   <msg key="lt_____will_crawl_your_w">,
     will crawl your weblog shortly after it has been updated.
     You can</msg>
   <msg key="lt__use_this_information">, use this information to
     compile lists of recently updated weblogs. Other services,
     such as</msg>
+  <msg key="lt_Add_a_link_to_your_bl">Add a link to your blogroll</msg>
+  <msg key="lt_Add_another_ping-comp">Add another ping-compatible site</msg>
+  <msg key="lt_Are_you_sure_that_you">Are you sure that you want to delete this link?</msg>
+  <msg key="lt_Are_you_sure_that_you_1">Are you sure that you want to delete this ping URL?</msg>
   <msg key="lt_Before_you_can_start_">Before you can start using your web log, you must setup a screen name at %pvt_home_name%.</msg>
   <msg key="lt_blog_name_Add_Ping_UR">%blog_name%: Add Ping URL</msg>
   <msg key="lt_blog_name_Bookmarklet">%blog_name%: Bookmarklet</msg>
   <msg key="lt_blog_namenoquote_Blog">%blog_name;noquote% Blogroll</msg>
   <msg key="lt_blog_namenoquote_Ping">%blog_name;noquote% Ping URLs</msg>
   <msg key="lt_by_blogposter_first_n">by %blog.poster_first_names% %blog.poster_last_name%</msg>
+  <msg key="lt_Categories_are_not_su">Categories are not supported. Modify the package parameters to add support.</msg>
+  <msg key="lt_Category_doesnt_exist">Category doesn't exist</msg>
+  <msg key="lt_Category_migration_fi">Category migration finished. $count objects recategorized.</msg>
   <msg key="lt_Comments_blognum_comm">Comments (%blog.num_comments%)</msg>
   <msg key="lt_Drag_the_bookmarklet_">Drag the bookmarklet link to your Bookmarks/Favorites toolbar.
     You can then quickly blog about any page you visit by selecting
     some text that will be quoted and clicking on your bookmarklet.</msg>
+  <msg key="lt_For_example_default_p">For example $default_ping_url</msg>
+  <msg key="lt_Format_YYYY-MM-DD_HH2">Format: YYYY-MM-DD HH24:MI:SS</msg>
   <msg key="lt_I_put_this_hack_in_be">I put this hack in because category_url is not valid.</msg>
+  <msg key="lt_If_this_entry_is_abou">If this entry is about a web page you can \
+                put the full URL here, e.g. ${valid_url_example}.  The \
+                title of your entry will then become a hyperlink to \
+                that web page.</msg>
   <msg key="lt_instance_name_Categor">$instance_name Categories</msg>
+  <msg key="lt_It_might_be_a_good_id">It might be a good idea to take a look at your log file.
+Some useful information about the progress of migration will be written
+there.</msg>
   <msg key="lt_Manage_your_ping_URLs">Manage your ping URLs</msg>
   <msg key="lt_Manage_your_RSS_feeds">Manage your RSS feeds</msg>
+  <msg key="lt_Migrating_categories_">Migrating categories ...</msg>
+  <msg key="lt_Migrating_categories__1">Migrating categories, please wait ...</msg>
   <msg key="lt_Migration_Script_Sour">Migration Script Source Code</msg>
   <msg key="lt_more">...more</msg>
   <msg key="lt_Name_must_be_less_tha">Name must be less than 100 characters.</msg>
   <msg key="lt_Old_style_Weblogger-o">Old style Weblogger-only Categories</msg>
   <msg key="lt_on_commentspretty_dat">on %comments.pretty_date%</msg>
+  <msg key="lt_Ping_URL_must_be_a_va">Ping URL must be a valid URL</msg>
+  <msg key="lt_Ping_URL_ping_url_has">Ping URL \&quot;$ping_url\&quot; has been added.</msg>
+  <msg key="lt_Ping_URL_ping_url_has_1">Ping URL \&quot;$ping_url\&quot; has been removed.</msg>
   <msg key="lt_Proceed_only_if_you_a">Proceed only if you are sure you know what you are doing.</msg>
   <msg key="lt_read_more____about_th">read more
     about the ping API</msg>
   <msg key="lt_Setup_instance_RSS_fe">Setup instance RSS feed</msg>
   <msg key="lt_Show_E-Mail_subscribe">Show E-Mail subscribers</msg>
   <msg key="lt_Suggested_Ping_Servic">Suggested Ping Services</msg>
+  <msg key="lt_The_specified_categor">The specified category wasn't valid.</msg>
   <msg key="lt_These_are_standard_pi">These are standard ping services which you might want to add.</msg>
+  <msg key="lt_This_category_tree_is">This category tree is a result of migration of old \
+      Weblogger-specific categories performed on [ns_fmttime [ns_time]]</msg>
+  <msg key="lt_This_is_used_to_provi">This is used to provide a pretty URL for viewing postings in this category</msg>
+  <msg key="lt_This_short_name_is_al">This short name is already used by another category</msg>
   <msg key="lt_This_utility_script_w">This utility script will migrate all the Blogger-specific categories to
 Site-wide categories.  Depending on the specific need of your site you
 may want to customize the script.  The script source code is included
@@ -111,17 +111,28 @@ below for your convenience.</msg>
   <msg key="lt_Whenever_you_update_y">Whenever you update your weblog this server will automatically
     contact the listed sites and notify them that your weblog has
     changed. Some services, such as</msg>
+  <msg key="lt_Your_input_title_url_">Your input \&quot;$title_url\&quot; doesn't look like a valid URL. \
+            Example of a valid URL: $valid_url_example</msg>
+  <msg key="Manage_Categories">Manage Categories</msg>
   <msg key="Migrate_Categories">Migrate Categories</msg>
   <msg key="Name">Name</msg>
   <msg key="No_bloggers_here">No bloggers here.</msg>
+  <msg key="No_category_support">No category support</msg>
   <msg key="No_subscribers">No subscribers.</msg>
   <msg key="Notifications">Notifications</msg>
   <msg key="One_Link">One Link</msg>
   <msg key="or">or</msg>
   <msg key="Order">Order</msg>
   <msg key="Permalink">Permalink</msg>
+  <msg key="Ping_URL">Ping URL</msg>
+  <msg key="Ping_URLs">Ping URLs</msg>
+  <msg key="Post_Status">Post Status</msg>
+  <msg key="Preview_entry">Preview entry</msg>
   <msg key="Publish">Publish</msg>
+  <msg key="Publish_entry">Publish entry</msg>
   <msg key="Recent_Comments">Recent Comments</msg>
+  <msg key="Remove">Remove</msg>
+  <msg key="Screen_Name">Screen Name</msg>
   <msg key="Service">Service</msg>
   <msg key="Set_parameters">Set parameters</msg>
   <msg key="Site-Wide_Categories">Site-Wide Categories</msg>
@@ -129,7 +140,9 @@ below for your convenience.</msg>
   <msg key="Syndication_Feed">Syndication Feed</msg>
   <msg key="Technorati_Blogs">Technorati Blogs</msg>
   <msg key="Title">Title</msg>
+  <msg key="Title_URL">Title URL</msg>
   <msg key="Trackback_from">Trackback from</msg>
+  <msg key="Up">Up</msg>
   <msg key="URL">URL</msg>
   <msg key="URLs">URLs</msg>
   <msg key="View_draft_entries">View draft entries</msg>

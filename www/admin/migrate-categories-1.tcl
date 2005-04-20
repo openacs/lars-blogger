@@ -14,9 +14,9 @@ set admin_p [ad_require_permission $package_id admin]
 # Getting fancy - display progress bar
 
 ad_progress_bar_begin \
-    -title "[_ lars-blogger._Migrating] \
-    -message_1 "[_ lars-blogger._Migrating_1] \
-    -message_2 "[_ lars-blogger._It]
+    -title "[_ lars-blogger.lt_Migrating_categories_]" \
+    -message_1 "[_ lars-blogger.lt_Migrating_categories__1]" \
+    -message_2 "[_ lars-blogger.lt_It_might_be_a_good_id]"
 
 # Migrate categories
 
@@ -27,8 +27,8 @@ db_transaction {
     of $instance_name $package_id ###############
   ns_log Notice catmig Creating new site wide tree
   set tree_id [category_tree::add \
-    -name "[_ lars-blogger.lt_instance_name_Categor] \
-    -description "[_ lars-blogger._This]]
+    -name "[_ lars-blogger.lt_instance_name_Categor]" \
+    -description "[_ lars-blogger.lt_This_category_tree_is]"]
   ns_log Notice catmig Done. tree_id = $tree_id
   category_tree::map \
     -tree_id $tree_id \
@@ -83,4 +83,4 @@ db_transaction {
 # Done
 
 ad_progress_bar_end -url .. -message_after_redirect \
-  "[_ lars-blogger._Category]
+  "[_ lars-blogger.lt_Category_migration_fi]"
