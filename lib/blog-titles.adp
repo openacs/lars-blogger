@@ -10,7 +10,7 @@
 	      <if @titles.title_url_base@ not nil>
 		<span class="lars_blogger_title_url">[@titles.title_url_base@]</span>
 	    </if>
-	    <a href="@titles.permalink_url;noquote@>...more</a>
+	    <a href="@titles.permalink_url;noquote@>#lars-blogger.lt_more#</a>
 	    </li>
 	    </if>
 	      <else>
@@ -30,3 +30,4 @@
   
 
   
+

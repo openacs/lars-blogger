@@ -6,7 +6,7 @@ ad_page_contract {} {
 set package_id [ad_conn package_id]
 set user_id [ad_conn user_id]
 
-set page_title "Draft Entries"
+set page_title "[_ lars-blogger._Draft]"
 
 set context [list $page_title]
 
@@ -18,22 +18,22 @@ lappend elements edit {
         <img src="/resources/acs-subsite/Edit16.gif" height="16" width="16" border="0">
     }
     link_url_eval {[export_vars -base entry-edit { entry_id { return_url [ad_return_url] } }]}
-    link_html { title "Edit entry" }
+    link_html { title "[_ lars-blogger._Edit_1]" }
 }
 lappend elements title {
-    label "Title"
+    label "[_ lars-blogger.Title]"
     link_url_eval {[export_vars -base one-entry { entry_id }]}
-    link_html { title "Preview entry" }
+    link_html { title "[_ lars-blogger._Preview]" }
 }
 lappend elements entry_date {
-    label "Date"
+    label "[_ lars-blogger.Date]"
     display_col entry_date_pretty
 }
 
 if { [permission::permission_p -object_id $package_id -privilege write] } {
     set statement "all_draft_entries"
     lappend elements creation_user {
-        label "Author"
+        label "[_ lars-blogger.Author]"
         display_template {@entries.first_names@ @entries.last_name@}
         link_url_eval {[acs_community_member_url -user_id $creation_user]}
     }
@@ -42,7 +42,7 @@ if { [permission::permission_p -object_id $package_id -privilege write] } {
 }
 
 lappend elements content {
-    label "Content"
+    label "[_ lars-blogger.Content]"
 }
 lappend elements publish {
     label {Publish}
@@ -51,7 +51,7 @@ lappend elements publish {
         Publish
     }
     link_url_eval {[export_vars -base entry-publish { entry_id { return_url [ad_return_url] } }]}
-    link_html { title "Publish entry" }
+    link_html { title "[_ lars-blogger._Publish]" }
     html { align center }
 }
 lappend elements delete {
@@ -61,7 +61,7 @@ lappend elements delete {
         <img src="/resources/acs-subsite/Delete16.gif" height="16" width="16" border="0">
     }
     link_url_eval {[export_vars -base entry-delete { entry_id { return_url [ad_return_url] } }]}
-    link_html { title "Delete entry" }
+    link_html { title "[_ lars-blogger._Delete_1]" }
 }
 
 

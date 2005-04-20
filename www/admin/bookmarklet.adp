@@ -1,13 +1,11 @@
 <master>
-<property name="title">@blog_name@: Bookmarklet</property>
+<property name="title">#lars-blogger.lt_blog_name_Bookmarklet#</property>
 <property name="context">@context;noquote@</property>
 
 <p>
-    Drag the bookmarklet link to your Bookmarks/Favorites toolbar.
-    You can then quickly blog about any page you visit by selecting
-    some text that will be quoted and clicking on your bookmarklet.
+    #lars-blogger.lt_Drag_the_bookmarklet_#
 </p>
 
 <p>
-    <b><a href="@bookmarklet_link@">Bookmarklet Link</a></b>
+    <b><a href="@bookmarklet_link@">#lars-blogger.Bookmarklet_Link#</a></b>
 </p>

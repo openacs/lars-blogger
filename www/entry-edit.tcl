@@ -21,9 +21,9 @@ permission::require_permission -object_id [ad_conn package_id] -privilege create
 # need it sooner.
 
 if {[ad_form_new_p -key entry_id]} {
-    set page_title "Add Blog Entry"
+    set page_title "[_ lars-blogger._Add_6]"
 } else {
-    set page_title "Edit Blog Entry"
+    set page_title "[_ lars-blogger._Edit_2]"
 }
 
 set valid_url_example "http://www.example.com/foo"
@@ -51,14 +51,11 @@ ad_form -name entry \
     -cancel_url [ad_decode $return_url "" "." $return_url] \
     -form {entry_id:key(acs_object_id_seq)
         {title:text
-            {label Title}
+            {label "[_ lars-blogger.Title]"}
             {html {size 50}}}
         {title_url:text,optional
-            {label "Title URL"}
-            {help_text "If this entry is a rant on a web page you can \
-                put the full URL here, e.g. ${valid_url_example}.  The \
-                title of your entry will then become a hyperlink to \
-                that web page."}
+            {label "[_ lars-blogger._Title]"}
+            {help_text "[_ lars-blogger._If]"}
             {html {size 50}}
         }
     } \
@@ -91,22 +88,22 @@ category::ad_form::add_widgets \
 ad_form -extend -name entry -form {
     {content:richtext(richtext)
         {html {cols 80 rows 20}}
-        {label "Content"}
+        {label "[_ lars-blogger.Content]"}
     }
 }
 
 ad_form -extend -name entry -form {
     {entry_date:text
-        {label "Entry date"}
+        {label "[_ lars-blogger._Entry]"}
         {help_text "Format: YYYY-MM-DD HH24:MI:SS"}
         {html {size 20}}
         {after_html
-            {(<a href="javascript:setEntryDateToToday()">Set to now</a>)}
+            {(<a href="javascript:setEntryDateToToday()">[_ lars-blogger._Set]</a>)}
         }
     }
     {draft_p:text(select)
-        {options {{"Draft" "t"} {"Publish" "f"}}}
-        {label "Post Status"}
+        {options {{"[_ lars-blogger.Draft]" "t"} {"[_ lars-blogger.Publish]" "f"}}}
+        {label "[_ lars-blogger._Post]"}
     }
 } \
     -new_request {
@@ -197,8 +194,7 @@ ad_form -extend -name entry -form {
                 [util_url_valid_p $title_url]
             }
         ]}
-        "Your input \"$title_url\" doesn't look like a valid URL. \
-            Example of a valid URL: $valid_url_example"
+        "[_ lars-blogger._Your]"
     }}
 
 set context [list $page_title]

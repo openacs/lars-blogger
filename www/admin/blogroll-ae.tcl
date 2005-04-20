@@ -12,21 +12,21 @@ set user_id [ad_conn user_id]
 set ip [ns_conn peeraddr]
 
 set blog_name [lars_blog_name]
-set context [list [list "blogroll" "Blogroll"] "One Link"]
+set context [list [list "blogroll" "[_ lars-blogger.Blogroll]"] "[_ lars-blogger.One_Link]"]
 
 ad_form -name entry_form -form {
     link_id:key
-    {name:text      {label "Name"}
+    {name:text      {label "[_ lars-blogger.Name]"}
                     {html {size 40}}}
-    {url:text       {label "URL"}
+    {url:text       {label "[_ lars-blogger.URL]"}
                     {html {size 40}}}
 } -validate {
     {name
         {[string length $name] <= 100}
-        "Name must be less than 100 characters."}
+        "[_ lars-blogger.lt_Name_must_be_less_tha]"}
     {url
         {[string length $url] <= 500}
-        "URL must be less than 500 characters."}
+        "[_ lars-blogger.lt_URL_must_be_less_than]"}
 } -new_data {
     db_exec_plsql link_add "" 
 } -edit_data {

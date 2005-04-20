@@ -1,26 +1,20 @@
 <master>
-<property name="title">@blog_name;noquote@ Ping URLs</property>
+<property name="title">#lars-blogger.lt_blog_namenoquote_Ping#</property>
 <property name="context">@context;noquote@</property>
 
 <p>
-    Whenever you update your weblog this server will automatically
-    contact the listed sites and notify them that your weblog has
-    changed. Some services, such as
-    <a href="http://www.weblogs.com/">Weblogs.Com</a> or
-    <a href="http://blo.gs/">blo.gs</a>, use this information to
-    compile lists of recently updated weblogs. Other services,
-    such as <a href="http://www.technorati.com/">Technorati</a>,
-    will crawl your weblog shortly after it has been updated.
-    You can <a href="http://www.xmlrpc.com/weblogsCom">read more
-    about the ping API</a>.
+    #lars-blogger.lt_Whenever_you_update_y#
+    <a href="http://www.weblogs.com/">Weblogs.Com</a> #lars-blogger.or#
+    <a href="http://blo.gs/">blo.gs</a>#lars-blogger.lt__use_this_information# <a href="http://www.technorati.com/">Technorati</a>#lars-blogger.lt_____will_crawl_your_w# <a href="http://www.xmlrpc.com/weblogsCom">#lars-blogger.lt_read_more____about_th#</a>.
 </p>
 
 <listtemplate name="ping_urls"></listtemplate>
 
 <if @default_pings:rowcount@ gt 0>
-  <h2>Suggested Ping Services</h2>
+  <h2>#lars-blogger.lt_Suggested_Ping_Servic#</h2>
   <p>
-    These are standard ping services which you might want to add.
+    #lars-blogger.lt_These_are_standard_pi#
   </p>
   <listtemplate name="default_pings"></listtemplate>
 </if>
+

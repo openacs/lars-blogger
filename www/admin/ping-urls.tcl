@@ -13,12 +13,12 @@ list::create \
     -name ping_urls \
     -multirow ping_urls \
     -key ping_url \
-    -row_pretty_plural "URLs" \
+    -row_pretty_plural "[_ lars-blogger.URLs] \
     -actions {
-        "Add Ping URL" "ping-url-add" "Add another ping-compatible site"
+        "[_ lars-blogger._Add_2] "ping-url-add" "[_ lars-blogger._Add_3]
     } -elements {
         ping_url {
-            label "Ping URL"
+            label "[_ lars-blogger._Ping_1]
         }
         remove_url {
             label ""
@@ -27,7 +27,7 @@ list::create \
     }
     
 set blog_name [lars_blog_name]
-set context "Ping URLs"
+set context "[_ lars-blogger._Ping_2]"
 
 multirow create ping_urls ping_url remove_url
 
@@ -50,10 +50,10 @@ template::list::create \
     -name default_pings \
     -elements {
         service {
-            label "Service"
+            label "[_ lars-blogger.Service]
         }
         ping_url {
-            label "Ping URL"
+            label "[_ lars-blogger._Ping_1]
         }
         add {
             display_template {Add}

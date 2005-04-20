@@ -16,7 +16,7 @@ list::create \
     -key link_id \
     -row_pretty_plural "links" \
     -actions {
-        "Add Link" "blogroll-ae" "Add a link to your blogroll"
+        "[_ lars-blogger._Add]" "blogroll-ae" "[_ lars-blogger._Add_1]"
     } -elements {
         edit {
             sub_class narrow
@@ -27,16 +27,16 @@ list::create \
             link_url_col edit_link
         }
         name {
-            label "Name"
+            label "[_ lars-blogger.Name]"
         }
         url {
-            label "URL"
+            label "[_ lars-blogger.URL]"
             display_template {
                 <a href="@links.url@">@links.url@</a>
             }
         }
         order {
-            label "Order"
+            label "[_ lars-blogger.Order]"
             display_template {
                 <a href="@links.move_up_link@">Up</a>
                 <a href="@links.move_down_link@">Down</a>
@@ -46,7 +46,7 @@ list::create \
             label ""
             sub_class narrow
             display_template {
-                <a onclick="if (confirm('Are you sure that you want to delete this link?')) return true; else return false;" href="@links.delete_link@"><img src="/shared/images/Delete16.gif" height="16" width="16" border="0"></a>
+                <a onclick="if (confirm('[_ lars-blogger._Are]')) return true; else return false;" href="@links.delete_link@"><img src="/shared/images/Delete16.gif" height="16" width="16" border="0"></a>
             }
         }
     }

@@ -22,7 +22,7 @@ permission::require_permission -object_id [ad_conn package_id] -privilege admin
 set package_id [ad_conn package_id]
 
 if { [lars_blog_categories_p -package_id $package_id] != 1} {
-    ad_return_error "No category support" "Categories are not supported. Modify the package parameters to add support."
+    ad_return_error "[_ lars-blogger._No]" "[_ lars-blogger._Categories]"
     ad_script_abort
 }
 
@@ -39,13 +39,13 @@ if { [empty_string_p $return_url] } {
 ad_form -name category -cancel_url $return_url -form {
     {category_id:key}
     {name:text
-        {label "Category"}
+        {label "[_ lars-blogger.Category]"}
         {html { size 50 }}
     }
     {short_name:text,optional
-        {label "Category Short Name"}
+        {label "[_ lars-blogger._Category_1]"}
         {html { size 20 }}
-        {help_text "This is used to provide a pretty URL for viewing postings in this category"}
+        {help_text "[_ lars-blogger._This_1]"}
     }
     {return_url:text(hidden),optional}
 } -new_request {
@@ -59,7 +59,7 @@ ad_form -name category -cancel_url $return_url -form {
     if { ![empty_string_p $short_name] } {
 	db_1row short_name_exists { *SQL* }
 	if { $short_name_exists > 0 } {
-	    form set_error category short_name "This short name is already used by another category"
+	    form set_error category short_name "[_ lars-blogger._This_2]"
 	    break
 	}
     }
@@ -95,13 +95,13 @@ template::list::create \
     -name categories \
     -multirow categories \
     -actions {
-        "Add category" "category-edit" "Add new category"
+        "[_ lars-blogger._Add_4]" "category-edit" "[_ lars-blogger._Add_5]"
     } -elements {
         edit {
             label {}
-            display_template {<img src="/resources/acs-subsite/Edit16.gif" width="16" height="16" border="0" alt="Edit">}
+            display_template {<img src="/resources/acs-subsite/Edit16.gif" width="16" height="16" border="0" alt="[_ lars-blogger.Edit]">}
             link_url_eval {[export_vars -base [ad_conn url] { category_id }]}
-            link_html { title "Edit category" }
+            link_html { title "[_ lars-blogger._Edit]" }
             sub_class narrow
         }
         name {
@@ -118,9 +118,9 @@ template::list::create \
         }
         delete {
             label {}
-            display_template {<img src="/resources/acs-subsite/Delete16.gif" width="16" height="16" border="0" alt="Delete">}
+            display_template {<img src="/resources/acs-subsite/Delete16.gif" width="16" height="16" border="0" alt="[_ lars-blogger.Delete]">}
             link_url_eval {[export_vars -base "category-delete" { category_id { return_url [ad_return_url] } }]}
-            link_html { title "Delete category" }
+            link_html { title "[_ lars-blogger._Delete]" }
             sub_class narrow
         }
     }
