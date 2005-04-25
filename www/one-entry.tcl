@@ -7,7 +7,12 @@ set package_id [ad_conn package_id]
 
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
-lars_blogger::entry::get -entry_id $entry_id -array blog
+if {[catch {lars_blogger::entry::get -entry_id $entry_id -array blog} errMsg]} {
+    if {[string equal $::errorCode NOT_FOUND]} {
+        ns_returnnotfound
+        ad_script_abort
+    }
+}
 
 # SWC
 

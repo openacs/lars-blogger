@@ -92,7 +92,9 @@ ad_proc -public lars_blogger::entry::get {
     # Select the info into the upvar'ed Tcl Array
     upvar $array row
 
-    db_1row select_entry {} -column_array row 
+    if {![db_0or1row select_entry {} -column_array row]} {
+        error "lars_blogger::entry::get: entry $entry_id not found" {} NOT_FOUND
+    }
 
     set row(entry_date_pretty) [lc_time_fmt $row(entry_date_ansi) "%q %X"]
     set row(package_url) [lars_blog_public_package_url -package_id $row(package_id)]
