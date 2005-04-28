@@ -12,6 +12,7 @@ if {[catch {lars_blogger::entry::get -entry_id $entry_id -array blog} errMsg]} {
         ns_returnnotfound
         ad_script_abort
     }
+    error $errMsg $::errorInfo $::errorCode
 }
 
 # SWC
