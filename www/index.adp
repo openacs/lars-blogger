@@ -58,7 +58,8 @@
           </multiple>
         </div>
       </if>
-      <if @sw_categories:rowcount@ gt 0>
+      <if @sw_cats@ gt 0>
+        <if @sw_categories:rowcount@ gt 0>
         <div class="lars_blogger_portlet">
          <multiple name="sw_categories">
            <h2>@sw_categories.tree_name@</h2>
@@ -67,6 +68,7 @@
            </group>
          </multiple>
         </div>
+      </if>
       </if>
       <if @create_p@ true>
         <div class="lars_blogger_portlet">
