@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<message_catalog package_key="lars-blogger" package_version="2.1.1" locale="en_US" charset="ISO-8859-1">
+<message_catalog package_key="lars-blogger" package_version="2.1.2d1" locale="en_US" charset="ISO-8859-1">
+
   <msg key="Actions">Actions</msg>
   <msg key="Add_Blog_Entry">Add Blog Entry</msg>
   <msg key="Add_category">Add category</msg>
