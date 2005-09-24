@@ -8,8 +8,9 @@
   <if @blog_url@ not nil>
     <li><a href="@blog_url@" title="Visit @blog_name@ home">@blog_name@</a></li>
   </if>
+  <li><a href="@archive_url@" title="Visit the archive for @blog_name@">#lars-blogger.Archive#</a></li>
   <if @create_p@ true>
-    <li><a href="@entry_add_url@" title="Add an entry to @blog_name@">Add @blog_name@ Item</a></li>
+    <li><a href="@entry_add_url@" title="Add an entry to @blog_name@">#lars-blogger.Add_entry#</a></li>
   </if>
   <li><a href="@archive_url@" title="Visit the archive for @blog_name@">Archive</a></li>
 

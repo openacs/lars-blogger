@@ -1,5 +1,5 @@
 <master> 
-<property name="title">E-mail subscribers</property>
+<property name="title">#lars-blogger.E-mail_subscribers#</property>
 <property name="context">subscribers</property>
 
 <if @subscribers:rowcount@ gt 0>
@@ -12,5 +12,5 @@
 </ul>
 </if>
 <else>
-<em>No subscribers.</em>
+<em>#lars-blogger.No_subscribers#</em>
 </else>

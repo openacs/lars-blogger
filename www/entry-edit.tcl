@@ -21,9 +21,9 @@ permission::require_permission -object_id [ad_conn package_id] -privilege create
 # need it sooner.
 
 if {[ad_form_new_p -key entry_id]} {
-    set page_title "Add Blog Entry"
+    set page_title "[_ lars-blogger.Add_Blog_Entry]"
 } else {
-    set page_title "Edit Blog Entry"
+    set page_title "[_ lars-blogger.Edit_Blog_Entry]"
 }
 
 set valid_url_example "http://www.example.com/foo"
@@ -33,7 +33,7 @@ if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
     acs_user::get -user_id [ad_conn user_id] -array user_info
     if { [empty_string_p $user_info(screen_name)] } {
 
-        set page_title "Screen Name"
+        set page_title "[_ lars-blogger.Screen_Name]"
         set context [list $page_title]
         set pvt_home_url [ad_pvt_home]
         set pvt_home_name [ad_pvt_home_name]
@@ -54,11 +54,8 @@ ad_form -name entry \
             {label Title}
             {html {size 50}}}
         {title_url:text,optional
-            {label "Title URL"}
-            {help_text "If this entry is about a web page you can \
-                put the full URL here, e.g. ${valid_url_example}.  The \
-                title of your entry will then become a hyperlink to \
-                that web page."}
+            {label "[_ lars-blogger.Title_URL]"}
+            {help_text "[_ lars-blogger.lt_If_this_entry_is_abou]"}
             {html {size 50}}
         }
     } \
@@ -92,14 +89,14 @@ category::ad_form::add_widgets \
 ad_form -extend -name entry -form {
     {content:richtext(richtext)
         {html {cols 80 rows 20}}
-        {label "Content"}
+        {label "[_ lars-blogger.Content]"}
     }
 }
 
 ad_form -extend -name entry -form {
     {entry_date:text
-        {label "Entry date"}
-        {help_text "Format: YYYY-MM-DD HH24:MI:SS"}
+        {label "[_ lars-blogger.Entry_date]"}
+        {help_text "[_ lars-blogger.lt_Format_YYYY-MM-DD_HH2]"}
         {html {size 20}}
         {after_html
             {(<a href="javascript:setEntryDateToToday()">Set to now</a>)}
@@ -111,8 +108,8 @@ set unpublish_p [expr ![parameter::get -parameter ImmediatePublishP -default 0]]
 if {$unpublish_p} {
     ad_form -extend -name entry -form {
         {draft_p:text(select)
-            {options {{"Draft" "t"} {"Publish" "f"}}}
-            {label "Post Status"}
+            {options {{"[_ lars-blogger.Draft]" "t"} {"[_ lars-blogger.Publish]" "f"}}}
+            {label "[_ lars-blogger.Post_Status]"}
         }
     }
 } else {
@@ -215,8 +212,7 @@ ad_form -extend -name entry \
                 [util_url_valid_p $title_url]
             }
         ]}
-        "Your input \"$title_url\" doesn't look like a valid URL. \
-            Example of a valid URL: $valid_url_example"
+        "[_ lars-blogger.lt_Your_input_title_url_]"
     }}
 
 set context [list $page_title]

@@ -34,7 +34,7 @@ if { ![empty_string_p $screen_name] } {
 
 if { ![empty_string_p $category_short_name] } {
     if { ![db_0or1row get_category_from_short_name {}] } {
-	ad_return_error "Category doesn't exist" "The specified category wasn't valid."
+	ad_return_error "[_ lars-blogger.lt_Category_doesnt_exist]" "[_ lars-blogger.lt_The_specified_categor]"
 	return
     }
     # Show Category in context bar
@@ -159,7 +159,7 @@ if { [exists_and_not_null year] } {
         db_1row archive_date_year {}
     }
 
-    append page_title " Archive"
+    append page_title "[_ lars-blogger.Archive]"
     set date "$year-[ad_decode $month "" "01" $month]-[ad_decode $day "" "01" $day]"
     set type "archive"
 

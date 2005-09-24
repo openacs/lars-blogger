@@ -5,5 +5,5 @@
 <p><listtemplate name="entries"></listtemplate></p>
 
 <p>
-  &raquo; <a href="@entry_add_url@" class="action_link">Add entry</a>
+  &raquo; <a href="@entry_add_url@" class="action_link">#lars-blogger.Add_entry#</a>
 </p>
