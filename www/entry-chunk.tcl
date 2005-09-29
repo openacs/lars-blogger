@@ -58,7 +58,11 @@ lars_blogger::entry::htmlify \
 
 
 set blog(edit_url) [export_vars -base "${package_url}entry-edit" { entry_id return_url }]
-set blog(delete_url) [export_vars -base "${package_url}entry-delete" { entry_id return_url }]
+if {$perma_p} {
+    set blog(delete_url) [export_vars -base "${package_url}entry-delete" { entry_id {return_url $package_url} }]
+} else {
+    set blog(delete_url) [export_vars -base "${package_url}entry-delete" { entry_id return_url }]
+}
 
 set blog(publish_url) [export_vars -base "${package_url}entry-publish" { entry_id return_url }]
 set blog(revoke_url) [export_vars -base "${package_url}entry-revoke" { entry_id return_url }]
