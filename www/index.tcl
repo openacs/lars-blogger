@@ -20,6 +20,7 @@ set package_url [ad_conn package_url]
 set package_url_with_extras $package_url
 
 set index_page_p 1
+set show_archive_p [parameter::get -parameter "ShowArchiveP"]
 
 set context [list]
 set context_base_url $package_url

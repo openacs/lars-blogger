@@ -7,14 +7,14 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="2.2.0d2" url="http://openacs.org/repository/download/apm/lars-blogger-2.2.0d2.apm">
+    <version name="2.2.0d3" url="http://openacs.org/repository/download/apm/lars-blogger-2.2.0d3.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Individual or collaborative web logs.</summary>
         <release-date>2004-02-11</release-date>
         <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
         <description format="text/html">Weblog creation and management with notifications, RSS, trackpack, technorati, blogroll, pings, archives, draft and published entries, includable templates for presenting on other pages, and permissioning for multiple users.</description>
 
-        <provides url="lars-blogger" version="2.2.0d2"/>
+        <provides url="lars-blogger" version="2.2.0d3"/>
         <requires url="acs-datetime" version="4.0"/>
         <requires url="acs-tcl" version="5.0.1"/>
         <requires url="categories" version="1.0d4"/>
@@ -42,6 +42,7 @@
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="MinNumEntriesOnFrontPage"  default="3" description="Minimum number of entries to show on the weblog front page. 0 or empty string for no minimum."/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="NumDaysOnFrontPage"  default="30" description="Number of days worth of entries on the weblog front page. Default is 30. Set to 0 or empty string for no date limit."/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="NumberOfCommentsInIncludelet"  default="10" description="How many comments should be included in the &quot;last n comments&quot; includelet?"/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1" name="ShowArchiveP"  default="1" description="Show archive calendar"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="ShowPosterP"  default="1" description="Show who posted the entry and when"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="StylesheetURL"  default="/resources/lars-blogger/lars-blogger.css" description="The url to the stylesheet used in conjunction with the weblog instance."/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="TechnoratiApiCosmosNumber"  default="40" description="Number of entries to retrieve in Cosmos calls. The includelet can decide to display a different number of entries." section_name="technorati"/>
