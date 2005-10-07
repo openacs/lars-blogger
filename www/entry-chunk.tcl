@@ -53,7 +53,7 @@ set entry_id $blog(entry_id)
 
 lars_blogger::entry::htmlify \
     -max_content_length $max_content_length \
-    -more [ad_decode [ad_return_url] $blog(permalink_url) {} "<p><a href=\"[ad_quotehtml $blog(permalink_url)]\">Continued...</a>"] \
+    -more [ad_decode [ad_return_url] $blog(permalink_url) {} " <a href=\"[ad_quotehtml $blog(permalink_url)]\">Continued...</a>"] \
     -array blog
 
 

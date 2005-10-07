@@ -38,10 +38,11 @@
 
     <div id="lars_blogger_left">
       <div class="lars_blogger_content_table">
-        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@" sw_category_id="@sw_category_id@" max_content_length="0">
+        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@" sw_category_id="@sw_category_id@" max_content_length="">
       </div>
     </div>
 
+    <if @show_archive_p@ true>
       <div id="lars_blogger_right">
       <div class="lars_blogger_portlet">
         <h2>#lars-blogger.Archive#</h2>
@@ -114,7 +115,16 @@
         </div>
       </include-optional>
 
-    </div>
+      </div>
+    </if>
+    <else>
+      <if @notification_chunk@ not nil>
+        <div class="lars_blogger_portlet">
+          <h2>#lars-blogger.Notifications#</h2>
+          @notification_chunk;noquote@            
+        </div>
+      </if>
+    </else>
 
   </else>
 
