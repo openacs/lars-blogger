@@ -38,15 +38,14 @@
 
     <div id="lars_blogger_left">
       <div class="lars_blogger_content_table">
-        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@" sw_category_id="@sw_category_id@" max_content_length="">
+        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@" sw_category_id="@sw_category_id@" max_content_length="700">
       </div>
     </div>
 
     <if @show_archive_p@ true>
       <div id="lars_blogger_right">
-      <div class="lars_blogger_portlet">
         <h2>#lars-blogger.Archive#</h2>
-        <include src="calendar" date="@date@" screen_name="@screen_name@">
+        <include src="calendar" date="@date@" screen_name="@screen_name@">      <div class="lars_blogger_portlet">
         <include-optional src="blog-months" screen_name="@screen_name@">
           <include-output>
         </include-optional>

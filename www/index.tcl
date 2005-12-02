@@ -174,7 +174,6 @@ if { [exists_and_not_null year] } {
 db_multirow categories categories {}
 
 # Site-Wide Categories
-
 if { ![empty_string_p $sw_category_id] } {
     set sw_category_name [category::get_name $sw_category_id]
     if { [empty_string_p $sw_category_name] } {
@@ -198,7 +197,7 @@ db_foreach catcount {select c.category_id as catid, count(*) as count from categ
 }
 
 if {$sw_cats} {
-    db_multirow -unclobber -extend { sw_category_name tree_name } sw_categories sw_categories {
+    db_multirow -unclobber -extend { sw_category_name tree_name } sw_categories2 sw_categories {
         select c.category_id as sw_category_id, c.tree_id
         from   categories c, category_tree_map ctm
         where  ctm.tree_id = c.tree_id

@@ -28,7 +28,6 @@ ad_proc -public lars_blogger::entry::new {
     db_transaction {
         # Create the entry
         set entry_id [db_exec_plsql entry_add {}]
-        lars_blog_flush_cache $package_id
     }
 
     # If publish directly, fire off notifications and ping weblogs.com
@@ -39,7 +38,7 @@ ad_proc -public lars_blogger::entry::new {
             -no_update
     }
 
-    lars_blog_flush_cache $package_id
+    # lars_blog_flush_cache $package_id
 
     return $entry_id
 }
@@ -125,16 +124,16 @@ ad_proc -public lars_blogger::entry::publish {
     }
     
     # Setup instance/user feeds if needed
-    lars_blog_setup_feed -package_id $package_id
+    # lars_blog_setup_feed -package_id $package_id
     
     # Notifications
-    lars_blogger::entry::do_notifications -entry_id $entry_id
+    # lars_blogger::entry::do_notifications -entry_id $entry_id
 
     # Ping weblogs.com
-    lars_blogger::instance::send_pings -package_id $package_id
+    # lars_blogger::instance::send_pings -package_id $package_id
 
     # trackback
-    lars_blogger::entry::trackback -entry_id $entry_id
+    # lars_blogger::entry::trackback -entry_id $entry_id
 }
 
 

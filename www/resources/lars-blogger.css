@@ -93,10 +93,17 @@
   text-transform: uppercase;
   padding: 3px;
   letter-spacing: .3em;
+  color: white;
+}
+
+.lars_blogger_portlet h3 {
+  text-decoration: none;
+  color: white;
 }
 
 .lars_blogger_portlet a {
   text-decoration: none;
+  color: white;
 }
 .lars_blogger_portlet a:link {
   color: #;

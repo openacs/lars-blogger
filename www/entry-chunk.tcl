@@ -31,8 +31,13 @@ if { ![info exists package_id] } {
 }
 
 if { ![exists_and_not_null return_url] } {
-    set return_url [ad_return_url]
+    # IMPORTANT: I changed the return_url here since ad_return_url also add the variables 
+    # for the sw_category_id, year, month and day and this are already take in care in
+    # the indext.vuh file, ad_conn url returns only the URL without the variables
+    # set return_url [ad_return_url]
+    set return_url [ad_conn url]
 }
+
 if { ![exists_and_not_null screen_name] } {
     set screen_name ""
 }
