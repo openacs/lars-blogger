@@ -59,12 +59,12 @@
         </div>
       </if>
       <if @sw_cats@ gt 0>
-        <if @sw_categories:rowcount@ gt 0>
+        <if @sw_categories2:rowcount@ gt 0>
         <div class="lars_blogger_portlet">
-         <multiple name="sw_categories">
-           <h2>@sw_categories.tree_name@</h2>
+         <multiple name="sw_categories2">
+           <h2>@sw_categories2.tree_name@</h2>
            <group column="tree_id">
-             <a href="@package_url_with_extras@swcat/@sw_categories.sw_category_id@">@sw_categories.sw_category_name@</a><br>
+             <a href="@package_url_with_extras@swcat/@sw_categories2.sw_category_id@">@sw_categories2.sw_category_name@</a><br>
            </group>
          </multiple>
         </div>
