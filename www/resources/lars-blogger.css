@@ -1,7 +1,5 @@
 .lars_blogger_body {
   text-align:left;
-  margin-bottom: 5px;
-  border: solid 10px #fff;
 }
 
 .lars_blogger_content_table {
@@ -35,12 +33,8 @@
 }
 
 .lars_blogger_title {
-  font-size: 12pt;
+  text-align: left;
   font-weight: bold;
-  color: #76A7DC;
-  margin-bottom: 5px;
-  padding-left: 14px;
-  background: url("/resources/images/h2bg.gif") top left repeat-y;
 }
 .lars_blogger_title_url {
   color: #999;
@@ -50,9 +44,6 @@
 
 .lars_blogger_text {
   text-align: left;
-  margin-bottom: 20px;
-  padding-left: 14px;
-  background: url("/resources/images/articlebg.gif") top left repeat-y;
 }
 
 .lars_blogger_poster {
@@ -77,20 +68,14 @@
 
 #lars_blogger_left {
   float: left;
-  width: 400px;
+  width: 600px;
   overflow: hidden;
-  margin: 10px 0 0 4px;
 }
 #lars_blogger_right {
-  width: 120px;
-  margin-left: .5em;
-  margin-bottom: .5em;
-  overflow: hidden;
-  color: #808080;
   float: left;
-  padding: 10px;
-  border-right: 4px solid #FFF;
-  background-color: #e2e2e2;
+  width: 200px;
+  margin-left: .5em;
+  overflow: hidden;
 }
 
 .lars_blogger_portlet {
@@ -107,7 +92,6 @@
   text-transform: uppercase;
   padding: 3px;
   letter-spacing: .3em;
-  font-size: 6pt;
 }
 
 .lars_blogger_portlet a {
