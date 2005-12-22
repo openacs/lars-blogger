@@ -91,7 +91,7 @@ category::ad_form::add_widgets \
 
 ad_form -extend -name entry -form {
     {content:richtext(richtext)
-        {html {cols 80 rows 20}}
+        {html {cols 50 rows 20}}
         {label "Content"}
     }
 }
