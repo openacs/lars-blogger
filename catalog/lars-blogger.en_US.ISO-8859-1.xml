@@ -62,19 +62,19 @@
   <msg key="lt_by_blogposter_first_n">by %blog.poster_first_names% %blog.poster_last_name%</msg>
   <msg key="lt_Categories_are_not_su">Categories are not supported. Modify the package parameters to add support.</msg>
   <msg key="lt_Category_doesnt_exist">Category doesn't exist</msg>
-  <msg key="lt_Category_migration_fi">Category migration finished. $count objects recategorized.</msg>
+  <msg key="lt_Category_migration_fi">Category migration finished. %count objects% recategorized.</msg>
   <msg key="lt_Comments_blognum_comm">Comments (%blog.num_comments%)</msg>
   <msg key="lt_Drag_the_bookmarklet_">Drag the bookmarklet link to your Bookmarks/Favorites toolbar.
     You can then quickly blog about any page you visit by selecting
     some text that will be quoted and clicking on your bookmarklet.</msg>
-  <msg key="lt_For_example_default_p">For example $default_ping_url</msg>
+  <msg key="lt_For_example_default_p">For example %default_ping_url%</msg>
   <msg key="lt_Format_YYYY-MM-DD_HH2">Format: YYYY-MM-DD HH24:MI:SS</msg>
   <msg key="lt_I_put_this_hack_in_be">I put this hack in because category_url is not valid.</msg>
-  <msg key="lt_If_this_entry_is_abou">If this entry is about a web page you can \
-                put the full URL here, e.g. ${valid_url_example}.  The \
-                title of your entry will then become a hyperlink to \
+  <msg key="lt_If_this_entry_is_abou">If this entry is about a web page you can 
+                put the full URL here, e.g. %valid_url_example%.  The 
+                title of your entry will then become a hyperlink to 
                 that web page.</msg>
-  <msg key="lt_instance_name_Categor">$instance_name Categories</msg>
+  <msg key="lt_instance_name_Categor">%instance_name% Categories</msg>
   <msg key="lt_It_might_be_a_good_id">It might be a good idea to take a look at your log file.
 Some useful information about the progress of migration will be written
 there.</msg>
@@ -88,8 +88,8 @@ there.</msg>
   <msg key="lt_Old_style_Weblogger-o">Old style Weblogger-only Categories</msg>
   <msg key="lt_on_commentspretty_dat">on %comments.pretty_date%</msg>
   <msg key="lt_Ping_URL_must_be_a_va">Ping URL must be a valid URL</msg>
-  <msg key="lt_Ping_URL_ping_url_has">Ping URL \&quot;$ping_url\&quot; has been added.</msg>
-  <msg key="lt_Ping_URL_ping_url_has_1">Ping URL \&quot;$ping_url\&quot; has been removed.</msg>
+  <msg key="lt_Ping_URL_ping_url_has">Ping URL &quot;%ping_url%&quot; has been added.</msg>
+  <msg key="lt_Ping_URL_ping_url_has_1">Ping URL &quot;%ping_url%&quot; has been removed.</msg>
   <msg key="lt_Proceed_only_if_you_a">Proceed only if you are sure you know what you are doing.</msg>
   <msg key="lt_read_more____about_th">read more
     about the ping API</msg>
@@ -98,7 +98,7 @@ there.</msg>
   <msg key="lt_Suggested_Ping_Servic">Suggested Ping Services</msg>
   <msg key="lt_The_specified_categor">The specified category wasn't valid.</msg>
   <msg key="lt_These_are_standard_pi">These are standard ping services which you might want to add.</msg>
-  <msg key="lt_This_category_tree_is">This category tree is a result of migration of old \
+  <msg key="lt_This_category_tree_is">This category tree is a result of migration of old 
       Weblogger-specific categories performed on [ns_fmttime [ns_time]]</msg>
   <msg key="lt_This_is_used_to_provi">This is used to provide a pretty URL for viewing postings in this category</msg>
   <msg key="lt_This_short_name_is_al">This short name is already used by another category</msg>
@@ -112,8 +112,8 @@ below for your convenience.</msg>
   <msg key="lt_Whenever_you_update_y">Whenever you update your weblog this server will automatically
     contact the listed sites and notify them that your weblog has
     changed. Some services, such as</msg>
-  <msg key="lt_Your_input_title_url_">Your input \&quot;$title_url\&quot; doesn't look like a valid URL. \
-            Example of a valid URL: $valid_url_example</msg>
+  <msg key="lt_Your_input_title_url_">Your input &quot;%title_url%&quot; doesn't look like a valid URL. 
+            Example of a valid URL: %valid_url_example%</msg>
   <msg key="Manage_Categories">Manage Categories</msg>
   <msg key="Migrate_Categories">Migrate Categories</msg>
   <msg key="Name">Name</msg>
