@@ -10,8 +10,8 @@
     <version name="2.2.0" url="http://openacs.org/repository/download/apm/lars-blogger-2.2.0.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Individual or collaborative web logs.</summary>
-        <release-date>2006-02-12</release-date>
-        <vendor url="http://www.collaboraid.biz">Collaboraid</vendor>
+        <release-date>2006-02-18</release-date>
+        <vendor url="http://www.openacs.org">OpenACS</vendor>
         <description format="text/html">Weblog creation and management with notifications, RSS, trackpack, technorati, blogroll, pings, archives, draft and published entries, includable templates for presenting on other pages, and permissioning for multiple users.</description>
         <maturity>0</maturity>
 
@@ -27,8 +27,8 @@
 
         <callbacks>
             <callback type="after-mount"  proc="lars_blogger::install::after_mount"/>
-            <callback type="after-instantiate"  proc="lars_blogger::install::package_instantiate"/>
             <callback type="before-uninstantiate"  proc="lars_blogger::install::package_uninstantiate"/>
+            <callback type="after-instantiate"  proc="lars_blogger::install::package_instantiate"/>
         </callbacks>
         <parameters>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="CategoryContainer"  default="package_id" description="Should the category container for the weblog be &quot;subsite_id&quot; or &quot;package_id&quot;"/>
