@@ -16,14 +16,14 @@
         <maturity>0</maturity>
 
         <provides url="lars-blogger" version="2.2.0"/>
-        <requires url="acs-datetime" version="4.0"/>
-        <requires url="acs-tcl" version="5.0.1"/>
-        <requires url="categories" version="1.0d4"/>
-        <requires url="general-comments" version="4.0"/>
-        <requires url="notifications" version="5.0.0b4"/>
-        <requires url="rss-support" version="0.3d1"/>
-        <requires url="trackback" version="0.1d"/>
-        <requires url="xml-rpc" version="0.1"/>
+        <requires url="acs-datetime" version="5.2.1"/>
+        <requires url="acs-tcl" version="5.2.2"/>
+        <requires url="categories" version="1.1"/>
+        <requires url="general-comments" version="5.2.0"/>
+        <requires url="notifications" version="5.2.0"/>
+        <requires url="rss-support" version="0.3"/>
+        <requires url="trackback" version="0.1"/>
+        <requires url="xml-rpc" version="0.3"/>
 
         <callbacks>
             <callback type="after-mount"  proc="lars_blogger::install::after_mount"/>
