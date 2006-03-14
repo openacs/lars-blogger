@@ -62,19 +62,19 @@
   <msg key="lt_by_blogposter_first_n">by %blog.poster_first_names% %blog.poster_last_name%</msg>
   <msg key="lt_Categories_are_not_su">Categories are not supported. Modify the package parameters to add support.</msg>
   <msg key="lt_Category_doesnt_exist">Category doesn't exist</msg>
-  <msg key="lt_Category_migration_fi">Category migration finished. $count objects recategorized.</msg>
+  <msg key="lt_Category_migration_fi">Category migration finished. %count% objects recategorized.</msg>
   <msg key="lt_Comments_blognum_comm">Comments (%blog.num_comments%)</msg>
   <msg key="lt_Drag_the_bookmarklet_">Drag the bookmarklet link to your Bookmarks/Favorites toolbar.
     You can then quickly blog about any page you visit by selecting
     some text that will be quoted and clicking on your bookmarklet.</msg>
-  <msg key="lt_For_example_default_p">For example $default_ping_url</msg>
+  <msg key="lt_For_example_default_p">For example %default_ping_url%</msg>
   <msg key="lt_Format_YYYY-MM-DD_HH2">Format: YYYY-MM-DD HH24:MI:SS</msg>
   <msg key="lt_I_put_this_hack_in_be">I put this hack in because category_url is not valid.</msg>
   <msg key="lt_If_this_entry_is_abou">If this entry is about a web page you can
                 put the full URL here, e.g. %valid_url_example%.  The
                 title of your entry will then become a hyperlink to
                 that web page.</msg>
-  <msg key="lt_instance_name_Categor">$instance_name Categories</msg>
+  <msg key="lt_instance_name_Categor">%instance_name% Categories</msg>
   <msg key="lt_It_might_be_a_good_id">It might be a good idea to take a look at your log file.
 Some useful information about the progress of migration will be written
 there.</msg>
