@@ -204,6 +204,14 @@ ad_form -extend -name entry \
             ad_returnredirect $return_url
         }
         ad_script_abort
-    }
-
+    } \
+    -validate {{  
+	title_url  
+	{[  
+	  expr {[empty_string_p $title_url] || \  
+		[util_url_valid_p $title_url]  
+	    }  
+	 ]}  
+	"[_ lars-blogger.lt_Your_input_title_url_]"  
+    }}
 set context [list $page_title]
