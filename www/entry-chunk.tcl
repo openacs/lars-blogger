@@ -30,12 +30,14 @@ if { ![info exists package_id] } {
     set package_id [ad_conn package_id]
 }
 
+set entry_id $blog(entry_id)
+
 if { ![exists_and_not_null return_url] } {
     # IMPORTANT: I changed the return_url here since ad_return_url also add the variables 
     # for the sw_category_id, year, month and day and this are already take in care in
     # the indext.vuh file, ad_conn url returns only the URL without the variables
     # set return_url [ad_return_url]
-    set return_url [ad_conn url]
+    set return_url [export_vars -base "[ad_conn url]" -url {entry_id}]
 }
 
 if { ![exists_and_not_null screen_name] } {
@@ -53,8 +55,6 @@ set user_id [ad_conn user_id]
 set general_comments_package_url [general_comments_package_url]
 
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
-
-set entry_id $blog(entry_id)
 
 lars_blogger::entry::htmlify \
     -max_content_length $max_content_length \

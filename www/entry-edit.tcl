@@ -43,7 +43,6 @@ if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
     }
 }
 
-
 set package_id [ad_conn package_id]
 set now_ansi [clock format [clock seconds] -format "%Y-%m-%d %H:%M:%S"]
 
@@ -160,7 +159,7 @@ ad_form -extend -name entry \
         set category_ids [category::ad_form::get_categories \
                               -container_object_id $container_id]
 
-    } \
+   } \
     -new_data {
         lars_blogger::entry::new \
             -entry_id $entry_id \
@@ -198,21 +197,13 @@ ad_form -extend -name entry \
             $category_ids
     } \
     -after_submit {
+	
         if {"$draft_p" == "t"} {
             ad_returnredirect one-entry?[export_url_vars entry_id]
         } else {
             ad_returnredirect $return_url
         }
         ad_script_abort
-    } \
-    -validate {{
-        title_url
-        {[
-            expr {[empty_string_p $title_url] || \
-                [util_url_valid_p $title_url]
-            }
-        ]}
-        "[_ lars-blogger.lt_Your_input_title_url_]"
-    }}
+    }
 
 set context [list $page_title]
