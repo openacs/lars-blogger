@@ -16,7 +16,7 @@ list::create \
     -key link_id \
     -row_pretty_plural "[_ lars-blogger.links]" \
     -actions {
-        "[_ lars-blogger.Add_Link]" "blogroll-ae" "[_ lars-blogger.lt_Add_a_link_to_your_bl]"
+        "#lars-blogger.Add_Link#" "blogroll-ae" "#lars-blogger.lt_Add_a_link_to_your_bl#"
     } -elements {
         edit {
             sub_class narrow
