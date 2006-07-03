@@ -17,7 +17,12 @@ set calendar_details [ns_set create calendar_details]
 set package_url [lars_blog_public_package_url]
 set month_number [clock format [clock scan $date] -format %m]
 
-set package_id [ad_conn package_id]
+if {![exists_and_not_null package_id]} {
+    set package_id [ad_conn package_id]
+} else {
+    set package_url [apm_package_url_from_id $package_id]
+}
+
 
 if {[empty_string_p $screen_name]} {
     db_foreach all_entry_dates { * SQL * } {
