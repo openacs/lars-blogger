@@ -3,9 +3,10 @@
 <property name="context">@context@</property>   
 
 <p>
-  Before you can start using your web log, you must setup a screen name at @pvt_home_name@.
+  #lars-blogger.lt_Before_you_can_start_#
 </p>
 
 <p>
-  <b>&raquo;</b> <a href="@pvt_home_url@">Visit @pvt_home_name@ to set up your screen name</a>.
+  <b>&raquo;</b> <a href="@pvt_home_url@">#lars-blogger.lt_Visit_pvt_home_name_t#</a>.
 </p>
+

@@ -10,7 +10,7 @@ ad_page_contract {
     {short_name:allhtml ""}
 }
 
-set page_title "Manage Categories"
+set page_title "[_ lars-blogger.Manage_Categories]"
 set context [list $page_title]
 
 # Must be logged in
@@ -22,7 +22,7 @@ permission::require_permission -object_id [ad_conn package_id] -privilege admin
 set package_id [ad_conn package_id]
 
 if { [lars_blog_categories_p -package_id $package_id] != 1} {
-    ad_return_error "No category support" "Categories are not supported. Modify the package parameters to add support."
+    ad_return_error "[_ lars-blogger.No_category_support]" "[_ lars-blogger.lt_Categories_are_not_su]"
     ad_script_abort
 }
 
@@ -39,13 +39,13 @@ if { [empty_string_p $return_url] } {
 ad_form -name category -cancel_url $return_url -form {
     {category_id:key}
     {name:text
-        {label "Category"}
+        {label "[_ lars-blogger.Category]"}
         {html { size 50 }}
     }
     {short_name:text,optional
-        {label "Category Short Name"}
+        {label "[_ lars-blogger.Category_Short_Name]"}
         {html { size 20 }}
-        {help_text "This is used to provide a pretty URL for viewing postings in this category"}
+        {help_text "[_ lars-blogger.lt_This_is_used_to_provi]"}
     }
     {return_url:text(hidden),optional}
 } -new_request {
@@ -59,7 +59,7 @@ ad_form -name category -cancel_url $return_url -form {
     if { ![empty_string_p $short_name] } {
 	db_1row short_name_exists { *SQL* }
 	if { $short_name_exists > 0 } {
-	    form set_error category short_name "This short name is already used by another category"
+	    form set_error category short_name "[_ lars-blogger.lt_This_short_name_is_al]"
 	    break
 	}
     }
@@ -95,13 +95,13 @@ template::list::create \
     -name categories \
     -multirow categories \
     -actions {
-        "Add category" "category-edit" "Add new category"
+        "[_ lars-blogger.Add_category]" "category-edit" "[_ lars-blogger.Add_new_category]"
     } -elements {
         edit {
             label {}
-            display_template {<img src="/resources/acs-subsite/Edit16.gif" width="16" height="16" border="0" alt="Edit">}
+            display_template {<img src="/resources/acs-subsite/Edit16.gif" width="16" height="16" border="0" alt="[_ lars-blogger.Edit]">}
             link_url_eval {[export_vars -base [ad_conn url] { category_id }]}
-            link_html { title "Edit category" }
+            link_html { title "[_ lars-blogger.Edit_category]" }
             sub_class narrow
         }
         name {
@@ -118,9 +118,9 @@ template::list::create \
         }
         delete {
             label {}
-            display_template {<img src="/resources/acs-subsite/Delete16.gif" width="16" height="16" border="0" alt="Delete">}
+            display_template {<img src="/resources/acs-subsite/Delete16.gif" width="16" height="16" border="0" alt="[_ lars-blogger.Delete]">}
             link_url_eval {[export_vars -base "category-delete" { category_id { return_url [ad_return_url] } }]}
-            link_html { title "Delete category" }
+            link_html { title "[_ lars-blogger.Delete_category]" }
             sub_class narrow
         }
     }

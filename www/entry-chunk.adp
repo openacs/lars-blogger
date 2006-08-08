@@ -26,39 +26,39 @@
   <p class="lars_blogger_poster">
     @blog.posted_time_pretty@ 
     <if @show_poster_p@ true>
-      by @blog.poster_first_names@ @blog.poster_last_name@
+      #lars-blogger.lt_by_blogposter_first_n#
     </if>
     <if 1 eq 0>
-      I put this hack in because category_url is not valid.
+      #lars-blogger.lt_I_put_this_hack_in_be#
       <multiple name="sw_category_multirow" delimiter=", ">
         <if @sw_category_multirow.rownum@ eq 1 and
             @sw_category_multirow.sw_category_name@ not nil>
-          in
+          #lars-blogger.in#
         </if>
         <a href="@sw_category_multirow.sw_category_url@">@sw_category_multirow.sw_category_name@</a>
       </multiple>
     </if>
     <if 1 eq 0>
-      I put this hack in because category_url is not valid.
+      #lars-blogger.lt_I_put_this_hack_in_be#
     <if @display_categories@ and @blog.category_id@ gt 0>
-      in
+      #lars-blogger.in#
       <a href="@category_url@" title="@blog.category_name@">@blog.category_name@</a>
     </if>
     |
       </if>
 
-    <a href="@blog.permalink_url@" title="Permanent URL for this entry">Permalink</a>
+    <a href="@blog.permalink_url@" title="Permanent URL for this entry">#lars-blogger.Permalink#</a>
     <if @show_comments_p@ false>
-      | <a href="@blog.permalink_url@" title="View comments on this entry">Comments (@blog.num_comments@)</a>
+      | <a href="@blog.permalink_url@" title="View comments on this entry">#lars-blogger.lt_Comments_blognum_comm#</a>
     </if>
     <if @manageown_p@ false or @blog.user_id@ eq @user_id@>
       <if @blog.write_p@ true>
         | <a href="@blog.edit_url@">Edit</a>
         <if @blog.draft_p@ true>
-          | <a href="@blog.publish_url@">Publish</a>
+          | <a href="@blog.publish_url@">#lars-blogger.Publish#</a>
         </if>
         <else>
-           <if @unpublish_p@ true>| <a href="@blog.revoke_url@">Unpublish</a></if>
+           <if @unpublish_p@ true>| <a href="@blog.revoke_url@">#lars-blogger.Draft#</a></if>
         </else>
         | <a href="@blog.delete_url@">Delete</a>
       </if>
@@ -71,7 +71,8 @@
     <a name="comment@comments.comment_id@"></a>
     <h3 class="lars_blogger_comment_title">@comments.title@</h3>
     <p class="lars_blogger_comment_text">@comments.content;noquote@</p>
-    <p><if @comments.trackback_p@ eq "f">by @comments.author@</if><else>Trackback from <a href="@comments.trackback_url@" title="@comments.trackback_name@">@comments.trackback_name@</a></else> on @comments.pretty_date@</p>
+    <p><if @comments.trackback_p@ eq "f">#lars-blogger.by_commentsauthor#</if><else>#lars-blogger.Trackback_from# <a href="@comments.trackback_url@" title="@comments.trackback_name@">@comments.trackback_name@</a></else> #lars-blogger.lt_on_commentspretty_dat#</p>
   </multiple>
-  <center><a href="@blog.comment_add_url@" title="Comment on this entry">Add comment</a></center>
+  <center><a href="@blog.comment_add_url@" title="Comment on this entry">#lars-blogger.Add_comment#</a></center>
 </if>
+

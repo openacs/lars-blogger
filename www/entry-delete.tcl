@@ -17,7 +17,7 @@ ad_form -name confirmation \
     } \
     -export {return_url}
 
-set page_title "Confirm Delete"
+set page_title "[_ lars-blogger.Confirm_Delete]"
 set context [list $page_title]
 
 ad_return_template

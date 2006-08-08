@@ -1,5 +1,6 @@
 <master>
-<property name="title">@blog_name@ Blogroll</property>
+<property name="title">#lars-blogger.blog_name_Blogroll#</property>
 <property name="context">@context;noquote@</property>
 
 <listtemplate name="links"></listtemplate>
+

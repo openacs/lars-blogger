@@ -53,12 +53,16 @@ set entry_id $blog(entry_id)
 
 lars_blogger::entry::htmlify \
     -max_content_length $max_content_length \
-    -more [ad_decode [ad_return_url] $blog(permalink_url) {} "<p><a href=\"[ad_quotehtml $blog(permalink_url)]\">Continued...</a>"] \
+    -more [ad_decode [ad_return_url] $blog(permalink_url) {} " <a href=\"[ad_quotehtml $blog(permalink_url)]\">Continued...</a>"] \
     -array blog
 
 
 set blog(edit_url) [export_vars -base "${package_url}entry-edit" { entry_id return_url }]
-set blog(delete_url) [export_vars -base "${package_url}entry-delete" { entry_id return_url }]
+if {$perma_p} {
+    set blog(delete_url) [export_vars -base "${package_url}entry-delete" { entry_id {return_url $package_url} }]
+} else {
+    set blog(delete_url) [export_vars -base "${package_url}entry-delete" { entry_id return_url }]
+}
 
 set blog(publish_url) [export_vars -base "${package_url}entry-publish" { entry_id return_url }]
 set blog(revoke_url) [export_vars -base "${package_url}entry-revoke" { entry_id return_url }]

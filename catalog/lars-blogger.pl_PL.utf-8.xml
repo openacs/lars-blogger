@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<message_catalog package_key="lars-blogger" package_version="2.2.0" locale="pl_PL" charset="utf-8">
+
+  <msg key="Actions">Czynności</msg>
+  <msg key="Add_Blog_Entry">Dodaj Wpis</msg>
+  <msg key="Add_category">Dodaj Kategorię</msg>
+  <msg key="Add_comment">Dodaj komentarz</msg>
+  <msg key="Add_entry">Dodaj wpis</msg>
+  <msg key="Add_Link">Dodaj Link</msg>
+  <msg key="Add_new_blog_entry">Dodaj nowy wpis </msg>
+  <msg key="Add_new_category">Dodaj nową kategorię</msg>
+  <msg key="Administer">Administruj</msg>
+  <msg key="Administration">Administracja</msg>
+  <msg key="Archive">Archiwum</msg>
+  <msg key="Author">Autor</msg>
+  <msg key="by_commentsauthor">przez %comments.author%</msg>
+  <msg key="Categories">Kategorie</msg>
+  <msg key="Category">Kategoria</msg>
+  <msg key="Category_Short_Name">Krótka Nazwa Kategorii</msg>
+  <msg key="Change_permissions">Zmień przywileje</msg>
+  <msg key="Confirm_Delete">Potwierdź Usunięcie</msg>
+  <msg key="Content">Treść</msg>
+  <msg key="Date">Data</msg>
+  <msg key="Draft">Szkic</msg>
+  <msg key="Draft_Entries">Szkice</msg>
+  <msg key="Draft_entries">Szkice</msg>
+  <msg key="E-mail_subscribers">wyślij E-mail do subskrybentów</msg>
+  <msg key="Edit">Edytuj</msg>
+  <msg key="Edit_Blog_Entry">Edytuj Wpis Bloga</msg>
+  <msg key="Edit_category">Edytuj kategorię</msg>
+  <msg key="Edit_entry">Edytuj wpis</msg>
+  <msg key="lt_Category_doesnt_exist">Kategoria nie istnieje</msg>
+  <msg key="lt_Comments_blognum_comm">Komentarze (%blog.num_comments%)</msg>
+  <msg key="lt_instance_name_Categor">Kategorie %instance_name% </msg>
+  <msg key="lt_more">...więcej</msg>
+  <msg key="lt_on_commentspretty_dat">%comments.pretty_date%</msg>
+  <msg key="lt_Proceed_only_if_you_a">Kontynuuj wyłącznie wtedy, gdy rozumiesz co robisz.</msg>
+  <msg key="lt_Show_E-Mail_subscribe">Pokaż subskrybentów E-mail</msg>
+  <msg key="lt_This_short_name_is_al">Ta nazwa jest już użyta przez inną kategorię</msg>
+  <msg key="lt_URL_must_be_less_than">URL nie może przekraczać 500 znaków.</msg>
+  <msg key="Manage_Categories">Zarządzaj Kategoriami</msg>
+</message_catalog>
