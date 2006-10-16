@@ -30,7 +30,7 @@ ad_proc -public lars_blogger::rss::generate {
     {-package_id ""}
 } {
     foreach subscr_id [lars_blogger::rss::get_subscr_id_list -package_id $package_id] {
-        rss_gen_report $subscr_id
+        # rss_gen_report $subscr_id
     }
 }
 

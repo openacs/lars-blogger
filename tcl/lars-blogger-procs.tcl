@@ -42,7 +42,7 @@ ad_proc lars_blog_setup_feed {
             db_dml update_subscr {}
         }
         # Run it now
-        rss_gen_report $subscr_id
+        # rss_gen_report $subscr_id
     }
 
     if { [parameter::get -parameter "user_rss_feed_p" -package_id $package_id -default 0] } {
@@ -73,7 +73,7 @@ ad_proc lars_blog_setup_feed {
         }
         if { ![empty_string_p $subscr_id] } {
             # Run it now
-            rss_gen_report $subscr_id
+            # rss_gen_report $subscr_id
         }
     }
 }

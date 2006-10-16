@@ -1,4 +1,4 @@
-if {![exists_and_not_null package_id]} {
+if { ![info exists package_id] } {
     set package_id [ad_conn package_id]
 }
 set package_url [lindex [site_node::get_url_from_object_id -object_id $package_id] 0]

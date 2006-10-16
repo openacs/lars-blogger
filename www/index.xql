@@ -4,9 +4,9 @@
 
     <fullquery name="archive_date_year">
         <querytext>
-			select to_date(:year || '-01-01', 'YYYY-MM-DD') 
+			select to_date(:year || '-01-01') 
 				as archive_date, 
-			to_char(to_date(:year || '-01-01', 'YYYY-MM-DD'), 'YYYY')
+			to_char(to_date(:year || '-01-01'), 'YYYY')
 				as archive_date_pretty
 			from dual
         </querytext>

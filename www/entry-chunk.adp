@@ -3,7 +3,7 @@
 <div class="lars_blogger_entry">
 
   <div class="lars_blogger_title">
-    <p>
+   <p>
     <if @blog.title_url@ not nil>
       <a href="@blog.title_url@"><b><if @blog.title@ not nil>@blog.title;noquote@</if><else>@blog.title_url@</else></b></a>
 
@@ -16,7 +16,7 @@
         <b>@blog.title;noquote@</b>
       </if>
     </else>
-    </p>
+   </p>
   </div> 
 
   <div class="lars_blogger_text">

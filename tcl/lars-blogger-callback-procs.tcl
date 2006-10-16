@@ -42,26 +42,28 @@ ad_proc -callback merge::MergePackageUser -impl lars_blogger {
     
     return $result
 }
+
+#Callbacks for application-track
+
 ad_proc -callback application-track::getApplicationName -impl weblogger {} { 
         callback implementation 
     } {
         return "weblogger"
     }    
     
-    ad_proc -callback application-track::getGeneralInfo -impl weblogger {} { 
+ad_proc -callback application-track::getGeneralInfo -impl weblogger {} { 
         callback implementation 
     } {
 	db_1row my_query {
     		select count(1) as result
 			from pinds_blog_entries w,  dotlrn_communities com
 		    	where com.community_id=:comm_id
-		    	and w.deleted_p = 'f'
 			and apm_package__parent_id(w.package_id) = com.package_id	
 	}
 	
 	return "$result"
     }
-    ad_proc -callback application-track::getSpecificInfo -impl weblogger {} { 
+ad_proc -callback application-track::getSpecificInfo -impl weblogger {} { 
         callback implementation 
     } {
    	

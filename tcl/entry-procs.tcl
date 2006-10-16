@@ -221,23 +221,22 @@ ad_proc -public lars_blogger::entry::do_notifications {
     set blog_name [lars_blog_name -package_id $blog(package_id)]
 
     set new_content ""
-    append new_content "$blog(title)\n[string repeat "-" [string length $blog(title)]]\n"
+
     if { ![empty_string_p $blog(title_url)] } {
-        append new_content "$blog(title_url)\n"
+        append new_content "<a href=\"$blog(title_url)\">$blog(title)</a>"
+    } else {
+	append new_content "$blog(title)"
     }
-    append new_content "\n"
+    append new_content "<br>[string repeat "-" [string length $blog(title)]]<p>"
 
-    lars_blogger::entry::htmlify \
-        -array blog
+    append new_content "$blog(content)<p>"
+    append new_content "$blog(entry_date_pretty) by $blog(poster_first_names) $blog(poster_last_name)<p>"
 
-    append new_content "[ad_html_text_convert -from text/html -to text/plain -- $blog(content)]\n\n"
-    append new_content "$blog(entry_date_pretty) by $blog(poster_first_names) $blog(poster_last_name)" \n\n
+    append new_content "Permalink: $entry_url<br>"
+    append new_content "$blog_name: $blog_url<br>"
 
-    append new_content "Permalink: $entry_url\n\n"
-    append new_content "$blog_name: $blog_url\n"
-
-    append new_content "This entry: " $entry_url \n\n
-    append new_content "$blog_name: " $blog_url \n
+    append new_content "This entry: $entry_url<br>"
+    append new_content "$blog_name: $blog_url<p>"
     
     # Do the notification for the forum
     notification::new \
@@ -246,7 +245,7 @@ ad_proc -public lars_blogger::entry::do_notifications {
         -object_id $blog(package_id) \
         -response_id $blog(entry_id) \
         -notif_subject $blog(title) \
-        -notif_text $new_content
+        -notif_html $new_content
 }
 
 ad_proc lars_blogger::entry::trackback { -entry_id } {
