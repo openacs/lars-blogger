@@ -222,6 +222,8 @@ ad_proc -public lars_blogger::entry::do_notifications {
 
     set new_content ""
 
+    append new_content "$blog_name: $blog_url<p>"
+
     if { ![empty_string_p $blog(title_url)] } {
         append new_content "<a href=\"$blog(title_url)\">$blog(title)</a>"
     } else {
@@ -236,7 +238,6 @@ ad_proc -public lars_blogger::entry::do_notifications {
     append new_content "$blog_name: $blog_url<br>"
 
     append new_content "This entry: $entry_url<br>"
-    append new_content "$blog_name: $blog_url<p>"
     
     # Do the notification for the forum
     notification::new \
