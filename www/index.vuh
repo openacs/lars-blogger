@@ -64,11 +64,19 @@ if { [regexp {^/(u|user)/([^/]+)/rss} $url ignore ignore2 screen_name] } {
     } elseif {[regexp {^/+swcat/+([^/]+)/*} $rest_url \
                   ignore_whole sw_category_id]} {
 
-          # SWC (Site-wide categories)
-          # As the categories package currently doesn't have short names we
-          # are using IDs. We don't check whether this is a valid integer here
-          # because index.tcl will take care of that.
-          rp_form_put sw_category_id $sw_category_id
+	# MS: 27/11/06, copied from above
+	# We need to get rid of the first form element for sw_category_id
+	# Otherwise we would have it there twice, which does not make that much sense :)
+	
+	set form [rp_getform]
+	ns_set idelkey $form sw_category_id
+	
+	# SWC (Site-wide categories)
+	# As the categories package currently doesn't have short names we
+	# are using IDs. We don't check whether this is a valid integer here
+	# because index.tcl will take care of that.
+
+	rp_form_put sw_category_id $sw_category_id
 
     } elseif { [regexp {one-entry$} $url] } {
 	      # Backwards compatibility with user/<screen_name>/one-entry?entry_id=<entry_id>
