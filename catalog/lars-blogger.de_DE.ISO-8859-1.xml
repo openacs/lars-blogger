@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<message_catalog package_key="lars-blogger" package_version="2.2.0" locale="de_DE" charset="ISO-8859-1">
+
+  <msg key="Actions">Aktionen</msg>
+  <msg key="Add_Blog_Entry">Blog-Eintrag hinzufügen</msg>
+  <msg key="Add_category">Kategorie hinzufügen</msg>
+  <msg key="Add_comment">Kommentar hinzufügen</msg>
+  <msg key="Add_entry">Eintrag hinzufügen</msg>
+  <msg key="Add_Link">Link hinzufügen</msg>
+  <msg key="Add_new_blog_entry">Neuen Blog-Eintrag hinzufügen</msg>
+  <msg key="Add_new_category">Neue Kategorie hinzufügen</msg>
+  <msg key="Add_Ping_URL">Ping-URL hinzufügen</msg>
+  <msg key="Administer">Verwalten</msg>
+  <msg key="Administration">Verwaltung</msg>
+  <msg key="Archive">Archiv</msg>
+  <msg key="Author">Author</msg>
+  <msg key="blog_name_Blogroll">%blog_name% Blogroll</msg>
+  <msg key="Blogroll">Blogroll</msg>
+  <msg key="Bookmarklet">Bookmarklet</msg>
+  <msg key="Bookmarklet_Link">Bookmarklet-Link</msg>
+  <msg key="by_commentsauthor">von %comments.author%</msg>
+  <msg key="Categories">Kategorien</msg>
+  <msg key="Category">Kategorie</msg>
+  <msg key="Change_permissions">Berechtigungen ändern</msg>
+  <msg key="Configure_Trackback">Trackback konfigurieren</msg>
+  <msg key="Confirm_Delete">Löschen bestätigen</msg>
+  <msg key="Content">Inhalt</msg>
+  <msg key="Date">Datum</msg>
+  <msg key="Delete">Löschen</msg>
+  <msg key="Delete_category">Kategorie löschen</msg>
+  <msg key="Delete_entry">Eintrag löschen</msg>
+  <msg key="Deprecated">[veraltet]</msg>
+  <msg key="Down">Abwärts</msg>
+  <msg key="Draft">Entwurf</msg>
+  <msg key="E-mail_subscribers">E-Mail Abonnenten</msg>
+  <msg key="Edit">Bearbeiten</msg>
+  <msg key="Edit_Blog_Entry">Blog-Eintrag bearbeiten</msg>
+  <msg key="Edit_category">Kategorie bearbeiten</msg>
+  <msg key="Edit_entry">Eintrag bearbeiten</msg>
+  <msg key="Entry_date">Eintragsdatum</msg>
+  <msg key="in">in</msg>
+  <msg key="lt_Add_a_link_to_your_bl">Einen Link zur Blogroll hinzufügen</msg>
+  <msg key="lt_Add_another_ping-comp">Eine weitere ping-kompatible Site hinzufügen</msg>
+  <msg key="lt_Are_you_sure_that_you">Sind Sie sicher, dass Sie diesen Link löschen wollen?</msg>
+  <msg key="lt_Are_you_sure_that_you_1">Sind Sie sicher, dass SIe diese Ping-URL löschen wollen?</msg>
+  <msg key="lt_Before_you_can_start_">Bevor Sie Ihren Weblog nutzen können, müssen Sie einen Benutzernamen bei %pvt_home_name% einrichten.</msg>
+  <msg key="Publish">Veröffentlichen</msg>
+  <msg key="Publish_entry">Eintrag veröffentlichen</msg>
+  <msg key="Remove">Entfernen</msg>
+</message_catalog>
