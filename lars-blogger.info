@@ -7,7 +7,7 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="2.2.1a1" url="http://openacs.org/repository/download/apm/lars-blogger-2.2.1a1.apm">
+    <version name="2.2.1b1" url="http://openacs.org/repository/download/apm/lars-blogger-2.2.1a1.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Individual or collaborative web logs.</summary>
         <release-date>2006-02-18</release-date>
@@ -15,7 +15,7 @@
         <description format="text/html">Weblog creation and management with notifications, RSS, trackpack, technorati, blogroll, pings, archives, draft and published entries, includable templates for presenting on other pages, and permissioning for multiple users.</description>
         <maturity>0</maturity>
 
-        <provides url="lars-blogger" version="2.2.1a1"/>
+        <provides url="lars-blogger" version="2.2.1b1"/>
         <requires url="acs-datetime" version="5.2.1"/>
         <requires url="acs-tcl" version="5.2.2"/>
         <requires url="categories" version="1.1"/>
