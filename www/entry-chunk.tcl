@@ -50,12 +50,11 @@ set general_comments_package_url [general_comments_package_url]
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
 set entry_id $blog(entry_id)
-
+set admin_p [permission::permission_p -object_id $entry_id -party_id $user_id -privilege admin]
 lars_blogger::entry::htmlify \
     -max_content_length $max_content_length \
     -more [ad_decode [ad_return_url] $blog(permalink_url) {} " <a href=\"[ad_quotehtml $blog(permalink_url)]\">Continued...</a>"] \
     -array blog
-
 
 set blog(edit_url) [export_vars -base "${package_url}entry-edit" { entry_id return_url }]
 if {$perma_p} {
@@ -75,9 +74,11 @@ set blog(write_p) [permission::write_permission_p \
 set display_categories [lars_blog_categories_p \
                             -package_id [ad_conn package_id]]
 
+set comment_return_url "${package_url}flush-cache?[export_vars { return_url }]"
+
 if { [template::util::is_true $show_comments_p] } {
     lars_blogger::entry::get_comments -entry_id $entry_id
-    set blog(comment_add_url) [export_vars -base "${general_comments_package_url}comment-add" { { object_id $entry_id } { object_name $blog(title) } { return_url "${package_url}flush-cache?[export_vars { return_url }]"} }]
+    set blog(comment_add_url) [export_vars -base "${general_comments_package_url}comment-add" { { object_id $entry_id } { object_name $blog(title) } { return_url "$comment_return_url"} }]
 }
 
 set blog(posted_time_pretty) [util::age_pretty \
