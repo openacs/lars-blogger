@@ -58,9 +58,16 @@ if { [regexp {^/(u|user)/([^/]+)/rss} $url ignore ignore2 screen_name] } {
                     set year [lindex $date_list 0]
                     set month [format "%02d" [lindex $date_list 1]]
           }
-          rp_form_put year $year
-          rp_form_put month $month
-          rp_form_put day $day
+	
+	set form [rp_getform]
+	ns_set idelkey $form year
+	ns_set idelkey $form month
+	ns_set idelkey $form day
+	
+	rp_form_put year $year
+	rp_form_put month $month
+	rp_form_put day $day
+
     } elseif {[regexp {^/+swcat/+([^/]+)/*} $rest_url \
                   ignore_whole sw_category_id]} {
 
