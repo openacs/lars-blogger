@@ -10,7 +10,7 @@
     <version name="2.3.0a1" url="http://openacs.org/repository/download/apm/lars-blogger-2.3.0d1.apm">
         <owner url="mailto:lars@pinds.com">Lars Pind</owner>
         <summary>Individual or collaborative web logs.</summary>
-        <release-date>2006-02-18</release-date>
+        <release-date>2007-03-31</release-date>
         <vendor url="http://www.openacs.org">OpenACS</vendor>
         <description format="text/html">Weblog creation and management with notifications, RSS, trackpack, technorati, blogroll, pings, archives, draft and published entries, includable templates for presenting on other pages, and permissioning for multiple users.</description>
         <maturity>0</maturity>
