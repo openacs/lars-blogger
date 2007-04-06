@@ -71,7 +71,7 @@
     <a name="comment@comments.comment_id@"></a>
     <h3 class="lars_blogger_comment_title">@comments.title@</h3>
     <p class="lars_blogger_comment_text">@comments.content;noquote@</p>
-    <p><if @comments.trackback_p@ eq "f">#lars-blogger.by_commentsauthor#</if><else>#lars-blogger.Trackback_from# <a href="@comments.trackback_url@" title="@comments.trackback_name@">@comments.trackback_name@</a></else> #lars-blogger.lt_on_commentspretty_dat#</p>
+    <p><if @comments.trackback_p@ eq "f">#lars-blogger.by_commentsauthor#</if><else>#lars-blogger.Trackback_from# <a href="@comments.trackback_url@" title="@comments.trackback_name@">@comments.trackback_name@</a></else> #lars-blogger.lt_on_commentspretty_dat#<if @admin_p@ eq 1 or @comments.creation_user@ eq @user_id@> | <a href="@general_comments_package_url@comment-edit?comment_id=@comments.comment_id@&return_url=@comment_return_url@">Edit</a> | <a href="@general_comments_package_url@delete?comment_id=@comments.comment_id@&return_url=@comment_return_url@">Delete</a></if></p>
   </multiple>
   <center><a href="@blog.comment_add_url@" title="Comment on this entry">#lars-blogger.Add_comment#</a></center>
 </if>

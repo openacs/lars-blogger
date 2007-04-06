@@ -24,7 +24,6 @@ if { ![exists_and_not_null show_comments_p] } {
     set show_comments_p $perma_p
 }
 
-
 # Maybe package_id is supplied, but maybe not
 if { ![info exists package_id] } {
     set package_id [ad_conn package_id]
@@ -50,6 +49,8 @@ set general_comments_package_url [general_comments_package_url]
 set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
 
 set entry_id $blog(entry_id)
+
+set admin_p [permission::permission_p -object_id $package_id -privilege admin -party_id $user_id]
 
 lars_blogger::entry::htmlify \
     -max_content_length $max_content_length \
@@ -83,3 +84,5 @@ if { [template::util::is_true $show_comments_p] } {
 set blog(posted_time_pretty) [util::age_pretty \
                                  -timestamp_ansi $blog(entry_date_ansi) \
                                  -sysdate_ansi $blog(sysdate_ansi)]
+
+set comment_return_url "${package_url}flush-cache?[export_vars { return_url }]"
