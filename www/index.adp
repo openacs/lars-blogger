@@ -1,6 +1,5 @@
 <master>
 <property name="title">@page_title@</property>
-<property name="header_stuff">@headerstuff;noquote@</property>
 <property name="context">@context;noquote@</property>
 
 <div class="lars_blogger_body">

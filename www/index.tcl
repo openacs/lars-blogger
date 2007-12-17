@@ -74,15 +74,15 @@ if {$manageown_p} {
     set manageown_p [expr ![permission::permission_p -object_id $package_id -privilege admin]]
 }
 
-# since ADP commands can't be evaluated in the <property> tags, we
-# create a separate ADP file for headerstuff. See Bart's post
-# http://openacs.org/forums/message-view?message_id=149849
-set cwd [file dirname [ad_conn file]]
-set headerstuff [template::adp_parse ${cwd}/headerstuff \
-                     [list \
-                          rss_file_url $rss_file_url \
-                          rsd_url $rsd_url \
-                          stylesheet_url $stylesheet_url]]
+# header stuffs
+if { $rss_file_url ne ""} {
+    template::head::add_link -rel "alternate" -href $rss_file_url -type "application/rss+xml"
+}
+if { $rsd_url ne ""} {
+    template::head::add_link -rel "EditURI" -href $rsd_url -type "application/rsd+xml" -title "RSD"
+}
+
+template::head::add_css -href $stylesheet_url
 
 set create_p [permission::permission_p -object_id $package_id -privilege create -party_id [ad_conn untrusted_user_id]]
 set admin_p [permission::permission_p -object_id $package_id -privilege admin -party_id [ad_conn untrusted_user_id]]

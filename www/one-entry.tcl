@@ -68,5 +68,4 @@ if {![exists_and_not_null screen_name]} {
 
 set header_background_color [lars_blog_header_background_color]
 
-set stylesheet_url [lars_blog_stylesheet_url]
-
+template::head::add_css -href [lars_blog_stylesheet_url]
