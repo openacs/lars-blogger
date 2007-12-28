@@ -49,8 +49,8 @@ if { ![empty_string_p $category_short_name] } {
 
 # Set up the <link> elements for the HTML <head>
 # 3 items - RSS, RSD and stylesheet.
-set rss_file_url ""
-if { ![empty_string_p [parameter::get -parameter "rss_file_name"]] } {
+set rss_file_url [parameter::get -parameter rss_file_url -default ""]
+if { $rss_file_url eq "" && ![empty_string_p [parameter::get -parameter "rss_file_name"]] } {
     if {[exists_and_not_null screen_name]} {
         set rss_file_url "${package_url}user/$screen_name/rss/[parameter::get -parameter "rss_file_name"]"
     } else {
