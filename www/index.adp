@@ -64,7 +64,7 @@
          <multiple name="sw_categories">
            <h2>@sw_categories.tree_name@</h2>
            <group column="tree_id">
-             <if @sw_categories.count@ gt 0>@sw_categories.pad;noquote@<a href="@package_url_with_extras@swcat/@sw_categories.category_id@">@sw_categories.category_name@</a> (@sw_categories.count@)<br /></if>
+             <if @sw_categories.count@ gt 0>@sw_categories.pad;noquote@<a href="@package_url_with_extras@swcat/@sw_categories.category_id@">@sw_categories.category_name@</a> (@sw_categories.count@)<br></if>
            </group>
          </multiple>
         </div>

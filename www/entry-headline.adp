@@ -13,7 +13,7 @@
         <a href="@blog.permalink_url@" title="Permanent URL for this entry"><b>@blog.title;noquote@</b></a>
       </else>
     </if>
-    <br/> @blog.posted_time_pretty@ 
+    <br> @blog.posted_time_pretty@ 
   </div> 
 
 
