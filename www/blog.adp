@@ -1,7 +1,5 @@
-<link rel="stylesheet" type="text/css" href="@stylesheet_url@">
-
 <multiple name="blog">
-  <include src="@entry_chunk@" &="blog" package_id="@package_id@" screen_name="@screen_name@" max_content_length="@max_content_length@" unpublish_p="@unpublish_p@" manageown_p="@manageown_p@">
+  <include src="@entry_chunk@" &="blog" package_id="@package_id@" screen_name="@screen_name@" max_content_length="@max_content_length@" unpublish_p="@unpublish_p@" manageown_p="@manageown_p@" />
 </multiple>
 
 <ul class="action-links">
