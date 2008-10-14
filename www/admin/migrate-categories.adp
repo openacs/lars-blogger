@@ -6,12 +6,11 @@
 #lars-blogger.lt_Proceed_only_if_you_a#
 <p>
 <form method="post" action="migrate-categories-1">
-<input type="submit" value="Start Migration - Execute code listed below">
+<div><input type="submit" value="Start Migration - Execute code listed below"></div>
 </form>
+
 <h2>#lars-blogger.lt_Migration_Script_Sour#</h2>
-<blockquote>
 <pre>
 @meat;noquote@
 </pre>
-</blockquote>
 
