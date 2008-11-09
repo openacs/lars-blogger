@@ -254,6 +254,8 @@ set stylesheet_url [lars_blog_stylesheet_url -package_id $package_id]
 
 set rss_file_url [lars_blogger::get_rss_file_url -package_id $package_id]
 
+template::head::add_css -href $stylesheet_url
+
 if { [exists_and_not_null display_template] } {
     ad_return_template $display_template
 }

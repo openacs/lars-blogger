@@ -93,7 +93,7 @@
       <if @rss_file_url@ not nil>
         <div class="lars_blogger_portlet">
           <h2>#lars-blogger.Syndication_Feed#</h2>
-          <a href="@rss_file_url@" title="RSS 2.0 feed"><img src="/resources/lars-blogger/xml.gif" width="36" height="14" border="0" alt="XML"></a>
+          <a href="@rss_file_url@" title="RSS 2.0 feed"><img src="/resources/lars-blogger/xml.gif" width="36" height="14" style="border:0" alt="XML"></a>
         </div>
       </if>
 

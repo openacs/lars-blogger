@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="@stylesheet_url@" />
-
 <multiple name="blog">
   <include src="@entry_chunk@" &="blog" package_id="@package_id@" screen_name="@screen_name@" max_content_length="@max_content_length@" unpublish_p="@unpublish_p@" manageown_p="@manageown_p@" />
 </multiple>
@@ -16,5 +14,5 @@
 </ul>
 
 <if @rss_file_url@ not nil>
-  <a href="@rss_file_url@" title="RSS 2.0 feed"><img src="/resources/lars-blogger/xml.gif" width="36" height="14" border="0" alt="XML"></a>
+  <a href="@rss_file_url@" title="RSS 2.0 feed"><img src="/resources/lars-blogger/xml.gif" width="36" height="14" style="border:0" alt="XML"></a>
 </if>

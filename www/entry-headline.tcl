@@ -59,7 +59,7 @@ if { [empty_string_p $screen_name] } {
 
 lars_blogger::entry::htmlify \
     -max_content_length $max_content_length \
-    -more [ad_decode [ad_return_url] $blog(permalink_url) {} "<br/><a href=\"$blog(permalink_url)\">(more)</a>"] \
+    -more [ad_decode [ad_return_url] $blog(permalink_url) {} "<br><a href=\"$blog(permalink_url)\">(more)</a>"] \
     -array blog
 
 
