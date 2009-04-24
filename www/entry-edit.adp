@@ -3,7 +3,7 @@
 <property name="focus">entry.title</property>   
 <property name="context">@context@</property>   
 
-<script langauge="javascript">
+<script type="text/javascript">
     function setEntryDateToToday() {
         document.forms['entry'].entry_date.value = '@now_ansi@';
     }
