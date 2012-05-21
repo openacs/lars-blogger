@@ -29,7 +29,7 @@ if { [regexp {^/(u|user)/([^/]+)/rss} $url ignore ignore2 screen_name] } {
 	    set $name $val
 	}
     }
-    set xml [apply rss_gen $args]
+    set xml [ad_apply rss_gen $args]
     ns_set put [ns_conn outputheaders] "Content-Disposition" "attachment; filename=\"rss.xml\""
     ReturnHeaders "application/xml"
     ns_write $xml

@@ -24,7 +24,7 @@ if { ![empty_string_p $summary_context_id] } {
 	    set $name $val
 	}
     }
-    set xml [apply rss_gen $args]
+    set xml [ad_apply rss_gen $args]
     ns_set put [ns_conn outputheaders] "Content-Disposition" "attachment; filename=\"rss.xml\""
     ReturnHeaders "application/xml"
     ns_write $xml

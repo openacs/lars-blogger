@@ -17,7 +17,7 @@
 
         <provides url="lars-blogger" version="2.6.0"/>
         <requires url="acs-datetime" version="5.2.2"/>
-        <requires url="acs-tcl" version="5.4.2"/>
+        <requires url="acs-tcl" version="5.6.0"/>
         <requires url="categories" version="1.1.2d3"/>
         <requires url="general-comments" version="5.2.0"/>
         <requires url="notifications" version="5.4.2"/>
