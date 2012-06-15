@@ -98,11 +98,12 @@ ad_proc -private lars_blogger::technorati::parse_xml {
     }
     
     if { [catch {
-        set doc [dom parse $xml]
-        
-        set root [$doc documentElement]
+
+        dom parse $xml doc
+        $doc documentElement root
+
         set root_name [$root nodeName]
-        if { ![string equal $root_name "tapi"] } {
+        if { $root_name ne "tapi" } {
             error "Root element is not tapi"
         }
         
