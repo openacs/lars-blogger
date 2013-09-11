@@ -7,7 +7,7 @@ ad_page_contract -properties {
 
 set package_id [ad_conn package_id]
 
-set admin_p [ad_require_permission $package_id admin]
+set admin_p [permission::require_permission -object_id $package_id -privilege admin]
 
 set context {{Categories Migration}}
 

@@ -104,7 +104,7 @@ ad_proc -public lars_blog_get_as_string {
         array set blog_site_node [site_node::get -url $url]
         set package_id $blog_site_node(object_id)
     }
-    set create_p [ad_permission_p $package_id create]
+    set create_p [permission::permission_p -object_id $package_id -privilege create]
     return [util_memoize [list lars_blog_get_as_string_mem $package_id $create_p $display_template] 600]
 }
 

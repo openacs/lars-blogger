@@ -61,7 +61,7 @@ ad_proc -private lars_blog__rss_datasource {
 
     set column_array(channel_link) $blog_url
 
-    set image_url [ad_parameter -package_id $package_id "channel_image_url"]
+    set image_url [parameter::get -package_id $package_id -parameter "channel_image_url"]
     if { [empty_string_p $image_url] } {
         set column_array(image) ""
     } else {
@@ -69,8 +69,8 @@ ad_proc -private lars_blog__rss_datasource {
                 url "[ad_url]$image_url" \
                 title $blog_title \
                 link $blog_url \
-                width [ad_parameter -package_id $package_id "channel_image_width"] \
-                height [ad_parameter -package_id $package_id "channel_image_height"]]
+                width [parameter::get -package_id $package_id -parameter "channel_image_width"] \
+                height [parameter::get -package_id $package_id -parameter "channel_image_height"]]
     }
 
     set items [list]

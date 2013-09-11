@@ -200,7 +200,7 @@ ad_form -extend -name entry \
     } \
     -after_submit {
         if {"$draft_p" == "t"} {
-            ad_returnredirect one-entry?[export_url_vars entry_id]
+            ad_returnredirect one-entry?[export_vars -url {entry_id}]
         } else {
             ad_returnredirect $return_url
         }
