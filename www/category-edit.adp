@@ -1,5 +1,5 @@
 <master>
-<property name="title">@page_title@</property>
+<property name="doc(title)">@page_title@</property>
 <property name="focus">category.name</property>   
 <property name="context">@context@</property>   
 

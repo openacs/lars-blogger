@@ -1,5 +1,5 @@
 <master>
-<property name="title">#lars-blogger.lt_blog_namenoquote_Ping#</property>
+<property name="doc(title)">#lars-blogger.lt_blog_namenoquote_Ping#</property>
 <property name="context">@context;noquote@</property>
 
 <p>

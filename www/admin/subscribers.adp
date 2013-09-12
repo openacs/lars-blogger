@@ -1,5 +1,5 @@
 <master> 
-<property name="title">#lars-blogger.E-mail_subscribers#</property>
+<property name="doc(title)">#lars-blogger.E-mail_subscribers#</property>
 <property name="context">subscribers</property>
 
 <if @subscribers:rowcount@ gt 0>
