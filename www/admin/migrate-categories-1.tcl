@@ -48,7 +48,7 @@ db_transaction {
   ns_log Notice creating site wide category \"tree\"
 
   foreach rec $category_list {
-    util_unlist $rec category_id name
+    lassign $rec category_id name
     set sw_category_id [category::add \
       -tree_id $tree_id \
       -parent_id "" \
@@ -68,7 +68,7 @@ db_transaction {
 
   set count 0
   foreach rec $oldcat_entry_list {
-    util_unlist $rec category_id entry_id
+    lassign $rec category_id entry_id
     ns_log Notice catmig $oldtonew($category_id)
     # This -remove_old thing is something you may want to customize for
     # your site.  It will remove all current site-wide categorizations
