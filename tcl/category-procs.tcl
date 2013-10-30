@@ -16,13 +16,13 @@ ad_proc lars_blogger::category::new {
     set creation_user [ad_conn user_id]
     set creation_ip [ns_conn peeraddr]
 
-    if { [empty_string_p $category_id] } {
+    if { $category_id eq "" } {
         set category_id [db_nextval acs_object_id_seq]
     }
-    if { [empty_string_p $package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
-    if { [empty_string_p $short_name] } {
+    if { $short_name eq "" } {
         set existing_short_names [lars_blogger::category::get_existing_short_names -package_id $package_id]
         set short_name [util_text_to_url -existing_urls $existing_short_names -text $name]
     }

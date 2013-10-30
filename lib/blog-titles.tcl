@@ -28,20 +28,20 @@ set package_url [lars_blog_public_package_url -package_id $package_id]
 
 set blog_name [lars_blog_name -package_id $package_id]
 
-if { [ad_conn isconnected] && ![string equal $package_url [string range [ad_conn url] 0 [string length $package_url]]] } {
+if { [ad_conn isconnected] && $package_url ne [string range [ad_conn url] 0 [string length $package_url]] } {
     set blog_url $package_url
 } else {
     set blog_url {}
 }
 
-if { [exists_and_not_null max_num_entries] } {
+if { [info exists max_num_entries] && $max_num_entries ne "" } {
     # MaxNumEntriesOnFrontPage parameter is set, which means we should limit to that
     set limit $max_num_entries
 } else {
     set limit ""
 }
 
-if { [exists_and_not_null num_days] } {
+if { ([info exists num_days] && $num_days ne "") } {
     # NumDaysOnFrontPage parameter is set, which means we should limit to that
     set date_clause [db_map date_clause_default]
 } else {
@@ -52,7 +52,7 @@ set output_rows_count 0
 
 db_multirow -extend {permalink_url} titles blog-titles "" {
 
-    if {$limit != ""} {
+    if {$limit ne ""} {
 	if {$output_rows_count >= $limit} {break}
     }
 

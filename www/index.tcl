@@ -25,7 +25,7 @@ set show_archive_p [parameter::get -parameter "ShowArchiveP"]
 set context [list]
 set context_base_url $package_url
 
-if { ![empty_string_p $screen_name] } {
+if { $screen_name ne "" } {
     # Show Screen Name in context bar
     append context_base_url /user/$screen_name
     lappend context [list $context_base_url $screen_name]
@@ -33,7 +33,7 @@ if { ![empty_string_p $screen_name] } {
     append package_url_with_extras user/$screen_name/
 }
 
-if { ![empty_string_p $category_short_name] } {
+if { $category_short_name ne "" } {
     if { ![db_0or1row get_category_from_short_name {}] } {
 	ad_return_error "[_ lars-blogger.lt_Category_doesnt_exist]" "[_ lars-blogger.lt_The_specified_categor]"
 	return
@@ -51,7 +51,7 @@ if { ![empty_string_p $category_short_name] } {
 # 3 items - RSS, RSD and stylesheet.
 set rss_file_url [parameter::get -parameter rss_file_url -default ""]
 if { $rss_file_url eq "" && ![empty_string_p [parameter::get -parameter "rss_file_name"]] } {
-    if {[exists_and_not_null screen_name]} {
+    if {([info exists screen_name] && $screen_name ne "")} {
         set rss_file_url "${package_url}user/$screen_name/rss/[parameter::get -parameter "rss_file_name"]"
     } else {
         set rss_file_url "${package_url}rss/[parameter::get -parameter "rss_file_name"]"
@@ -66,12 +66,12 @@ if { [xmlrpc::enabled_p] } {
 
 set stylesheet_url [lars_blog_stylesheet_url]
 
-set unpublish_p [expr ![parameter::get -parameter ImmediatePublishP -default 0]]
+set unpublish_p [expr {![parameter::get -parameter ImmediatePublishP -default 0]}] 
 
 # We say manageown if manageown set and not admin on the package.
 set manageown_p [parameter::get -parameter OnlyManageOwnPostsP -default 0]
 if {$manageown_p} {
-    set manageown_p [expr ![permission::permission_p -object_id $package_id -privilege admin]]
+    set manageown_p [expr {![permission::permission_p -object_id $package_id -privilege admin]}] 
 }
 
 # header stuffs
@@ -90,7 +90,7 @@ set admin_p [permission::permission_p -object_id $package_id -privilege admin -p
 set display_users_p [parameter::get -parameter "DisplayUsersP" -default 0]
 set display_categories [lars_blog_categories_p -package_id $package_id]
 
-if {$display_users_p && ![exists_and_not_null screen_name]} {
+if {$display_users_p && (![info exists screen_name] || $screen_name eq "")} {
 
     set display_bloggers_p 1
 
@@ -121,7 +121,7 @@ set notification_chunk [notification::display::request_widget \
 
 set header_background_color [lars_blog_header_background_color]
 
-if { [exists_and_not_null year] } {
+if { ([info exists year] && $year ne "") } {
     
     set index_page_p 0
 
@@ -132,8 +132,8 @@ if { [exists_and_not_null year] } {
     append context_base_url $year
     lappend context [list $context_base_url $year]
 
-    if { [exists_and_not_null day] } {
-        if {[db_type] == "oracle"} {
+    if { ([info exists day] && $day ne "") } {
+        if {[db_type] eq "oracle"} {
           # Oracle does have format called 'day' but it means
           # something else...
           set interval "ddd"
@@ -148,7 +148,7 @@ if { [exists_and_not_null year] } {
 	append context_base_url /$day
 	lappend context [list $context_base_url $day]
 
-    } elseif { [exists_and_not_null month] } {
+    } elseif { ([info exists month] && $month ne "") } {
         set interval "month"
         db_1row archive_date_month {}
 
@@ -175,9 +175,9 @@ db_multirow categories categories {}
 
 # Site-Wide Categories
 
-if { ![empty_string_p $sw_category_id] } {
+if { $sw_category_id ne "" } {
     set sw_category_name [category::get_name $sw_category_id]
-    if { [empty_string_p $sw_category_name] } {
+    if { $sw_category_name eq "" } {
         ad_return_exception_page 404 "No such category" "Site-wide \
           Category with ID $sw_category_id doesn't exist"
 	    return
@@ -214,7 +214,7 @@ if {$sw_cats} {
 
 # Cut the URL off the last item in the context bar
 if { [llength $context] > 0 } {
-    set context [lreplace $context end end [lindex [lindex $context end] end]]
+    set context [lreplace $context end end [lindex $context end end]]
 }
 
 set blog_name [lars_blog_name]

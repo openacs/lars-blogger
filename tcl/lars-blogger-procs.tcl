@@ -11,11 +11,11 @@ ad_proc lars_blog_setup_feed {
     -user:boolean
     {-package_id ""}
 } {
-    if { [empty_string_p $package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
     
-    set timeout [expr 30*60]
+    set timeout [expr {30*60}]
     set channel_title [lars_blog_name -package_id $package_id]
     set creation_user [ad_conn user_id]
     set creation_ip [ns_conn peeraddr]
@@ -26,7 +26,7 @@ ad_proc lars_blog_setup_feed {
         # check whether there's been a channel setup for this instance
         set summary_context_id [db_string select_instance_channel {} -default {}]
             
-        if { [empty_string_p $summary_context_id] } {
+        if { $summary_context_id eq "" } {
             # Setup a channel for this instance
             set summary_context_id [db_exec_plsql create_instance_channel {}]
         }
@@ -34,7 +34,7 @@ ad_proc lars_blog_setup_feed {
         # check whether there's been a feed setup for this instance
         set subscr_id [db_string instance_feed_subscr_id {} -default {}]
         
-        if { [empty_string_p $subscr_id] } {
+        if { $subscr_id eq "" } {
             # Setup an RSS feed for this instance
             set channel_link [lars_blog_public_package_url]
             
@@ -50,7 +50,7 @@ ad_proc lars_blog_setup_feed {
         # check whether there's been a channel setup for this instance
         set summary_context_id [db_string select_user_channel {} -default {}]
 
-        if { [empty_string_p $summary_context_id] } {
+        if { $summary_context_id eq "" } {
             # Setup a channel for this instance
             set summary_context_id [db_exec_plsql create_user_channel {}]
         }
@@ -58,10 +58,10 @@ ad_proc lars_blog_setup_feed {
         # check whether there's been a feed setup for this user
         set subscr_id [db_string user_feed_subscr_id {} -default {}]
 
-        if { [empty_string_p $subscr_id] } {
+        if { $subscr_id eq "" } {
             set screen_name [acs_user::get_element -user_id $creation_user -element screen_name]
             
-            if { ![empty_string_p $screen_name] } {
+            if { $screen_name ne "" } {
                 # Setup an RSS feed for the user
                 set channel_link "[lars_blog_public_package_url]user/$screen_name/"
                 
@@ -71,7 +71,7 @@ ad_proc lars_blog_setup_feed {
                 ns_log Warning "lars-blogger: User $creation_user has no screen_name, cannot setup an RSS feed for user"
             }
         }
-        if { ![empty_string_p $subscr_id] } {
+        if { $subscr_id ne "" } {
             # Run it now
             # rss_gen_report $subscr_id
         }
@@ -88,7 +88,7 @@ ad_proc -private lars_blog_get_as_string_mem {
 
 
 ad_proc -public lars_blog_get_as_string { 
-    -package_id
+    {-package_id ""}
     -url
     {-display_template /packages/lars-blogger/www/blog}
 } {
@@ -100,7 +100,7 @@ ad_proc -public lars_blog_get_as_string {
     display_template is what to use to render the blog (instead of
     the default blog.adp).
 } { 
-    if { ![exists_and_not_null package_id] } {
+    if { $package_id eq "" } {
         array set blog_site_node [site_node::get -url $url]
         set package_id $blog_site_node(object_id)
     }
@@ -111,7 +111,7 @@ ad_proc -public lars_blog_get_as_string {
 ad_proc lars_blog_flush_cache {
     {package_id ""}
 } {
-    if { [empty_string_p $package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
     # Flush both admin and non-admin version
@@ -119,9 +119,9 @@ ad_proc lars_blog_flush_cache {
 }
 
 ad_proc -public lars_blog_public_package_url {
-    -package_id
+    {-package_id ""}
 } {
-    if { ![exists_and_not_null package_id] } {
+    if { $package_id eq "" } {
         # No package_id given, so we'll just use ad_conn
         set package_id [ad_conn package_id]
         set default_url [ad_conn package_url]
@@ -138,9 +138,9 @@ ad_proc -public lars_blog_public_package_url {
 }
 
 ad_proc -public lars_blog_name { 
-    -package_id
+    {-package_id ""}
 } {
-    if { ![exists_and_not_null package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
     array set site_node [site_node::get_from_object_id -object_id $package_id]
@@ -148,27 +148,27 @@ ad_proc -public lars_blog_name {
 }
 
 ad_proc -public lars_blog_header_background_color {
-    -package_id
+    {-package_id ""}
 } {
-    if { ![exists_and_not_null package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
     return [ad_parameter -package_id $package_id "HeaderBackgroundColor" "lars-blogger" "#dcdcdc"] 
 }
 
 ad_proc -public lars_blog_categories_p {
-    -package_id
+    {-package_id ""}
 } {
-    if { ![exists_and_not_null package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
     return [ad_parameter -package_id $package_id "EnableCategoriesP" "lars-blogger" "1"]
 }
 
 ad_proc -public lars_blog_stylesheet_url {
-    -package_id
+    {-package_id ""}
 } {
-    if { ![exists_and_not_null package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
     return [parameter::get -package_id $package_id -parameter "StylesheetURL" -default "/resources/lars-blogger/lars-blogger.css"] 
@@ -187,11 +187,11 @@ ad_proc -public lars_blog_list_user_blogs {
 }
 
 ad_proc -public lars_blogger::count {
-    -package_id
+    {-package_id ""}
 } {
     @return the number of published blog entries in the package.
 } {
-    if { ![exists_and_not_null package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
     return [db_string entry_count {}]
@@ -199,8 +199,8 @@ ad_proc -public lars_blogger::count {
 
 
 ad_proc -public lars_blogger::get_rss_file_url {
-    -package_id
-    -screen_name
+    {-package_id ""}
+    {-screen_name ""}
 } {
     @param package_id The package_id of the lars-blogger instance. Defaults to current package.
     
@@ -208,7 +208,7 @@ ad_proc -public lars_blogger::get_rss_file_url {
     
     @return The URL of the RSS feed.
 } {
-    if { ![exists_and_not_null package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
 
@@ -216,10 +216,10 @@ ad_proc -public lars_blogger::get_rss_file_url {
     
     set rss_file_name [parameter::get -parameter "rss_file_name" -package_id $package_id]
 
-    if { ![empty_string_p $rss_file_name] } {
+    if { $rss_file_name ne "" } {
         set package_url [lars_blog_public_package_url -package_id $package_id]
 
-        if { [exists_and_not_null screen_name] } {
+        if { $screen_name ne "" } {
             set rss_file_url "${package_url}user/$screen_name/rss/$rss_file_name"
         } else {
             set rss_file_url "${package_url}rss/$rss_file_name"

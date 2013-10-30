@@ -41,7 +41,7 @@ foreach { service ping_url } {
     "blo.gs" "http://ping.blo.gs/"
     "Technorati.com" "http://rpc.technorati.com/rpc/ping"
 } {
-    if { [lsearch -exact $ping_urls $ping_url] == -1 } {
+    if {$ping_url ni $ping_urls} {
         multirow append default_pings $service $ping_url
     }
 }

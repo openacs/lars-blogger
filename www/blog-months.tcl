@@ -3,7 +3,7 @@ if { ![info exists package_id] } {
 }
 set package_url [lindex [site_node::get_url_from_object_id -object_id $package_id] 0]
 
-if [empty_string_p $screen_name] {
+if {$screen_name eq ""} {
     db_multirow -extend { url } months all_blog_months { *SQL* } {
 	set url "${package_url}archive/$month_url_stub"
     }

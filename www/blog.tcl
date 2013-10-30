@@ -30,11 +30,11 @@ if {! [info exists create_p] } {
     set create_p [permission::permission_p -object_id $package_id -privilege create]
 }
 
-if {![exists_and_not_null unpublish_p]} { 
+if {(![info exists unpublish_p] || $unpublish_p eq "")} { 
     set unpublish_p 1
 }
-if {![exists_and_not_null manageown_p]} { 
-    set manageown_p [expr ![permission::permission_p -object_id $package_id -privilege admin]]
+if {(![info exists manageown_p] || $manageown_p eq "")} { 
+    set manageown_p [expr {![permission::permission_p -object_id $package_id -privilege admin]}] 
 }
 
 
@@ -59,28 +59,28 @@ if { ![info exists screen_name] } {
     set blog_user_id [cc_screen_name_user $screen_name]
 }
 
-if { ![exists_and_not_null max_num_entries] } {
+if { ![info exists max_num_entries] || $max_num_entries eq "" } {
     set max_num_entries [parameter::get \
                              -package_id $package_id \
                              -parameter MaxNumEntriesOnFrontPage \
                              -default {}]
 }
 
-if { ![exists_and_not_null min_num_entries] } {
+if { ![info exists min_num_entries] || $min_num_entries eq "" } {
     set min_num_entries [parameter::get \
                              -package_id $package_id \
                              -parameter MinNumEntriesOnFrontPage \
                              -default {}]
 }
 
-if { ![exists_and_not_null num_days] } {
+if { ![info exists num_days] || $num_days eq "" } {
     set num_days [parameter::get \
                       -package_id $package_id \
                       -parameter NumDaysOnFrontPage \
                       -default {}]
 }
 
-if { ![exists_and_not_null max_content_length] } {
+if { ![info exists max_content_length] || $max_content_length eq "" } {
     set max_content_length [parameter::get \
                                 -package_id $package_id \
                                 -parameter max_content_length \
@@ -105,12 +105,12 @@ switch -exact $type {
         set date_clause {}
         set limit {}
 
-        if { ![empty_string_p $max_num_entries] && $max_num_entries != 0 } {
+        if { $max_num_entries ne "" && $max_num_entries != 0 } {
             # MaxNumEntriesOnFrontPage parameter is set, which means we should limit to that
             set limit $max_num_entries
         } 
 
-        if { ![empty_string_p $num_days] && $num_days != 0 } {
+        if { $num_days ne "" && $num_days != 0 } {
             # NumDaysOnFrontPage parameter is set, which means we should limit to that
             set date_clause [db_map date_clause_default]
         }
@@ -124,7 +124,7 @@ switch -exact $type {
     }
 }
 
-set show_poster_p [ad_parameter "ShowPosterP" "" "1"]
+set show_poster_p [parameter::get -parameter "ShowPosterP" -default "1"]
 
 set package_url [lars_blog_public_package_url -package_id $package_id]
 
@@ -137,11 +137,11 @@ if { [ad_conn isconnected] && ![string equal $package_url [string range [ad_conn
 }
 
 # Check that the date limit is not limiting us to show less than min_num_entries entries
-if { ![string equal $type "archive"] && 
-     ![empty_string_p $min_num_entries] && $min_num_entries != 0 && 
-     ![empty_string_p $num_days] && $num_days != 0 
+if { $type ne "archive" && 
+     $min_num_entries ne "" && $min_num_entries != 0 && 
+     $num_days ne "" && $num_days != 0 
  } {
-    if { [empty_string_p $blog_user_id] } {
+    if { $blog_user_id eq "" } {
         set num_entries [db_string num_entries_by_date_all {}]
     } else {
         set num_entries [db_string num_entries_by_date {}]
@@ -161,7 +161,7 @@ db_foreach categories {} {
     set arr_category_short_name($category_id) $short_name
 }
 
-if { [empty_string_p $blog_user_id] } {
+if { $blog_user_id eq "" } {
     set user_filter_where_clause ""
     set archive_url "${package_url}archive/"
 } else {
@@ -198,7 +198,7 @@ db_multirow -extend {
     # Putting the limit in the query won't give correct results.  We
     # need to do it here:
 
-    if {$limit != ""} {
+    if {$limit ne ""} {
       if {$output_rows_count >= $limit} {break}
     }
 
@@ -209,9 +209,9 @@ db_multirow -extend {
       $category_id != $blog_category_id} {continue}
 
     set sw_category_url ""
-    if { $sw_category_id != "" } {
+    if { $sw_category_id ne "" } {
         set sw_category_url "${package_url}"
-        if { [exists_and_not_null screen_name] } {
+        if { ([info exists screen_name] && $screen_name ne "") } {
     	  append sw_category_url "user/$screen_name"
         }
         append sw_category_url "swcat/$sw_category_id"
@@ -256,6 +256,6 @@ set rss_file_url [lars_blogger::get_rss_file_url -package_id $package_id]
 
 template::head::add_css -href $stylesheet_url
 
-if { [exists_and_not_null display_template] } {
+if { ([info exists display_template] && $display_template ne "") } {
     ad_return_template $display_template
 }

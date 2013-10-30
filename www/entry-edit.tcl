@@ -32,7 +32,7 @@ set valid_url_example "http://www.example.com/foo"
 # If we're in DisplayUserP mode, the user must have a screen name setup
 if { [parameter::get -parameter "DisplayUsersP" -default 0] } {
     acs_user::get -user_id [ad_conn user_id] -array user_info
-    if { [empty_string_p $user_info(screen_name)] } {
+    if { $user_info(screen_name) eq "" } {
 
         set page_title "[_ lars-blogger.Screen_Name]"
         set context [list $page_title]
@@ -64,7 +64,7 @@ ad_form -name entry \
 
 # If categories are enabled, set up a select-box with option. 
 
-if { [string equal [lars_blog_categories_p] "1"] } {
+if {[lars_blog_categories_p] eq "1"} {
     set options_list [db_list_of_lists categories {}]
     if { [llength $options_list] > 0 } {
         set option_list [concat [list [list None ""]] $options_list]
@@ -104,7 +104,7 @@ ad_form -extend -name entry -form {
         }
     }
 }
-set unpublish_p [expr ![parameter::get -parameter ImmediatePublishP -default 0]]
+set unpublish_p [expr {![parameter::get -parameter ImmediatePublishP -default 0]}] 
 
 if {$unpublish_p} {
     ad_form -extend -name entry -form {
@@ -209,7 +209,7 @@ ad_form -extend -name entry \
     -validate {{
         title_url
         {[
-            expr {[empty_string_p $title_url] || \
+            expr {$title_url eq "" || \
                 [util_url_valid_p $title_url]
             }
         ]}

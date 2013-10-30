@@ -34,7 +34,7 @@ aa_register_init_class create_blog_and_user {
                         -last_name $ln \
                         -password $password]
     
-    if { [string equal $user(creation_status) ok] } {
+    if {$user(creation_status) eq "ok"} {
         set user_id $user(user_id)
         permission::grant -party_id $user_id \
             -object_id $blog_id \

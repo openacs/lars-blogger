@@ -12,7 +12,7 @@ namespace eval lars_blogger::rss {}
 ad_proc -public lars_blogger::rss::get_subscr_id_list {
     {-package_id ""}
 } {
-    if { [empty_string_p $package_id] } {
+    if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
 
@@ -62,7 +62,7 @@ ad_proc -private lars_blog__rss_datasource {
     set column_array(channel_link) $blog_url
 
     set image_url [parameter::get -package_id $package_id -parameter "channel_image_url"]
-    if { [empty_string_p $image_url] } {
+    if { $image_url eq "" } {
         set column_array(image) ""
     } else {
         set column_array(image) [list \
@@ -77,14 +77,14 @@ ad_proc -private lars_blog__rss_datasource {
     set counter 0
 
 
-    if { [empty_string_p $user_id] } {
+    if { $user_id eq "" } {
         set statement "blog_rss_items" 
     } else {
         set statement "user_blog_rss_items"
     }
 
     set rss_max_description_length [parameter::get -parameter rss_max_description_length -package_id $package_id -default 0]
-    if { [empty_string_p $rss_max_description_length] } {
+    if { $rss_max_description_length eq "" } {
         set rss_max_description_length 0
     }
 
@@ -96,7 +96,7 @@ ad_proc -private lars_blog__rss_datasource {
         regsub -all {<[^>]*>} $content {} content_as_text
 
         if { $rss_max_description_length > 0 && [string length $content_as_text] > $rss_max_description_length } {
-            set description "[string range $content_as_text 0 [expr {$rss_max_description_length-3}]]..."
+            set description "[string range $content_as_text 0 $rss_max_description_length-3]..."
         } else {
             set description $content_as_text
         }
@@ -142,7 +142,7 @@ ad_proc -private lars_blog__rss_lastUpdated {
 
     db_1row select_package_id_user_id {}
 
-    if { [empty_string_p $user_id] } {
+    if { $user_id eq "" } {
         db_0or1row get_last_update {}
     } else {
         db_0or1row get_last_user_update {}

@@ -30,7 +30,7 @@ ad_proc lars_blog_auth_for_xmlrpc {
                             -password $password]
     }
 
-    if { $auth(auth_status) != "ok" } {
+    if { $auth(auth_status) ne "ok" } {
         return -code error $auth(auth_message)
     }
 

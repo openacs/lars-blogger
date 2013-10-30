@@ -1,6 +1,6 @@
 set package_id [ad_conn package_id]
 
-if { ![exists_and_not_null number_of_comments] || $number_of_comments == 0 } {
+if { ![info exists number_of_comments] || $number_of_comments eq "" || $number_of_comments == 0 } {
     set number_of_comments [parameter::get \
                                 -default 10 \
                                 -parameter NumberOfCommentsInIncludelet]
