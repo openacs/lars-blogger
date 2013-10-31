@@ -134,7 +134,7 @@ ad_proc -public lars_blog_public_package_url {
             set default_url ""
         }
     }
-    return [ad_parameter -package_id $package_id "public_url" "lars-blogger" $default_url] 
+    return [parameter::get -package_id $package_id -parameter "public_url" -default $default_url] 
 }
 
 ad_proc -public lars_blog_name { 
@@ -153,7 +153,7 @@ ad_proc -public lars_blog_header_background_color {
     if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
-    return [ad_parameter -package_id $package_id "HeaderBackgroundColor" "lars-blogger" "#dcdcdc"] 
+    return [parameter::get -package_id $package_id -parameter "HeaderBackgroundColor" -default "#dcdcdc"] 
 }
 
 ad_proc -public lars_blog_categories_p {
@@ -162,7 +162,7 @@ ad_proc -public lars_blog_categories_p {
     if { $package_id eq "" } {
         set package_id [ad_conn package_id]
     }
-    return [ad_parameter -package_id $package_id "EnableCategoriesP" "lars-blogger" "1"]
+    return [parameter::get -package_id $package_id -parameter "EnableCategoriesP" -default "1"]
 }
 
 ad_proc -public lars_blog_stylesheet_url {
