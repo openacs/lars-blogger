@@ -6,7 +6,7 @@ ad_page_contract {
 } {
     {screen_name:optional {}}
     {category_short_name:optional {}}
-    {sw_category_id:integer,optional {}}
+    {sw_category_id:naturalnum,optional {}}
     year:optional,string_length_range(4|4)
     month:optional,string_length_range(2|2)
     day:optional,string_length_range(2|2)

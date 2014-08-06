@@ -1,5 +1,5 @@
 ad_page_contract {} {
-    category_id:integer
+    category_id:naturalnum,notnull
     {return_url ""}
 }
 

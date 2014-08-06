@@ -4,7 +4,7 @@ ad_page_contract {
     @author Steffen Christensen (steffen@refresh.dk)
     @cvs-id $Id$
 } {
-    category_id:integer,optional
+    category_id:naturalnum,optional
     {return_url ""}
     {name:allhtml ""}
     {short_name:allhtml ""}

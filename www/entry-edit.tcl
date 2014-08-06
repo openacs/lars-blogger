@@ -5,7 +5,7 @@
 
 
 ad_page_contract {} {
-    {entry_id:integer,optional}
+    {entry_id:naturalnum,optional}
     {return_url ""}
     {title:allhtml ""}
     {title_url ""}

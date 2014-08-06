@@ -1,5 +1,5 @@
 ad_page_contract {} {
-    entry_id:integer
+    entry_id:naturalnum,notnull
     {return_url "."}
 }
 
