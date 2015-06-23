@@ -15,7 +15,7 @@
 	    </if>
 	      <else>
 	      <if @titles.title@ not nil>
-	      <li><a href="@titles.permalink_url;noquote@">@titles.title;noquote@</a></li>
+	      <li><a href="@titles.permalink_url@">@titles.title;noquote@</a></li>
 	</if>
       </else>
       </p>
