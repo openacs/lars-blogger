@@ -52,9 +52,9 @@ set show_poster_p [parameter::get -parameter "ShowPosterP" -default "1"]
 set entry_id $blog(entry_id)
 
 if { $screen_name eq "" } {
-    set blog(permalink_url) "${package_url}one-entry?[export_vars { entry_id }]"
+    set blog(permalink_url) [export_vars -base ${package_url}one-entry { entry_id }]
 } else {
-    set blog(permalink_url) "${package_url}user/$screen_name/one-entry?[export_vars { entry_id }]"
+    set blog(permalink_url) [export_vars -base ${package_url}user/$screen_name/one-entry { entry_id }]
 }
 
 lars_blogger::entry::htmlify \
@@ -79,7 +79,11 @@ set display_categories [lars_blog_categories_p \
 
 if { [template::util::is_true $show_comments_p] } {
     lars_blogger::entry::get_comments -entry_id $entry_id
-    set blog(comment_add_url) [export_vars -base "${general_comments_package_url}comment-add" { { object_id $entry_id } { object_name $blog(title) } { return_url "${package_url}flush-cache?[export_vars { return_url }]"} }]
+    set blog(comment_add_url) [export_vars -base "${general_comments_package_url}comment-add" {
+	{ object_id $entry_id }
+	{ object_name $blog(title) }
+	{ return_url "[export_vars -base ${package_url}flush-cache { return_url }]"}
+    }]
 }
 
 set blog(posted_time_pretty) [util::age_pretty \

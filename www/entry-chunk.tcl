@@ -71,14 +71,16 @@ set blog(write_p) [permission::write_permission_p \
                        -creation_user $blog(user_id) \
                        -party_id [ad_conn untrusted_user_id]]
 
-set display_categories [lars_blog_categories_p \
-                            -package_id [ad_conn package_id]]
-
-set comment_return_url "${package_url}flush-cache?[export_vars { return_url }]"
+set display_categories [lars_blog_categories_p -package_id [ad_conn package_id]]
+set comment_return_url [export_vars -base ${package_url}flush-cache { return_url }]
 
 if { [template::util::is_true $show_comments_p] } {
     lars_blogger::entry::get_comments -entry_id $entry_id
-    set blog(comment_add_url) [export_vars -base "${general_comments_package_url}comment-add" { { object_id $entry_id } { object_name $blog(title) } { return_url "$comment_return_url"} }]
+    set blog(comment_add_url) [export_vars -base "${general_comments_package_url}comment-add" {
+	{ object_id $entry_id }
+	{ object_name $blog(title) }
+	{ return_url "$comment_return_url"}
+    }]
 }
 
 set blog(posted_time_pretty) [util::age_pretty \

@@ -57,9 +57,9 @@ db_multirow -extend {
     delete_link
     edit_link
 } links links_select "" {
-    set move_up_link "blogroll-move?[export_vars -url [list link_id [list direction up]]]"
-    set move_down_link "blogroll-move?[export_vars -url [list link_id [list direction down]]]"
-    set delete_link "blogroll-delete?[export_vars -url link_id]"
-    set edit_link "blogroll-ae?[export_vars -url link_id]"
+    set move_up_link [export_vars -base blogroll-move {link_id {direction up}}]
+    set move_down_link [export_vars -base blogroll-move {link_id {direction down}}]
+    set delete_link [export_vars -base blogroll-delete link_id]
+    set edit_link [export_vars -base blogroll-ae link_id]
 }
 

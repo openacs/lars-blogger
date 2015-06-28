@@ -170,7 +170,7 @@ ad_proc -private lars_blogger::technorati::fetch_xml {
         set url "[ad_url][lars_blog_public_package_url]"
     }
     
-    set api_url "http://api.technorati.com/cosmos?[export_vars -url [list key url type version]]"
+    set api_url [export_vars -base http://api.technorati.com/cosmos [list key url type version]]
     
     array set f [ad_httpget -url $api_url -timeout 60]
     if {$f(status) == 200} {

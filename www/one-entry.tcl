@@ -60,9 +60,9 @@ set page_title $blog(title)
 if {![info exists screen_name] || $screen_name eq ""} {
     set screen_name ""
     set context [list $page_title]
-    set blog(permalink_url) "${package_url}one-entry?[export_vars { entry_id }]"
+    set blog(permalink_url) [export_vars -base ${package_url}one-entry { entry_id }]
 } else {
-    set blog(permalink_url) "${package_url}user/$screen_name/one-entry?[export_vars { entry_id }]"
+    set blog(permalink_url) [export_vars -base ${package_url}user/$screen_name/one-entry { entry_id }]
     set context [list $screen_name]
 }
 

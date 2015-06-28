@@ -6,6 +6,7 @@ if { ![info exists number_of_comments] || $number_of_comments eq "" || $number_o
                                 -parameter NumberOfCommentsInIncludelet]
 }
 
+set entry_base [ad_url][lars_blog_public_package_url]/one-entry 
 db_multirow -extend {entry_url} comments select_n_comments "" {
-    set entry_url "[ad_url][lars_blog_public_package_url]/one-entry?[export_vars entry_id]"
+    set entry_url [export_vars -base $entry_base entry_id]
 }

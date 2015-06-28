@@ -217,7 +217,7 @@ ad_proc -public lars_blogger::entry::do_notifications {
     get -entry_id $entry_id -array blog
 
     set blog_url "[ad_url][lars_blog_public_package_url -package_id $blog(package_id)]"
-    set entry_url "[ad_url][lars_blog_public_package_url -package_id $blog(package_id)]one-entry?[export_vars { entry_id }]"
+    set entry_url [export_vars -base "[ad_url][lars_blog_public_package_url -package_id $blog(package_id)]one-entry" { entry_id }]
     set blog_name [lars_blog_name -package_id $blog(package_id)]
 
     set new_content ""

@@ -57,7 +57,7 @@ db_multirow -extend {permalink_url} titles blog-titles "" {
     }
 
     incr output_rows_count
-    set permalink_url "${package_url}one-entry?[export_vars { entry_id }]"
+    set permalink_url [export_vars -base ${package_url}one-entry { entry_id }]
 }
 
 set arrow_url "${package_url}graphics/arrow-box.gif"

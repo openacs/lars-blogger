@@ -217,7 +217,7 @@ db_multirow -extend {
         append sw_category_url "swcat/$sw_category_id"
     }
 
-    set permalink_url "${package_url}one-entry?[export_vars { entry_id }]"
+    set permalink_url [export_vars -base ${package_url}one-entry { entry_id }]
 
     # Inner multirow.  Here's its magic name:
     set sw_category_multirow "__branimir__multirow__blog/$entry_id"
