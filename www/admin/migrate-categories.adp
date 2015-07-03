@@ -1,6 +1,6 @@
 <master>
-<property name="doc(title)">@title;noquote@</property>
-<property name="context">@context;noquote@</property>
+<property name="doc(title)">@title;literal@</property>
+<property name="context">@context;literal@</property>
 #lars-blogger.lt_This_utility_script_w#
 <p>
 #lars-blogger.lt_Proceed_only_if_you_a#

@@ -1,6 +1,6 @@
 <master>
 <property name="doc(title)">#lars-blogger.lt_blog_name_Bookmarklet#</property>
-<property name="context">@context;noquote@</property>
+<property name="context">@context;literal@</property>
 
 <p>
     #lars-blogger.lt_Drag_the_bookmarklet_#

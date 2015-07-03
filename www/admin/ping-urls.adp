@@ -1,6 +1,6 @@
 <master>
 <property name="doc(title)">#lars-blogger.lt_blog_namenoquote_Ping#</property>
-<property name="context">@context;noquote@</property>
+<property name="context">@context;literal@</property>
 
 <p>
     #lars-blogger.lt_Whenever_you_update_y#

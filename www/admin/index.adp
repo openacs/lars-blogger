@@ -1,6 +1,6 @@
 <master>
-<property name="doc(title)">@title;noquote@</property>
-<property name="context">@context;noquote@</property>
+<property name="doc(title)">@title;literal@</property>
+<property name="context">@context;literal@</property>
 
 <ul class="action-links">
   <li><a href="../entry-edit" title="Add new blog entry" class="action_link">#lars-blogger.Add_new_blog_entry#</a></li>
