@@ -37,7 +37,7 @@
 
     <div id="lars_blogger_left">
       <div class="lars_blogger_content_table">
-        <include src="blog" type="@type@" archive_interval="@interval@" archive_date="@archive_date@" screen_name="@screen_name@" category_id="@category_id@" sw_category_id="@sw_category_id@" max_content_length="" unpublish_p="@unpublish_p@" manageown_p="@manageown_p@">
+        <include src="blog" type="@type;literal@" archive_interval="@interval;literal@" archive_date="@archive_date;literal@" screen_name="@screen_name;literal@" category_id="@category_id;literal@" sw_category_id="@sw_category_id;literal@" max_content_length="" unpublish_p="@unpublish_p;literal@" manageown_p="@manageown_p;literal@">
       </div>
     </div>
 
@@ -45,8 +45,8 @@
       <div id="lars_blogger_right">
       <div class="lars_blogger_portlet">
         <h2>#lars-blogger.Archive#</h2>
-        <include src="calendar" date="@date@" screen_name="@screen_name@">
-        <include-optional src="blog-months" screen_name="@screen_name@">
+        <include src="calendar" date="@date;literal@" screen_name="@screen_name;literal@">
+        <include-optional src="blog-months" screen_name="@screen_name;literal@">
           <include-output>
         </include-optional>
       </div>

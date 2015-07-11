@@ -1,5 +1,5 @@
 <multiple name="blog">
-  <include src="@entry_chunk@" &="blog" package_id="@package_id@" screen_name="@screen_name@" max_content_length="@max_content_length@" unpublish_p="@unpublish_p@" manageown_p="@manageown_p@" />
+  <include src="@entry_chunk;literal@" &="blog" package_id="@package_id;literal@" screen_name="@screen_name;literal@" max_content_length="@max_content_length;literal@" unpublish_p="@unpublish_p;literal@" manageown_p="@manageown_p;literal@" />
 </multiple>
 
 <ul class="action-links">

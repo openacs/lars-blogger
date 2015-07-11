@@ -1,5 +1,5 @@
 <!--
-  <include src="/packages/trackback/lib/trackback-chunk" url="@blog.permalink_url@" blog_url="@package_url@" title="@blog.title@" object_id="@blog.entry_id@">
+  <include src="/packages/trackback/lib/trackback-chunk" url="@blog.permalink_url;literal@" blog_url="@package_url;literal@" title="@blog.title;literal@" object_id="@blog.entry_id;literal@">
 -->
 
 <div class="lars_blogger_entry">
