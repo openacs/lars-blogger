@@ -3,18 +3,18 @@
 <title>Weblogger Documentation</title>
 </head>
 <body bgcolor=white>
-<h2>Weblogger Documentation</h2>
+<h1>Weblogger Documentation</h1>
 By <a href="http://www.pinds.com/lars/">Lars Pind</a> and <a href="http://bcuni.net">Simon Carstensen</a>
 <hr>
 
-<h3>Download</h3>
+<h2>Download</h2>
 
 <p>
   The blogger now lives in the <a
   href="http://openacs.org">OpenACS</a> cvs repository.
 </p>
 
-<h3>Getting started</h3>
+<h2>Getting started</h2>
 
 <p>
   Install the package on your system, mount a new instance somewhere
@@ -23,7 +23,7 @@ By <a href="http://www.pinds.com/lars/">Lars Pind</a> and <a href="http://bcuni.
   it. Now you can add your first blog entry.
 </p>
 
-<h3>Syndicating a blog (putting it on your front page)</h3>
+<h2>Syndicating a blog (putting it on your front page)</h2>
 
 <p>
   If you want to include a blog as part of another page, that's pretty
@@ -76,7 +76,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
 </p>
 
 
-<h3>Technical Info</h3>
+<h2>Technical Info</h2>
 
 <p>
   The package fully supports multiple instances. You can mount
@@ -96,7 +96,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
   that if you've added custom ADP tags, those are also available to you in your blog.
 </p>
 
-<h3>Permissions</h3>
+<h2>Permissions</h2>
 
 <ul>
   <li>'read' means people can read entries.</li>
@@ -105,7 +105,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
   <li>'admin' means people can define categories, etc.</li>
 </ul>
 
-<h3>weblogs.com update ping</h3>
+<h2>weblogs.com update ping</h2>
 
 <p>
   There are a couple parameters governing this feature. You can turn it
@@ -116,7 +116,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
   Jerry Asher for the code to do this.
 </p>
 
-<h3>RSS Feed</h3>
+<h2>RSS Feed</h2>
 
 <p>
   The RSS feed is version 1.0 only, and uses the rss-support
@@ -137,7 +137,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
   parameters.
 </p>
 
-<h3>XML-RPC APIs</h3>
+<h2>XML-RPC APIs</h2>
 
 <p>
   The Blogger and MetaWeblog APIs are supported. An <a
@@ -148,7 +148,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
   disallow access to your blog via XML-RPC.
 </p>
 
-<h3>Posting From News Aggregator via URL</h3>
+<h2>Posting From News Aggregator via URL</h2>
 
 <p>
   Some news aggregators can blog items you read via simply sending you
@@ -161,7 +161,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
 <i>URL-of-your-blog</i>/entry-edit?title=$ITEM_TITLE$&title_url=$ITEM_LINK$&content=$ITEM_DESCRIPTION$
 </pre>
 
-<h3>Road Map</h3>
+<h2>Road Map</h2>
 
 <ul>
   <li>
@@ -196,7 +196,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
   </li>
 </ul>
 
-<h3>Version History</h3>
+<h2>Version History</h2>
 
 <ul>
   <li>
@@ -277,7 +277,7 @@ set blog_html [template::adp_parse "[acs_package_root_dir "lars-blogger"]/www/bl
   </li>
 </ul>
 
-<h3>License</h3>
+<h2>License</h2>
 
 Released under the <a href="http://www.gnu.org/licenses/gpl.txt">GPL</a>.
 
