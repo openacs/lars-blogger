@@ -80,8 +80,8 @@ ad_proc -private lars_blogger::instance::send_pings {
 
     ns_log debug "lars_blogger::instance::send_pings:"
     foreach ping_url $ping_urls {
-        ns_log debug "lars_blogger::instance::send_pings: call is \n[list xmlrpc::remote_call $ping_url weblogUpdates.ping -string [ad_quotehtml $blog_title] -string [ad_quotehtml $blog_url]]"
-        if { [catch {xmlrpc::remote_call $ping_url weblogUpdates.ping -string [ad_quotehtml $blog_title] -string [ad_quotehtml $blog_url] } errmsg ] } {
+        ns_log debug "lars_blogger::instance::send_pings: call is \n[list xmlrpc::remote_call $ping_url weblogUpdates.ping -string [ns_quotehtml $blog_title] -string [ns_quotehtml $blog_url]]"
+        if { [catch {xmlrpc::remote_call $ping_url weblogUpdates.ping -string [ns_quotehtml $blog_title] -string [ns_quotehtml $blog_url] } errmsg ] } {
             ns_log warning "lars_blogger::instance::send_pings error: $errmsg"
             set success_p 0
         } else {

@@ -53,7 +53,7 @@ set entry_id $blog(entry_id)
 set admin_p [permission::permission_p -object_id $entry_id -party_id $user_id -privilege admin]
 lars_blogger::entry::htmlify \
     -max_content_length $max_content_length \
-    -more [ad_decode [ad_return_url] $blog(permalink_url) {} " <a href=\"[ad_quotehtml $blog(permalink_url)]\">Continued...</a>"] \
+    -more [ad_decode [ad_return_url] $blog(permalink_url) {} " <a href=\"[ns_quotehtml $blog(permalink_url)]\">Continued...</a>"] \
     -array blog
 
 set blog(edit_url) [export_vars -base "${package_url}entry-edit" { entry_id return_url }]
