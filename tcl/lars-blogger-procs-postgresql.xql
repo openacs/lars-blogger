@@ -45,4 +45,15 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="lars_blog_list_user_blogs.blog_list">
+        <querytext>
+
+    select p.package_id 
+    from apm_packages p
+    where p.package_key = 'lars-blogger'
+    and acs_permission__permission_p(p.package_id, :user_id, 'create')
+    
+        </querytext>
+    </fullquery>
+    
 </queryset>
