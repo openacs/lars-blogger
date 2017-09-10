@@ -4,7 +4,7 @@
 <master>
 <h1>Weblogger Documentation</h1>
 
-By <a href="http://www.pinds.com/lars/">Lars Pind</a>
+By <a href="https://www.linkedin.com/in/truecalvin">Calvin Correli, former known as Lars Pind</a>
  and <a href="http://bcuni.net">Simon Carstensen</a>
 <h2>Download</h2>
 <p>The blogger now lives in the <a href="http://openacs.org">OpenACS</a> cvs repository.</p>
