@@ -1,7 +1,7 @@
 # Expects:
 # blog:onerow
 # show_comments_p:boolean
-# retrun_url:onevalue,optional
+# return_url:onevalue,optional
 # package_id:optional
 # screen_name:onevalue,optional
 # perma_p: 1/0 (defaults to 0 -- set to 1 if this is the permalink page)
