@@ -46,7 +46,7 @@
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="MinNumEntriesOnFrontPage"  default="3" description="Minimum number of entries to show on the weblog front page. 0 or empty string for no minimum."/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="NumberOfCommentsInIncludelet"  default="10" description="How many comments should be included in the &quot;last n comments&quot; includelet?"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="NumDaysOnFrontPage"  default="30" description="Number of days worth of entries on the weblog front page. Default is 30. Set to 0 or empty string for no date limit."/>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="OnlyManageOwnPostsP"  default="0" description="If 1 only the original poster or an admin can edit thier posts"/>
+            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="OnlyManageOwnPostsP"  default="0" description="If 1 only the original poster or an admin can edit their posts"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="package_rss_feed_p"  default="1" description="Should we build an RSS feed for this instance." section_name="rss"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="public_url"  description="The public URL for this blog (in case you've put the blog on your front page, for example)"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="rss_file_name"  default="rss.xml" description="What name should we advertise the RSS feed under, relative to the blog mount point. Leave blank if no RSS feed." section_name="rss"/>
