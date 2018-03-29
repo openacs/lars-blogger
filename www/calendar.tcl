@@ -3,7 +3,7 @@
 # date:onevalue,optional
 #
 
-if { ![info exist date] } {
+if { ![info exists date] } {
     set date [dt_sysdate]
 }
 
@@ -14,7 +14,7 @@ dt_get_info $date
 
 set calendar_details [ns_set create calendar_details]
 
-if { ![info exist package_id] } {
+if { ![info exists package_id] } {
     set package_id [ad_conn package_id]
 }
 
