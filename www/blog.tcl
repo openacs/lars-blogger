@@ -56,7 +56,7 @@ if { ![info exists screen_name] } {
     set screen_name ""
     set blog_user_id {}
 } else {
-    set blog_user_id [cc_screen_name_user $screen_name]
+    set blog_user_id [acs_user::get_user_id_by_screen_name -screen_name  $screen_name]
 }
 
 if { ![info exists max_num_entries] || $max_num_entries eq "" } {
