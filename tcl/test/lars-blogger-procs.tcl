@@ -8,7 +8,7 @@ ad_library {
 
 aa_register_case -cats {smoke api db} lars_blog_add_entry {
     Test the lars_blogger::entry::new proc
-} {    
+} {
 
     aa_run_with_teardown \
         -rollback \
@@ -32,6 +32,6 @@ aa_register_case -cats {smoke api db} lars_blog_add_entry {
                 select 1 from pinds_blog_entries where entry_id = :entry_id
             } -default "0"]
 
-            aa_equals "entry was added succesfully" $success_p 1
+            aa_equals "entry was added successfully" $success_p 1
         }
 }
