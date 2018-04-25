@@ -191,7 +191,7 @@ ad_proc -public metaWeblog.getPost {
         -object_id $entry_id \
         -privilege read
 
-    array set content [list]
+    array set content {}
     lars_blogger::entry::get -entry_id $entry_id -array content
 
     return [list -struct \
