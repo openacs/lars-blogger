@@ -10,7 +10,7 @@ set page_title "[_ lars-blogger.Draft_Entries]"
 
 set context [list $page_title]
 
-set elements [list]
+set elements {}
 lappend elements edit {
     label {}
     sub_class narrow

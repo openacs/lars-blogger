@@ -22,7 +22,7 @@ set package_url_with_extras $package_url
 set index_page_p 1
 set show_archive_p [parameter::get -parameter "ShowArchiveP"]
 
-set context [list]
+set context {}
 set context_base_url $package_url
 
 if { $screen_name ne "" } {
