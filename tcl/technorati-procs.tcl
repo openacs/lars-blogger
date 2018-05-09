@@ -109,7 +109,7 @@ ad_proc -private lars_blogger::technorati::parse_xml {
         
         set item_nodes [$root selectNodes "document/item"]
         
-        set items {}
+        set items [list]
         
         # Let's go through each item node and parse it
         set i 0

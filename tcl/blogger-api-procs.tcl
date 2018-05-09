@@ -170,7 +170,7 @@ ad_proc -public blogger.getUsersBlogs {
 
     # find blogs on which this user has create permission
 
-    set return_array {}
+    set return_array [list]
     foreach package_id [lars_blog_list_user_blogs $user_id] {
         array unset struct
         set struct(url) [list -string \
@@ -214,7 +214,7 @@ ad_proc -public blogger.getUserInfo {
                      -username $username \
                      -password $password]
 
-    array set user_info {}
+    array set user_info [list]
     acs_user::get -user_id $user_id -array user_info
     
     array set struct []
@@ -272,10 +272,10 @@ ad_proc -public blogger.getPost {
         -object_id $entry_id \
         -privilege read
 
-    array set e {}
+    array set e [list]
 
     if { ![catch { lars_blogger::entry::get -entry_id $entry_id -array e } errmsg] } {
-        array set struct {}
+        array set struct [list]
         # note: Blogger has no space for title, so we ignore title
         set struct(content) [list -string "$e(content)"]
         set struct(userid) [list -string $user_id]
@@ -317,7 +317,7 @@ ad_proc -public blogger.getRecentPosts {
         -object_id $package_id \
         -privilege read
 
-    set return_array {}
+    set return_array [list]
 
     db_foreach get_n_entries {} {
         # put the date in readable format

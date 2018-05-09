@@ -73,7 +73,7 @@ ad_proc -private lars_blog__rss_datasource {
                 height [parameter::get -package_id $package_id -parameter "channel_image_height"]]
     }
 
-    set items {}
+    set items [list]
     set counter 0
 
 

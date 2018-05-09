@@ -7,7 +7,7 @@ set package_id [ad_conn package_id]
 
 set admin_p [permission::require_permission -object_id $package_id -privilege admin]
 
-set context {}
+set context [list]
 
 set title "[_ lars-blogger.Administration]"
 
