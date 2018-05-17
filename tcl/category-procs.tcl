@@ -1,5 +1,5 @@
 ad_library {
-    Category Tcl APi
+    Category Tcl API
 }
 
 namespace eval lars_blogger {}
