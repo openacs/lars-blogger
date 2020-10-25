@@ -25,7 +25,7 @@ select acs_sc_impl_alias__new(
 
 
 create function pinds_blog_entries__itrg ()
-returns opaque as '
+returns trigger as '
 begin
     if new.draft_p = ''f'' then
         perform search_observer__enqueue(new.entry_id,''INSERT'');
@@ -34,14 +34,14 @@ begin
 end;' language 'plpgsql';
 
 create function pinds_blog_entries__dtrg ()
-returns opaque as '
+returns trigger as '
 begin
     perform search_observer__enqueue(old.entry_id,''DELETE'');
     return old;
 end;' language 'plpgsql';
 
 create function pinds_blog_entries__utrg ()
-returns opaque as '
+returns trigger as '
 begin
     if (new.draft_p = ''t'' and old.draft_p = ''f'') or new.deleted_p = ''t'' then
         perform search_observer__enqueue(old.entry_id,''DELETE'');
