@@ -25,7 +25,7 @@ db_transaction {
   ns_log Notice catmig
   ns_log Notice catmig ################### Starting category migration \
     of $instance_name $package_id ###############
-  ns_log Notice catmig Creating new site wide tree
+  ns_log Notice catmig Creating new site-wide tree
   set tree_id [category_tree::add \
     -name "[_ lars-blogger.lt_instance_name_Categor]" \
     -description "[_ lars-blogger.lt_This_category_tree_is]"]
@@ -45,7 +45,7 @@ db_transaction {
 
   ns_log Notice catmig Got the list:
   ns_log Notice catmig $category_list
-  ns_log Notice creating site wide category \"tree\"
+  ns_log Notice creating site-wide category \"tree\"
 
   foreach rec $category_list {
     lassign $rec category_id name
